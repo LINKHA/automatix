@@ -1,4 +1,2 @@
-
-go build --trimpath --mod=vendor --buildmode=plugin -o ./data/modules/backend.so
-
+#!/bin/bash
 ../nakama --config ./nakama-config.yml --database.address postgres:localdb@localhost:5432/nakama

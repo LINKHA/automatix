@@ -63,6 +63,7 @@ var (
 )
 
 func main() {
+	fmt.Println("1----------|", "xxx")
 	semver := fmt.Sprintf("%s+%s", version, commitID)
 	// Always set default timeout on HTTP client.
 	http.DefaultClient.Timeout = 1500 * time.Millisecond

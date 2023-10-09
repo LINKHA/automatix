@@ -82,8 +82,11 @@ func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runti
 	initStart := time.Now()
 
 	fmt.Println("2------------------------------")
-	if err := initializer.RegisterRpc(rpcMyFunc2, rpcMyFunch2); err != nil {
+	// if err := initializer.RegisterRpc(rpcMyFunc, rpcMyFunch); err != nil {
+	// 	return err
+	// }
 
+	if err := initializer.RegisterRpc(rpcMyFunc2, rpcMyFunch2); err != nil {
 		return err
 	}
 
