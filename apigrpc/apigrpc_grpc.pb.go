@@ -7,6 +7,7 @@
 package apigrpc
 
 import (
+	"fmt"
 	context "context"
 	api "github.com/heroiclabs/nakama-common/api"
 	grpc "google.golang.org/grpc"
@@ -1339,6 +1340,7 @@ func RegisterNakamaServer(s grpc.ServiceRegistrar, srv NakamaServer) {
 }
 
 func _Nakama_AddFriends_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	fmt.Println("00----------|", 1)
 	in := new(api.AddFriendsRequest)
 	if err := dec(in); err != nil {
 		return nil, err

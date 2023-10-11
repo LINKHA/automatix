@@ -16,6 +16,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"strconv"
 
 	"github.com/gofrs/uuid/v5"
@@ -90,12 +91,18 @@ func (s *ApiServer) ListFriends(ctx context.Context, in *api.ListFriendsRequest)
 }
 
 func (s *ApiServer) AddFriends(ctx context.Context, in *api.AddFriendsRequest) (*emptypb.Empty, error) {
+	fmt.Println("2----------|", ctx)
+
 	userID := ctx.Value(ctxUserIDKey{}).(uuid.UUID)
+	fmt.Println("3----------|", userID)
 
 	// Before hook.
 	if fn := s.runtime.BeforeAddFriends(); fn != nil {
 		beforeFn := func(clientIP, clientPort string) error {
 			result, err, code := fn(ctx, s.logger, userID.String(), ctx.Value(ctxUsernameKey{}).(string), ctx.Value(ctxVarsKey{}).(map[string]string), ctx.Value(ctxExpiryKey{}).(int64), clientIP, clientPort, in)
+
+			fmt.Println("4----------|", result)
+
 			if err != nil {
 				return status.Error(code, err.Error())
 			}
@@ -121,6 +128,8 @@ func (s *ApiServer) AddFriends(ctx context.Context, in *api.AddFriendsRequest) (
 
 	username := ctx.Value(ctxUsernameKey{}).(string)
 
+	fmt.Println("5----------|", username)
+
 	for _, id := range in.GetIds() {
 		if userID.String() == id {
 			return nil, status.Error(codes.InvalidArgument, "Cannot add self as friend.")
@@ -129,6 +138,8 @@ func (s *ApiServer) AddFriends(ctx context.Context, in *api.AddFriendsRequest) (
 			return nil, status.Error(codes.InvalidArgument, "Invalid user ID '"+id+"'.")
 		}
 	}
+
+	fmt.Println("6----------|", in.GetIds())
 
 	for _, u := range in.GetUsernames() {
 		if u == "" {
