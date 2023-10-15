@@ -24,7 +24,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/heroiclabs/nakama/v3/flags"
+	"github.com/linkha/automatix/flags"
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"

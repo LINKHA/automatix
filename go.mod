@@ -1,4 +1,4 @@
-module github.com/heroiclabs/nakama/v3
+module github.com/linkha/automatix
 
 go 1.20
 

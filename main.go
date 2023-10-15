@@ -29,12 +29,12 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid/v5"
-	"github.com/heroiclabs/nakama/v3/console"
-	"github.com/heroiclabs/nakama/v3/ga"
-	"github.com/heroiclabs/nakama/v3/migrate"
-	"github.com/heroiclabs/nakama/v3/server"
-	"github.com/heroiclabs/nakama/v3/social"
 	_ "github.com/jackc/pgx/v4/stdlib"
+	"github.com/linkha/automatix/console"
+	"github.com/linkha/automatix/ga"
+	"github.com/linkha/automatix/migrate"
+	"github.com/linkha/automatix/server"
+	"github.com/linkha/automatix/social"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"google.golang.org/protobuf/encoding/protojson"
@@ -63,7 +63,6 @@ var (
 )
 
 func main() {
-	fmt.Println("1----------|", "xxx")
 	semver := fmt.Sprintf("%s+%s", version, commitID)
 	// Always set default timeout on HTTP client.
 	http.DefaultClient.Timeout = 1500 * time.Millisecond

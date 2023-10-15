@@ -17,7 +17,7 @@ package server
 import (
 	"sync"
 
-	lua "github.com/heroiclabs/nakama/v3/internal/gopher-lua"
+	lua "github.com/linkha/automatix/internal/gopher-lua"
 )
 
 type RuntimeLuaLocalCache struct {

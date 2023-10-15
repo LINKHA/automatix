@@ -25,7 +25,7 @@ import (
 
 	"github.com/gofrs/uuid/v5"
 	"github.com/heroiclabs/nakama-common/api"
-	"github.com/heroiclabs/nakama/v3/internal/skiplist"
+	"github.com/linkha/automatix/internal/skiplist"
 	"go.uber.org/zap"
 )
 
