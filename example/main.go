@@ -125,6 +125,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"runtime/debug"
 
 	"github.com/heroiclabs/nakama-common/runtime"
 )
@@ -133,6 +134,8 @@ const apiBaseUrl = "https://pokeapi.co/api/v2"
 
 // All Go modules must have a InitModule function with this exact signature.
 func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, initializer runtime.Initializer) error {
+	debug.PrintStack() // 打印调用堆栈信息
+	fmt.Println("ii 1----------|", "")
 	// Register the RPC function.
 	if err := initializer.RegisterRpc("get_pokemon", GetPokemon); err != nil {
 		logger.Error("Unable to register: %v", err)
@@ -185,11 +188,11 @@ func GetPokemon(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runti
 		return "", runtime.NewError("unable to find pokemon", 5)
 	}
 
-	response, err := json.Marshal(result)
+	_, err2 := json.Marshal(result)
 
-	if err != nil {
+	if err2 != nil {
 		return "", runtime.NewError("unable to marshal response", 13)
 	}
-	fmt.Println("q 1----------|", response)
+	fmt.Println("q 1----------|", 1)
 	return string("qqqqqqqqqqqqqqqqqqqqqqqq"), nil
 }

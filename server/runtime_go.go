@@ -18,6 +18,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 	"path/filepath"
 	"plugin"
 	"strings"
@@ -2607,11 +2608,14 @@ func NewRuntimeProviderGo(ctx context.Context, logger, startupLogger *zap.Logger
 
 	match := make(map[string]func(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule) (runtime.Match, error), 0)
 
+	fmt.Println("ii 2----------|", "")
+
 	matchLock := &sync.RWMutex{}
 	matchNamesListFn := func() []string {
 		matchLock.RLock()
 		matchNames := make([]string, 0, len(match))
 		for name := range match {
+
 			matchNames = append(matchNames, name)
 		}
 		matchLock.RUnlock()
