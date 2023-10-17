@@ -1,0 +1,19 @@
+// apigrpc.proto
+
+syntax = "proto3";
+
+package apigrpc;
+
+option go_package = "github.com/linkha/automatix/apigrpc";
+
+service GreetService {
+  rpc SayHello (HelloRequest) returns (HelloResponse);
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string message = 1;
+}
