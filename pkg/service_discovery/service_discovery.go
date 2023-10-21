@@ -1,4 +1,4 @@
-package main
+package service_discovery
 
 import (
 	"context"
@@ -12,6 +12,13 @@ import (
 )
 
 type Method struct {
+	service string
+	method  string
+	addr    string
+}
+
+func (m *Method) GenMethod() {
+	fmt.Sprintf("/automatix/services/%s/%s/%s", m.service, m.method, m.addr)
 }
 
 type ServiceDiscovery struct {
@@ -22,15 +29,14 @@ type ServiceDiscovery struct {
 	addr     string
 	ctx      context.Context
 
-	//Registered services(已注册的方法)
+	//Registered services(已注册的服务)
 	registeredMethod map[string]struct{}
 	//Services to be registered(待注册的服务)
 	toRegisteredMethod map[string]struct{}
+	//Services in a cluster(集群中的服务)
+	globalMethod map[string]struct{}
 
 	lock sync.Mutex
-
-	// //集群中的服务
-	// globalMethod map[string]struct{}
 }
 
 func NewServiceDiscovery(endpoints []string, service, addr string, leaseTTL int) (*ServiceDiscovery, error) {
@@ -70,12 +76,17 @@ func (sd *ServiceDiscovery) Serve() error {
 	// 启动一个定时器来定期续约租约
 	go sd.keepAlive()
 
+	// 定期检查服务变化
+	go sd.watchService()
+
 	return nil
 }
 
 // Wait for next heartbeat Register method(等待下次心跳注册方法)
 func (sd *ServiceDiscovery) RegisterMethod(registerMethod map[string]struct{}) error {
-	sd.toRegisteredMethod = registerMethod
+	for method, _ := range registerMethod {
+		sd.toRegisteredMethod[method] = struct{}{}
+	}
 	return nil
 }
 
@@ -101,6 +112,49 @@ func (sd *ServiceDiscovery) RegisterMethodImmediate(registerMethod map[string]st
 	}
 
 	return nil
+}
+
+func (sd *ServiceDiscovery) DiscoverService() ([]string, error) {
+	//watch
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	resp, err := sd.client.Get(ctx, fmt.Sprintf("/services/%s", sd.service), clientv3.WithPrefix())
+	if err != nil {
+		return nil, err
+	}
+
+	endpoints := make([]string, 0)
+	for _, kv := range resp.Kvs {
+		endpoints = append(endpoints, string(kv.Value))
+	}
+
+	return endpoints, nil
+}
+
+func (sd *ServiceDiscovery) Close() (err error) {
+	return sd.client.Close()
+}
+
+func (sd *ServiceDiscovery) keepAlive() {
+	heartbeat := time.NewTicker(time.Duration(sd.leaseTTL/2) * time.Second)
+	defer heartbeat.Stop()
+
+	for {
+		select {
+		case <-heartbeat.C:
+			// Check whether there is data in the queue to be registered
+			// (判断待注册队列中是否有数据)
+			sd.putMethod()
+
+			// 续约租约，告诉 etcd 服务还在正常运行
+			_, err := sd.client.KeepAlive(context.Background(), sd.leaseID)
+			if err != nil {
+				//失败三次就将数据放回待注册的服务
+				log.Printf("Failed to renew lease: %v", err)
+			}
+		}
+	}
 }
 
 // Register methods to Etcd(注册方法到Etcd)
@@ -138,79 +192,36 @@ func (sd *ServiceDiscovery) putMethod() error {
 	return nil
 }
 
-func (sd *ServiceDiscovery) keepAlive() {
-	heartbeat := time.NewTicker(time.Duration(sd.leaseTTL/2) * time.Second)
-	defer heartbeat.Stop()
+func (sd *ServiceDiscovery) watchService() {
+	serviceChangesCh := make(chan []string)
 
-	for {
-		select {
-		case <-heartbeat.C:
-			// Check whether there is data in the queue to be registered
-			// (判断待注册队列中是否有数据)
-			sd.putMethod()
+	go func() {
+		key := fmt.Sprintf("/services/%s", sd.service)
+		rch := sd.client.Watch(sd.ctx, key, clientv3.WithPrefix())
 
-			// 续约租约，告诉 etcd 服务还在正常运行
-			_, err := sd.client.KeepAlive(context.Background(), sd.leaseID)
-			if err != nil {
-				//失败三次就将数据放回待注册的服务
-				log.Printf("Failed to renew lease: %v", err)
+		for wresp := range rch {
+			for _, ev := range wresp.Events {
+				switch ev.Type {
+				case clientv3.EventTypePut:
+					// 服务新增或更新
+					endpoints := []string{string(ev.Kv.Value)}
+					serviceChangesCh <- endpoints
+				case clientv3.EventTypeDelete:
+					// 服务删除
+					serviceChangesCh <- nil
+				}
 			}
 		}
-	}
-}
+	}()
 
-func (sd *ServiceDiscovery) Close() (err error) {
-	return sd.client.Close()
-}
-
-func (sd *ServiceDiscovery) DiscoverService() ([]string, error) {
-	//watch
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	resp, err := sd.client.Get(ctx, fmt.Sprintf("/services/%s", sd.service), clientv3.WithPrefix())
-	if err != nil {
-		return nil, err
-	}
-
-	endpoints := make([]string, 0)
-	for _, kv := range resp.Kvs {
-		endpoints = append(endpoints, string(kv.Value))
-	}
-
-	return endpoints, nil
-}
-
-func main() {
-	etcdEndpoints := []string{"http://localhost:2379"} // 替换为您的 etcd 服务器地址
-	serviceName := "example-service"
-	serviceAddress := "127.0.0.1:8080" // 替换为您的服务地址
-	leaseTTL := 10                     // 租约的过期时间，以秒为单位
-
-	serviceDiscovery, err := NewServiceDiscovery(etcdEndpoints, serviceName, serviceAddress, leaseTTL)
-	if err != nil {
-		log.Fatalf("Failed to create service discovery: %v", err)
-	}
-
-	if err := serviceDiscovery.Serve(); err != nil {
-		log.Fatalf("Failed serve service: %v", err)
-	}
-	registerMethod := make(map[string]struct{})
-	registerMethod["a1"] = struct{}{}
-	registerMethod["a2"] = struct{}{}
-	registerMethod["a3"] = struct{}{}
-
-	if err := serviceDiscovery.RegisterMethod(registerMethod); err != nil {
-		log.Fatalf("Failed to register service: %v", err)
-	}
-
-	discoveredEndpoints, err := serviceDiscovery.DiscoverService()
-	if err != nil {
-		log.Fatalf("Failed to discover service: %v", err)
-	}
-
-	fmt.Printf("Discovered endpoints for %s: %v\n", serviceName, discoveredEndpoints)
-
-	// 保持程序运行
-	select {}
+	go func() {
+		for {
+			endpoints := <-serviceChangesCh
+			if endpoints != nil {
+				fmt.Printf("Service %s updated. New endpoints: %v\n", sd.service, endpoints)
+			} else {
+				fmt.Printf("Service %s deleted.\n", sd.service)
+			}
+		}
+	}()
 }
