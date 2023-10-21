@@ -15,7 +15,8 @@ func ClientTest() {
 	serviceAddress := "127.0.0.1:8080" // 替换为您的服务地址
 	leaseTTL := 10                     // 租约的过期时间，以秒为单位
 
-	serviceDiscovery, err := NewServiceDiscovery(etcdEndpoints, serviceName, serviceAddress, leaseTTL)
+	var err error
+	serviceDiscovery, err = NewServiceDiscovery(etcdEndpoints, serviceName, serviceAddress, leaseTTL)
 	if err != nil {
 		log.Fatalf("Failed to create service discovery: %v", err)
 	}
@@ -35,4 +36,6 @@ func TestServiceDiscovery(t *testing.T) {
 	if err := serviceDiscovery.RegisterMethod(registerMethod); err != nil {
 		log.Fatalf("Failed to register service: %v", err)
 	}
+
+	select {}
 }
