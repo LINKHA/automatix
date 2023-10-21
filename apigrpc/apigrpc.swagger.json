@@ -6,7 +6,7 @@
   },
   "tags": [
     {
-      "name": "GreetService"
+      "name": "Greeter"
     }
   ],
   "consumes": [
@@ -17,13 +17,14 @@
   ],
   "paths": {},
   "definitions": {
-    "apigrpcHelloResponse": {
+    "apigrpcHelloReply": {
       "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      }
+      },
+      "title": "The response message containing the greetings"
     },
     "protobufAny": {
       "type": "object",
