@@ -1,28 +1,41 @@
-// package main
+package main
 
-// import (
-// 	"fmt"
+import (
+	"context"
+	"fmt"
+	"time"
+)
 
-// 	"google.golang.org/protobuf/encoding/protojson"
-// )
+type Connection struct {
+	ctx    context.Context
+	cancel context.CancelFunc
+}
 
-// var (
-// 	version  string = "0.0.1"
-// 	commitID string = "dev"
+func (c *Connection) Start() {
+	c.ctx, c.cancel = context.WithCancel(context.Background())
+}
 
-// 	// Shared utility components.
-// 	jsonpbMarshaler = &protojson.MarshalOptions{
-// 		UseEnumNumbers:  true,
-// 		EmitUnpopulated: false,
-// 		Indent:          "",
-// 		UseProtoNames:   true,
-// 	}
-// 	jsonpbUnmarshaler = &protojson.UnmarshalOptions{
-// 		DiscardUnknown: false,
-// 	}
-// )
+func (c *Connection) Func(id int) {
+	fmt.Println(fmt.Sprintf("start func: %d", id))
+	go func() {
+		select {
+		case <-c.ctx.Done():
+			fmt.Println(fmt.Sprintf("finish: %d", id))
+		}
+	}()
+}
 
-// func main() {
-// 	semver := fmt.Sprintf("%s+%s", version, commitID)
+func (c *Connection) Cancel() {
+	c.cancel()
+}
 
-// }
+func main() {
+	var conn = &Connection{}
+	conn.Start()
+	conn.Func(1)
+	conn.Func(2)
+	time.Sleep(time.Duration(2) * time.Second)
+
+	conn.Cancel()
+	time.Sleep(time.Duration(100) * time.Second)
+}
