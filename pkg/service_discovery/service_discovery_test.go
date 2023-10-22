@@ -3,6 +3,7 @@ package service_discovery
 import (
 	"log"
 	"testing"
+	"time"
 )
 
 var (
@@ -13,7 +14,7 @@ func ClientTest() {
 	etcdEndpoints := []string{"http://localhost:2379"} // 替换为您的 etcd 服务器地址
 	serviceName := "example-service"
 	serviceAddress := "127.0.0.1:8080" // 替换为您的服务地址
-	leaseTTL := 10                     // 租约的过期时间，以秒为单位
+	leaseTTL := 2                      // 租约的过期时间，以秒为单位
 
 	var err error
 	serviceDiscovery, err = NewServiceDiscovery(etcdEndpoints, serviceName, serviceAddress, leaseTTL)
@@ -37,5 +38,6 @@ func TestServiceDiscovery(t *testing.T) {
 		log.Fatalf("Failed to register service: %v", err)
 	}
 
-	select {}
+	time.Sleep(50 * time.Second)
+	// select {}
 }
