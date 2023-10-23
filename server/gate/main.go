@@ -2,9 +2,10 @@ package main
 
 import (
 	"log"
+	"net"
 
-	"github.com/gin-gonic/gin" // 使用Gin框架
-	"google.golang.org/grpc"   // 导入gRPC库
+	"github.com/gin-gonic/gin"
+	"google.golang.org/grpc"
 	// 导入其他必要的库
 )
 
@@ -13,38 +14,39 @@ func main() {
 	router := gin.Default()
 
 	// 设置HTTP路由，将不同的路径映射到不同的处理函数
-	router.POST("/", handleHTTPForward)
+	router.POST("/httpEndpoint", handleHTTPForward)
 	// 添加更多的HTTP路由规则，如果需要的话
 
-	// 启动HTTP服务器
+	// 同一个端口上同时启动HTTP和gRPC服务器
 	go startHTTPServer(router)
-
-	// 连接到gRPC服务器
-	grpcConn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("Failed to connect to gRPC server: %v", err)
-	}
-	defer grpcConn.Close()
-
-	// 启动gRPC服务
-	go startGRPCServer(grpcConn)
+	go startGRPCServer()
 
 	// 保持程序运行
 	select {}
 }
 
 func startHTTPServer(router *gin.Engine) {
-	httpAddr := ":8080" // HTTP服务器的地址
-	log.Printf("HTTP server is listening on %s\n", httpAddr)
+	httpAddr := ":8080" // HTTP和gRPC服务器共享的端口
+	log.Printf("Server is listening on %s\n", httpAddr)
 	if err := router.Run(httpAddr); err != nil {
 		log.Fatalf("HTTP server failed: %v", err)
 	}
 }
 
-func startGRPCServer(grpcConn *grpc.ClientConn) {
-	// 在这里实现gRPC服务的逻辑
-	// 你可以使用protobuf生成的代码来处理gRPC请求和响应
-	// 示例：实现一个gRPC函数
+func startGRPCServer() {
+	grpcAddr := ":8080" // HTTP和gRPC服务器共享的端口
+	lis, err := net.Listen("tcp", grpcAddr)
+	if err != nil {
+		log.Fatalf("Failed to listen on port %s: %v", grpcAddr, err)
+	}
+
+	grpcServer := grpc.NewServer()
+	// 在这里注册gRPC服务
+
+	log.Printf("gRPC server is listening on %s\n", grpcAddr)
+	if err := grpcServer.Serve(lis); err != nil {
+		log.Fatalf("gRPC server failed: %v", err)
+	}
 }
 
 func handleHTTPForward(c *gin.Context) {
