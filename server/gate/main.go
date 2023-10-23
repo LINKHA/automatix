@@ -2,19 +2,18 @@ package main
 
 import (
 	"log"
-	"net/http"
 
-	"github.com/gorilla/mux" // 使用Gorilla Mux来处理HTTP路由
-	"google.golang.org/grpc" // 导入gRPC库
+	"github.com/gin-gonic/gin" // 使用Gin框架
+	"google.golang.org/grpc"   // 导入gRPC库
 	// 导入其他必要的库
 )
 
 func main() {
-	// 创建HTTP路由器
-	router := mux.NewRouter()
+	// 创建Gin引擎
+	router := gin.Default()
 
 	// 设置HTTP路由，将不同的路径映射到不同的处理函数
-	router.HandleFunc("/httpEndpoint", handleHTTPForward).Methods("POST")
+	router.POST("/", handleHTTPForward)
 	// 添加更多的HTTP路由规则，如果需要的话
 
 	// 启动HTTP服务器
@@ -34,10 +33,10 @@ func main() {
 	select {}
 }
 
-func startHTTPServer(router *mux.Router) {
+func startHTTPServer(router *gin.Engine) {
 	httpAddr := ":8080" // HTTP服务器的地址
 	log.Printf("HTTP server is listening on %s\n", httpAddr)
-	if err := http.ListenAndServe(httpAddr, router); err != nil {
+	if err := router.Run(httpAddr); err != nil {
 		log.Fatalf("HTTP server failed: %v", err)
 	}
 }
@@ -48,7 +47,7 @@ func startGRPCServer(grpcConn *grpc.ClientConn) {
 	// 示例：实现一个gRPC函数
 }
 
-func handleHTTPForward(w http.ResponseWriter, r *http.Request) {
+func handleHTTPForward(c *gin.Context) {
 	// 在这里实现HTTP请求的处理和转发逻辑
 	// 你可以将HTTP请求转发到gRPC服务，或者其他目标服务
 	// 示例：HTTP请求处理逻辑
