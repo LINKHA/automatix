@@ -3,9 +3,6 @@ version: '3'
 ######## app下api+rpc ,  Before starting this project, start the environment that the project depends on docker-compose-env.yml #######
 
 services:
-
-  #前端网关nginx-gateay (只代理looklook，admin-api不在这里做代理)
-  # Front-end gateway nginx-gateway (Only agent looklook，admin-api Do not be an agent here)
   nginx-gateway:
     image: nginx:1.21.5
     container_name: nginx-gateway
@@ -19,30 +16,28 @@ services:
       - ./deploy/nginx/conf.d:/etc/nginx/conf.d
       - ./data/nginx/log:/var/log/nginx
     networks:
-      - looklook_net
+      - automatix_net
     depends_on:
-      - looklook
+      - automatix
 
   #前端api + 业务rpc - Front-end API + business RPC
-  looklook:
-    # docker-hub : https://hub.docker.com/r/lyumikael/gomodd
-    # dockerfile: https://github.com/Mikaelemmmm/gomodd , If you are macOs m1\m2 use dockerfile yourself to build the image
-    image: lyumikael/gomodd:v1.20.3
-    container_name: looklook
+  automatix:
+    image: automatix:latest
+    container_name: automatix
     environment:
       # 时区上海 - Timezone Shanghai
       TZ: Asia/Shanghai
       GOPROXY: https://goproxy.cn,direct
-    working_dir: /go/looklook
+    working_dir: /go/automatix
     volumes:
-      - .:/go/looklook
+      - .:/go/automatix
     privileged: true
     restart: always
     networks:
-      - looklook_net
+      - automatix_net
 
 networks:
-  looklook_net:
+  automatix_net:
     driver: bridge
     ipam:
       config:
