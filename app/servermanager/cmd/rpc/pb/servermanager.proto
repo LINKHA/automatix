@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+//model
+message Server {
+	int64 id = 1;
+	string name = 2;
+	int64 serverType = 3;
+	int64 switch = 4;
+	int64 startTime = 5;
+	int64 area = 6;
+	string tags = 7;
+	int64 maxOnline = 8;
+	int64 maxQueue = 9;
+  	int64 maxSign = 10;
+  	string templateValue = 11;
+}
+
+//req 、resp
+message GetServerReq {
+	int64 id = 1;
+}
+
+message GetServerResp {
+    int64 id = 1;
+    string name = 2;
+    int64 serverType = 3;
+    int64 switch = 4;
+    int64 startTime = 5;
+    int64 area = 6;
+    string tags = 7;
+    int64 maxOnline = 8;
+    int64 maxQueue = 9;
+    int64 maxSign = 10;
+    string templateValue = 11;
+}
+
+message SetServerReq  {
+    int64 id = 1;
+    string name = 2;
+    int64 serverType = 3;
+    int64 switch = 4;
+    int64 startTime = 5;
+    int64 area = 6;
+    string tags = 7;
+    int64 maxOnline = 8;
+    int64 maxQueue = 9;
+    int64 maxSign = 10;
+    string templateValue = 11;
+}
+
+message SetServerResp {
+    string returnCode = 1;
+}
+
+message CreateServerReq  {
+    string name = 1;
+    int64 serverType = 2;
+    int64 switch = 3;
+    int64 startTime = 4;
+    int64 area = 5;
+    string tags = 6;
+    int64 maxOnline = 7;
+    int64 maxQueue = 8;
+    int64 maxSign = 9;
+    string templateValue = 10;
+}
+
+message CreateServerResp {
+    string returnCode = 1;
+}
+
+//service
+service usercenter {
+  rpc createServer(CreateServerReq) returns(CreateServerResp);
+  rpc setServer(SetServerReq) returns(SetServerResp);
+  rpc getServer(GetServerReq) returns(GetServerResp);
+}

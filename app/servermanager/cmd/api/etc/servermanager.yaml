@@ -1,4 +1,4 @@
-Name: usercenter-api
+Name: servermanager-api
 Host: 0.0.0.0
 Port: 1005
 Mode: dev
@@ -6,7 +6,7 @@ Mode: dev
 #监控
 Prometheus:
   Host: 0.0.0.0
-  Port: 5001
+  Port: 4012
   Path: /metrics
 
 #链路追踪
