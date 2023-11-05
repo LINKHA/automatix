@@ -41,6 +41,18 @@ type (
 )
 
 type (
+	FastLoginReq {
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
+	FastLoginResp {
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+		RefreshAfter int64  `json:"refreshAfter"`
+	}
+)
+
+type (
 	WXMiniAuthReq {
 		Code          string `json:"code"`
 		IV            string `json:"iv"`

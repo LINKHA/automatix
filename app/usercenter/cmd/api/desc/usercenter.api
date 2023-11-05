@@ -19,14 +19,18 @@ import (
 	group: user
 )
 service usercenter {
-	
+
 	@doc "register"
 	@handler register
 	post /user/register (RegisterReq) returns (RegisterResp)
-	
+
 	@doc "login"
 	@handler login
 	post /user/login (LoginReq) returns (LoginResp)
+
+	@doc "fastLogin"
+	@handler fastLogin
+	post /user/fastLogin (FastLoginReq) returns (FastLoginResp)
 }
 
 //need login
@@ -36,11 +40,11 @@ service usercenter {
 	jwt: JwtAuth
 )
 service usercenter {
-	
+
 	@doc "get user info"
 	@handler detail
 	post /user/detail (UserInfoReq) returns (UserInfoResp)
-	
+
 	@doc "wechat mini auth"
 	@handler wxMiniAuth
 	post /user/wxMiniAuth (WXMiniAuthReq) returns (WXMiniAuthResp)

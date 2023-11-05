@@ -32,6 +32,17 @@ type LoginResp struct {
 	RefreshAfter int64  `json:"refreshAfter"`
 }
 
+type FastLoginReq struct {
+	Mobile   string `json:"mobile"`
+	Password string `json:"password"`
+}
+
+type FastLoginResp struct {
+	AccessToken  string `json:"accessToken"`
+	AccessExpire int64  `json:"accessExpire"`
+	RefreshAfter int64  `json:"refreshAfter"`
+}
+
 type WXMiniAuthReq struct {
 	Code          string `json:"code"`
 	IV            string `json:"iv"`
