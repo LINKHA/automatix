@@ -1,0 +1,80 @@
+syntax = "v1"
+
+info (
+	title: "服务器实例"
+	desc: "服务器实例"
+	author: "LINKH"
+	email: "421698843@qq.com"
+)
+
+type Server {
+	Id       		int64  	`json:"id"`
+	Name   			string  `json:"name"`
+	ServerType 		int64  	`json:"server_type"`
+	Switch     		int64 	`json:"switch"`
+	StartTime  		int64 	`json:"start_time"`
+	Area			int64	`json:"area"`
+	Tags			string	`json:"tags"`
+	MaxOnline		int64	`json:"max_online"`
+	MaxQueue 		int64	`json:"max_queue"`
+  	MaxSign 		int64	`json:"max_sign"`
+  	TemplateValue 	string	`json:"template_value"`
+}
+
+type (
+	GetServerReq {
+		Id	int64 `json:"id"`
+	}
+
+	GetServerResp {
+		Id       		int64  	`json:"id"`
+		Name   			string  `json:"name"`
+		ServerType 		int64  	`json:"server_type"`
+		Switch     		int64 	`json:"switch"`
+		StartTime  		int64 	`json:"start_time"`
+		Area			int64	`json:"area"`
+		Tags			string	`json:"tags"`
+		MaxOnline		int64	`json:"max_online"`
+		MaxQueue 		int64	`json:"max_queue"`
+		MaxSign 		int64	`json:"max_sign"`
+		TemplateValue 	string	`json:"template_value"`
+	}
+)
+
+type(
+	SetServerReq  {
+		Id	int64 `json:"id"`
+		Name   			string  `json:"name"`
+		ServerType 		int64  	`json:"server_type"`
+		Switch     		int64 	`json:"switch"`
+		Area			int64	`json:"area"`
+		Tags			string	`json:"tags"`
+		MaxOnline		int64	`json:"max_online"`
+		MaxQueue 		int64	`json:"max_queue"`
+		MaxSign 		int64	`json:"max_sign"`
+		TemplateValue 	string	`json:"template_value"`
+	}
+
+	SetServerResp {
+		ReturnCode string `json:"return_code"`
+	}
+)
+
+type(
+	CreateServerReq  {
+		Name   			string  `json:"name"`
+		ServerType 		int64  	`json:"server_type"`
+		Switch     		int64 	`json:"switch"`
+		StartTime  		int64 	`json:"start_time"`
+		Area			int64	`json:"area"`
+		Tags			string	`json:"tags"`
+		MaxOnline		int64	`json:"max_online"`
+		MaxQueue 		int64	`json:"max_queue"`
+		MaxSign 		int64	`json:"max_sign"`
+		TemplateValue 	string	`json:"template_value"`
+	}
+
+	CreateServerResp {
+		ReturnCode string `json:"return_code"`
+	}
+)

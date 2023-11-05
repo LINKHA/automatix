@@ -1,0 +1,26 @@
+syntax = "v1"
+
+info (
+	title: "游戏服务器管理"
+	desc: "游戏服务器管理"
+	author: "LINKH"
+	email: "421698843@qq.com"
+)
+
+import (
+	"server/server.api"
+)
+
+service servermanager {
+	@doc "createServer"
+	@handler createServer
+	post /servermanager/createServer (CreateServerReq) returns (CreateServerResp)
+
+	@doc "setServer"
+	@handler setServer
+	post /servermanager/setServer (SetServerReq) returns (SetServerResp)
+
+	@doc "getServer"
+	@handler getServer
+	post /servermanager/getServer (GetServerReq) returns (GetServerResp)
+}
