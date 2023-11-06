@@ -8,12 +8,13 @@ import (
 	"fmt"
 	"strings"
 	"time"
-
+	"looklook/deploy/script/mysql/genModel"
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
+	"looklook/common/globalkey"
 )
 
 var (
@@ -84,13 +85,16 @@ func (m *defaultServerModel) FindOne(ctx context.Context, id int64) (*Server, er
 	case nil:
 		return &resp, nil
 	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
+		return nil, genModel.ErrNotFound
 	default:
 		return nil, err
 	}
 }
 
 func (m *defaultServerModel) Insert(ctx context.Context, data *Server) (sql.Result, error) {
+	data.DeleteTime = time.Unix(0, 0)
+	data.DelState = globalkey.DelStateNo
+
 	amxServermanagerServerIdKey := fmt.Sprintf("%s%v", cacheAmxServermanagerServerIdPrefix, data.Id)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, serverRowsExpectAutoSet)
