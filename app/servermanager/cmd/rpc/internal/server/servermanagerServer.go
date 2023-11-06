@@ -11,28 +11,28 @@ import (
 	"looklook/app/servermanager/cmd/rpc/pb"
 )
 
-type UsercenterServer struct {
+type ServermanagerServer struct {
 	svcCtx *svc.ServiceContext
-	pb.UnimplementedUsercenterServer
+	pb.UnimplementedServermanagerServer
 }
 
-func NewUsercenterServer(svcCtx *svc.ServiceContext) *UsercenterServer {
-	return &UsercenterServer{
+func NewServermanagerServer(svcCtx *svc.ServiceContext) *ServermanagerServer {
+	return &ServermanagerServer{
 		svcCtx: svcCtx,
 	}
 }
 
-func (s *UsercenterServer) CreateServer(ctx context.Context, in *pb.CreateServerReq) (*pb.CreateServerResp, error) {
+func (s *ServermanagerServer) CreateServer(ctx context.Context, in *pb.CreateServerReq) (*pb.CreateServerResp, error) {
 	l := logic.NewCreateServerLogic(ctx, s.svcCtx)
 	return l.CreateServer(in)
 }
 
-func (s *UsercenterServer) SetServer(ctx context.Context, in *pb.SetServerReq) (*pb.SetServerResp, error) {
+func (s *ServermanagerServer) SetServer(ctx context.Context, in *pb.SetServerReq) (*pb.SetServerResp, error) {
 	l := logic.NewSetServerLogic(ctx, s.svcCtx)
 	return l.SetServer(in)
 }
 
-func (s *UsercenterServer) GetServer(ctx context.Context, in *pb.GetServerReq) (*pb.GetServerResp, error) {
+func (s *ServermanagerServer) GetServer(ctx context.Context, in *pb.GetServerReq) (*pb.GetServerResp, error) {
 	l := logic.NewGetServerLogic(ctx, s.svcCtx)
 	return l.GetServer(in)
 }

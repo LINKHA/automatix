@@ -75,7 +75,7 @@ message CreateServerResp {
 }
 
 //service
-service usercenter {
+service servermanager {
   rpc createServer(CreateServerReq) returns(CreateServerResp);
   rpc setServer(SetServerReq) returns(SetServerResp);
   rpc getServer(GetServerReq) returns(GetServerResp);
