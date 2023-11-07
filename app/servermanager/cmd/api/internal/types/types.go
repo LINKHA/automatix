@@ -2,7 +2,7 @@
 package types
 
 type Server struct {
-	Id            int64  `json:"id"`
+	ServerId      string `json:"serverId"`
 	Name          string `json:"name"`
 	ServerType    int64  `json:"serverType"`
 	Switch        int64  `json:"switch"`
@@ -16,11 +16,11 @@ type Server struct {
 }
 
 type GetServerReq struct {
-	Id int64 `json:"id"`
+	ServerId string `json:"serverId"`
 }
 
 type GetServerResp struct {
-	Id            int64  `json:"id"`
+	ServerId      string `json:"serverId"`
 	Name          string `json:"name"`
 	ServerType    int64  `json:"serverType"`
 	Switch        int64  `json:"switch"`
@@ -34,7 +34,7 @@ type GetServerResp struct {
 }
 
 type SetServerReq struct {
-	Id            int64  `json:"id"`
+	ServerId      string `json:"serverId"`
 	Name          string `json:"name"`
 	ServerType    int64  `json:"serverType"`
 	Switch        int64  `json:"switch"`
@@ -64,5 +64,6 @@ type CreateServerReq struct {
 }
 
 type CreateServerResp struct {
+	ServerId   string `json:"serverId"`
 	ReturnCode string `json:"returnCode"`
 }

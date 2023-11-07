@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"strconv"
 
 	"looklook/app/servermanager/cmd/rpc/internal/svc"
 	"looklook/app/servermanager/cmd/rpc/pb"
@@ -28,8 +28,10 @@ func NewCreateServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Crea
 }
 
 func (l *CreateServerLogic) CreateServer(in *pb.CreateServerReq) (*pb.CreateServerResp, error) {
-	// todo: add your logic here and delete this line
 	server := new(model.Server)
+	serverId := strconv.FormatInt(int64(l.svcCtx.Snowflake.Generate()), 10)
+
+	server.ServerId = serverId
 	server.Name = in.Name
 	server.ServerType = in.ServerType
 	server.Switch = in.Switch
@@ -47,6 +49,8 @@ func (l *CreateServerLogic) CreateServer(in *pb.CreateServerReq) (*pb.CreateServ
 		// return errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Create db server Insert err:%v,server:%+v", err, server)
 	}
 
-	fmt.Println("CreateServer++++++++++++++++")
-	return &pb.CreateServerResp{ReturnCode: "success"}, nil
+	return &pb.CreateServerResp{
+		ReturnCode: "success",
+		ServerId:   serverId,
+	}, nil
 }

@@ -8,7 +8,7 @@ info (
 )
 
 type Server {
-	Id       		int64  	`json:"id"`
+	ServerId       	string  `json:"serverId"`
 	Name   			string  `json:"name"`
 	ServerType 		int64  	`json:"serverType"`
 	Switch     		int64 	`json:"switch"`
@@ -23,11 +23,11 @@ type Server {
 
 type (
 	GetServerReq {
-		Id	int64 `json:"id"`
+		ServerId		string 	`json:"serverId"`
 	}
 
 	GetServerResp {
-		Id       		int64  	`json:"id"`
+		ServerId		string 	`json:"serverId"`
 		Name   			string  `json:"name"`
 		ServerType 		int64  	`json:"serverType"`
 		Switch     		int64 	`json:"switch"`
@@ -43,7 +43,7 @@ type (
 
 type(
 	SetServerReq  {
-		Id	int64 `json:"id"`
+		ServerId		string 	`json:"serverId"`
 		Name   			string  `json:"name"`
 		ServerType 		int64  	`json:"serverType"`
 		Switch     		int64 	`json:"switch"`
@@ -75,6 +75,7 @@ type(
 	}
 
 	CreateServerResp {
-		ReturnCode string `json:"returnCode"`
+		ServerId   		string 	`json:"serverId"`
+		ReturnCode 		string 	`json:"returnCode"`
 	}
 )

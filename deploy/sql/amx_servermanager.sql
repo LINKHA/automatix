@@ -27,6 +27,7 @@ CREATE TABLE `server`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
   `delete_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
   `del_state` tinyint(0) NOT NULL,
+  `server_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '业务Id',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '服务器名称',
   `server_type` tinyint(0) NOT NULL COMMENT '服务类型(0:运营 1:测试)',
   `switch` tinyint(0) NOT NULL COMMENT '服务器是否开启(0:关闭 1:开启)',
@@ -37,7 +38,8 @@ CREATE TABLE `server`  (
   `max_queue` int(0) NOT NULL COMMENT '最大排队人数',
   `max_sign` int(0) NOT NULL COMMENT '最大注册人数',
   `template_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '自定义参数(json格式)',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_serverId_key` (`server_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;

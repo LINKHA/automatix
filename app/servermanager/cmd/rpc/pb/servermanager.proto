@@ -7,7 +7,7 @@ package pb;
 
 //model
 message Server {
-	int64 id = 1;
+	string serverId = 1;
 	string name = 2;
 	int64 serverType = 3;
 	int64 switch = 4;
@@ -22,11 +22,11 @@ message Server {
 
 //req 、resp
 message GetServerReq {
-	int64 id = 1;
+	string serverId = 1;
 }
 
 message GetServerResp {
-    int64 id = 1;
+    string serverId = 1;
     string name = 2;
     int64 serverType = 3;
     int64 switch = 4;
@@ -40,7 +40,7 @@ message GetServerResp {
 }
 
 message SetServerReq  {
-    int64 id = 1;
+    string serverId = 1;
     string name = 2;
     int64 serverType = 3;
     int64 switch = 4;
@@ -71,7 +71,8 @@ message CreateServerReq  {
 }
 
 message CreateServerResp {
-    string returnCode = 1;
+    string serverId = 1;
+    string returnCode = 2;
 }
 
 //service

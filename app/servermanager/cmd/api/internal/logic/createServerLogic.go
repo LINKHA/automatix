@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
 	"looklook/app/servermanager/cmd/api/internal/svc"
 	"looklook/app/servermanager/cmd/api/internal/types"
@@ -27,12 +26,6 @@ func NewCreateServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Crea
 }
 
 func (l *CreateServerLogic) CreateServer(req *types.CreateServerReq) (*types.CreateServerResp, error) {
-	fmt.Println("1 CreateServer++++++++++++++++")
-
-	id := l.svcCtx.Snowflake.Generate()
-	fmt.Print("ggg 1------------------   :   ")
-	fmt.Println(id)
-
 	createServerResp, err := l.svcCtx.ServerManagerRpc.CreateServer(l.ctx, &servermanager.CreateServerReq{
 		Name:          req.Name,
 		ServerType:    req.ServerType,
