@@ -30,3 +30,5 @@ ServerManagerRpcConf:
   Endpoints:
     - 127.0.0.1:2005
   NonBlock: true
+
+Id: 1

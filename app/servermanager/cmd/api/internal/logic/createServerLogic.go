@@ -8,7 +8,6 @@ import (
 	"looklook/app/servermanager/cmd/api/internal/types"
 	"looklook/app/servermanager/cmd/rpc/servermanager"
 
-	"github.com/bwmarrin/snowflake"
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,13 +29,7 @@ func NewCreateServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Crea
 func (l *CreateServerLogic) CreateServer(req *types.CreateServerReq) (*types.CreateServerResp, error) {
 	fmt.Println("1 CreateServer++++++++++++++++")
 
-	node, err := snowflake.NewNode(1)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// 生成唯一ID
-	id := node.Generate()
+	id := l.svcCtx.Snowflake.Generate()
 	fmt.Print("ggg 1------------------   :   ")
 	fmt.Println(id)
 
