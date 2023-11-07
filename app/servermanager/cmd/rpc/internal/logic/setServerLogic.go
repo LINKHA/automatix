@@ -2,10 +2,14 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"looklook/app/servermanager/cmd/rpc/internal/svc"
 	"looklook/app/servermanager/cmd/rpc/pb"
+	"looklook/app/servermanager/model"
+	"looklook/common/xerr"
 
+	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -24,7 +28,28 @@ func NewSetServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SetServ
 }
 
 func (l *SetServerLogic) SetServer(in *pb.SetServerReq) (*pb.SetServerResp, error) {
-	// todo: add your logic here and delete this line
+	server := model.Server{
+		ServerId:   in.ServerId,
+		Name:       in.Name,
+		ServerType: in.ServerType,
+		Switch:     in.Switch,
+		StartTime:  in.StartTime,
+		// Area: in.Area,
+		Tags:          in.Tags,
+		MaxOnline:     in.MaxOnline,
+		MaxQueue:      in.MaxQueue,
+		MaxSign:       in.MaxSign,
+		TemplateValue: in.TemplateValue,
+	}
+	fmt.Print("1---------    :   ")
+	fmt.Println(server)
 
-	return &pb.SetServerResp{}, nil
+	fmt.Print("2---------    :   ")
+	fmt.Println(in.Switch)
+	err := l.svcCtx.ServerModel.UpdateByServerId(l.ctx, &server)
+	if err != nil {
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), " SetServer db err , serverId : %s ", in.ServerId)
+	}
+
+	return &pb.SetServerResp{ReturnCode: "success"}, nil
 }

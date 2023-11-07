@@ -34,6 +34,7 @@ type (
 		FindOne(ctx context.Context, id int64) (*Server, error)
 		FindOneByServerId(ctx context.Context, serverId string) (*Server, error)
 		Update(ctx context.Context, data *Server) error
+		UpdateByServerId(ctx context.Context, newData *Server) error
 		Delete(ctx context.Context, id int64) error
 	}
 
@@ -134,6 +135,9 @@ func (m *defaultServerModel) Insert(ctx context.Context, data *Server) (sql.Resu
 }
 
 func (m *defaultServerModel) Update(ctx context.Context, newData *Server) error {
+	newData.DeleteTime = time.Unix(0, 0)
+	newData.DelState = globalkey.DelStateNo
+
 	data, err := m.FindOne(ctx, newData.Id)
 	if err != nil {
 		return err
@@ -147,6 +151,25 @@ func (m *defaultServerModel) Update(ctx context.Context, newData *Server) error 
 	}, amxServermanagerServerIdKey, amxServermanagerServerServerIdKey)
 	return err
 }
+
+func (m *defaultServerModel) UpdateByServerId(ctx context.Context, newData *Server) error {
+	newData.DeleteTime = time.Unix(0, 0)
+	newData.DelState = globalkey.DelStateNo
+
+	data, err := m.FindOneByServerId(ctx, newData.ServerId)
+	if err != nil {
+		return err
+	}
+
+	amxServermanagerServerIdKey := fmt.Sprintf("%s%v", cacheAmxServermanagerServerIdPrefix, data.Id)
+	amxServermanagerServerServerIdKey := fmt.Sprintf("%s%v", cacheAmxServermanagerServerServerIdPrefix, data.ServerId)
+	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `server_id` = ?", m.table, serverRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, newData.DeleteTime, newData.DelState, newData.ServerId, newData.Name, newData.ServerType, newData.Switch, newData.StartTime, newData.Area, newData.Tags, newData.MaxOnline, newData.MaxQueue, newData.MaxSign, newData.TemplateValue, newData.ServerId)
+	}, amxServermanagerServerIdKey, amxServermanagerServerServerIdKey)
+	return err
+}
+
 
 func (m *defaultServerModel) formatPrimary(primary any) string {
 	return fmt.Sprintf("%s%v", cacheAmxServermanagerServerIdPrefix, primary)
