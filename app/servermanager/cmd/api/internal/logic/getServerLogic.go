@@ -5,7 +5,9 @@ import (
 
 	"looklook/app/servermanager/cmd/api/internal/svc"
 	"looklook/app/servermanager/cmd/api/internal/types"
+	"looklook/app/servermanager/cmd/rpc/servermanager"
 
+	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -23,8 +25,16 @@ func NewGetServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetServ
 	}
 }
 
-func (l *GetServerLogic) GetServer(req *types.GetServerReq) (resp *types.GetServerResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *GetServerLogic) GetServer(req *types.GetServerReq) (*types.GetServerResp, error) {
+	getServerResp, err := l.svcCtx.ServerManagerRpc.GetServer(l.ctx, &servermanager.GetServerReq{
+		ServerId: req.ServerId,
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	var resp types.GetServerResp
+	_ = copier.Copy(&resp, getServerResp)
+
+	return &resp, nil
 }
