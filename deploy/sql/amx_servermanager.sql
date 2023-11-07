@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `server`;
 CREATE TABLE `server`  (
-  `id` bigint(0) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
   `delete_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
