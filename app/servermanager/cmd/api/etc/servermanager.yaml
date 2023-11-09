@@ -32,7 +32,7 @@ ServerManagerRpcConf:
     - 127.0.0.1:2005
   NonBlock: true
 
-KqConf:
+KqConfServerQueue:
   Brokers:
     - kafka:9092
   Topic: server-queue-topic

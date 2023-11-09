@@ -14,5 +14,5 @@ type Config struct {
 	rest.RestConf
 	ServerManagerRpcConf zrpc.RpcClientConf
 	Id                   int64
-	KqConf               KqConfig
+	KqConfServerQueue    KqConfig
 }

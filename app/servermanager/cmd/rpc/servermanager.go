@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"automatix/app/servermanager/cmd/rpc/internal/config"
+	"automatix/app/servermanager/cmd/rpc/internal/mqs/listen"
 	"automatix/app/servermanager/cmd/rpc/internal/server"
 	"automatix/app/servermanager/cmd/rpc/internal/svc"
 	"automatix/app/servermanager/cmd/rpc/pb"
@@ -25,15 +26,24 @@ func main() {
 	conf.MustLoad(*configFile, &c, conf.UseEnv())
 	ctx := svc.NewServiceContext(c)
 
-	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
+	rpcServer := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		pb.RegisterServermanagerServer(grpcServer, server.NewServermanagerServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
 		}
 	})
-	defer s.Stop()
+	defer rpcServer.Stop()
+
+	serviceGroup := service.NewServiceGroup()
+	defer serviceGroup.Stop()
+	for _, mq := range listen.Mqs(c) {
+		serviceGroup.Add(mq)
+	}
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
-	s.Start()
+	go rpcServer.Start()
+	go serviceGroup.Start()
+
+	select {}
 }

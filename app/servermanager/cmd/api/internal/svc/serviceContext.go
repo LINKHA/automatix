@@ -10,18 +10,18 @@ import (
 )
 
 type ServiceContext struct {
-	Config           config.Config
-	ServerManagerRpc servermanager.Servermanager
-	Snowflake        *snowflake.Node
-	Kqueue           *kq.Pusher
+	Config            config.Config
+	ServerManagerRpc  servermanager.Servermanager
+	Snowflake         *snowflake.Node
+	KqueueServerQueue *kq.Pusher
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	snowflake, _ := snowflake.NewNode(c.Id)
 	return &ServiceContext{
-		Config:           c,
-		ServerManagerRpc: servermanager.NewServermanager(zrpc.MustNewClient(c.ServerManagerRpcConf)),
-		Snowflake:        snowflake,
-		Kqueue:           kq.NewPusher(c.KqConf.Brokers, c.KqConf.Topic),
+		Config:            c,
+		ServerManagerRpc:  servermanager.NewServermanager(zrpc.MustNewClient(c.ServerManagerRpcConf)),
+		Snowflake:         snowflake,
+		KqueueServerQueue: kq.NewPusher(c.KqConfServerQueue.Brokers, c.KqConfServerQueue.Topic),
 	}
 }
