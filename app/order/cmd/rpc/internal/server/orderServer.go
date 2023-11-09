@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"looklook/app/order/cmd/rpc/internal/logic"
-	"looklook/app/order/cmd/rpc/internal/svc"
-	"looklook/app/order/cmd/rpc/pb"
+	"automatix/app/order/cmd/rpc/internal/logic"
+	"automatix/app/order/cmd/rpc/internal/svc"
+	"automatix/app/order/cmd/rpc/pb"
 )
 
 type OrderServer struct {

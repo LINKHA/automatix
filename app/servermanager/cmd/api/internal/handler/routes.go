@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	"looklook/app/servermanager/cmd/api/internal/svc"
+	"automatix/app/servermanager/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

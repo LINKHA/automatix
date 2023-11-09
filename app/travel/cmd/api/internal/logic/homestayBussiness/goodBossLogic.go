@@ -2,13 +2,14 @@ package homestayBussiness
 
 import (
 	"context"
+
 	"github.com/Masterminds/squirrel"
 
-	"looklook/app/travel/cmd/api/internal/svc"
-	"looklook/app/travel/cmd/api/internal/types"
-	"looklook/app/travel/model"
-	"looklook/app/usercenter/cmd/rpc/usercenter"
-	"looklook/common/xerr"
+	"automatix/app/travel/cmd/api/internal/svc"
+	"automatix/app/travel/cmd/api/internal/types"
+	"automatix/app/travel/model"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

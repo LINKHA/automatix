@@ -1,4 +1,4 @@
-module looklook
+module automatix
 
 go 1.18
 

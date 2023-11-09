@@ -1,10 +1,10 @@
 package svc
 
 import (
-	"looklook/app/order/cmd/api/internal/config"
-	"looklook/app/order/cmd/rpc/order"
-	"looklook/app/payment/cmd/rpc/payment"
-	"looklook/app/travel/cmd/rpc/travel"
+	"automatix/app/order/cmd/api/internal/config"
+	"automatix/app/order/cmd/rpc/order"
+	"automatix/app/payment/cmd/rpc/payment"
+	"automatix/app/travel/cmd/rpc/travel"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

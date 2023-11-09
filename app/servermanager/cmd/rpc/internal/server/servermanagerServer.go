@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"looklook/app/servermanager/cmd/rpc/internal/logic"
-	"looklook/app/servermanager/cmd/rpc/internal/svc"
-	"looklook/app/servermanager/cmd/rpc/pb"
+	"automatix/app/servermanager/cmd/rpc/internal/logic"
+	"automatix/app/servermanager/cmd/rpc/internal/svc"
+	"automatix/app/servermanager/cmd/rpc/pb"
 )
 
 type ServermanagerServer struct {

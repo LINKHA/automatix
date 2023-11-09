@@ -1,9 +1,9 @@
 package listen
 
 import (
+	"automatix/app/order/cmd/mq/internal/config"
+	"automatix/app/order/cmd/mq/internal/svc"
 	"context"
-	"looklook/app/order/cmd/mq/internal/config"
-	"looklook/app/order/cmd/mq/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/service"
 )

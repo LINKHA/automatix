@@ -4,11 +4,11 @@ import (
 	"flag"
 	"fmt"
 
-	"looklook/app/travel/cmd/rpc/internal/config"
-	"looklook/app/travel/cmd/rpc/internal/server"
-	"looklook/app/travel/cmd/rpc/internal/svc"
-	"looklook/app/travel/cmd/rpc/pb"
-	"looklook/common/interceptor/rpcserver"
+	"automatix/app/travel/cmd/rpc/internal/config"
+	"automatix/app/travel/cmd/rpc/internal/server"
+	"automatix/app/travel/cmd/rpc/internal/svc"
+	"automatix/app/travel/cmd/rpc/pb"
+	"automatix/common/interceptor/rpcserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

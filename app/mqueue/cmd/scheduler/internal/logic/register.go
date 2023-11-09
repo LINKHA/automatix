@@ -1,8 +1,8 @@
 package logic
 
 import (
+	"automatix/app/mqueue/cmd/scheduler/internal/svc"
 	"context"
-	"looklook/app/mqueue/cmd/scheduler/internal/svc"
 )
 
 type MqueueScheduler struct {
@@ -17,10 +17,7 @@ func NewCronScheduler(ctx context.Context, svcCtx *svc.ServiceContext) *MqueueSc
 	}
 }
 
-func (l *MqueueScheduler) Register()  {
+func (l *MqueueScheduler) Register() {
 
 	l.settleRecordScheduler()
 }
-
-
-

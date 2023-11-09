@@ -4,10 +4,10 @@ import (
 	"context"
 	"strconv"
 
-	"looklook/app/servermanager/cmd/rpc/internal/svc"
-	"looklook/app/servermanager/cmd/rpc/pb"
-	"looklook/app/servermanager/model"
-	"looklook/common/xerr"
+	"automatix/app/servermanager/cmd/rpc/internal/svc"
+	"automatix/app/servermanager/cmd/rpc/pb"
+	"automatix/app/servermanager/model"
+	"automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"

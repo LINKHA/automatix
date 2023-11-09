@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"looklook/app/usercenter/cmd/api/internal/config"
-	"looklook/app/usercenter/cmd/rpc/usercenter"
+	"automatix/app/usercenter/cmd/api/internal/config"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
 
 	"github.com/zeromicro/go-zero/rest"
 	"github.com/zeromicro/go-zero/zrpc"

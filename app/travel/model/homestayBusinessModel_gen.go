@@ -6,7 +6,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"looklook/deploy/script/mysql/genModel"
+	"automatix/deploy/script/mysql/genModel"
 	"strings"
 
 	"time"
@@ -18,7 +18,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
-	"looklook/common/globalkey"
+	"automatix/common/globalkey"
 )
 
 var (

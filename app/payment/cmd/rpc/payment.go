@@ -4,11 +4,11 @@ import (
 	"flag"
 	"fmt"
 
-	"looklook/app/payment/cmd/rpc/internal/config"
-	"looklook/app/payment/cmd/rpc/internal/server"
-	"looklook/app/payment/cmd/rpc/internal/svc"
-	"looklook/app/payment/cmd/rpc/pb"
-	"looklook/common/interceptor/rpcserver"
+	"automatix/app/payment/cmd/rpc/internal/config"
+	"automatix/app/payment/cmd/rpc/internal/server"
+	"automatix/app/payment/cmd/rpc/internal/svc"
+	"automatix/app/payment/cmd/rpc/pb"
+	"automatix/common/interceptor/rpcserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

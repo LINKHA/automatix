@@ -1,9 +1,9 @@
 package svc
 
 import (
+	"automatix/app/payment/cmd/api/internal/config"
+	"automatix/common/xerr"
 	"context"
-	"looklook/app/payment/cmd/api/internal/config"
-	"looklook/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/wechatpay-apiv3/wechatpay-go/core"

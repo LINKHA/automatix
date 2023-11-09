@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"looklook/app/payment/cmd/rpc/internal/logic"
-	"looklook/app/payment/cmd/rpc/internal/svc"
-	"looklook/app/payment/cmd/rpc/pb"
+	"automatix/app/payment/cmd/rpc/internal/logic"
+	"automatix/app/payment/cmd/rpc/internal/svc"
+	"automatix/app/payment/cmd/rpc/pb"
 )
 
 type PaymentServer struct {

@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 
-	"looklook/app/order/cmd/rpc/internal/svc"
-	"looklook/app/order/cmd/rpc/pb"
-	"looklook/app/order/model"
-	"looklook/common/xerr"
+	"automatix/app/order/cmd/rpc/internal/svc"
+	"automatix/app/order/cmd/rpc/pb"
+	"automatix/app/order/model"
+	"automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
@@ -29,7 +29,7 @@ func NewHomestayOrderDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 func (l *HomestayOrderDetailLogic) HomestayOrderDetail(in *pb.HomestayOrderDetailReq) (*pb.HomestayOrderDetailResp, error) {
 
-	homestayOrder, err := l.svcCtx.HomestayOrderModel.FindOneBySn(l.ctx,in.Sn)
+	homestayOrder, err := l.svcCtx.HomestayOrderModel.FindOneBySn(l.ctx, in.Sn)
 	if err != nil && err != model.ErrNotFound {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "HomestayOrderModel  FindOneBySn db err : %v , sn : %s", err, in.Sn)
 	}

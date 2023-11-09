@@ -1,17 +1,17 @@
 package logic
 
 import (
+	"automatix/app/mqueue/cmd/job/internal/svc"
+	"automatix/app/mqueue/cmd/job/jobtype"
+	"automatix/app/order/cmd/rpc/order"
+	"automatix/app/order/model"
+	"automatix/common/xerr"
 	"context"
 	"encoding/json"
+
 	"github.com/hibiken/asynq"
 	"github.com/pkg/errors"
-	"looklook/app/mqueue/cmd/job/internal/svc"
-	"looklook/app/mqueue/cmd/job/jobtype"
-	"looklook/app/order/cmd/rpc/order"
-	"looklook/app/order/model"
-	"looklook/common/xerr"
 )
-
 
 var ErrCloseOrderFal = xerr.NewErrMsg("close order fail")
 
@@ -22,7 +22,7 @@ type CloseHomestayOrderHandler struct {
 
 func NewCloseHomestayOrderHandler(svcCtx *svc.ServiceContext) *CloseHomestayOrderHandler {
 	return &CloseHomestayOrderHandler{
-		svcCtx:svcCtx,
+		svcCtx: svcCtx,
 	}
 }
 

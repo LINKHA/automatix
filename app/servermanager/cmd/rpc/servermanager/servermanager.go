@@ -6,7 +6,7 @@ package servermanager
 import (
 	"context"
 
-	"looklook/app/servermanager/cmd/rpc/pb"
+	"automatix/app/servermanager/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

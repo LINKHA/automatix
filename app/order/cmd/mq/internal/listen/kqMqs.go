@@ -1,16 +1,16 @@
 package listen
 
 import (
+	"automatix/app/order/cmd/mq/internal/config"
+	kqMq "automatix/app/order/cmd/mq/internal/mqs/kq"
+	"automatix/app/order/cmd/mq/internal/svc"
 	"context"
-	"looklook/app/order/cmd/mq/internal/config"
-	kqMq "looklook/app/order/cmd/mq/internal/mqs/kq"
-	"looklook/app/order/cmd/mq/internal/svc"
 
 	"github.com/zeromicro/go-queue/kq"
 	"github.com/zeromicro/go-zero/core/service"
 )
 
-//pub sub use kq (kafka)
+// pub sub use kq (kafka)
 func KqMqs(c config.Config, ctx context.Context, svcContext *svc.ServiceContext) []service.Service {
 
 	return []service.Service{

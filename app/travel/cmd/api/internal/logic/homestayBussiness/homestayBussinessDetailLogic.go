@@ -3,11 +3,11 @@ package homestayBussiness
 import (
 	"context"
 
-	"looklook/app/travel/cmd/api/internal/svc"
-	"looklook/app/travel/cmd/api/internal/types"
-	"looklook/app/usercenter/cmd/rpc/usercenter"
-	"looklook/app/usercenter/model"
-	"looklook/common/xerr"
+	"automatix/app/travel/cmd/api/internal/svc"
+	"automatix/app/travel/cmd/api/internal/types"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"automatix/app/usercenter/model"
+	"automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
@@ -30,7 +30,7 @@ func NewHomestayBussinessDetailLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *HomestayBussinessDetailLogic) HomestayBussinessDetail(req types.HomestayBussinessDetailReq) (*types.HomestayBussinessDetailResp, error) {
 
-	homestayBusiness, err := l.svcCtx.HomestayBusinessModel.FindOne(l.ctx,req.Id)
+	homestayBusiness, err := l.svcCtx.HomestayBusinessModel.FindOne(l.ctx, req.Id)
 	if err != nil && err != model.ErrNotFound {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), " HomestayBussinessDetail  FindOne db fail ,id  : %d , err : %v", req.Id, err)
 	}

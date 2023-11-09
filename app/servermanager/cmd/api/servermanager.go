@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"looklook/app/servermanager/cmd/api/internal/config"
-	"looklook/app/servermanager/cmd/api/internal/handler"
-	"looklook/app/servermanager/cmd/api/internal/svc"
+	"automatix/app/servermanager/cmd/api/internal/config"
+	"automatix/app/servermanager/cmd/api/internal/handler"
+	"automatix/app/servermanager/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

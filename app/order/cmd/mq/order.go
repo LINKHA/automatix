@@ -1,9 +1,9 @@
 package main
 
 import (
+	"automatix/app/order/cmd/mq/internal/config"
+	"automatix/app/order/cmd/mq/internal/listen"
 	"flag"
-	"looklook/app/order/cmd/mq/internal/config"
-	"looklook/app/order/cmd/mq/internal/listen"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

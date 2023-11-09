@@ -1,9 +1,9 @@
 package svc
 
 import (
-	"looklook/app/order/cmd/mq/internal/config"
-	"looklook/app/order/cmd/rpc/order"
-	"looklook/app/usercenter/cmd/rpc/usercenter"
+	"automatix/app/order/cmd/mq/internal/config"
+	"automatix/app/order/cmd/rpc/order"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

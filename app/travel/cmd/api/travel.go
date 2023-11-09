@@ -4,11 +4,12 @@ import (
 	"flag"
 	"fmt"
 
+	"automatix/app/travel/cmd/api/internal/config"
+	"automatix/app/travel/cmd/api/internal/handler"
+	"automatix/app/travel/cmd/api/internal/svc"
+
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
-	"looklook/app/travel/cmd/api/internal/config"
-	"looklook/app/travel/cmd/api/internal/handler"
-	"looklook/app/travel/cmd/api/internal/svc"
 )
 
 var configFile = flag.String("f", "etc/travel.yaml", "the config file")

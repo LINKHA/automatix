@@ -1,21 +1,22 @@
 package kq
 
 import (
+	"automatix/app/order/cmd/mq/internal/svc"
+	"automatix/app/order/cmd/rpc/order"
+	"automatix/app/order/model"
+	paymentModel "automatix/app/payment/model"
+	"automatix/common/kqueue"
+	"automatix/common/xerr"
 	"context"
 	"encoding/json"
-	"looklook/app/order/cmd/mq/internal/svc"
-	"looklook/app/order/cmd/rpc/order"
-	"looklook/app/order/model"
-	paymentModel "looklook/app/payment/model"
-	"looklook/common/kqueue"
-	"looklook/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-/**
-	Listening to the payment flow status change notification message queue
+/*
+*
+Listening to the payment flow status change notification message queue
 */
 type PaymentUpdateStatusMq struct {
 	ctx    context.Context
@@ -62,7 +63,7 @@ func (l *PaymentUpdateStatusMq) execService(message kqueue.ThirdPaymentUpdatePay
 	return nil
 }
 
-//Get order status based on payment status.
+// Get order status based on payment status.
 func (l *PaymentUpdateStatusMq) getOrderTradeStateByPaymentTradeState(thirdPaymentPayStatus int64) int64 {
 
 	switch thirdPaymentPayStatus {

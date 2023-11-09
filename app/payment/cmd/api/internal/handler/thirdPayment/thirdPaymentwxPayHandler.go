@@ -3,10 +3,10 @@ package thirdPayment
 import (
 	"net/http"
 
-	"looklook/app/payment/cmd/api/internal/logic/thirdPayment"
-	"looklook/app/payment/cmd/api/internal/svc"
-	"looklook/app/payment/cmd/api/internal/types"
-	"looklook/common/result"
+	"automatix/app/payment/cmd/api/internal/logic/thirdPayment"
+	"automatix/app/payment/cmd/api/internal/svc"
+	"automatix/app/payment/cmd/api/internal/types"
+	"automatix/common/result"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

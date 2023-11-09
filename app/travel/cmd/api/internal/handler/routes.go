@@ -4,10 +4,10 @@ package handler
 import (
 	"net/http"
 
-	homestay "looklook/app/travel/cmd/api/internal/handler/homestay"
-	homestayBussiness "looklook/app/travel/cmd/api/internal/handler/homestayBussiness"
-	homestayComment "looklook/app/travel/cmd/api/internal/handler/homestayComment"
-	"looklook/app/travel/cmd/api/internal/svc"
+	homestay "automatix/app/travel/cmd/api/internal/handler/homestay"
+	homestayBussiness "automatix/app/travel/cmd/api/internal/handler/homestayBussiness"
+	homestayComment "automatix/app/travel/cmd/api/internal/handler/homestayComment"
+	"automatix/app/travel/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

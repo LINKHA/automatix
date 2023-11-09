@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 
-	"looklook/app/payment/cmd/rpc/internal/svc"
-	"looklook/app/payment/cmd/rpc/pb"
-	"looklook/app/payment/model"
-	"looklook/common/xerr"
+	"automatix/app/payment/cmd/rpc/internal/svc"
+	"automatix/app/payment/cmd/rpc/pb"
+	"automatix/app/payment/model"
+	"automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
@@ -29,7 +29,7 @@ func NewGetPaymentBySnLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 
 func (l *GetPaymentBySnLogic) GetPaymentBySn(in *pb.GetPaymentBySnReq) (*pb.GetPaymentBySnResp, error) {
 
-	thirdPayment, err := l.svcCtx.ThirdPaymentModel.FindOneBySn(l.ctx,in.Sn)
+	thirdPayment, err := l.svcCtx.ThirdPaymentModel.FindOneBySn(l.ctx, in.Sn)
 	if err != nil && err != model.ErrNotFound {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "GetPaymentBySn  FindOneBySn  db err:%v , in : %+v", err, in)
 	}

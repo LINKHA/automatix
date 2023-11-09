@@ -1,8 +1,9 @@
 package svc
 
 import (
+	"automatix/app/mqueue/cmd/scheduler/internal/config"
+
 	"github.com/hibiken/asynq"
-	"looklook/app/mqueue/cmd/scheduler/internal/config"
 )
 
 type ServiceContext struct {
@@ -13,8 +14,7 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
-		Config: c,
-		Scheduler:newScheduler(c),
+		Config:    c,
+		Scheduler: newScheduler(c),
 	}
 }
-

@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	homestayOrder "looklook/app/order/cmd/api/internal/handler/homestayOrder"
-	"looklook/app/order/cmd/api/internal/svc"
+	homestayOrder "automatix/app/order/cmd/api/internal/handler/homestayOrder"
+	"automatix/app/order/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

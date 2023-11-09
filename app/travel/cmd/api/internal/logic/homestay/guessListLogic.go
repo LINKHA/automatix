@@ -3,10 +3,10 @@ package homestay
 import (
 	"context"
 
-	"looklook/app/travel/cmd/api/internal/svc"
-	"looklook/app/travel/cmd/api/internal/types"
-	"looklook/common/tool"
-	"looklook/common/xerr"
+	"automatix/app/travel/cmd/api/internal/svc"
+	"automatix/app/travel/cmd/api/internal/types"
+	"automatix/common/tool"
+	"automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

@@ -3,11 +3,11 @@ package logic
 import (
 	"context"
 
-	"looklook/app/usercenter/cmd/rpc/internal/svc"
-	"looklook/app/usercenter/cmd/rpc/pb"
-	"looklook/app/usercenter/cmd/rpc/usercenter"
-	"looklook/app/usercenter/model"
-	"looklook/common/xerr"
+	"automatix/app/usercenter/cmd/rpc/internal/svc"
+	"automatix/app/usercenter/cmd/rpc/pb"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"automatix/app/usercenter/model"
+	"automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
@@ -32,7 +32,7 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 
 func (l *GetUserInfoLogic) GetUserInfo(in *pb.GetUserInfoReq) (*pb.GetUserInfoResp, error) {
 
-	user, err := l.svcCtx.UserModel.FindOne(l.ctx,in.Id)
+	user, err := l.svcCtx.UserModel.FindOne(l.ctx, in.Id)
 	if err != nil && err != model.ErrNotFound {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "GetUserInfo find user db err , id:%d , err:%v", in.Id, err)
 	}

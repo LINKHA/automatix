@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"looklook/app/servermanager/cmd/rpc/internal/config"
-	"looklook/app/servermanager/model"
+	"automatix/app/servermanager/cmd/rpc/internal/config"
+	"automatix/app/servermanager/model"
 
 	"github.com/bwmarrin/snowflake"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"

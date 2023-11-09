@@ -3,10 +3,10 @@ package homestayOrder
 import (
 	"net/http"
 
-	"looklook/app/order/cmd/api/internal/logic/homestayOrder"
-	"looklook/app/order/cmd/api/internal/svc"
-	"looklook/app/order/cmd/api/internal/types"
-	"looklook/common/result"
+	"automatix/app/order/cmd/api/internal/logic/homestayOrder"
+	"automatix/app/order/cmd/api/internal/svc"
+	"automatix/app/order/cmd/api/internal/types"
+	"automatix/common/result"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

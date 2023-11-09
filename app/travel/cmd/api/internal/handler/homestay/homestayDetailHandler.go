@@ -3,10 +3,10 @@ package homestay
 import (
 	"net/http"
 
-	"looklook/app/travel/cmd/api/internal/logic/homestay"
-	"looklook/app/travel/cmd/api/internal/svc"
-	"looklook/app/travel/cmd/api/internal/types"
-	"looklook/common/result"
+	"automatix/app/travel/cmd/api/internal/logic/homestay"
+	"automatix/app/travel/cmd/api/internal/svc"
+	"automatix/app/travel/cmd/api/internal/types"
+	"automatix/common/result"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

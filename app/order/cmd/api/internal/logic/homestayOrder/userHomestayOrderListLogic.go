@@ -3,12 +3,12 @@ package homestayOrder
 import (
 	"context"
 
-	"looklook/app/order/cmd/api/internal/svc"
-	"looklook/app/order/cmd/api/internal/types"
-	"looklook/app/order/cmd/rpc/order"
-	"looklook/common/ctxdata"
-	"looklook/common/tool"
-	"looklook/common/xerr"
+	"automatix/app/order/cmd/api/internal/svc"
+	"automatix/app/order/cmd/api/internal/types"
+	"automatix/app/order/cmd/rpc/order"
+	"automatix/common/ctxdata"
+	"automatix/common/tool"
+	"automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

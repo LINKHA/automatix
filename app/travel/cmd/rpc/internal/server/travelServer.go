@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"looklook/app/travel/cmd/rpc/internal/logic"
-	"looklook/app/travel/cmd/rpc/internal/svc"
-	"looklook/app/travel/cmd/rpc/pb"
+	"automatix/app/travel/cmd/rpc/internal/logic"
+	"automatix/app/travel/cmd/rpc/internal/svc"
+	"automatix/app/travel/cmd/rpc/pb"
 )
 
 type TravelServer struct {

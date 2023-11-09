@@ -3,14 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
+
 	"github.com/zeromicro/go-zero/core/service"
 	"google.golang.org/grpc/reflection"
 
-	"looklook/app/usercenter/cmd/rpc/internal/config"
-	"looklook/app/usercenter/cmd/rpc/internal/server"
-	"looklook/app/usercenter/cmd/rpc/internal/svc"
-	"looklook/app/usercenter/cmd/rpc/pb"
-	"looklook/common/interceptor/rpcserver"
+	"automatix/app/usercenter/cmd/rpc/internal/config"
+	"automatix/app/usercenter/cmd/rpc/internal/server"
+	"automatix/app/usercenter/cmd/rpc/internal/svc"
+	"automatix/app/usercenter/cmd/rpc/pb"
+	"automatix/common/interceptor/rpcserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"

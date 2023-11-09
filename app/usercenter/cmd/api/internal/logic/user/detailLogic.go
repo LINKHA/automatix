@@ -3,10 +3,10 @@ package user
 import (
 	"context"
 
-	"looklook/app/usercenter/cmd/api/internal/svc"
-	"looklook/app/usercenter/cmd/api/internal/types"
-	"looklook/app/usercenter/cmd/rpc/usercenter"
-	"looklook/common/ctxdata"
+	"automatix/app/usercenter/cmd/api/internal/svc"
+	"automatix/app/usercenter/cmd/api/internal/types"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"automatix/common/ctxdata"
 
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"

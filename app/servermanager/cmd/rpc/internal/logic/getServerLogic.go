@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 
-	"looklook/app/servermanager/cmd/rpc/internal/svc"
-	"looklook/app/servermanager/cmd/rpc/pb"
-	"looklook/common/xerr"
+	"automatix/app/servermanager/cmd/rpc/internal/svc"
+	"automatix/app/servermanager/cmd/rpc/pb"
+	"automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"

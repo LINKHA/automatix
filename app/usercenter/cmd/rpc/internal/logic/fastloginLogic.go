@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"looklook/app/usercenter/cmd/rpc/internal/svc"
-	"looklook/app/usercenter/cmd/rpc/pb"
+	"automatix/app/usercenter/cmd/rpc/internal/svc"
+	"automatix/app/usercenter/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

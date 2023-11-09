@@ -1,10 +1,10 @@
 package svc
 
 import (
-	"looklook/app/travel/cmd/api/internal/config"
-	"looklook/app/travel/cmd/rpc/travel"
-	"looklook/app/travel/model"
-	"looklook/app/usercenter/cmd/rpc/usercenter"
+	"automatix/app/travel/cmd/api/internal/config"
+	"automatix/app/travel/cmd/rpc/travel"
+	"automatix/app/travel/model"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/zrpc"

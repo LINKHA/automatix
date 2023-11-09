@@ -1,14 +1,16 @@
 package logic
 
 import (
+	"automatix/common/ctxdata"
 	"context"
-	"github.com/pkg/errors"
-	"looklook/common/ctxdata"
 	"time"
 
+	"github.com/pkg/errors"
+
+	"automatix/app/usercenter/cmd/rpc/internal/svc"
+	"automatix/app/usercenter/cmd/rpc/pb"
+
 	"github.com/golang-jwt/jwt/v4"
-	"looklook/app/usercenter/cmd/rpc/internal/svc"
-	"looklook/app/usercenter/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

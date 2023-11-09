@@ -3,7 +3,7 @@ package rpcserver
 import (
 	"context"
 
-	"looklook/common/xerr"
+	"automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"

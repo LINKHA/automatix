@@ -2,12 +2,13 @@ package logic
 
 import (
 	"context"
+
 	"github.com/Masterminds/squirrel"
 
-	"looklook/app/order/cmd/rpc/internal/svc"
-	"looklook/app/order/cmd/rpc/pb"
-	"looklook/app/order/model"
-	"looklook/common/xerr"
+	"automatix/app/order/cmd/rpc/internal/svc"
+	"automatix/app/order/cmd/rpc/pb"
+	"automatix/app/order/model"
+	"automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

@@ -1,10 +1,10 @@
 package svc
 
 import (
-	"looklook/app/order/cmd/rpc/order"
-	"looklook/app/payment/cmd/api/internal/config"
-	"looklook/app/payment/cmd/rpc/payment"
-	"looklook/app/usercenter/cmd/rpc/usercenter"
+	"automatix/app/order/cmd/rpc/order"
+	"automatix/app/payment/cmd/api/internal/config"
+	"automatix/app/payment/cmd/rpc/payment"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
 
 	"github.com/wechatpay-apiv3/wechatpay-go/core"
 	"github.com/zeromicro/go-zero/zrpc"

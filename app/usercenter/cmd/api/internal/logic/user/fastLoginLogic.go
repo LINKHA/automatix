@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"looklook/app/usercenter/cmd/api/internal/svc"
-	"looklook/app/usercenter/cmd/api/internal/types"
+	"automatix/app/usercenter/cmd/api/internal/svc"
+	"automatix/app/usercenter/cmd/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

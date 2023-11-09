@@ -1,12 +1,12 @@
 package logic
 
 import (
+	"automatix/app/mqueue/cmd/job/internal/svc"
+	"automatix/app/mqueue/cmd/job/jobtype"
 	"context"
-	"github.com/hibiken/asynq"
-	"looklook/app/mqueue/cmd/job/internal/svc"
-	"looklook/app/mqueue/cmd/job/jobtype"
-)
 
+	"github.com/hibiken/asynq"
+)
 
 type CronJob struct {
 	ctx    context.Context
@@ -26,15 +26,13 @@ func (l *CronJob) Register() *asynq.ServeMux {
 	mux := asynq.NewServeMux()
 
 	//scheduler job
-	mux.Handle(jobtype.ScheduleSettleRecord,NewSettleRecordHandler(l.svcCtx))
+	mux.Handle(jobtype.ScheduleSettleRecord, NewSettleRecordHandler(l.svcCtx))
 
 	//defer job
-	mux.Handle(jobtype.DeferCloseHomestayOrder,NewCloseHomestayOrderHandler(l.svcCtx))
+	mux.Handle(jobtype.DeferCloseHomestayOrder, NewCloseHomestayOrderHandler(l.svcCtx))
 
 	//queue job , asynq support queue job
 	// wait you fill..
 
 	return mux
 }
-
-
