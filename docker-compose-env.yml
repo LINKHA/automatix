@@ -167,7 +167,7 @@ services:
       - zookeeper
 
   kafka-manager:
-    image: sheepkiller/kafka-manager:latest
+    image: kafkamanager/kafka-manager:latest
     container_name: kafka-manager
     ports:
       - "9000:9000"
