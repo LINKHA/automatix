@@ -1,4 +1,5 @@
 Name: servermanager-api
+Id: 1
 Host: 0.0.0.0
 Port: 1005
 Mode: dev
@@ -31,4 +32,7 @@ ServerManagerRpcConf:
     - 127.0.0.1:2005
   NonBlock: true
 
-Id: 1
+KqConf:
+  Brokers:
+    - kafka:9092
+  Topic: server-queue-topic

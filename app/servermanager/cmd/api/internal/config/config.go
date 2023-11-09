@@ -5,8 +5,14 @@ import (
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
+type KqConfig struct {
+	Brokers []string
+	Topic   string
+}
+
 type Config struct {
 	rest.RestConf
 	ServerManagerRpcConf zrpc.RpcClientConf
 	Id                   int64
+	KqConf               KqConfig
 }

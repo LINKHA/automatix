@@ -79,3 +79,14 @@ type(
 		ReturnCode 		string 	`json:"returnCode"`
 	}
 )
+
+type(
+	LoginServerReq  {
+		PlayerId   		string  `json:"playerId"`
+		ServerId		string  `json:"serverId"`
+	}
+
+	LoginServerResp {
+		ReturnCode 		string 	`json:"returnCode"`
+	}
+)

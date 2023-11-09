@@ -1,4 +1,5 @@
 Name: servermanager.rpc
+Id: 1
 ListenOn: 0.0.0.0:2005
 Mode: dev
 
@@ -29,4 +30,5 @@ DB:
 Cache:
   - Host: redis:6379
     Pass: G62m50oigInC30sf
-Id: 1
+
+
