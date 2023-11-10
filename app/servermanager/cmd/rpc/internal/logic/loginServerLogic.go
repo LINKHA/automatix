@@ -3,11 +3,11 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"automatix/app/servermanager/cmd/rpc/internal/svc"
 	"automatix/app/servermanager/cmd/rpc/pb"
 	"automatix/common/kqueue"
+	"automatix/common/xerr"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,8 +27,7 @@ func NewLoginServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 }
 
 func (l *LoginServerLogic) LoginServer(in *pb.LoginServerReq) (*pb.LoginServerResp, error) {
-	fmt.Print("qwe 1---------    :   ")
-	fmt.Println("push login msg")
+	var returnCode = xerr.OK
 	var message kqueue.LoginServerMessage
 	message.PlayerId = in.PlayerId
 	message.ServerId = in.ServerId
@@ -37,10 +36,10 @@ func (l *LoginServerLogic) LoginServer(in *pb.LoginServerReq) (*pb.LoginServerRe
 
 	err := l.svcCtx.KqueueServerQueue.Push(string(jsonData))
 	if err != nil {
-		fmt.Println(err)
+		returnCode = xerr.SERVER_COMMON_ERROR
 	}
 
 	return &pb.LoginServerResp{
-		ReturnCode: 0,
+		ReturnCode: int64(returnCode),
 	}, nil
 }

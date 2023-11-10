@@ -2,14 +2,12 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
 	"automatix/app/servermanager/cmd/rpc/internal/svc"
 	"automatix/app/servermanager/cmd/rpc/pb"
 	"automatix/app/servermanager/model"
 	"automatix/common/xerr"
 
-	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -28,6 +26,7 @@ func NewSetServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SetServ
 }
 
 func (l *SetServerLogic) SetServer(in *pb.SetServerReq) (*pb.SetServerResp, error) {
+	var returnCode = xerr.OK
 	server := model.Server{
 		ServerId:   in.ServerId,
 		Name:       in.Name,
@@ -41,15 +40,13 @@ func (l *SetServerLogic) SetServer(in *pb.SetServerReq) (*pb.SetServerResp, erro
 		MaxSign:       in.MaxSign,
 		TemplateValue: in.TemplateValue,
 	}
-	fmt.Print("1---------    :   ")
-	fmt.Println(server)
 
-	fmt.Print("2---------    :   ")
-	fmt.Println(in.Switch)
 	err := l.svcCtx.ServerModel.UpdateByServerId(l.ctx, &server)
 	if err != nil {
-		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), " SetServer db err , serverId : %s ", in.ServerId)
+		returnCode = xerr.SERVER_COMMON_ERROR
 	}
 
-	return &pb.SetServerResp{ReturnCode: 0}, nil
+	return &pb.SetServerResp{
+		ReturnCode: int64(returnCode),
+	}, nil
 }

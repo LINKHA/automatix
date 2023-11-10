@@ -2,13 +2,11 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
 	"automatix/app/servermanager/cmd/rpc/internal/svc"
 	"automatix/app/servermanager/cmd/rpc/pb"
 	"automatix/common/xerr"
 
-	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -27,22 +25,16 @@ func NewGetServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetServ
 }
 
 func (l *GetServerLogic) GetServer(in *pb.GetServerReq) (*pb.GetServerResp, error) {
-
-	errxx := l.svcCtx.Redis.Set("asd/aw/asd", "1111")
-	fmt.Print("1------------------   :   ")
-	fmt.Println(errxx)
+	var returnCode = xerr.OK
+	// errxx := l.svcCtx.Redis.Set("asd/aw/asd", "1111")
 
 	server, err := l.svcCtx.ServerModel.FindOneByServerId(l.ctx, in.ServerId)
 	if err != nil {
-		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Get db server Insert err:%v,server:%+v", err, server)
+		returnCode = xerr.SERVER_COMMON_ERROR
 	}
 
-	fmt.Print("2------------------   :   ")
-	fmt.Println(server)
-	fmt.Println(server.ServerId)
-
 	return &pb.GetServerResp{
-		ReturnCode: 0,
+		ReturnCode: int64(returnCode),
 		ServerId:   server.ServerId,
 		Name:       server.Name,
 		ServerType: server.ServerType,

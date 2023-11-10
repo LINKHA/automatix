@@ -9,7 +9,6 @@ import (
 	"automatix/app/servermanager/model"
 	"automatix/common/xerr"
 
-	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -28,6 +27,8 @@ func NewCreateServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Crea
 }
 
 func (l *CreateServerLogic) CreateServer(in *pb.CreateServerReq) (*pb.CreateServerResp, error) {
+	var returnCode = xerr.OK
+
 	server := new(model.Server)
 	serverId := strconv.FormatInt(int64(l.svcCtx.Snowflake.Generate()), 10)
 
@@ -45,12 +46,11 @@ func (l *CreateServerLogic) CreateServer(in *pb.CreateServerReq) (*pb.CreateServ
 
 	_, err := l.svcCtx.ServerModel.Insert(l.ctx, server)
 	if err != nil {
-		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Create db server Insert err:%v,server:%+v", err, server)
-		// return errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Create db server Insert err:%v,server:%+v", err, server)
+		returnCode = xerr.SERVER_COMMON_ERROR
 	}
 
 	return &pb.CreateServerResp{
-		ReturnCode: 0,
+		ReturnCode: int64(returnCode),
 		ServerId:   serverId,
 	}, nil
 }
