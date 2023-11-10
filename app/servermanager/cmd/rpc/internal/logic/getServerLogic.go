@@ -32,10 +32,6 @@ func (l *GetServerLogic) GetServer(in *pb.GetServerReq) (*pb.GetServerResp, erro
 	fmt.Print("1------------------   :   ")
 	fmt.Println(errxx)
 
-	sw, _ := l.svcCtx.Redis.Get("asd/aw/asd")
-	fmt.Print("2------------------   :   ")
-	fmt.Println(sw)
-
 	server, err := l.svcCtx.ServerModel.FindOneByServerId(l.ctx, in.ServerId)
 	if err != nil {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Get db server Insert err:%v,server:%+v", err, server)

@@ -25,10 +25,12 @@ func NewServerQueueMq(ctx context.Context, svcCtx *svc.ServiceContext) *ServerQu
 }
 
 func (l *ServerQueueMq) Consume(_, val string) error {
-	fmt.Print("qwe 1---------    :   ")
+	fmt.Print("qwe 3---------    :   ")
+	fmt.Println("consume login msg")
 	fmt.Println(val)
 
-	var message kqueue.ThirdPaymentUpdatePayStatusNotifyMessage
+	var message kqueue.LoginServerMessage
+
 	if err := json.Unmarshal([]byte(val), &message); err != nil {
 		logx.WithContext(l.ctx).Error("PaymentUpdateStatusMq->Consume Unmarshal err : %v , val : %s", err, val)
 		return err
@@ -42,7 +44,8 @@ func (l *ServerQueueMq) Consume(_, val string) error {
 	return nil
 }
 
-func (l *ServerQueueMq) execService(message kqueue.ThirdPaymentUpdatePayStatusNotifyMessage) error {
-
+func (l *ServerQueueMq) execService(message kqueue.LoginServerMessage) error {
+	// serverId = message.ServerId
+	// l.svcCtx.Redis.Incr(message.ServerId + )
 	return nil
 }

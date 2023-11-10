@@ -1,9 +1,14 @@
-//KqMessage
+// KqMessage
 package kqueue
 
-//第三方支付回调更改支付状态通知
+// 第三方支付回调更改支付状态通知
 type ThirdPaymentUpdatePayStatusNotifyMessage struct {
 	PayStatus int64  `json:"payStatus"`
 	OrderSn   string `json:"orderSn"`
 }
 
+// 角色登录服务器队列
+type LoginServerMessage struct {
+	PlayerId string `json:"playerId"`
+	ServerId string `json:"serverId"`
+}

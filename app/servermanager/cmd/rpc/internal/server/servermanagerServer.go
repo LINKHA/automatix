@@ -36,3 +36,8 @@ func (s *ServermanagerServer) GetServer(ctx context.Context, in *pb.GetServerReq
 	l := logic.NewGetServerLogic(ctx, s.svcCtx)
 	return l.GetServer(in)
 }
+
+func (s *ServermanagerServer) LoginServer(ctx context.Context, in *pb.LoginServerReq) (*pb.LoginServerResp, error) {
+	l := logic.NewLoginServerLogic(ctx, s.svcCtx)
+	return l.LoginServer(in)
+}

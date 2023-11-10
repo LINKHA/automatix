@@ -75,9 +75,20 @@ message CreateServerResp {
     string returnCode = 2;
 }
 
+message LoginServerReq  {
+    string playerId = 1;
+    string serverId = 2;
+}
+
+message LoginServerResp {
+    string returnCode = 1;
+}
+
+
 //service
 service servermanager {
   rpc createServer(CreateServerReq) returns(CreateServerResp);
   rpc setServer(SetServerReq) returns(SetServerResp);
   rpc getServer(GetServerReq) returns(GetServerResp);
+    rpc loginServer(LoginServerReq) returns(LoginServerResp);
 }

@@ -18,6 +18,7 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	snowflake, _ := snowflake.NewNode(c.Id)
+
 	return &ServiceContext{
 		Config:            c,
 		ServerManagerRpc:  servermanager.NewServermanager(zrpc.MustNewClient(c.ServerManagerRpcConf)),
