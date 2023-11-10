@@ -36,7 +36,13 @@ func (l *GetServerLogic) GetServer(in *pb.GetServerReq) (*pb.GetServerResp, erro
 	if err != nil {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Get db server Insert err:%v,server:%+v", err, server)
 	}
+
+	fmt.Print("2------------------   :   ")
+	fmt.Println(server)
+	fmt.Println(server.ServerId)
+
 	return &pb.GetServerResp{
+		ReturnCode: 0,
 		ServerId:   server.ServerId,
 		Name:       server.Name,
 		ServerType: server.ServerType,

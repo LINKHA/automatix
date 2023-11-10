@@ -26,17 +26,18 @@ message GetServerReq {
 }
 
 message GetServerResp {
-    string serverId = 1;
-    string name = 2;
-    int64 serverType = 3;
-    int64 switch = 4;
-    int64 startTime = 5;
-    int64 area = 6;
-    string tags = 7;
-    int64 maxOnline = 8;
-    int64 maxQueue = 9;
-    int64 maxSign = 10;
-    string templateValue = 11;
+    int64 returnCode = 1;
+    string serverId = 2;
+    string name = 3;
+    int64 serverType = 4;
+    int64 switch = 5;
+    int64 startTime = 6;
+    int64 area = 7;
+    string tags = 8;
+    int64 maxOnline = 9;
+    int64 maxQueue = 10;
+    int64 maxSign = 11;
+    string templateValue = 12;
 }
 
 message SetServerReq  {
@@ -54,7 +55,7 @@ message SetServerReq  {
 }
 
 message SetServerResp {
-    string returnCode = 1;
+    int64 returnCode = 1;
 }
 
 message CreateServerReq  {
@@ -72,7 +73,7 @@ message CreateServerReq  {
 
 message CreateServerResp {
     string serverId = 1;
-    string returnCode = 2;
+    int64 returnCode = 2;
 }
 
 message LoginServerReq  {

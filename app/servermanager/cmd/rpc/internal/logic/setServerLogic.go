@@ -51,5 +51,5 @@ func (l *SetServerLogic) SetServer(in *pb.SetServerReq) (*pb.SetServerResp, erro
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), " SetServer db err , serverId : %s ", in.ServerId)
 	}
 
-	return &pb.SetServerResp{ReturnCode: "success"}, nil
+	return &pb.SetServerResp{ReturnCode: 0}, nil
 }

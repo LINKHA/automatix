@@ -27,6 +27,7 @@ type (
 	}
 
 	GetServerResp {
+		ReturnCode 		int64 `json:"returnCode"`
 		ServerId		string 	`json:"serverId"`
 		Name   			string  `json:"name"`
 		ServerType 		int64  	`json:"serverType"`
@@ -56,7 +57,7 @@ type(
 	}
 
 	SetServerResp {
-		ReturnCode string `json:"returnCode"`
+		ReturnCode 		int64 `json:"returnCode"`
 	}
 )
 
@@ -76,7 +77,7 @@ type(
 
 	CreateServerResp {
 		ServerId   		string 	`json:"serverId"`
-		ReturnCode 		string 	`json:"returnCode"`
+		ReturnCode 		int64 	`json:"returnCode"`
 	}
 )
 

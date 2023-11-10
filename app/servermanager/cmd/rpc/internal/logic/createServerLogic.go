@@ -50,7 +50,7 @@ func (l *CreateServerLogic) CreateServer(in *pb.CreateServerReq) (*pb.CreateServ
 	}
 
 	return &pb.CreateServerResp{
-		ReturnCode: "success",
+		ReturnCode: 0,
 		ServerId:   serverId,
 	}, nil
 }

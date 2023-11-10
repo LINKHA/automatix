@@ -34,6 +34,7 @@ func (l *GetServerLogic) GetServer(req *types.GetServerReq) (*types.GetServerRes
 	}
 
 	var resp types.GetServerResp
+
 	_ = copier.Copy(&resp, getServerResp)
 
 	return &resp, nil
