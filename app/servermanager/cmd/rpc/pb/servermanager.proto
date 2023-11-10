@@ -81,7 +81,7 @@ message LoginServerReq  {
 }
 
 message LoginServerResp {
-    string returnCode = 1;
+    int64 returnCode = 1;
 }
 
 

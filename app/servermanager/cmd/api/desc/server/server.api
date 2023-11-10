@@ -87,6 +87,6 @@ type(
 	}
 
 	LoginServerResp {
-		ReturnCode 		string 	`json:"returnCode"`
+		ReturnCode 		int64 	`json:"returnCode"`
 	}
 )

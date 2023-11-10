@@ -74,5 +74,5 @@ type LoginServerReq struct {
 }
 
 type LoginServerResp struct {
-	ReturnCode string `json:"returnCode"`
+	ReturnCode int64 `json:"returnCode"`
 }
