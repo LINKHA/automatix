@@ -40,5 +40,7 @@ func (l *LoginServerLogic) LoginServer(in *pb.LoginServerReq) (*pb.LoginServerRe
 		fmt.Println(err)
 	}
 
-	return &pb.LoginServerResp{}, nil
+	return &pb.LoginServerResp{
+		ReturnCode: 0,
+	}, nil
 }
