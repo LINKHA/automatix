@@ -42,3 +42,6 @@ KqConfServerQueue:
   Consumers: 1
   Processors: 1
 
+SlidingWindow:
+  Rate:       10
+  WindowSize: 5000

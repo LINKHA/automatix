@@ -6,6 +6,7 @@ import (
 
 	"automatix/app/servermanager/cmd/rpc/internal/svc"
 	"automatix/app/servermanager/cmd/rpc/pb"
+	"automatix/common/flowlimit"
 	"automatix/common/kqueue"
 	"automatix/common/xerr"
 
@@ -19,6 +20,7 @@ type LoginServerLogic struct {
 }
 
 func NewLoginServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginServerLogic {
+
 	return &LoginServerLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
@@ -27,19 +29,35 @@ func NewLoginServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 }
 
 func (l *LoginServerLogic) LoginServer(in *pb.LoginServerReq) (*pb.LoginServerResp, error) {
-	var returnCode = xerr.OK
-	var message kqueue.LoginServerMessage
-	message.PlayerId = in.PlayerId
-	message.ServerId = in.ServerId
+	playerId := in.PlayerId
+	serverId := in.ServerId
 
-	jsonData, _ := json.Marshal(message)
+	server, err := l.svcCtx.ServerModel.FindOneByServerId(l.ctx, serverId)
 
-	err := l.svcCtx.KqueueServerQueue.Push(string(jsonData))
 	if err != nil {
-		returnCode = xerr.SERVER_COMMON_ERROR
+		return &pb.LoginServerResp{ReturnCode: int64(xerr.SERVER_COMMON_ERROR)}, nil
 	}
 
-	return &pb.LoginServerResp{
-		ReturnCode: int64(returnCode),
-	}, nil
+	//If the number of people in line reaches the maximum(如果排队人数到达上限)
+	if int(server.MaxQueue) < flowlimit.SlidingWindowCount(l.svcCtx.Redis, serverId) {
+		return &pb.LoginServerResp{ReturnCode: int64(xerr.SERVER_MANAGER_LOGIN_SERVER_QUEUE_MAX)}, nil
+	}
+
+	//Obtain the traffic limiting configuration(获取限流配置)
+	if flowlimit.SlidingWindow(l.svcCtx.Redis, serverId, int64(l.svcCtx.Config.SlidingWindow.Rate), int64(l.svcCtx.Config.SlidingWindow.WindowSize)) {
+		var message kqueue.LoginServerMessage
+		message.PlayerId = playerId
+		message.ServerId = serverId
+		jsonData, _ := json.Marshal(message)
+		err = l.svcCtx.KqueueServerQueue.Push(string(jsonData))
+
+		if err != nil {
+			return &pb.LoginServerResp{ReturnCode: int64(xerr.SERVER_COMMON_ERROR)}, nil
+		}
+		return &pb.LoginServerResp{ReturnCode: int64(xerr.SERVER_MANAGER_LOGIN_SERVER_QUEUE_ENTER)}, nil
+	} else {
+		//登录
+	}
+
+	return &pb.LoginServerResp{ReturnCode: int64(xerr.OK)}, nil
 }

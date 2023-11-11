@@ -5,7 +5,6 @@ import (
 	"automatix/common/kqueue"
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,10 +24,6 @@ func NewServerQueueMq(ctx context.Context, svcCtx *svc.ServiceContext) *ServerQu
 }
 
 func (l *ServerQueueMq) Consume(_, val string) error {
-	fmt.Print("qwe 3---------    :   ")
-	fmt.Println("consume login msg")
-	fmt.Println(val)
-
 	var message kqueue.LoginServerMessage
 
 	if err := json.Unmarshal([]byte(val), &message); err != nil {
@@ -45,7 +40,6 @@ func (l *ServerQueueMq) Consume(_, val string) error {
 }
 
 func (l *ServerQueueMq) execService(message kqueue.LoginServerMessage) error {
-	// serverId = message.ServerId
-	// l.svcCtx.Redis.Incr(message.ServerId + )
+	//登录
 	return nil
 }
