@@ -77,3 +77,25 @@ type LoginServerReq struct {
 type LoginServerResp struct {
 	ReturnCode int64 `json:"returnCode"`
 }
+
+type GetServerListInfo struct {
+	ServerId      string `json:"serverId"`
+	Name          string `json:"name"`
+	ServerType    int64  `json:"serverType"`
+	Switch        int64  `json:"switch"`
+	StartTime     int64  `json:"startTime"`
+	Area          int64  `json:"area"`
+	Tags          string `json:"tags"`
+	MaxOnline     int64  `json:"maxOnline"`
+	MaxQueue      int64  `json:"maxQueue"`
+	MaxSign       int64  `json:"maxSign"`
+	TemplateValue string `json:"templateValue"`
+}
+
+type GetServerListReq struct {
+}
+
+type GetServerListResp struct {
+	ReturnCode int64               `json:"returnCode"`
+	ServerList []GetServerListInfo `json:"list"`
+}

@@ -32,6 +32,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/servermanager/loginServer",
 				Handler: loginServerHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/servermanager/getServerList",
+				Handler: getServerListHandler(serverCtx),
+			},
 		},
 	)
 }

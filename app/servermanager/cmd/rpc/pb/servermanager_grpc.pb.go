@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Servermanager_CreateServer_FullMethodName = "/pb.servermanager/createServer"
-	Servermanager_SetServer_FullMethodName    = "/pb.servermanager/setServer"
-	Servermanager_GetServer_FullMethodName    = "/pb.servermanager/getServer"
-	Servermanager_LoginServer_FullMethodName  = "/pb.servermanager/loginServer"
+	Servermanager_CreateServer_FullMethodName  = "/pb.servermanager/createServer"
+	Servermanager_SetServer_FullMethodName     = "/pb.servermanager/setServer"
+	Servermanager_GetServer_FullMethodName     = "/pb.servermanager/getServer"
+	Servermanager_LoginServer_FullMethodName   = "/pb.servermanager/loginServer"
+	Servermanager_GetServerList_FullMethodName = "/pb.servermanager/getServerList"
 )
 
 // ServermanagerClient is the client API for Servermanager service.
@@ -33,6 +34,7 @@ type ServermanagerClient interface {
 	SetServer(ctx context.Context, in *SetServerReq, opts ...grpc.CallOption) (*SetServerResp, error)
 	GetServer(ctx context.Context, in *GetServerReq, opts ...grpc.CallOption) (*GetServerResp, error)
 	LoginServer(ctx context.Context, in *LoginServerReq, opts ...grpc.CallOption) (*LoginServerResp, error)
+	GetServerList(ctx context.Context, in *GetServerListReq, opts ...grpc.CallOption) (*GetServerListResp, error)
 }
 
 type servermanagerClient struct {
@@ -79,6 +81,15 @@ func (c *servermanagerClient) LoginServer(ctx context.Context, in *LoginServerRe
 	return out, nil
 }
 
+func (c *servermanagerClient) GetServerList(ctx context.Context, in *GetServerListReq, opts ...grpc.CallOption) (*GetServerListResp, error) {
+	out := new(GetServerListResp)
+	err := c.cc.Invoke(ctx, Servermanager_GetServerList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServermanagerServer is the server API for Servermanager service.
 // All implementations must embed UnimplementedServermanagerServer
 // for forward compatibility
@@ -87,6 +98,7 @@ type ServermanagerServer interface {
 	SetServer(context.Context, *SetServerReq) (*SetServerResp, error)
 	GetServer(context.Context, *GetServerReq) (*GetServerResp, error)
 	LoginServer(context.Context, *LoginServerReq) (*LoginServerResp, error)
+	GetServerList(context.Context, *GetServerListReq) (*GetServerListResp, error)
 	mustEmbedUnimplementedServermanagerServer()
 }
 
@@ -105,6 +117,9 @@ func (UnimplementedServermanagerServer) GetServer(context.Context, *GetServerReq
 }
 func (UnimplementedServermanagerServer) LoginServer(context.Context, *LoginServerReq) (*LoginServerResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginServer not implemented")
+}
+func (UnimplementedServermanagerServer) GetServerList(context.Context, *GetServerListReq) (*GetServerListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServerList not implemented")
 }
 func (UnimplementedServermanagerServer) mustEmbedUnimplementedServermanagerServer() {}
 
@@ -191,6 +206,24 @@ func _Servermanager_LoginServer_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Servermanager_GetServerList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServerListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServermanagerServer).GetServerList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Servermanager_GetServerList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServermanagerServer).GetServerList(ctx, req.(*GetServerListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Servermanager_ServiceDesc is the grpc.ServiceDesc for Servermanager service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -213,6 +246,10 @@ var Servermanager_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "loginServer",
 			Handler:    _Servermanager_LoginServer_Handler,
+		},
+		{
+			MethodName: "getServerList",
+			Handler:    _Servermanager_GetServerList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

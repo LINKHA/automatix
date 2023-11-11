@@ -27,4 +27,8 @@ service servermanager {
 	@doc "loginServer"
 	@handler loginServer
 	post /servermanager/loginServer (LoginServerReq) returns (LoginServerResp)
+
+	@doc "getServerList"
+	@handler getServerList
+	post /servermanager/getServerList (GetServerListReq) returns (GetServerListResp)
 }

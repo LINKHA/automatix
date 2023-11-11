@@ -26,17 +26,17 @@ type Server struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ServerId      string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId"`
-	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	ServerType    int64  `protobuf:"varint,3,opt,name=serverType,proto3" json:"serverType"`
-	Switch        int64  `protobuf:"varint,4,opt,name=switch,proto3" json:"switch"`
-	StartTime     int64  `protobuf:"varint,5,opt,name=startTime,proto3" json:"startTime"`
-	Area          int64  `protobuf:"varint,6,opt,name=area,proto3" json:"area"`
-	Tags          string `protobuf:"bytes,7,opt,name=tags,proto3" json:"tags"`
-	MaxOnline     int64  `protobuf:"varint,8,opt,name=maxOnline,proto3" json:"maxOnline"`
-	MaxQueue      int64  `protobuf:"varint,9,opt,name=maxQueue,proto3" json:"maxQueue"`
-	MaxSign       int64  `protobuf:"varint,10,opt,name=maxSign,proto3" json:"maxSign"`
-	TemplateValue string `protobuf:"bytes,11,opt,name=templateValue,proto3" json:"templateValue"`
+	ServerId      string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"`
+	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ServerType    int64  `protobuf:"varint,3,opt,name=serverType,proto3" json:"serverType,omitempty"`
+	Switch        int64  `protobuf:"varint,4,opt,name=switch,proto3" json:"switch,omitempty"`
+	StartTime     int64  `protobuf:"varint,5,opt,name=startTime,proto3" json:"startTime,omitempty"`
+	Area          int64  `protobuf:"varint,6,opt,name=area,proto3" json:"area,omitempty"`
+	Tags          string `protobuf:"bytes,7,opt,name=tags,proto3" json:"tags,omitempty"`
+	MaxOnline     int64  `protobuf:"varint,8,opt,name=maxOnline,proto3" json:"maxOnline,omitempty"`
+	MaxQueue      int64  `protobuf:"varint,9,opt,name=maxQueue,proto3" json:"maxQueue,omitempty"`
+	MaxSign       int64  `protobuf:"varint,10,opt,name=maxSign,proto3" json:"maxSign,omitempty"`
+	TemplateValue string `protobuf:"bytes,11,opt,name=templateValue,proto3" json:"templateValue,omitempty"`
 }
 
 func (x *Server) Reset() {
@@ -154,7 +154,7 @@ type GetServerReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ServerId string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId"`
+	ServerId string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"`
 }
 
 func (x *GetServerReq) Reset() {
@@ -201,18 +201,18 @@ type GetServerResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ReturnCode    int64  `protobuf:"varint,1,opt,name=returnCode,proto3" json:"returnCode"`
-	ServerId      string `protobuf:"bytes,2,opt,name=serverId,proto3" json:"serverId"`
-	Name          string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	ServerType    int64  `protobuf:"varint,4,opt,name=serverType,proto3" json:"serverType"`
-	Switch        int64  `protobuf:"varint,5,opt,name=switch,proto3" json:"switch"`
-	StartTime     int64  `protobuf:"varint,6,opt,name=startTime,proto3" json:"startTime"`
-	Area          int64  `protobuf:"varint,7,opt,name=area,proto3" json:"area"`
-	Tags          string `protobuf:"bytes,8,opt,name=tags,proto3" json:"tags"`
-	MaxOnline     int64  `protobuf:"varint,9,opt,name=maxOnline,proto3" json:"maxOnline"`
-	MaxQueue      int64  `protobuf:"varint,10,opt,name=maxQueue,proto3" json:"maxQueue"`
-	MaxSign       int64  `protobuf:"varint,11,opt,name=maxSign,proto3" json:"maxSign"`
-	TemplateValue string `protobuf:"bytes,12,opt,name=templateValue,proto3" json:"templateValue"`
+	ReturnCode    int64  `protobuf:"varint,1,opt,name=returnCode,proto3" json:"returnCode,omitempty"`
+	ServerId      string `protobuf:"bytes,2,opt,name=serverId,proto3" json:"serverId,omitempty"`
+	Name          string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	ServerType    int64  `protobuf:"varint,4,opt,name=serverType,proto3" json:"serverType,omitempty"`
+	Switch        int64  `protobuf:"varint,5,opt,name=switch,proto3" json:"switch,omitempty"`
+	StartTime     int64  `protobuf:"varint,6,opt,name=startTime,proto3" json:"startTime,omitempty"`
+	Area          int64  `protobuf:"varint,7,opt,name=area,proto3" json:"area,omitempty"`
+	Tags          string `protobuf:"bytes,8,opt,name=tags,proto3" json:"tags,omitempty"`
+	MaxOnline     int64  `protobuf:"varint,9,opt,name=maxOnline,proto3" json:"maxOnline,omitempty"`
+	MaxQueue      int64  `protobuf:"varint,10,opt,name=maxQueue,proto3" json:"maxQueue,omitempty"`
+	MaxSign       int64  `protobuf:"varint,11,opt,name=maxSign,proto3" json:"maxSign,omitempty"`
+	TemplateValue string `protobuf:"bytes,12,opt,name=templateValue,proto3" json:"templateValue,omitempty"`
 }
 
 func (x *GetServerResp) Reset() {
@@ -336,17 +336,17 @@ type SetServerReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ServerId      string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId"`
-	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	ServerType    int64  `protobuf:"varint,3,opt,name=serverType,proto3" json:"serverType"`
-	Switch        int64  `protobuf:"varint,4,opt,name=switch,proto3" json:"switch"`
-	StartTime     int64  `protobuf:"varint,5,opt,name=startTime,proto3" json:"startTime"`
-	Area          int64  `protobuf:"varint,6,opt,name=area,proto3" json:"area"`
-	Tags          string `protobuf:"bytes,7,opt,name=tags,proto3" json:"tags"`
-	MaxOnline     int64  `protobuf:"varint,8,opt,name=maxOnline,proto3" json:"maxOnline"`
-	MaxQueue      int64  `protobuf:"varint,9,opt,name=maxQueue,proto3" json:"maxQueue"`
-	MaxSign       int64  `protobuf:"varint,10,opt,name=maxSign,proto3" json:"maxSign"`
-	TemplateValue string `protobuf:"bytes,11,opt,name=templateValue,proto3" json:"templateValue"`
+	ServerId      string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"`
+	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ServerType    int64  `protobuf:"varint,3,opt,name=serverType,proto3" json:"serverType,omitempty"`
+	Switch        int64  `protobuf:"varint,4,opt,name=switch,proto3" json:"switch,omitempty"`
+	StartTime     int64  `protobuf:"varint,5,opt,name=startTime,proto3" json:"startTime,omitempty"`
+	Area          int64  `protobuf:"varint,6,opt,name=area,proto3" json:"area,omitempty"`
+	Tags          string `protobuf:"bytes,7,opt,name=tags,proto3" json:"tags,omitempty"`
+	MaxOnline     int64  `protobuf:"varint,8,opt,name=maxOnline,proto3" json:"maxOnline,omitempty"`
+	MaxQueue      int64  `protobuf:"varint,9,opt,name=maxQueue,proto3" json:"maxQueue,omitempty"`
+	MaxSign       int64  `protobuf:"varint,10,opt,name=maxSign,proto3" json:"maxSign,omitempty"`
+	TemplateValue string `protobuf:"bytes,11,opt,name=templateValue,proto3" json:"templateValue,omitempty"`
 }
 
 func (x *SetServerReq) Reset() {
@@ -463,7 +463,7 @@ type SetServerResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ReturnCode int64 `protobuf:"varint,1,opt,name=returnCode,proto3" json:"returnCode"`
+	ReturnCode int64 `protobuf:"varint,1,opt,name=returnCode,proto3" json:"returnCode,omitempty"`
 }
 
 func (x *SetServerResp) Reset() {
@@ -510,16 +510,16 @@ type CreateServerReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
-	ServerType    int64  `protobuf:"varint,2,opt,name=serverType,proto3" json:"serverType"`
-	Switch        int64  `protobuf:"varint,3,opt,name=switch,proto3" json:"switch"`
-	StartTime     int64  `protobuf:"varint,4,opt,name=startTime,proto3" json:"startTime"`
-	Area          int64  `protobuf:"varint,5,opt,name=area,proto3" json:"area"`
-	Tags          string `protobuf:"bytes,6,opt,name=tags,proto3" json:"tags"`
-	MaxOnline     int64  `protobuf:"varint,7,opt,name=maxOnline,proto3" json:"maxOnline"`
-	MaxQueue      int64  `protobuf:"varint,8,opt,name=maxQueue,proto3" json:"maxQueue"`
-	MaxSign       int64  `protobuf:"varint,9,opt,name=maxSign,proto3" json:"maxSign"`
-	TemplateValue string `protobuf:"bytes,10,opt,name=templateValue,proto3" json:"templateValue"`
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	ServerType    int64  `protobuf:"varint,2,opt,name=serverType,proto3" json:"serverType,omitempty"`
+	Switch        int64  `protobuf:"varint,3,opt,name=switch,proto3" json:"switch,omitempty"`
+	StartTime     int64  `protobuf:"varint,4,opt,name=startTime,proto3" json:"startTime,omitempty"`
+	Area          int64  `protobuf:"varint,5,opt,name=area,proto3" json:"area,omitempty"`
+	Tags          string `protobuf:"bytes,6,opt,name=tags,proto3" json:"tags,omitempty"`
+	MaxOnline     int64  `protobuf:"varint,7,opt,name=maxOnline,proto3" json:"maxOnline,omitempty"`
+	MaxQueue      int64  `protobuf:"varint,8,opt,name=maxQueue,proto3" json:"maxQueue,omitempty"`
+	MaxSign       int64  `protobuf:"varint,9,opt,name=maxSign,proto3" json:"maxSign,omitempty"`
+	TemplateValue string `protobuf:"bytes,10,opt,name=templateValue,proto3" json:"templateValue,omitempty"`
 }
 
 func (x *CreateServerReq) Reset() {
@@ -629,8 +629,8 @@ type CreateServerResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ServerId   string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId"`
-	ReturnCode int64  `protobuf:"varint,2,opt,name=returnCode,proto3" json:"returnCode"`
+	ServerId   string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"`
+	ReturnCode int64  `protobuf:"varint,2,opt,name=returnCode,proto3" json:"returnCode,omitempty"`
 }
 
 func (x *CreateServerResp) Reset() {
@@ -684,8 +684,8 @@ type LoginServerReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PlayerId string `protobuf:"bytes,1,opt,name=playerId,proto3" json:"playerId"`
-	ServerId string `protobuf:"bytes,2,opt,name=serverId,proto3" json:"serverId"`
+	PlayerId string `protobuf:"bytes,1,opt,name=playerId,proto3" json:"playerId,omitempty"`
+	ServerId string `protobuf:"bytes,2,opt,name=serverId,proto3" json:"serverId,omitempty"`
 }
 
 func (x *LoginServerReq) Reset() {
@@ -739,7 +739,7 @@ type LoginServerResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ReturnCode int64 `protobuf:"varint,1,opt,name=returnCode,proto3" json:"returnCode"`
+	ReturnCode int64 `protobuf:"varint,1,opt,name=returnCode,proto3" json:"returnCode,omitempty"`
 }
 
 func (x *LoginServerResp) Reset() {
@@ -779,6 +779,226 @@ func (x *LoginServerResp) GetReturnCode() int64 {
 		return x.ReturnCode
 	}
 	return 0
+}
+
+type ServerInfo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ServerId      string `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"`
+	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ServerType    int64  `protobuf:"varint,3,opt,name=serverType,proto3" json:"serverType,omitempty"`
+	Switch        int64  `protobuf:"varint,4,opt,name=switch,proto3" json:"switch,omitempty"`
+	StartTime     int64  `protobuf:"varint,5,opt,name=startTime,proto3" json:"startTime,omitempty"`
+	Area          int64  `protobuf:"varint,6,opt,name=area,proto3" json:"area,omitempty"`
+	Tags          string `protobuf:"bytes,7,opt,name=tags,proto3" json:"tags,omitempty"`
+	MaxOnline     int64  `protobuf:"varint,8,opt,name=maxOnline,proto3" json:"maxOnline,omitempty"`
+	MaxQueue      int64  `protobuf:"varint,9,opt,name=maxQueue,proto3" json:"maxQueue,omitempty"`
+	MaxSign       int64  `protobuf:"varint,10,opt,name=maxSign,proto3" json:"maxSign,omitempty"`
+	TemplateValue string `protobuf:"bytes,11,opt,name=templateValue,proto3" json:"templateValue,omitempty"`
+}
+
+func (x *ServerInfo) Reset() {
+	*x = ServerInfo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_servermanager_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ServerInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServerInfo) ProtoMessage() {}
+
+func (x *ServerInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_servermanager_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServerInfo.ProtoReflect.Descriptor instead.
+func (*ServerInfo) Descriptor() ([]byte, []int) {
+	return file_servermanager_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ServerInfo) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+func (x *ServerInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ServerInfo) GetServerType() int64 {
+	if x != nil {
+		return x.ServerType
+	}
+	return 0
+}
+
+func (x *ServerInfo) GetSwitch() int64 {
+	if x != nil {
+		return x.Switch
+	}
+	return 0
+}
+
+func (x *ServerInfo) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ServerInfo) GetArea() int64 {
+	if x != nil {
+		return x.Area
+	}
+	return 0
+}
+
+func (x *ServerInfo) GetTags() string {
+	if x != nil {
+		return x.Tags
+	}
+	return ""
+}
+
+func (x *ServerInfo) GetMaxOnline() int64 {
+	if x != nil {
+		return x.MaxOnline
+	}
+	return 0
+}
+
+func (x *ServerInfo) GetMaxQueue() int64 {
+	if x != nil {
+		return x.MaxQueue
+	}
+	return 0
+}
+
+func (x *ServerInfo) GetMaxSign() int64 {
+	if x != nil {
+		return x.MaxSign
+	}
+	return 0
+}
+
+func (x *ServerInfo) GetTemplateValue() string {
+	if x != nil {
+		return x.TemplateValue
+	}
+	return ""
+}
+
+type GetServerListReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *GetServerListReq) Reset() {
+	*x = GetServerListReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_servermanager_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetServerListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServerListReq) ProtoMessage() {}
+
+func (x *GetServerListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_servermanager_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServerListReq.ProtoReflect.Descriptor instead.
+func (*GetServerListReq) Descriptor() ([]byte, []int) {
+	return file_servermanager_proto_rawDescGZIP(), []int{10}
+}
+
+type GetServerListResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ReturnCode int64         `protobuf:"varint,1,opt,name=returnCode,proto3" json:"returnCode,omitempty"`
+	ServerList []*ServerInfo `protobuf:"bytes,2,rep,name=serverList,proto3" json:"serverList,omitempty"`
+}
+
+func (x *GetServerListResp) Reset() {
+	*x = GetServerListResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_servermanager_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetServerListResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServerListResp) ProtoMessage() {}
+
+func (x *GetServerListResp) ProtoReflect() protoreflect.Message {
+	mi := &file_servermanager_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServerListResp.ProtoReflect.Descriptor instead.
+func (*GetServerListResp) Descriptor() ([]byte, []int) {
+	return file_servermanager_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetServerListResp) GetReturnCode() int64 {
+	if x != nil {
+		return x.ReturnCode
+	}
+	return 0
+}
+
+func (x *GetServerListResp) GetServerList() []*ServerInfo {
+	if x != nil {
+		return x.ServerList
+	}
+	return nil
 }
 
 var File_servermanager_proto protoreflect.FileDescriptor
@@ -882,7 +1102,34 @@ var file_servermanager_proto_rawDesc = []byte{
 	0x72, 0x76, 0x65, 0x72, 0x49, 0x64, 0x22, 0x31, 0x0a, 0x0f, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x53,
 	0x65, 0x72, 0x76, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x12, 0x1e, 0x0a, 0x0a, 0x72, 0x65, 0x74,
 	0x75, 0x72, 0x6e, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x72,
-	0x65, 0x74, 0x75, 0x72, 0x6e, 0x43, 0x6f, 0x64, 0x65, 0x32, 0xe6, 0x01, 0x0a, 0x0d, 0x73, 0x65,
+	0x65, 0x74, 0x75, 0x72, 0x6e, 0x43, 0x6f, 0x64, 0x65, 0x22, 0xb4, 0x02, 0x0a, 0x0a, 0x53, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1a, 0x0a, 0x08, 0x73, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x73, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x73, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x73, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x77, 0x69, 0x74,
+	0x63, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x73, 0x77, 0x69, 0x74, 0x63, 0x68,
+	0x12, 0x1c, 0x0a, 0x09, 0x73, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x09, 0x73, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x12,
+	0x0a, 0x04, 0x61, 0x72, 0x65, 0x61, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x61, 0x72,
+	0x65, 0x61, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x61, 0x67, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x74, 0x61, 0x67, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x6d, 0x61, 0x78, 0x4f, 0x6e, 0x6c,
+	0x69, 0x6e, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x6d, 0x61, 0x78, 0x4f, 0x6e,
+	0x6c, 0x69, 0x6e, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x61, 0x78, 0x51, 0x75, 0x65, 0x75, 0x65,
+	0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x6d, 0x61, 0x78, 0x51, 0x75, 0x65, 0x75, 0x65,
+	0x12, 0x18, 0x0a, 0x07, 0x6d, 0x61, 0x78, 0x53, 0x69, 0x67, 0x6e, 0x18, 0x0a, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x07, 0x6d, 0x61, 0x78, 0x53, 0x69, 0x67, 0x6e, 0x12, 0x24, 0x0a, 0x0d, 0x74, 0x65,
+	0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0d, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x56, 0x61, 0x6c, 0x75, 0x65,
+	0x22, 0x12, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4c, 0x69, 0x73,
+	0x74, 0x52, 0x65, 0x71, 0x22, 0x63, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65,
+	0x72, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x1e, 0x0a, 0x0a, 0x72, 0x65, 0x74,
+	0x75, 0x72, 0x6e, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x72,
+	0x65, 0x74, 0x75, 0x72, 0x6e, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x2e, 0x0a, 0x0a, 0x73, 0x65, 0x72,
+	0x76, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e,
+	0x70, 0x62, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0a, 0x73,
+	0x65, 0x72, 0x76, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x32, 0xa4, 0x02, 0x0a, 0x0d, 0x73, 0x65,
 	0x72, 0x76, 0x65, 0x72, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x12, 0x39, 0x0a, 0x0c, 0x63,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x12, 0x13, 0x2e, 0x70, 0x62,
 	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x52, 0x65, 0x71,
@@ -897,8 +1144,11 @@ var file_servermanager_proto_rawDesc = []byte{
 	0x67, 0x69, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x12, 0x12, 0x2e, 0x70, 0x62, 0x2e, 0x4c,
 	0x6f, 0x67, 0x69, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x52, 0x65, 0x71, 0x1a, 0x13, 0x2e,
 	0x70, 0x62, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x52, 0x65,
-	0x73, 0x70, 0x42, 0x06, 0x5a, 0x04, 0x2e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x73, 0x70, 0x12, 0x3c, 0x0a, 0x0d, 0x67, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4c,
+	0x69, 0x73, 0x74, 0x12, 0x14, 0x2e, 0x70, 0x62, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x15, 0x2e, 0x70, 0x62, 0x2e, 0x47,
+	0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x42, 0x06, 0x5a, 0x04, 0x2e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -913,32 +1163,38 @@ func file_servermanager_proto_rawDescGZIP() []byte {
 	return file_servermanager_proto_rawDescData
 }
 
-var file_servermanager_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_servermanager_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_servermanager_proto_goTypes = []interface{}{
-	(*Server)(nil),           // 0: pb.Server
-	(*GetServerReq)(nil),     // 1: pb.GetServerReq
-	(*GetServerResp)(nil),    // 2: pb.GetServerResp
-	(*SetServerReq)(nil),     // 3: pb.SetServerReq
-	(*SetServerResp)(nil),    // 4: pb.SetServerResp
-	(*CreateServerReq)(nil),  // 5: pb.CreateServerReq
-	(*CreateServerResp)(nil), // 6: pb.CreateServerResp
-	(*LoginServerReq)(nil),   // 7: pb.LoginServerReq
-	(*LoginServerResp)(nil),  // 8: pb.LoginServerResp
+	(*Server)(nil),            // 0: pb.Server
+	(*GetServerReq)(nil),      // 1: pb.GetServerReq
+	(*GetServerResp)(nil),     // 2: pb.GetServerResp
+	(*SetServerReq)(nil),      // 3: pb.SetServerReq
+	(*SetServerResp)(nil),     // 4: pb.SetServerResp
+	(*CreateServerReq)(nil),   // 5: pb.CreateServerReq
+	(*CreateServerResp)(nil),  // 6: pb.CreateServerResp
+	(*LoginServerReq)(nil),    // 7: pb.LoginServerReq
+	(*LoginServerResp)(nil),   // 8: pb.LoginServerResp
+	(*ServerInfo)(nil),        // 9: pb.ServerInfo
+	(*GetServerListReq)(nil),  // 10: pb.GetServerListReq
+	(*GetServerListResp)(nil), // 11: pb.GetServerListResp
 }
 var file_servermanager_proto_depIdxs = []int32{
-	5, // 0: pb.servermanager.createServer:input_type -> pb.CreateServerReq
-	3, // 1: pb.servermanager.setServer:input_type -> pb.SetServerReq
-	1, // 2: pb.servermanager.getServer:input_type -> pb.GetServerReq
-	7, // 3: pb.servermanager.loginServer:input_type -> pb.LoginServerReq
-	6, // 4: pb.servermanager.createServer:output_type -> pb.CreateServerResp
-	4, // 5: pb.servermanager.setServer:output_type -> pb.SetServerResp
-	2, // 6: pb.servermanager.getServer:output_type -> pb.GetServerResp
-	8, // 7: pb.servermanager.loginServer:output_type -> pb.LoginServerResp
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	9,  // 0: pb.GetServerListResp.serverList:type_name -> pb.ServerInfo
+	5,  // 1: pb.servermanager.createServer:input_type -> pb.CreateServerReq
+	3,  // 2: pb.servermanager.setServer:input_type -> pb.SetServerReq
+	1,  // 3: pb.servermanager.getServer:input_type -> pb.GetServerReq
+	7,  // 4: pb.servermanager.loginServer:input_type -> pb.LoginServerReq
+	10, // 5: pb.servermanager.getServerList:input_type -> pb.GetServerListReq
+	6,  // 6: pb.servermanager.createServer:output_type -> pb.CreateServerResp
+	4,  // 7: pb.servermanager.setServer:output_type -> pb.SetServerResp
+	2,  // 8: pb.servermanager.getServer:output_type -> pb.GetServerResp
+	8,  // 9: pb.servermanager.loginServer:output_type -> pb.LoginServerResp
+	11, // 10: pb.servermanager.getServerList:output_type -> pb.GetServerListResp
+	6,  // [6:11] is the sub-list for method output_type
+	1,  // [1:6] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_servermanager_proto_init() }
@@ -1055,6 +1311,42 @@ func file_servermanager_proto_init() {
 				return nil
 			}
 		}
+		file_servermanager_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ServerInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_servermanager_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetServerListReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_servermanager_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetServerListResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1062,7 +1354,7 @@ func file_servermanager_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_servermanager_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

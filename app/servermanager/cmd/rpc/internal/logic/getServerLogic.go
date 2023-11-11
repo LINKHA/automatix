@@ -26,7 +26,6 @@ func NewGetServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetServ
 
 func (l *GetServerLogic) GetServer(in *pb.GetServerReq) (*pb.GetServerResp, error) {
 	var returnCode = xerr.OK
-	// errxx := l.svcCtx.Redis.Set("asd/aw/asd", "1111")
 
 	server, err := l.svcCtx.ServerModel.FindOneByServerId(l.ctx, in.ServerId)
 	if err != nil {

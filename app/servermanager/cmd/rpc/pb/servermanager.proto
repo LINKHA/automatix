@@ -85,11 +85,34 @@ message LoginServerResp {
     int64 returnCode = 1;
 }
 
+message ServerInfo {
+    string serverId = 1;
+    string name = 2;
+    int64 serverType = 3;
+    int64 switch = 4;
+    int64 startTime = 5;
+    int64 area = 6;
+    string tags = 7;
+    int64 maxOnline = 8;
+    int64 maxQueue = 9;
+    int64 maxSign = 10;
+    string templateValue = 11;
+}
+
+message GetServerListReq  {
+}
+
+message GetServerListResp {
+    int64 returnCode = 1;
+    repeated ServerInfo serverList = 2;
+}
+
 
 //service
 service servermanager {
-  rpc createServer(CreateServerReq) returns(CreateServerResp);
-  rpc setServer(SetServerReq) returns(SetServerResp);
-  rpc getServer(GetServerReq) returns(GetServerResp);
+    rpc createServer(CreateServerReq) returns(CreateServerResp);
+    rpc setServer(SetServerReq) returns(SetServerResp);
+    rpc getServer(GetServerReq) returns(GetServerResp);
     rpc loginServer(LoginServerReq) returns(LoginServerResp);
+    rpc getServerList(GetServerListReq) returns(GetServerListResp);
 }
