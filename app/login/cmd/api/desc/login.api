@@ -1,0 +1,45 @@
+syntax = "v1"
+
+info(
+	title: "登录服务"
+	desc: "登录服务"
+	author: "linkh"
+	email: "421698843@qq.com"
+	version: "v1"
+)
+
+type (
+	FastLoginReq {
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
+	FastLoginResp {
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+		RefreshAfter int64  `json:"refreshAfter"`
+	}
+)
+
+type (
+	EnterServerReq {
+		ServerId    string `json:"serverId"`
+		AccessToken string `json:"accessToken"`
+	}
+	EnterServerResp {
+		ServerToken string `json:"serverToken"`
+	}
+)
+
+@server(
+	prefix: login
+	group: login
+)
+service login {
+	@doc "fastLogin"
+	@handler fastLogin
+	post /login/fastLogin (FastLoginReq) returns (FastLoginResp)
+
+	@doc "enterServer"
+	@handler enterServer
+	post /login/enterServer (EnterServerReq) returns (EnterServerResp)
+}
