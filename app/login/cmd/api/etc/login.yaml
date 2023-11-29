@@ -1,6 +1,7 @@
 Name: login-api
 Host: 0.0.0.0
-Port: 1006
+Port: 1000
+Mode: dev
 
 #监控
 Prometheus:
@@ -34,3 +35,8 @@ KqConfServerQueue:
   Brokers:
     - kafka:9092
   Topic: server-queue-topic
+#rpc service
+UsercenterRpcConf:
+  Endpoints:
+    - 127.0.0.1:2004
+  NonBlock: true
