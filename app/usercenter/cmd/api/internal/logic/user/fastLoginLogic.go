@@ -2,11 +2,13 @@ package user
 
 import (
 	"context"
-	"fmt"
 
 	"automatix/app/usercenter/cmd/api/internal/svc"
 	"automatix/app/usercenter/cmd/api/internal/types"
+	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"automatix/app/usercenter/model"
 
+	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -24,21 +26,18 @@ func NewFastLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FastLog
 	}
 }
 
-func (l *FastLoginLogic) FastLogin(req *types.FastLoginReq) (resp *types.FastLoginResp, err error) {
-	// todo: add your logic here and delete this line
-	fmt.Println("fast login+++++++++++++++++++++++")
-	// loginResp, err := l.svcCtx.UsercenterRpc.Login(l.ctx, &usercenter.LoginReq{
-	// 	AuthType: model.UserAuthTypeSystem,
-	// 	AuthKey:  req.Mobile,
-	// 	Password: req.Password,
-	// })
-	// if err != nil {
-	// 	return nil, err
-	// }
+func (l *FastLoginLogic) FastLogin(req *types.FastLoginReq) (*types.FastLoginResp, error) {
+	fastLoginResp, err := l.svcCtx.UsercenterRpc.Fastlogin(l.ctx, &usercenter.FastLoginReq{
+		AuthType: model.UserAuthTypeSystem,
+		AuthKey:  req.Mobile,
+		Password: req.Password,
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	// var resp types.LoginResp
-	// _ = copier.Copy(&resp, loginResp)
+	var resp types.FastLoginResp
+	_ = copier.Copy(&resp, fastLoginResp)
 
-	//return &resp, nil
-	return
+	return &resp, nil
 }
