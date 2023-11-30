@@ -11,13 +11,13 @@ Prometheus:
 
 #链路追踪
 Telemetry:
-  Name: travel-api
+  Name: login-api
   Endpoint: http://jaeger:14268/api/traces
   Sampler: 1.0
   Batcher: jaeger
 
 Log:
-  ServiceName: travel-api
+  ServiceName: login-api
   Level: error
 
 DB:

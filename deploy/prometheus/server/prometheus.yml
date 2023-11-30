@@ -86,4 +86,26 @@ scrape_configs:
           job: mqueue-scheduler
           app: mqueue-scheduler
           env: dev
+  - job_name: 'servermanager-api'
+    static_configs:
+      - targets: [ 'automatix:4012' ]
+        labels:
+          job: servermanager-api
+          app: servermanager-api
+          env: dev
+  - job_name: 'servermanager-rpc'
+    static_configs:
+      - targets: [ 'automatix:4013' ]
+        labels:
+          job: servermanager-rpc
+          app: servermanager-rpc
+          env: dev
+  - job_name: 'login-api'
+    static_configs:
+      - targets: [ 'automatix:4014' ]
+        labels:
+          job: login-api
+          app: login-api
+          env: dev
+                  
 

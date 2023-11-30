@@ -24,6 +24,5 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: login.EnterServerHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/login"),
 	)
 }
