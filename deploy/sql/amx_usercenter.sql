@@ -1,11 +1,11 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : looklook
+ Source Server         : amx
  Source Server Type    : MySQL
  Source Server Version : 80028
  Source Host           : 127.0.0.1:33069
- Source Schema         : looklook_usercenter
+ Source Schema         : amx_usercenter
 
  Target Server Type    : MySQL
  Target Server Version : 80028
