@@ -13,10 +13,9 @@ type FastLoginResp struct {
 }
 
 type EnterServerReq struct {
-	ServerId    string `json:"serverId"`
-	AccessToken string `json:"accessToken"`
+	ServerCode string `json:"serverCode"`
 }
 
 type EnterServerResp struct {
-	ServerToken string `json:"serverToken"`
+	ReturnCode int64 `json:"returnCode"`
 }
