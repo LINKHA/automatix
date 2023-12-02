@@ -46,3 +46,8 @@ func (s *ServermanagerServer) GetServerList(ctx context.Context, in *pb.GetServe
 	l := logic.NewGetServerListLogic(ctx, s.svcCtx)
 	return l.GetServerList(in)
 }
+
+func (s *ServermanagerServer) GetServerCode(ctx context.Context, in *pb.GetServerCodeReq) (*pb.GetServerCodeResp, error) {
+	l := logic.NewGetServerCodeLogic(ctx, s.svcCtx)
+	return l.GetServerCode(in)
+}

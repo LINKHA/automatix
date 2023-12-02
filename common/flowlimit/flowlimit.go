@@ -33,9 +33,6 @@ func SlidingWindow(redis *redis.Redis, serverId string, rate int64, windowSize i
 	redis.Zremrangebyscore(slidingKey, FLOWLIMIT_MIN_TIME, windowStart)
 	totalCount, err := redis.Zcount(slidingKey, windowStart, FLOWLIMIT_MAX_TIME)
 
-	fmt.Println("qwe1----------------: ", slidingKey)
-	fmt.Println("qwe2----------------: ", totalCount)
-
 	if err != nil {
 		panic(err)
 	}

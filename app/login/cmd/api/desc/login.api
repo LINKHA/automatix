@@ -25,7 +25,9 @@ type (
 		ServerCode string `json:"serverCode"`
 	}
 	EnterServerResp {
-		ReturnCode int64 `json:"returnCode"`
+		ReturnCode int64  `json:"returnCode"`
+		Host       string `json:"host"`
+		Port       string `json:"port"`
 	}
 )
 
@@ -40,6 +42,17 @@ type (
 	}
 )
 
+type (
+	GetServerCodeReq {
+		ServerId string `json:"serverId"`
+	}
+
+	GetServerCodeResp {
+		ReturnCode int64  `json:"returnCode"`
+		ServerCode string `json:"serverCode"`
+	}
+)
+
 @server(
 	prefix: login
 	group: login
@@ -47,11 +60,8 @@ type (
 service login {
 	@doc "fastLogin"
 	@handler fastLogin
-	post /login/fastLogin (FastLoginReq) returns (FastLoginResp)
+	post /fastLogin (FastLoginReq) returns (FastLoginResp)
 
-	@doc "enterServer"
-	@handler enterServer
-	post /login/enterServer (EnterServerReq) returns (EnterServerResp)
 }
 
 @server(
@@ -62,5 +72,13 @@ service login {
 service login {
 	@doc "loginServer"
 	@handler loginServer
-	post /login/loginServer (LoginServerReq) returns (LoginServerResp)
+	post /loginServer (LoginServerReq) returns (LoginServerResp)
+
+	@doc "getServerCode"
+	@handler getServerCode
+	post /getServerCode (GetServerCodeReq) returns (GetServerCodeResp)
+
+	@doc "enterServer"
+	@handler enterServer
+	post /enterServer (EnterServerReq) returns (EnterServerResp)
 }

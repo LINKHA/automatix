@@ -15,6 +15,8 @@ import (
 type (
 	CreateServerReq   = pb.CreateServerReq
 	CreateServerResp  = pb.CreateServerResp
+	GetServerCodeReq  = pb.GetServerCodeReq
+	GetServerCodeResp = pb.GetServerCodeResp
 	GetServerListReq  = pb.GetServerListReq
 	GetServerListResp = pb.GetServerListResp
 	GetServerReq      = pb.GetServerReq
@@ -32,6 +34,7 @@ type (
 		GetServer(ctx context.Context, in *GetServerReq, opts ...grpc.CallOption) (*GetServerResp, error)
 		LoginServer(ctx context.Context, in *LoginServerReq, opts ...grpc.CallOption) (*LoginServerResp, error)
 		GetServerList(ctx context.Context, in *GetServerListReq, opts ...grpc.CallOption) (*GetServerListResp, error)
+		GetServerCode(ctx context.Context, in *GetServerCodeReq, opts ...grpc.CallOption) (*GetServerCodeResp, error)
 	}
 
 	defaultServermanager struct {
@@ -68,4 +71,9 @@ func (m *defaultServermanager) LoginServer(ctx context.Context, in *LoginServerR
 func (m *defaultServermanager) GetServerList(ctx context.Context, in *GetServerListReq, opts ...grpc.CallOption) (*GetServerListResp, error) {
 	client := pb.NewServermanagerClient(m.cli.Conn())
 	return client.GetServerList(ctx, in, opts...)
+}
+
+func (m *defaultServermanager) GetServerCode(ctx context.Context, in *GetServerCodeReq, opts ...grpc.CallOption) (*GetServerCodeResp, error) {
+	client := pb.NewServermanagerClient(m.cli.Conn())
+	return client.GetServerCode(ctx, in, opts...)
 }

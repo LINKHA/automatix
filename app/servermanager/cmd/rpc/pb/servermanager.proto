@@ -108,6 +108,17 @@ message GetServerListResp {
     repeated ServerInfo serverList = 2;
 }
 
+message GetServerCodeReq  {
+    int64 userId = 1;
+    string serverId = 2;
+}
+
+message GetServerCodeResp {
+    string serverCode = 1;
+    int64 returnCode = 2;
+}
+
+
 
 //service
 service servermanager {
@@ -116,4 +127,5 @@ service servermanager {
     rpc getServer(GetServerReq) returns(GetServerResp);
     rpc loginServer(LoginServerReq) returns(LoginServerResp);
     rpc getServerList(GetServerListReq) returns(GetServerListResp);
+    rpc getServerCode(GetServerCodeReq) returns(GetServerCodeResp);
 }

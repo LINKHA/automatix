@@ -39,6 +39,15 @@ func (l *LoginServerLogic) LoginServer(in *pb.LoginServerReq) (*pb.LoginServerRe
 		return &pb.LoginServerResp{ReturnCode: int64(xerr.SERVER_COMMON_ERROR)}, nil
 	}
 
+	//如果已经存在ServerCode
+	findCode := servercode.FindServerCode(l.svcCtx.Redis, userId, serverId)
+	if findCode != "" {
+		return &pb.LoginServerResp{
+			ReturnCode: int64(xerr.OK),
+			ServerCode: findCode,
+		}, nil
+	}
+
 	//If the number of people in line reaches the maximum(如果排队人数到达上限)
 	if int(server.MaxQueue) < flowlimit.SlidingWindowCount(l.svcCtx.Redis, serverId) {
 		return &pb.LoginServerResp{ReturnCode: int64(xerr.SERVER_MANAGER_LOGIN_SERVER_QUEUE_MAX)}, nil

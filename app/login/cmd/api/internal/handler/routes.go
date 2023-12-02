@@ -15,25 +15,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/login/fastLogin",
+				Path:    "/fastLogin",
 				Handler: login.FastLoginHandler(serverCtx),
 			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/login/enterServer",
-				Handler: login.EnterServerHandler(serverCtx),
-			},
 		},
+		rest.WithPrefix("/login"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/login/loginServer",
+				Path:    "/loginServer",
 				Handler: login.LoginServerHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/getServerCode",
+				Handler: login.GetServerCodeHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/enterServer",
+				Handler: login.EnterServerHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
+		rest.WithPrefix("/login"),
 	)
 }
