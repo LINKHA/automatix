@@ -3,6 +3,7 @@ package kq
 import (
 	"automatix/app/servermanager/cmd/rpc/internal/svc"
 	"automatix/common/kqueue"
+	"automatix/common/servercode"
 	"context"
 	"encoding/json"
 
@@ -41,5 +42,6 @@ func (l *ServerQueueMq) Consume(_, val string) error {
 
 func (l *ServerQueueMq) execService(message kqueue.LoginServerMessage) error {
 	//登录
+	servercode.GenServerCode(l.svcCtx.Redis, message.UserId, message.ServerId)
 	return nil
 }

@@ -1,10 +1,10 @@
-package logic
+package login
 
 import (
 	"context"
 
-	"automatix/app/servermanager/cmd/api/internal/svc"
-	"automatix/app/servermanager/cmd/api/internal/types"
+	"automatix/app/login/cmd/api/internal/svc"
+	"automatix/app/login/cmd/api/internal/types"
 	"automatix/app/servermanager/cmd/rpc/servermanager"
 	"automatix/common/ctxdata"
 
@@ -28,6 +28,7 @@ func NewLoginServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 
 func (l *LoginServerLogic) LoginServer(req *types.LoginServerReq) (*types.LoginServerResp, error) {
 	userId := ctxdata.GetUidFromCtx(l.ctx)
+
 	loginServerResp, err := l.svcCtx.ServerManagerRpc.LoginServer(l.ctx, &servermanager.LoginServerReq{
 		UserId:   userId,
 		ServerId: req.ServerId,

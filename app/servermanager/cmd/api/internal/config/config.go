@@ -15,4 +15,7 @@ type Config struct {
 	ServerManagerRpcConf zrpc.RpcClientConf
 	Id                   int64
 	KqConfServerQueue    KqConfig
+	JwtAuth              struct {
+		AccessSecret string
+	}
 }

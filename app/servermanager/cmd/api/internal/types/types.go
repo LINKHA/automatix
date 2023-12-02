@@ -70,11 +70,12 @@ type CreateServerResp struct {
 }
 
 type LoginServerReq struct {
-	PlayerId string `json:"playerId"`
+	UserId string `json:"userId"`
 	ServerId string `json:"serverId"`
 }
 
 type LoginServerResp struct {
+	ServerCode string `json:"serverCode"`
 	ReturnCode int64 `json:"returnCode"`
 }
 

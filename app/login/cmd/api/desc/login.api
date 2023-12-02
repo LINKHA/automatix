@@ -29,6 +29,17 @@ type (
 	}
 )
 
+type (
+	LoginServerReq {
+		ServerId string `json:"serverId"`
+	}
+
+	LoginServerResp {
+		ReturnCode int64  `json:"returnCode"`
+		ServerCode string `json:"serverCode"`
+	}
+)
+
 @server(
 	prefix: login
 	group: login
@@ -41,4 +52,15 @@ service login {
 	@doc "enterServer"
 	@handler enterServer
 	post /login/enterServer (EnterServerReq) returns (EnterServerResp)
+}
+
+@server(
+	prefix: login
+	group: login
+	jwt: JwtAuth
+)
+service login {
+	@doc "loginServer"
+	@handler loginServer
+	post /login/loginServer (LoginServerReq) returns (LoginServerResp)
 }

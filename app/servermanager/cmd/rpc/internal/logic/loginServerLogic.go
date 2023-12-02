@@ -8,6 +8,7 @@ import (
 	"automatix/app/servermanager/cmd/rpc/pb"
 	"automatix/common/flowlimit"
 	"automatix/common/kqueue"
+	"automatix/common/servercode"
 	"automatix/common/xerr"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -29,7 +30,7 @@ func NewLoginServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 }
 
 func (l *LoginServerLogic) LoginServer(in *pb.LoginServerReq) (*pb.LoginServerResp, error) {
-	playerId := in.PlayerId
+	userId := in.UserId
 	serverId := in.ServerId
 
 	server, err := l.svcCtx.ServerModel.FindOneByServerId(l.ctx, serverId)
@@ -44,9 +45,18 @@ func (l *LoginServerLogic) LoginServer(in *pb.LoginServerReq) (*pb.LoginServerRe
 	}
 
 	//Obtain the traffic limiting configuration(获取限流配置)
+	//Note: 这里还缺一个如果kafka中有数据，也需要进入排队
 	if flowlimit.SlidingWindow(l.svcCtx.Redis, serverId, int64(l.svcCtx.Config.SlidingWindow.Rate), int64(l.svcCtx.Config.SlidingWindow.WindowSize)) {
+		//登录
+		serverCode := servercode.GenServerCode(l.svcCtx.Redis, userId, serverId)
+		return &pb.LoginServerResp{
+			ReturnCode: int64(xerr.OK),
+			ServerCode: serverCode,
+		}, nil
+
+	} else {
 		var message kqueue.LoginServerMessage
-		message.PlayerId = playerId
+		message.UserId = userId
 		message.ServerId = serverId
 		jsonData, _ := json.Marshal(message)
 		err = l.svcCtx.KqueueServerQueue.Push(string(jsonData))
@@ -55,9 +65,5 @@ func (l *LoginServerLogic) LoginServer(in *pb.LoginServerReq) (*pb.LoginServerRe
 			return &pb.LoginServerResp{ReturnCode: int64(xerr.SERVER_COMMON_ERROR)}, nil
 		}
 		return &pb.LoginServerResp{ReturnCode: int64(xerr.SERVER_MANAGER_LOGIN_SERVER_QUEUE_ENTER)}, nil
-	} else {
-		//登录
 	}
-
-	return &pb.LoginServerResp{ReturnCode: int64(xerr.OK)}, nil
 }

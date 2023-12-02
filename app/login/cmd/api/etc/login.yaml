@@ -3,6 +3,10 @@ Host: 0.0.0.0
 Port: 1000
 Mode: dev
 
+#jwtAuth
+JwtAuth:
+  AccessSecret: ae0536f9-6450-4606-8e13-5a19ed505da0
+
 #监控
 Prometheus:
   Host: 0.0.0.0
@@ -25,18 +29,18 @@ DB:
 Cache:
   - Host: redis:6379
     Pass: G62m50oigInC30sf
-#rpc service
-ServerManagerRpcConf:
-  Endpoints:
-    - 127.0.0.1:2005
-  NonBlock: true
 
 KqConfServerQueue:
   Brokers:
     - kafka:9092
   Topic: server-queue-topic
+  
 #rpc service
 UsercenterRpcConf:
   Endpoints:
     - 127.0.0.1:2004
+  NonBlock: true
+ServerManagerRpcConf:
+  Endpoints:
+    - 127.0.0.1:2005
   NonBlock: true

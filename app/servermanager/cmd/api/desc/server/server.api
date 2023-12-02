@@ -83,12 +83,12 @@ type(
 
 type(
 	LoginServerReq  {
-		PlayerId   		string  `json:"playerId"`
 		ServerId		string  `json:"serverId"`
 	}
 
 	LoginServerResp {
 		ReturnCode 		int64 	`json:"returnCode"`
+		ServerCode 		string  `json:"serverCode"`
 	}
 )
 

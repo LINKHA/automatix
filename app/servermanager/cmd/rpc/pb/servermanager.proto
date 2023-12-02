@@ -77,12 +77,13 @@ message CreateServerResp {
 }
 
 message LoginServerReq  {
-    string playerId = 1;
+    int64 userId = 1;
     string serverId = 2;
 }
 
 message LoginServerResp {
-    int64 returnCode = 1;
+    string serverCode = 1;
+    int64 returnCode = 2;
 }
 
 message ServerInfo {

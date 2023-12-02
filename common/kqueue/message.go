@@ -9,6 +9,6 @@ type ThirdPaymentUpdatePayStatusNotifyMessage struct {
 
 // 角色登录服务器队列
 type LoginServerMessage struct {
-	PlayerId string `json:"playerId"`
+	UserId   int64  `json:"userId"`
 	ServerId string `json:"serverId"`
 }

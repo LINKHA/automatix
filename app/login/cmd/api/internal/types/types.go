@@ -19,3 +19,12 @@ type EnterServerReq struct {
 type EnterServerResp struct {
 	ReturnCode int64 `json:"returnCode"`
 }
+
+type LoginServerReq struct {
+	ServerId string `json:"serverId"`
+}
+
+type LoginServerResp struct {
+	ReturnCode int64  `json:"returnCode"`
+	ServerCode string `json:"serverCode"`
+}
