@@ -118,7 +118,15 @@ message GetServerCodeResp {
     int64 returnCode = 2;
 }
 
+message EnterServerReq  {
+    string serverCode = 1;
+}
 
+message EnterServerResp {
+    int64 returnCode = 1;
+    string host = 2;
+    string port = 3;
+}
 
 //service
 service servermanager {
@@ -128,4 +136,5 @@ service servermanager {
     rpc loginServer(LoginServerReq) returns(LoginServerResp);
     rpc getServerList(GetServerListReq) returns(GetServerListResp);
     rpc getServerCode(GetServerCodeReq) returns(GetServerCodeResp);
+    rpc enterServer(EnterServerReq) returns(EnterServerResp);
 }

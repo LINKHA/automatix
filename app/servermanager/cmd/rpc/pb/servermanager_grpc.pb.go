@@ -25,6 +25,7 @@ const (
 	Servermanager_LoginServer_FullMethodName   = "/pb.servermanager/loginServer"
 	Servermanager_GetServerList_FullMethodName = "/pb.servermanager/getServerList"
 	Servermanager_GetServerCode_FullMethodName = "/pb.servermanager/getServerCode"
+	Servermanager_EnterServer_FullMethodName   = "/pb.servermanager/enterServer"
 )
 
 // ServermanagerClient is the client API for Servermanager service.
@@ -37,6 +38,7 @@ type ServermanagerClient interface {
 	LoginServer(ctx context.Context, in *LoginServerReq, opts ...grpc.CallOption) (*LoginServerResp, error)
 	GetServerList(ctx context.Context, in *GetServerListReq, opts ...grpc.CallOption) (*GetServerListResp, error)
 	GetServerCode(ctx context.Context, in *GetServerCodeReq, opts ...grpc.CallOption) (*GetServerCodeResp, error)
+	EnterServer(ctx context.Context, in *EnterServerReq, opts ...grpc.CallOption) (*EnterServerResp, error)
 }
 
 type servermanagerClient struct {
@@ -101,6 +103,15 @@ func (c *servermanagerClient) GetServerCode(ctx context.Context, in *GetServerCo
 	return out, nil
 }
 
+func (c *servermanagerClient) EnterServer(ctx context.Context, in *EnterServerReq, opts ...grpc.CallOption) (*EnterServerResp, error) {
+	out := new(EnterServerResp)
+	err := c.cc.Invoke(ctx, Servermanager_EnterServer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServermanagerServer is the server API for Servermanager service.
 // All implementations must embed UnimplementedServermanagerServer
 // for forward compatibility
@@ -111,6 +122,7 @@ type ServermanagerServer interface {
 	LoginServer(context.Context, *LoginServerReq) (*LoginServerResp, error)
 	GetServerList(context.Context, *GetServerListReq) (*GetServerListResp, error)
 	GetServerCode(context.Context, *GetServerCodeReq) (*GetServerCodeResp, error)
+	EnterServer(context.Context, *EnterServerReq) (*EnterServerResp, error)
 	mustEmbedUnimplementedServermanagerServer()
 }
 
@@ -135,6 +147,9 @@ func (UnimplementedServermanagerServer) GetServerList(context.Context, *GetServe
 }
 func (UnimplementedServermanagerServer) GetServerCode(context.Context, *GetServerCodeReq) (*GetServerCodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerCode not implemented")
+}
+func (UnimplementedServermanagerServer) EnterServer(context.Context, *EnterServerReq) (*EnterServerResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnterServer not implemented")
 }
 func (UnimplementedServermanagerServer) mustEmbedUnimplementedServermanagerServer() {}
 
@@ -257,6 +272,24 @@ func _Servermanager_GetServerCode_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Servermanager_EnterServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnterServerReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServermanagerServer).EnterServer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Servermanager_EnterServer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServermanagerServer).EnterServer(ctx, req.(*EnterServerReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Servermanager_ServiceDesc is the grpc.ServiceDesc for Servermanager service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -287,6 +320,10 @@ var Servermanager_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getServerCode",
 			Handler:    _Servermanager_GetServerCode_Handler,
+		},
+		{
+			MethodName: "enterServer",
+			Handler:    _Servermanager_EnterServer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

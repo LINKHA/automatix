@@ -5,7 +5,9 @@ import (
 
 	"automatix/app/login/cmd/api/internal/svc"
 	"automatix/app/login/cmd/api/internal/types"
+	"automatix/app/servermanager/cmd/rpc/servermanager"
 
+	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -23,8 +25,16 @@ func NewEnterServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Enter
 	}
 }
 
-func (l *EnterServerLogic) EnterServer(req *types.EnterServerReq) (resp *types.EnterServerResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *EnterServerLogic) EnterServer(req *types.EnterServerReq) (*types.EnterServerResp, error) {
+	enterServerCodeResp, err := l.svcCtx.ServerManagerRpc.EnterServer(l.ctx, &servermanager.EnterServerReq{
+		ServerCode: req.ServerCode,
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	var resp types.EnterServerResp
+	_ = copier.Copy(&resp, enterServerCodeResp)
+
+	return &resp, nil
 }

@@ -51,3 +51,8 @@ func (s *ServermanagerServer) GetServerCode(ctx context.Context, in *pb.GetServe
 	l := logic.NewGetServerCodeLogic(ctx, s.svcCtx)
 	return l.GetServerCode(in)
 }
+
+func (s *ServermanagerServer) EnterServer(ctx context.Context, in *pb.EnterServerReq) (*pb.EnterServerResp, error) {
+	l := logic.NewEnterServerLogic(ctx, s.svcCtx)
+	return l.EnterServer(in)
+}
