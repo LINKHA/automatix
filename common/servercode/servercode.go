@@ -43,7 +43,13 @@ func GenServerCode(redis *redis.Redis, userId int64, serverId string) string {
 
 func UseServerCode(redis *redis.Redis, code string) (int64, string) {
 	userId, serverId := GetServerCode(redis, code)
-	redis.Hdel(code)
+	if serverId != "" {
+		userIdStr := strconv.FormatInt(userId, 10)
+		codeKey := serverCodeKey(code)
+		codeValue := serverCodeValue(userIdStr, serverId)
+		redis.Del(codeKey)
+		redis.Del(codeValue)
+	}
 	return userId, serverId
 }
 
