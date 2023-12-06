@@ -1,0 +1,6 @@
+Name: gate-api
+TcpHost: 0.0.0.0
+TcpPort: 11111
+
+UdpHost: 0.0.0.0
+UdpPort: 11112
