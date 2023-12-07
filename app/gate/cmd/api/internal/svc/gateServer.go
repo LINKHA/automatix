@@ -65,6 +65,6 @@ func NewGateServer(ctx *ServiceContext) {
 	c := ctx.Config
 	go newTcpServer(c.TcpHost, c.TcpPort)
 
-	go newUdpServer(c.UdpHost, c.UdpPort)
+	newUdpServer(c.UdpHost, c.UdpPort)
 
 }
