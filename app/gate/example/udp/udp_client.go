@@ -1,4 +1,4 @@
-package udp
+package main
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	udpAddr, err := net.ResolveUDPAddr("udp", "127.0.0.1:11112")
+	udpAddr, err := net.ResolveUDPAddr("udp", "127.0.0.1:10243")
 	if err != nil {
 		fmt.Println("Error resolving UDP address:", err)
 		return

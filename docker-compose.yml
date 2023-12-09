@@ -28,6 +28,9 @@ services:
       # 时区上海 - Timezone Shanghai
       TZ: Asia/Shanghai
       GOPROXY: https://goproxy.cn,direct
+    ports:
+      - 10242:10242
+      - 10243:10243
     working_dir: /go/automatix
     volumes:
       - .:/go/automatix

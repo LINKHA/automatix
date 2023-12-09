@@ -1,4 +1,4 @@
-package tcp
+package main
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	conn, err := net.Dial("tcp", "127.0.0.1:11111")
+	conn, err := net.Dial("tcp", "127.0.0.1:10242")
 	if err != nil {
 		fmt.Println("Error connecting to the server:", err)
 		return
