@@ -35,3 +35,6 @@
 # ./kafka-console-consumer.sh  --bootstrap-server kafka:9092  --topic looklook-log   --from-beginning
 # 命令生产
 # ./kafka-console-producer.sh --bootstrap-server kafka:9092 --topic second
+
+#到pb目录
+# protoc *.proto --go_out=../ --go-grpc_out=../
