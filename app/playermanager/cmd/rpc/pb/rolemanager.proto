@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message CreateRoleReq {
+    string id = 1;
+    string name = 2;
+    int64 account_id = 3;
+}
+
+message CreateRoleResp {
+    int64 returnCode = 1;
+}
+
+service rolemanager {
+    rpc createRole(CreateRoleReq) returns (CreateRoleResp);
+    rpc createRoleStream(stream CreateRoleReq) returns (stream CreateRoleResp);
+}
