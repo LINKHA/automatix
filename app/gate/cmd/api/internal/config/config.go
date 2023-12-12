@@ -10,4 +10,5 @@ type GateConfig struct {
 type Config struct {
 	// rest.RestConf
 	GateConfig
+	Id int64
 }
