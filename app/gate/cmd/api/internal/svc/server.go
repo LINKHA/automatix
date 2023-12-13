@@ -1,9 +1,10 @@
-package net
+package svc
 
 import (
 	"fmt"
 	"net"
 	"os"
+	"strconv"
 )
 
 type ServerConfig struct {
@@ -13,6 +14,7 @@ type ServerConfig struct {
 }
 
 type Server struct {
+	SvcCtx   *ServiceContext
 	Name     string
 	IP       string
 	Port     int
@@ -21,8 +23,9 @@ type Server struct {
 	ConnMgr *ConnManager
 }
 
-func NewServer(config *ServerConfig) *Server {
+func NewServer(ctx *ServiceContext, config *ServerConfig) *Server {
 	s := &Server{
+		SvcCtx:   ctx,
 		Name:     config.Name,
 		IP:       config.IP,
 		Port:     config.Port,
@@ -32,6 +35,24 @@ func NewServer(config *ServerConfig) *Server {
 	}
 
 	return s
+}
+
+func (s *Server) GetConnMgr() *ConnManager {
+	return s.ConnMgr
+}
+
+func (s *Server) StartConn(conn Connection) {
+	// HeartBeat check
+	if s.hc != nil {
+		// Clone a heart-beat checker from the server side
+		heartBeatChecker := s.hc.Clone()
+
+		// Bind current connection
+		heartBeatChecker.BindConn(conn)
+	}
+
+	// Start processing business for the current connection
+	conn.Start()
 }
 
 func (s *Server) ListenTcpConn() {
@@ -60,6 +81,10 @@ func (s *Server) ListenTcpConn() {
 				fmt.Println("Error accepting TCP connection:", err)
 				continue
 			}
+			connId := strconv.FormatInt(int64(s.SvcCtx.Snowflake.Generate()), 10)
+			dealConn := newServerConn(s, conn, connId)
+
+			go s.StartConn(dealConn)
 
 		}
 	}()

@@ -13,4 +13,5 @@ type Config struct {
 	// rest.RestConf
 	GateConfig
 	RoleManagerRpcConf zrpc.RpcClientConf
+	Id                 int64
 }

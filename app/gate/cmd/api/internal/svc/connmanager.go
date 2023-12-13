@@ -1,4 +1,4 @@
-package net
+package svc
 
 type ConnManager struct {
 	connections ShardLockMaps
@@ -9,16 +9,13 @@ func newConnManager() *ConnManager {
 		connections: NewShardLockMaps(),
 	}
 }
-func (connMgr *ConnManager) GenConnID() string {
-
-}
 
 func (connMgr *ConnManager) Add(conn Connection) {
 
-	connMgr.connections.Set(conn.GetConnIdStr(), conn)
+	connMgr.connections.Set(conn.GetConnID(), conn)
 }
 
 func (connMgr *ConnManager) Remove(conn Connection) {
 
-	connMgr.connections.Remove(conn.GetConnIdStr())
+	connMgr.connections.Remove(conn.GetConnID())
 }
