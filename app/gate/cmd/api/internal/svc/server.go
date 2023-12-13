@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"os/signal"
 	"strconv"
+	"syscall"
 )
 
 type ServerConfig struct {
@@ -42,16 +44,6 @@ func (s *Server) GetConnMgr() *ConnManager {
 }
 
 func (s *Server) StartConn(conn Connection) {
-	// HeartBeat check
-	if s.hc != nil {
-		// Clone a heart-beat checker from the server side
-		heartBeatChecker := s.hc.Clone()
-
-		// Bind current connection
-		heartBeatChecker.BindConn(conn)
-	}
-
-	// Start processing business for the current connection
 	conn.Start()
 }
 
@@ -93,7 +85,20 @@ func (s *Server) ListenTcpConn() {
 	case <-s.exitChan:
 		err := listener.Close()
 		if err != nil {
-			fmt.Println("listener close err: %v", err)
+			fmt.Printf("listener close err: %v\n", err)
 		}
 	}
+}
+
+func (s *Server) Start() {
+	s.exitChan = make(chan struct{})
+	go s.ListenTcpConn()
+}
+
+func (s *Server) Serve() {
+	s.Start()
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
+	sig := <-c
+	fmt.Printf("[SERVE] server , name %s, Serve Interrupt, signal = %v\n", s.Name, sig)
 }

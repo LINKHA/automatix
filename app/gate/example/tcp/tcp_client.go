@@ -18,15 +18,15 @@ func main() {
 		// 向服务器发送数据
 		conn.Write([]byte(message))
 
-		// 读取服务器的响应
-		buffer := make([]byte, 1024)
-		n, err := conn.Read(buffer)
-		if err != nil {
-			fmt.Println("Error reading from server:", err)
-			return
-		}
+		// // 读取服务器的响应
+		// buffer := make([]byte, 1024)
+		// n, err := conn.Read(buffer)
+		// if err != nil {
+		// 	fmt.Println("Error reading from server:", err)
+		// 	return
+		// }
 
-		receivedData := buffer[:n]
-		fmt.Printf("Received from server: %s\n", receivedData)
+		// receivedData := buffer[:n]
+		// fmt.Printf("Received from server: %s\n", receivedData)
 	}
 }
