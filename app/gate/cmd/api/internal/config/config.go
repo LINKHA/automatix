@@ -1,5 +1,7 @@
 package config
 
+import "github.com/zeromicro/go-zero/zrpc"
+
 type GateConfig struct {
 	TcpHost string `json:",default=0.0.0.0"`
 	TcpPort int
@@ -10,4 +12,5 @@ type GateConfig struct {
 type Config struct {
 	// rest.RestConf
 	GateConfig
+	RoleManagerRpcConf zrpc.RpcClientConf
 }

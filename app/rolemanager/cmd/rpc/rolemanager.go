@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"automatix/app/playermanager/cmd/rpc/internal/config"
-	"automatix/app/playermanager/cmd/rpc/internal/server"
-	"automatix/app/playermanager/cmd/rpc/internal/svc"
-	"automatix/app/playermanager/cmd/rpc/pb"
+	"automatix/app/rolemanager/cmd/rpc/internal/config"
+	"automatix/app/rolemanager/cmd/rpc/internal/server"
+	"automatix/app/rolemanager/cmd/rpc/internal/svc"
+	"automatix/app/rolemanager/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

@@ -4,3 +4,9 @@ TcpPort: 10242
 
 UdpHost: 0.0.0.0
 UdpPort: 10243
+
+#rpc service
+RoleManagerRpcConf:
+  Endpoints:
+    - 127.0.0.1:2006
+  NonBlock: true

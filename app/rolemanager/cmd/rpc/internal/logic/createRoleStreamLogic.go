@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
-	"automatix/app/playermanager/cmd/rpc/internal/svc"
-	"automatix/app/playermanager/cmd/rpc/pb"
+	"automatix/app/rolemanager/cmd/rpc/internal/svc"
+	"automatix/app/rolemanager/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,6 +26,11 @@ func NewCreateRoleStreamLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 func (l *CreateRoleStreamLogic) CreateRoleStream(stream pb.Rolemanager_CreateRoleStreamServer) error {
 	// todo: add your logic here and delete this line
-
+	fmt.Print("1------------------   :   ")
+	fmt.Println(111)
+	fmt.Println(stream)
+	stream.Send(&pb.CreateRoleResp{
+		ReturnCode: 1,
+	})
 	return nil
 }

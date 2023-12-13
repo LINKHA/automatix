@@ -6,9 +6,9 @@ import (
 	"os"
 )
 
-func newTcpServer(host string, port int) {
+func newTcpServer(ctx *ServiceContext) {
 	// TCP Server
-	address := fmt.Sprintf("%s:%d", host, port)
+	address := fmt.Sprintf("%s:%d", ctx.Config.TcpHost, ctx.Config.TcpPort)
 
 	tcpAddr, err := net.ResolveTCPAddr("tcp", address)
 	if err != nil {
@@ -33,15 +33,15 @@ func newTcpServer(host string, port int) {
 				continue
 			}
 
-			go handleTCPConnection(conn)
+			go handleTCPConnection(ctx, conn)
 		}
 	}()
 	select {}
 }
 
-func newUdpServer(host string, port int) {
+func newUdpServer(ctx *ServiceContext) {
 	// UDP Server
-	address := fmt.Sprintf("%s:%d", host, port)
+	address := fmt.Sprintf("%s:%d", ctx.Config.UdpHost, ctx.Config.UdpPort)
 	udpAddr, err := net.ResolveUDPAddr("udp", address)
 	if err != nil {
 		fmt.Println("Error resolving UDP address:", err)
@@ -62,9 +62,8 @@ func newUdpServer(host string, port int) {
 }
 
 func NewGateServer(ctx *ServiceContext) {
-	c := ctx.Config
-	go newTcpServer(c.TcpHost, c.TcpPort)
+	go newTcpServer(ctx)
 
-	newUdpServer(c.UdpHost, c.UdpPort)
+	newUdpServer(ctx)
 
 }

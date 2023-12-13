@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"automatix/app/playermanager/cmd/rpc/internal/svc"
-	"automatix/app/playermanager/cmd/rpc/pb"
+	"automatix/app/rolemanager/cmd/rpc/internal/svc"
+	"automatix/app/rolemanager/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

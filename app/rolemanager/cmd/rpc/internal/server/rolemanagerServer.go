@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"automatix/app/playermanager/cmd/rpc/internal/logic"
-	"automatix/app/playermanager/cmd/rpc/internal/svc"
-	"automatix/app/playermanager/cmd/rpc/pb"
+	"automatix/app/rolemanager/cmd/rpc/internal/logic"
+	"automatix/app/rolemanager/cmd/rpc/internal/svc"
+	"automatix/app/rolemanager/cmd/rpc/pb"
 )
 
 type RolemanagerServer struct {

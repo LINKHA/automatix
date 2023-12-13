@@ -1,29 +1,53 @@
 package svc
 
 import (
+	"context"
 	"fmt"
 	"net"
 )
 
-func handleTCPConnection(conn net.Conn) {
+func handleTCPConnection(ctx *ServiceContext, conn net.Conn) {
 	defer conn.Close()
+	ctx.RolemanagerRpc.CreateRoleStream(context.Background())
 
-	buffer := make([]byte, 1024)
-	for {
-		n, err := conn.Read(buffer)
-		if err != nil {
-			fmt.Println("Error reading:", err)
-			return
-		}
+	// roleStream, err := ctx.RolemanagerRpc.CreateRoleStream(context.Background())
+	// fmt.Print("xx 1------------------   :   ")
+	// fmt.Println(err)
 
-		fmt.Printf("Received TCP message: %s\n", string(buffer[:n]))
+	// roleStream.Send(&pb.CreateRoleReq{
+	// 	Id:        "1",
+	// 	Name:      "2",
+	// 	AccountId: 123,
+	// })
 
-		_, err = conn.Write(buffer[:n])
-		if err != nil {
-			fmt.Println("Error writing:", err)
-			return
-		}
-	}
+	// roleStream.Send(&pb.CreateRoleReq{
+	// 	Id:        "1x",
+	// 	Name:      "2x",
+	// 	AccountId: 123,
+	// })
+
+	// ss, _ := roleStream.Recv()
+	// ss2, _ := roleStream.Recv()
+	// fmt.Print("xx 2------------------   :   ")
+	// fmt.Println(ss)
+	// fmt.Println(ss2)
+
+	// buffer := make([]byte, 1024)
+	// for {
+	// 	n, err := conn.Read(buffer)
+	// 	if err != nil {
+	// 		fmt.Println("Error reading:", err)
+	// 		return
+	// 	}
+
+	// 	fmt.Printf("Received TCP message: %s\n", string(buffer[:n]))
+
+	// 	_, err = conn.Write(buffer[:n])
+	// 	if err != nil {
+	// 		fmt.Println("Error writing:", err)
+	// 		return
+	// 	}
+	// }
 }
 
 func handleUDPConnection(conn *net.UDPConn) {
