@@ -26,8 +26,7 @@ func NewCreateRoleStreamLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 func (l *CreateRoleStreamLogic) CreateRoleStream(stream pb.Rolemanager_CreateRoleStreamServer) error {
 	// todo: add your logic here and delete this line
-	fmt.Print("1------------------   :   ")
-	fmt.Println(111)
+	fmt.Printf("1------------------   :   %d", 111)
 	fmt.Println(stream)
 	stream.Send(&pb.CreateRoleResp{
 		ReturnCode: 1,

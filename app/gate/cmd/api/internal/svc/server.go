@@ -1,6 +1,8 @@
 package svc
 
 import (
+	"automatix/app/rolemanager/cmd/rpc/pb"
+	"context"
 	"fmt"
 	"net"
 	"os"
@@ -36,6 +38,16 @@ func NewServer(ctx *ServiceContext, config *ServerConfig) *Server {
 		ConnMgr: newConnManager(),
 	}
 
+	//增加一个机制/每个server对应于每个服务都有一个client
+	client, _ := ctx.RolemanagerRpc.CreateRoleStream(context.Background())
+	client.Send(&pb.CreateRoleReq{
+		Id:        "1",
+		Name:      "a",
+		AccountId: 1,
+	})
+
+	rec, _ := client.Recv()
+	fmt.Printf("xxx 1------------------   :   %v\n", rec)
 	return s
 }
 
