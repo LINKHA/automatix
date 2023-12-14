@@ -23,18 +23,7 @@ func main() {
 		fmt.Printf("")
 	}
 
-	type ServerConfig struct {
-		Name string
-		IP   string
-		Port int
-	}
-
-	s := svc.NewServer(ctx,
-		&svc.ServerConfig{
-			Name: "gate_server",
-			IP:   "0.0.0.0",
-			Port: 10242,
-		})
+	s := svc.NewServer(ctx)
 
 	// Start Service
 	s.Serve()

@@ -9,12 +9,6 @@ import (
 	"syscall"
 )
 
-type ServerConfig struct {
-	Name string
-	IP   string
-	Port int
-}
-
 type Server struct {
 	SvcCtx   *ServiceContext
 	Name     string
@@ -25,12 +19,13 @@ type Server struct {
 	ConnMgr *ConnManager
 }
 
-func NewServer(ctx *ServiceContext, config *ServerConfig) *Server {
+func NewServer(ctx *ServiceContext) *Server {
+
 	s := &Server{
 		SvcCtx:   ctx,
-		Name:     config.Name,
-		IP:       config.IP,
-		Port:     config.Port,
+		Name:     "",
+		IP:       ctx.Config.TcpHost,
+		Port:     ctx.Config.TcpPort,
 		exitChan: nil,
 
 		ConnMgr: newConnManager(),
