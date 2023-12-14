@@ -124,4 +124,6 @@ func (c *Connection) SendBuffMsg(msgID uint32, data []byte) error {
 	// case c.msgBuffChan <- msg:
 	// 	return nil
 	// }
+
+	return nil
 }

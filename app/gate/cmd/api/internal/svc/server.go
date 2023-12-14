@@ -46,6 +46,10 @@ func NewServer(ctx *ServiceContext) *Server {
 
 	client, _ := ctx.RolemanagerRpc.CreateRoleStream(context.Background())
 
+	var clientStream StreamClientInterface
+	clientStream = client
+	NewGrpcConnection(clientStream, "")
+
 	client.Send(&pb.CreateRoleReq{
 		Id:        "1",
 		Name:      "a",
