@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 
 	"automatix/app/gate/cmd/api/internal/config"
 	"automatix/app/gate/cmd/api/internal/svc"
@@ -18,10 +17,6 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
-
-	if ctx == nil {
-		fmt.Printf("")
-	}
 
 	s := svc.NewServer(ctx)
 

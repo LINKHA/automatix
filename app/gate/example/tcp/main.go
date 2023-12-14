@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net"
+	"time"
 )
 
 func main() {
@@ -18,6 +19,7 @@ func main() {
 		// 向服务器发送数据
 		conn.Write([]byte(message))
 
+		time.Sleep(time.Duration(1) * time.Second)
 		// // 读取服务器的响应
 		// buffer := make([]byte, 1024)
 		// n, err := conn.Read(buffer)

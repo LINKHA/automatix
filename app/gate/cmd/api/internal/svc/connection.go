@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net"
+	"time"
 )
 
 type Connection struct {
@@ -103,4 +104,24 @@ func (c *Connection) Send(data []byte) error {
 	}
 
 	return nil
+}
+
+func (c *Connection) SendBuffMsg(msgID uint32, data []byte) error {
+	if c.msgBuffChan == nil {
+		c.msgBuffChan = make(chan []byte, 10)
+		go c.StartWriter()
+	}
+
+	idleTimeout := time.NewTimer(5 * time.Millisecond)
+	defer idleTimeout.Stop()
+
+	// msg, err := c.packet.Pack(zpack.NewMsgPackage(msgID, data))
+
+	// // send timeout
+	// select {
+	// case <-idleTimeout.C:
+	// 	return errors.New("send buff msg timeout")
+	// case c.msgBuffChan <- msg:
+	// 	return nil
+	// }
 }

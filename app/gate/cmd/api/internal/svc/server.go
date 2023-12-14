@@ -1,6 +1,8 @@
 package svc
 
 import (
+	"automatix/app/rolemanager/cmd/rpc/pb"
+	"context"
 	"fmt"
 	"net"
 	"os"
@@ -31,6 +33,27 @@ func NewServer(ctx *ServiceContext) *Server {
 		ConnMgr: newConnManager(),
 	}
 
+	// //增加一个机制/每个server对应于每个服务都有一个client
+	// method := reflect.ValueOf(ctx.RolemanagerRpc).MethodByName("CreateRoleStream")
+	// // var client
+	// // 检查方法是否存在
+	// if method.IsValid() {
+	// 	// 调用方法
+	// 	method.Call(nil)
+	// } else {
+	// 	fmt.Println("Invalid method name:", methodName)
+	// }
+
+	client, _ := ctx.RolemanagerRpc.CreateRoleStream(context.Background())
+
+	client.Send(&pb.CreateRoleReq{
+		Id:        "1",
+		Name:      "a",
+		AccountId: 1,
+	})
+
+	rec, _ := client.Recv()
+	fmt.Printf("xxx 1------------------   :   %v\n", rec)
 	return s
 }
 
