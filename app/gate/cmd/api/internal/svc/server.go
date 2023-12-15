@@ -32,32 +32,19 @@ func NewServer(ctx *ServiceContext) *Server {
 
 		ConnMgr: newConnManager(),
 	}
-
-	// //增加一个机制/每个server对应于每个服务都有一个client
-	// method := reflect.ValueOf(ctx.RolemanagerRpc).MethodByName("CreateRoleStream")
-	// // var client
-	// // 检查方法是否存在
-	// if method.IsValid() {
-	// 	// 调用方法
-	// 	method.Call(nil)
-	// } else {
-	// 	fmt.Println("Invalid method name:", methodName)
-	// }
-
 	client, _ := ctx.RolemanagerRpc.CreateRoleStream(context.Background())
 
-	var clientStream StreamClientInterface
-	clientStream = client
-	NewGrpcConnection(clientStream, "")
+	grpc_conn := NewGrpcConnection(client, "")
 
-	client.Send(&pb.CreateRoleReq{
+	err1 := grpc_conn.Send(&pb.CreateRoleReq{
 		Id:        "1",
 		Name:      "a",
 		AccountId: 1,
 	})
-
-	rec, _ := client.Recv()
+	fmt.Printf("xxx 0------------------   :   %v\n", err1)
+	rec, err := grpc_conn.Recv(new(pb.CreateRoleResp))
 	fmt.Printf("xxx 1------------------   :   %v\n", rec)
+	fmt.Printf("xxx 2------------------   :   %v\n", err)
 	return s
 }
 

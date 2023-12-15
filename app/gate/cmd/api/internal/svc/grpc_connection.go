@@ -2,14 +2,12 @@ package svc
 
 import (
 	"context"
+	"fmt"
 
 	"google.golang.org/grpc"
-	"google.golang.org/protobuf/proto"
 )
 
 type StreamClientInterface interface {
-	Send(*proto.Message) error
-	Recv() (*proto.Message, error)
 	grpc.ClientStream
 }
 
@@ -35,39 +33,47 @@ func NewGrpcConnection[T StreamClientInterface](conn T, connID string) GrpcConne
 	return c
 }
 
-func (c *GrpcConnection[T]) Send(msg *proto.Message) error {
-	return c.conn.Send(msg)
+func (c *GrpcConnection[T]) Send(m interface{}) error {
+	return c.conn.SendMsg(m)
 }
 
-// func (c *GrpcConnection[T]) StartReader() {
-// 	// buffer := make([]byte, 1024)
+func (c *GrpcConnection[T]) Recv(m interface{}) (interface{}, error) {
+	if err := c.conn.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
 
-// 	// for {
-// 	// 	select {
-// 	// 	case <-c.ctx.Done():
-// 	// 		return
-// 	// 	default:
-// 	// 		c.conn.Recv()
-// 	// 	}
-// 	// }
-// }
+// bug note
+func (c *GrpcConnection[T]) StartReader() {
+	m := make([]byte, 1024)
 
-// func (c *GrpcConnection[T]) StartWriter() {
-// 	// for {
-// 	// 	select {
-// 	// 	case data, ok := <-c.msgBuffChan:
-// 	// 		if ok {
-// 	// 			if err := c.Send(data); err != nil {
-// 	// 				fmt.Printf("Send Buff Data error:, %s Conn Writer exit\n", err)
-// 	// 				break
-// 	// 			}
+	for {
+		select {
+		case <-c.ctx.Done():
+			return
+		default:
+			c.conn.RecvMsg(m)
+		}
+	}
+}
 
-// 	// 		} else {
-// 	// 			fmt.Println("msgBuffChan is Closed")
-// 	// 			break
-// 	// 		}
-// 	// 	case <-c.ctx.Done():
-// 	// 		return
-// 	// 	}
-// 	// }
-// }
+func (c *GrpcConnection[T]) StartWriter() {
+	for {
+		select {
+		case data, ok := <-c.msgBuffChan:
+			if ok {
+				if err := c.Send(data); err != nil {
+					fmt.Printf("Send Buff Data error:, %s Conn Writer exit\n", err)
+					break
+				}
+
+			} else {
+				fmt.Println("msgBuffChan is Closed")
+				break
+			}
+		case <-c.ctx.Done():
+			return
+		}
+	}
+}
