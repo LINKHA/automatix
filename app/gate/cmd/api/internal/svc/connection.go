@@ -2,6 +2,7 @@ package svc
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net"
 	"time"
@@ -71,6 +72,8 @@ func (c *Connection) StartReader() {
 
 			fmt.Printf("Received TCP message: %s\n", string(buffer[:n]))
 
+			// // Test
+			// c.SendToQueue([]byte("x----------------------------------"))
 		}
 	}
 }
@@ -104,6 +107,24 @@ func (c *Connection) Send(data []byte) error {
 	}
 
 	return nil
+}
+
+func (c *Connection) SendToQueue(data []byte) error {
+	if c.msgBuffChan == nil {
+		c.msgBuffChan = make(chan []byte, 10)
+		go c.StartWriter()
+	}
+
+	idleTimeout := time.NewTimer(5 * time.Millisecond)
+	defer idleTimeout.Stop()
+
+	// Send timeout
+	select {
+	case <-idleTimeout.C:
+		return errors.New("send buff msg timeout")
+	case c.msgBuffChan <- data:
+		return nil
+	}
 }
 
 func (c *Connection) SendBuffMsg(msgID uint32, data []byte) error {

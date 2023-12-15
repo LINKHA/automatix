@@ -1,7 +1,6 @@
 package svc
 
 import (
-	"automatix/app/rolemanager/cmd/rpc/pb"
 	"context"
 	"fmt"
 	"net"
@@ -35,16 +34,18 @@ func NewServer(ctx *ServiceContext) *Server {
 	client, _ := ctx.RolemanagerRpc.CreateRoleStream(context.Background())
 
 	grpc_conn := NewGrpcConnection(client, "")
+	fmt.Printf("xxx 0------------------   :   %v\n", 1)
+	go grpc_conn.Start()
 
-	err1 := grpc_conn.Send(&pb.CreateRoleReq{
-		Id:        "1",
-		Name:      "a",
-		AccountId: 1,
-	})
-	fmt.Printf("xxx 0------------------   :   %v\n", err1)
-	rec, err := grpc_conn.Recv(new(pb.CreateRoleResp))
-	fmt.Printf("xxx 1------------------   :   %v\n", rec)
-	fmt.Printf("xxx 2------------------   :   %v\n", err)
+	// err1 := grpc_conn.Send(&pb.CreateRoleReq{
+	// 	Id:        "1",
+	// 	Name:      "a",
+	// 	AccountId: 1,
+	// })
+	// fmt.Printf("xxx 0------------------   :   %v\n", err1)
+	// rec, err := grpc_conn.Recv(new(pb.CreateRoleResp))
+	// fmt.Printf("xxx 1------------------   :   %v\n", rec)
+	// fmt.Printf("xxx 2------------------   :   %v\n", err)
 	return s
 }
 

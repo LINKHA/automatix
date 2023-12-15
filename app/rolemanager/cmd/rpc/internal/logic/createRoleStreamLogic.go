@@ -28,8 +28,28 @@ func (l *CreateRoleStreamLogic) CreateRoleStream(stream pb.Rolemanager_CreateRol
 	// todo: add your logic here and delete this line
 	fmt.Printf("1------------------   :   %d", 111)
 	fmt.Println(stream)
+
 	stream.Send(&pb.CreateRoleResp{
-		ReturnCode: 1,
+		ReturnCode: 2,
 	})
+
+	// for i := 0; i < 5; i++ {
+	// 	fmt.Printf("create role stream\n")
+	// 	stream.Send(&pb.CreateRoleResp{
+	// 		ReturnCode: 1,
+	// 	})
+
+	// 	time.Sleep(time.Duration(1) * time.Second)
+	// 	// // 读取服务器的响应
+	// 	// buffer := make([]byte, 1024)
+	// 	// n, err := conn.Read(buffer)
+	// 	// if err != nil {
+	// 	// 	fmt.Println("Error reading from server:", err)
+	// 	// 	return
+	// 	// }
+
+	// 	// receivedData := buffer[:n]
+	// 	// fmt.Printf("Received from server: %s\n", receivedData)
+	// }
 	return nil
 }
