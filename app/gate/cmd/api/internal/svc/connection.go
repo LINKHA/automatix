@@ -72,8 +72,8 @@ func (c *Connection) StartReader() {
 
 			fmt.Printf("Received TCP message: %s\n", string(buffer[:n]))
 
-			// // Test
-			// c.SendToQueue([]byte("x----------------------------------"))
+			// Test
+			c.SendToQueue([]byte("x----------------------------------"))
 		}
 	}
 }
