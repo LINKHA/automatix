@@ -13,6 +13,7 @@ type JoinRoomStreamLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
+	msgBox chan pb.JoinRoomStreamResp
 }
 
 func NewJoinRoomStreamLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JoinRoomStreamLogic {
@@ -20,13 +21,24 @@ func NewJoinRoomStreamLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Jo
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
+		msgBox: make(chan pb.JoinRoomStreamResp, 1000),
 	}
 }
 
 func (l *JoinRoomStreamLogic) JoinRoomStream(stream pb.Roommanager_JoinRoomStreamServer) error {
-	// todo: add your logic here and delete this line
-	stream.Send(&pb.JoinRoomStreamResp{
-		ReturnCode: 1,
-	})
+
+	select {
+	case data := <-l.msgBox:
+		stream.Send(&data)
+		// stream.Send(&pb.JoinRoomStreamResp{
+		// 	ReturnCode: 1,
+		// })
+	case <-l.ctx.Done():
+		return nil
+	}
 	return nil
+}
+
+func (l *JoinRoomStreamLogic) SendJoinRoomStream(joinRoomStreamResp pb.JoinRoomStreamResp) {
+	l.msgBox <- joinRoomStreamResp
 }
