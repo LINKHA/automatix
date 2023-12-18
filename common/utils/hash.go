@@ -1,4 +1,4 @@
-package svc
+package utils
 
 const (
 	Prime   = 16777619

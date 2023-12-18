@@ -1,4 +1,4 @@
-package svc
+package utils
 
 import (
 	"encoding/json"

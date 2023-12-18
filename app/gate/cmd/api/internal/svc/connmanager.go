@@ -1,12 +1,14 @@
 package svc
 
+import "automatix/common/utils"
+
 type ConnManager struct {
-	connections ShardLockMaps
+	connections utils.ShardLockMaps
 }
 
 func newConnManager() *ConnManager {
 	return &ConnManager{
-		connections: NewShardLockMaps(),
+		connections: utils.NewShardLockMaps(),
 	}
 }
 
