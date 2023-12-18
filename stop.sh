@@ -11,3 +11,6 @@ pkill -f usercenter-rpc
 
 echo "------------------------------servermanager-rpc----------------------------------------"
 pkill -f servermanager-rpc
+
+echo "------------------------------roommanager-rpc----------------------------------------"
+pkill -f roommanager-rpc

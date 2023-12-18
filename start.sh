@@ -16,4 +16,8 @@ echo "------------------------------servermanager-rpc---------------------------
 go build -o data/server/servermanager-rpc  -v app/servermanager/cmd/rpc/servermanager.go
 ./data/server/servermanager-rpc -f app/servermanager/cmd/rpc/etc/servermanager.yaml &
 
+echo "------------------------------roommanager-rpc----------------------------------------"
+go build -o data/server/roommanager-rpc  -v app/roommanager/cmd/rpc/roommanager.go
+./data/server/roommanager-rpc -f app/roommanager/cmd/rpc/etc/roommanager.yaml &
+
 wait

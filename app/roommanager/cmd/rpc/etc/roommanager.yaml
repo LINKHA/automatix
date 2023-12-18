@@ -1,0 +1,26 @@
+Name: roommanager.rpc
+Id: 1
+ListenOn: 0.0.0.0:2007
+Mode: dev
+
+#Monitoring
+Prometheus:
+  Host: 0.0.0.0
+  Port: 4013
+  Path: /metrics
+
+#Link Tracking
+Telemetry:
+  Name: roommanager.rpc
+  Endpoint: http://jaeger:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
+  
+Log:
+  ServiceName: roommanager.rpc
+  Level: error
+Redis:
+  Host: redis:6379
+  Type: node
+  Pass: G62m50oigInC30sf
+  Key: roommanager.rpc
