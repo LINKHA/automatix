@@ -4,7 +4,7 @@ import (
 	"automatix/app/rolemanager/cmd/rpc/pb"
 	"context"
 	"fmt"
-	"time"
+	"io"
 
 	"google.golang.org/grpc"
 )
@@ -80,9 +80,16 @@ func (c *GrpcConnection[T]) StartReader() {
 		case <-c.ctx.Done():
 			return
 		default:
-			time.Sleep(time.Duration(1) * time.Second)
 			err := c.conn.RecvMsg(m)
-			fmt.Printf("Received GRPC err: %s\n", err)
+
+			if err == io.EOF {
+				fmt.Printf("Received GRPC EOF\n")
+			}
+
+			if err != nil {
+				fmt.Printf("Received GRPC err: %s\n", err)
+			}
+
 			fmt.Printf("Received GRPC message: %v\n", m)
 		}
 	}
