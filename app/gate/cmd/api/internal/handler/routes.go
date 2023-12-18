@@ -2,36 +2,21 @@ package handler
 
 import (
 	"automatix/app/gate/cmd/api/internal/svc"
+	"context"
 )
 
 func handle(serverCtx *svc.ServiceContext) {
-	// client, _ := serverCtx.RolemanagerRpc.CreateRoleStream(context.Background())
 
-	// go func() {
-	// 	for {
-	// 		select {
-	// 		case data, ok := <-c.msgBuffChan:
-	// 			client.Send(&pb.CreateRoleReq{
-	// 				Id:        "1",
-	// 				Name:      "a",
-	// 				AccountId: 1,
-	// 			})
-	// 		case <-c.ctx.Done():
-	// 			return
-	// 		}
-
-	// 	}
-	// }()
-
-	// go func() {
-	// 	for {
-
-	// 		rec, _ := client.Recv()
-	// 		fmt.Printf("xxx 1------------------   :   %v\n", rec)
-	// 	}
-	// }()
 }
 
-func RegisterHandlers(serverCtx *svc.ServiceContext) {
-	handle(serverCtx)
+func RegisterHandlers(ctx *svc.ServiceContext) {
+	// //RoleManager rpc
+	// createRole_Client, _ := ctx.RoleManagerRpc.CreateRoleStream(context.Background())
+	// createRole_GrpcConn := svc.NewGrpcConnection(createRole_Client, "")
+	// go createRole_GrpcConn.Start()
+
+	//RoomManager rpc
+	createRoleStream_Client, _ := ctx.RoomManagerRpc.JoinRoomStream(context.Background())
+	createRoleStream_GrpcConn := svc.NewGrpcConnection(createRoleStream_Client, "")
+	go createRoleStream_GrpcConn.Start()
 }

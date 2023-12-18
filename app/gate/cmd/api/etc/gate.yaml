@@ -11,3 +11,7 @@ RoleManagerRpcConf:
   Endpoints:
     - 127.0.0.1:2006
   NonBlock: true
+RoomManagerRpcConf:
+  Endpoints:
+    - 127.0.0.1:2007
+  NonBlock: true

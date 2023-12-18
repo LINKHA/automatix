@@ -25,6 +25,8 @@ func NewJoinRoomStreamLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Jo
 
 func (l *JoinRoomStreamLogic) JoinRoomStream(stream pb.Roommanager_JoinRoomStreamServer) error {
 	// todo: add your logic here and delete this line
-
+	stream.Send(&pb.JoinRoomStreamResp{
+		ReturnCode: 1,
+	})
 	return nil
 }

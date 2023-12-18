@@ -3,6 +3,7 @@ package svc
 import (
 	"automatix/app/gate/cmd/api/internal/config"
 	"automatix/app/rolemanager/cmd/rpc/rolemanager"
+	"automatix/app/roommanager/cmd/rpc/roommanager"
 
 	"github.com/bwmarrin/snowflake"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -10,7 +11,8 @@ import (
 
 type ServiceContext struct {
 	Config         config.Config
-	RolemanagerRpc rolemanager.Rolemanager
+	RoleManagerRpc rolemanager.Rolemanager
+	RoomManagerRpc roommanager.Roommanager
 	Snowflake      *snowflake.Node
 }
 
@@ -18,7 +20,8 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	snowflake, _ := snowflake.NewNode(c.Id)
 	return &ServiceContext{
 		Config:         c,
-		RolemanagerRpc: rolemanager.NewRolemanager(zrpc.MustNewClient(c.RoleManagerRpcConf)),
+		RoleManagerRpc: rolemanager.NewRolemanager(zrpc.MustNewClient(c.RoleManagerRpcConf)),
+		RoomManagerRpc: roommanager.NewRoommanager(zrpc.MustNewClient(c.RoomManagerRpcConf)),
 		Snowflake:      snowflake,
 	}
 }

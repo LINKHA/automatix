@@ -5,8 +5,8 @@ echo "------------------------------gate-api------------------------------------
 # ./data/server/gate-api -f app/gate/cmd/api/etc/gate.yaml &
 
 echo "------------------------------rolemanager-rpc----------------------------------------"
-# go build -o data/server/rolemanager-rpc  -v app/rolemanager/cmd/rpc/rolemanager.go
-# ./data/server/rolemanager-rpc -f app/rolemanager/cmd/rpc/etc/rolemanager.yaml &
+go build -o data/server/rolemanager-rpc  -v app/rolemanager/cmd/rpc/rolemanager.go
+./data/server/rolemanager-rpc -f app/rolemanager/cmd/rpc/etc/rolemanager.yaml &
 
 echo "------------------------------usercenter-rpc----------------------------------------"
 go build -o data/server/usercenter-rpc  -v app/usercenter/cmd/rpc/usercenter.go
@@ -17,7 +17,7 @@ go build -o data/server/servermanager-rpc  -v app/servermanager/cmd/rpc/serverma
 ./data/server/servermanager-rpc -f app/servermanager/cmd/rpc/etc/servermanager.yaml &
 
 echo "------------------------------roommanager-rpc----------------------------------------"
-go build -o data/server/roommanager-rpc  -v app/roommanager/cmd/rpc/roommanager.go
-./data/server/roommanager-rpc -f app/roommanager/cmd/rpc/etc/roommanager.yaml &
+# go build -o data/server/roommanager-rpc  -v app/roommanager/cmd/rpc/roommanager.go
+# ./data/server/roommanager-rpc -f app/roommanager/cmd/rpc/etc/roommanager.yaml &
 
 wait

@@ -4,6 +4,7 @@ import (
 	"flag"
 
 	"automatix/app/gate/cmd/api/internal/config"
+	"automatix/app/gate/cmd/api/internal/handler"
 	"automatix/app/gate/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
@@ -19,7 +20,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := svc.NewServer(ctx)
-
+	handler.RegisterHandlers(ctx)
 	// Start Service
 	s.Serve()
 }
