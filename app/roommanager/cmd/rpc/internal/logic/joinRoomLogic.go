@@ -25,6 +25,10 @@ func NewJoinRoomLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JoinRoom
 
 func (l *JoinRoomLogic) JoinRoom(in *pb.JoinRoomReq) (*pb.JoinRoomResp, error) {
 	// todo: add your logic here and delete this line
-
+	value, _ := l.svcCtx.StreamManager.Get("JoinRoomStream")
+	joinRoomStreamLogic := value.(JoinRoomStreamLogic)
+	joinRoomStreamLogic.SendJoinRoomStream(&pb.JoinRoomStreamResp{
+		ReturnCode: 1,
+	})
 	return &pb.JoinRoomResp{}, nil
 }

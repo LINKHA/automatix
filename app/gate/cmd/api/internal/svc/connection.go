@@ -18,10 +18,10 @@ type Connection struct {
 	msgBuffChan chan []byte
 }
 
-func newServerConn(server *Server, conn net.Conn, connID string) Connection {
+func newServerConn(server *Server, conn net.Conn, connID string) *Connection {
 
 	// Initialize Conn properties
-	c := Connection{
+	c := &Connection{
 		conn:   conn,
 		connID: connID,
 	}

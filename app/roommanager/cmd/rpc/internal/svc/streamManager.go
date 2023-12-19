@@ -6,12 +6,16 @@ type StreamManager struct {
 	streams utils.ShardLockMaps
 }
 
-func newStreamManager() *StreamManager {
+func NewStreamManager() *StreamManager {
 	return &StreamManager{
 		streams: utils.NewShardLockMaps(),
 	}
 }
 
 func (s *StreamManager) Add() {
+	s.streams.Set("", "")
+}
 
+func (s *StreamManager) Remove() {
+	s.streams.Remove("")
 }

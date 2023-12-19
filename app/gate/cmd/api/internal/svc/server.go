@@ -26,8 +26,7 @@ func NewServer(ctx *ServiceContext) *Server {
 		IP:       ctx.Config.TcpHost,
 		Port:     ctx.Config.TcpPort,
 		exitChan: nil,
-
-		ConnMgr: newConnManager(),
+		ConnMgr:  newConnManager(),
 	}
 	return s
 }
@@ -36,7 +35,7 @@ func (s *Server) GetConnMgr() *ConnManager {
 	return s.ConnMgr
 }
 
-func (s *Server) StartConn(conn Connection) {
+func (s *Server) StartConn(conn *Connection) {
 	conn.Start()
 }
 

@@ -1,14 +1,20 @@
 package svc
 
-import "automatix/app/roommanager/cmd/rpc/internal/config"
+import (
+	"automatix/app/roommanager/cmd/rpc/internal/config"
+	"automatix/common/utils"
+)
 
 type ServiceContext struct {
-	Config    config.Config
-	StreamManager newStreamManager()
+	Config        config.Config
+	StreamManager *utils.ShardLockMaps
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+	streamManager := utils.NewShardLockMaps()
+
 	return &ServiceContext{
-		Config: c,
+		Config:        c,
+		StreamManager: &streamManager,
 	}
 }

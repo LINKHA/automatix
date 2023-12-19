@@ -13,32 +13,33 @@ type JoinRoomStreamLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
-	msgBox chan pb.JoinRoomStreamResp
+	msgBox chan *pb.JoinRoomStreamResp
 }
 
 func NewJoinRoomStreamLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JoinRoomStreamLogic {
-	return &JoinRoomStreamLogic{
+	joinRoomStreamLogic := &JoinRoomStreamLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
-		msgBox: make(chan pb.JoinRoomStreamResp, 1000),
+		msgBox: make(chan *pb.JoinRoomStreamResp, 1000),
 	}
+
+	svcCtx.StreamManager.Set("JoinRoomStream", joinRoomStreamLogic)
+
+	return joinRoomStreamLogic
 }
 
 func (l *JoinRoomStreamLogic) JoinRoomStream(stream pb.Roommanager_JoinRoomStreamServer) error {
-
-	select {
-	case data := <-l.msgBox:
-		stream.Send(&data)
-		// stream.Send(&pb.JoinRoomStreamResp{
-		// 	ReturnCode: 1,
-		// })
-	case <-l.ctx.Done():
-		return nil
+	for {
+		select {
+		case data := <-l.msgBox:
+			stream.Send(data)
+		case <-l.ctx.Done():
+			return nil
+		}
 	}
-	return nil
 }
 
-func (l *JoinRoomStreamLogic) SendJoinRoomStream(joinRoomStreamResp pb.JoinRoomStreamResp) {
+func (l *JoinRoomStreamLogic) SendJoinRoomStream(joinRoomStreamResp *pb.JoinRoomStreamResp) {
 	l.msgBox <- joinRoomStreamResp
 }
