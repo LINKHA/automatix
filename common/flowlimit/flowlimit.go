@@ -2,6 +2,7 @@ package flowlimit
 
 import (
 	"fmt"
+	"math"
 	"time"
 
 	"github.com/google/uuid"
@@ -15,7 +16,7 @@ type SlidingWindowConf struct {
 
 const (
 	FLOWLIMIT_MIN_TIME = 0
-	FLOWLIMIT_MAX_TIME = 9999999999999
+	FLOWLIMIT_MAX_TIME = math.MaxInt64
 )
 
 /*
