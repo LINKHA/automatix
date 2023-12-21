@@ -123,7 +123,7 @@ func (g *Config) Reload() {
 		// The configuration file may not exist,
 		// in which case the default parameters should be used to initialize the logging module configuration.
 		// (配置文件不存在也需要用默认参数初始化日志模块配置)
-		g.InitLogConfig()
+		// g.InitLogConfig()
 
 		zlog.Ins().ErrorF("Config File %s is not exist!! \n You can set configFile by setting the environment variable %s, like export %s = xxx/xxx/zinx.conf ", confFilePath, EnvConfigFilePathKey, EnvConfigFilePathKey)
 		return
@@ -139,7 +139,7 @@ func (g *Config) Reload() {
 		panic(err)
 	}
 
-	g.InitLogConfig()
+	// g.InitLogConfig()
 }
 
 // Show Zinx Config Info

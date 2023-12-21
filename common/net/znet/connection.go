@@ -264,6 +264,7 @@ func (c *Connection) StartReader() {
 				}
 			} else {
 				msg := zpack.NewMessage(uint32(n), buffer[0:n])
+
 				// Get the current client's Request data
 				// (得到当前客户端请求的Request数据)
 				req := NewRequest(c, msg)
