@@ -3,6 +3,7 @@ package main
 import (
 	"automatix/app/gate/cmd/api/internal/config"
 	"automatix/app/gate/cmd/api/internal/handler"
+	"automatix/app/gate/cmd/api/internal/logic"
 	"automatix/app/gate/cmd/api/internal/svc"
 	"flag"
 	"fmt"
@@ -19,7 +20,8 @@ var configFile = flag.String("f", "etc/gate.yaml", "the config file")
 
 func OnConnectionAdd(conn ziface.IConnection) {
 	fmt.Println("Connection is start")
-
+	clientConn := logic.NewClientConn(conn)
+	svc.ServiceContextObj.ClientConnManager.AddClientConn(clientConn)
 }
 
 func OnConnectionLost(conn ziface.IConnection) {
