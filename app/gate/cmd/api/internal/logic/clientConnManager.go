@@ -28,3 +28,10 @@ func (ccm *ClientConnManager) RemoveClientConnByPID(pID int32) {
 	delete(ccm.ClientConns, pID)
 	ccm.pLock.Unlock()
 }
+
+func (ccm *ClientConnManager) GetPlayerByPID(pID int32) *ClientConn {
+	ccm.pLock.RLock()
+	defer ccm.pLock.RUnlock()
+
+	return ccm.ClientConns[pID]
+}

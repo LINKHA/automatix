@@ -7,10 +7,6 @@ import (
 	"fmt"
 )
 
-func handle(serverCtx *svc.ServiceContext) {
-
-}
-
 func RegisterHandlers(ctx *svc.ServiceContext) {
 	// //RoleManager rpc
 	// createRole_Client, _ := ctx.RoleManagerRpc.CreateRoleStream(context.Background())
@@ -25,4 +21,5 @@ func RegisterHandlers(ctx *svc.ServiceContext) {
 	} else {
 		fmt.Println("rpc register err: ", err)
 	}
+
 }

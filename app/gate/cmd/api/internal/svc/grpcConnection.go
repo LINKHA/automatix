@@ -8,6 +8,16 @@ import (
 	"google.golang.org/grpc"
 )
 
+type IGrpcConnection interface {
+	GetConnID() string
+	Start()
+	Stop()
+	Send(interface{}) error
+	SendToQueue(interface{}) error
+	StartReader()
+	StartWriter()
+}
+
 type StreamClientInterface interface {
 	grpc.ClientStream
 }
@@ -29,7 +39,6 @@ func NewGrpcConnection[T1 StreamClientInterface, T2 any, T3 any](ctx *ServiceCon
 	c := GrpcConnection[T1, T2, T3]{
 		conn:        conn,
 		connID:      connID,
-		msgReqChan:  make(chan T2, 1000),
 		msgRespChan: make(chan T3, 1000),
 	}
 
@@ -50,7 +59,6 @@ func (c *GrpcConnection[T1, T2, T3]) Start() {
 	c.ctx, c.cancel = context.WithCancel(context.Background())
 
 	go c.StartReader()
-	go c.StartWriter()
 
 	select {
 	case <-c.ctx.Done():
@@ -62,18 +70,24 @@ func (c *GrpcConnection[T1, T2, T3]) Stop() {
 	c.cancel()
 }
 
-func (c *GrpcConnection[T1, T2, T3]) Send(m T2) error {
+func (c *GrpcConnection[T1, T2, T3]) Send(_m interface{}) error {
+	m := _m.(T2)
+
 	return c.conn.SendMsg(m)
 }
 
-func (c *GrpcConnection[T1, T2, T3]) Recv(m T3) (interface{}, error) {
-	if err := c.conn.RecvMsg(m); err != nil {
-		return nil, err
+func (c *GrpcConnection[T1, T2, T3]) SendToQueue(_m interface{}) error {
+	m := _m.(T2)
+
+	if c.msgReqChan == nil {
+		c.msgReqChan = make(chan T2, 1000)
+		go c.StartWriter()
 	}
-	return m, nil
+	c.msgReqChan <- m
+
+	return nil
 }
 
-// bug note
 func (c *GrpcConnection[T1, T2, T3]) StartReader() {
 	m := new(T3)
 	for {
@@ -81,7 +95,6 @@ func (c *GrpcConnection[T1, T2, T3]) StartReader() {
 		case <-c.ctx.Done():
 			return
 		default:
-			//NOTE: 这里如果rpc服务没起来会报错
 			err := c.conn.RecvMsg(m)
 
 			if err == io.EOF {
@@ -102,7 +115,7 @@ func (c *GrpcConnection[T1, T2, T3]) StartWriter() {
 		select {
 		case data, ok := <-c.msgReqChan:
 			if ok {
-				if err := c.Send(data); err != nil {
+				if err := c.conn.SendMsg(data); err != nil {
 					fmt.Printf("Send Buff Data error:, %s Conn Writer exit\n", err)
 					break
 				}
