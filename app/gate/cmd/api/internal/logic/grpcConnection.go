@@ -1,4 +1,4 @@
-package svc
+package logic
 
 import (
 	"context"
@@ -33,7 +33,7 @@ type GrpcConnection[T1 StreamClientInterface, T2 any, T3 any] struct {
 	msgRespChan chan T3
 }
 
-func NewGrpcConnection[T1 StreamClientInterface, T2 any, T3 any](ctx *ServiceContext, conn T1, connID string) GrpcConnection[T1, T2, T3] {
+func NewGrpcConnection[T1 StreamClientInterface, T2 any, T3 any](conn T1, connID string) GrpcConnection[T1, T2, T3] {
 
 	// Initialize Conn properties
 	c := GrpcConnection[T1, T2, T3]{
@@ -41,8 +41,6 @@ func NewGrpcConnection[T1 StreamClientInterface, T2 any, T3 any](ctx *ServiceCon
 		connID:      connID,
 		msgRespChan: make(chan T3, 1000),
 	}
-
-	ctx.StreamManager.Set(c.GetConnID(), c)
 	return c
 }
 

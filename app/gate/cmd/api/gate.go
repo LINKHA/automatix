@@ -20,7 +20,7 @@ var configFile = flag.String("f", "etc/gate.yaml", "the config file")
 
 func OnConnectionAdd(conn ziface.IConnection) {
 	clientConn := logic.NewClientConn(conn)
-	svc.ServiceContextObj.ClientConnManager.AddClientConn(clientConn)
+	svc.ServiceContextObj.ClientConnManager.AddConn(clientConn)
 
 	conn.SetProperty("pID", clientConn.PID)
 	fmt.Println("Connection is start")
@@ -32,7 +32,7 @@ func OnConnectionLost(conn ziface.IConnection) {
 
 	if pID != nil {
 		connId = pID.(int32)
-		svc.ServiceContextObj.ClientConnManager.RemoveClientConnByPID(connId)
+		svc.ServiceContextObj.ClientConnManager.RemoveConnByPID(connId)
 	}
 	fmt.Println("Connection is Lost. connId: ", connId)
 }
