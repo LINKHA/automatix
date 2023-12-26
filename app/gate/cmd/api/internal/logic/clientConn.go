@@ -1,7 +1,7 @@
 package logic
 
 import (
-	"automatix/common/net/ziface"
+	"automatix/app/gate/cmd/api/internal/net/ziface"
 	"sync"
 )
 

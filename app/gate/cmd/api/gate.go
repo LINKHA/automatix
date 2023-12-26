@@ -4,14 +4,13 @@ import (
 	"automatix/app/gate/cmd/api/internal/config"
 	"automatix/app/gate/cmd/api/internal/handler"
 	"automatix/app/gate/cmd/api/internal/logic"
-	"automatix/app/gate/cmd/api/internal/svc"
 	"flag"
 	"fmt"
 
-	"automatix/common/net/zdecoder"
-	"automatix/common/net/ziface"
-	"automatix/common/net/znet"
-	"automatix/common/net/zpack"
+	"automatix/app/gate/cmd/api/internal/net/zdecoder"
+	"automatix/app/gate/cmd/api/internal/net/ziface"
+	"automatix/app/gate/cmd/api/internal/net/znet"
+	"automatix/app/gate/cmd/api/internal/net/zpack"
 
 	"github.com/zeromicro/go-zero/core/conf"
 )
@@ -20,7 +19,7 @@ var configFile = flag.String("f", "etc/gate.yaml", "the config file")
 
 func OnConnectionAdd(conn ziface.IConnection) {
 	clientConn := logic.NewClientConn(conn)
-	svc.ServiceContextObj.ClientConnManager.AddConn(clientConn)
+	handler.ServiceContextObj.MsgHandler.ClientConnManager.AddConn(clientConn)
 
 	conn.SetProperty("pID", clientConn.PID)
 	fmt.Println("Connection is start")
@@ -32,7 +31,7 @@ func OnConnectionLost(conn ziface.IConnection) {
 
 	if pID != nil {
 		connId = pID.(int32)
-		svc.ServiceContextObj.ClientConnManager.RemoveConnByPID(connId)
+		handler.ServiceContextObj.MsgHandler.ClientConnManager.RemoveConnByPID(connId)
 	}
 	fmt.Println("Connection is Lost. connId: ", connId)
 }
@@ -42,7 +41,7 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-	ctx := svc.NewServiceContext(c)
+	ctx := handler.NewServiceContext(c)
 
 	handler.RegisterHandlers(ctx)
 

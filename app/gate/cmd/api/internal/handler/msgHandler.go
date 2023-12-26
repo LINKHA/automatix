@@ -2,16 +2,15 @@ package handler
 
 import (
 	"automatix/app/gate/cmd/api/internal/logic"
-	"automatix/common/net/zconf"
-	"automatix/common/net/ziface"
+	"fmt"
 )
 
 type MsgHandler struct {
 	GrpcConnManager   *logic.GrpcConnManager
 	ClientConnManager *logic.ClientConnManager
 
-	grpcTaskQueue   []chan GrpcMessage
-	clientTaskQueue []chan ClientMessage
+	grpcTaskQueue   chan GrpcMessage
+	clientTaskQueue chan ClientMessage
 }
 
 func NewMsgHandler() *MsgHandler {
@@ -34,30 +33,29 @@ func (s *MsgHandler) HandleClient(msg ClientMessage) {
 	s.clientTaskQueue <- msg
 }
 
-func (s *MsgHandler) StartOneWorker(workerID int, taskQueue chan ziface.IRequest) {
-	// Continuously wait for messages in the queue
-	// (不断地等待队列中的消息)
-	for {
-		select {
-		// If there is a message, take out the Request from the queue and execute the bound business method
-		// (有消息则取出队列的Request，并执行绑定的业务方法)
-		case request := <-taskQueue:
+func (s *MsgHandler) doHandleGrpc(msg GrpcMessage) {
+	clientId := 1
+	clientMsg := s.ClientConnManager.Conns[int32(clientId)]
 
-			switch req := request.(type) {
+	fmt.Println("client: ", clientId, " clientMsg: ", clientMsg)
+}
 
-			case ziface.IFuncRequest:
-				// Internal function call request (内部函数调用request)
+func (s *MsgHandler) doHandleClient(msg ClientMessage) {
+	grpcId := 1
+	grpcMsg := s.GrpcConnManager.Conns[int32(grpcId)]
 
-				mh.doFuncHandler(req, workerID)
+	fmt.Println("grpcId: ", grpcId, " grpcMsg: ", grpcMsg)
+}
 
-			case ziface.IRequest: // Client message request
-
-				if !zconf.GlobalObject.RouterSlicesMode {
-					mh.doMsgHandler(req, workerID)
-				} else if zconf.GlobalObject.RouterSlicesMode {
-					mh.doMsgHandlerSlices(req, workerID)
-				}
+func (s *MsgHandler) StartOneWorker() {
+	go func() {
+		for {
+			select {
+			case grpcTaskMsg := <-s.grpcTaskQueue:
+				s.doHandleGrpc(grpcTaskMsg)
+			case clientTaskMsg := <-s.clientTaskQueue:
+				s.doHandleClient(clientTaskMsg)
 			}
 		}
-	}
+	}()
 }
