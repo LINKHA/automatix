@@ -1,19 +1,19 @@
 package logic
 
 import (
-	"automatix/app/gate/cmd/api/internal/net/ziface"
+	"automatix/app/gate/cmd/api/internal/net/iface"
 	"sync"
 )
 
 type ClientConn struct {
 	PID  int32
-	Conn ziface.IConnection
+	Conn iface.IConnection
 }
 
 var PIDGen int32 = 1
 var IDLock sync.Mutex
 
-func NewClientConn(conn ziface.IConnection) *ClientConn {
+func NewClientConn(conn iface.IConnection) *ClientConn {
 	IDLock.Lock()
 	ID := PIDGen
 	PIDGen++

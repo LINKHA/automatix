@@ -7,17 +7,17 @@ import (
 	"flag"
 	"fmt"
 
-	"automatix/app/gate/cmd/api/internal/net/zdecoder"
-	"automatix/app/gate/cmd/api/internal/net/ziface"
-	"automatix/app/gate/cmd/api/internal/net/znet"
-	"automatix/app/gate/cmd/api/internal/net/zpack"
+	"automatix/app/gate/cmd/api/internal/net/decoder"
+	"automatix/app/gate/cmd/api/internal/net/iface"
+	"automatix/app/gate/cmd/api/internal/net/net"
+	"automatix/app/gate/cmd/api/internal/net/pack"
 
 	"github.com/zeromicro/go-zero/core/conf"
 )
 
 var configFile = flag.String("f", "etc/gate.yaml", "the config file")
 
-func OnConnectionAdd(conn ziface.IConnection) {
+func OnConnectionAdd(conn iface.IConnection) {
 	clientConn := logic.NewClientConn(conn)
 	handler.ServiceContextObj.MsgHandler.ClientConnManager.AddConn(clientConn)
 
@@ -25,7 +25,7 @@ func OnConnectionAdd(conn ziface.IConnection) {
 	fmt.Println("Connection is start")
 }
 
-func OnConnectionLost(conn ziface.IConnection) {
+func OnConnectionLost(conn iface.IConnection) {
 	pID, _ := conn.GetProperty("pId")
 	var connId int32
 
@@ -45,14 +45,14 @@ func main() {
 
 	handler.RegisterHandlers(ctx)
 
-	s := znet.NewServer()
+	s := net.NewServer()
 	s.SetOnConnStart(OnConnectionAdd)
 	s.SetOnConnStop(OnConnectionLost)
 
 	// Add LTV data format Decoder
-	s.SetDecoder(zdecoder.NewLTV_Little_Decoder())
+	s.SetDecoder(decoder.NewLTV_Little_Decoder())
 	// Add LTV data format Pack packet Encoder
-	s.SetPacket(zpack.NewDataPackLtv())
+	s.SetPacket(pack.NewDataPackLtv())
 
 	s.Serve()
 }
