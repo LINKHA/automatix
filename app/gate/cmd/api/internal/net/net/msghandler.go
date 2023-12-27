@@ -21,6 +21,13 @@ const (
 // MsgHandle is the module for handling message processing callbacks
 // (对消息的处理回调模块)
 type MsgHandle struct {
+
+	// Current server's connection manager (当前Server的链接管理器)
+	connMgr iface.IConnManager
+
+	// Internal service grpc connection manager (内部服务grpc链接管理器)
+	grpcConnMgr iface.IGrpcConnManager
+
 	// A map property that stores the processing methods for each MsgID
 	// (存放每个MsgID 所对应的处理方法的map属性)
 	Apis map[uint32]iface.IRouter
@@ -159,6 +166,18 @@ func (mh *MsgHandle) Intercept(chain iface.IChain) iface.IcResp {
 	return chain.Proceed(chain.Request())
 }
 
+func (mh *MsgHandle) SetConnManager(connMgr iface.IConnManager) {
+	if mh.connMgr == nil {
+		mh.connMgr = connMgr
+	}
+}
+
+func (mh *MsgHandle) SetGrpcConnManager(grpcConnMgr iface.IGrpcConnManager) {
+	if mh.grpcConnMgr == nil {
+		mh.grpcConnMgr = grpcConnMgr
+	}
+}
+
 func (mh *MsgHandle) AddInterceptor(interceptor iface.IInterceptor) {
 	if mh.builder != nil {
 		mh.builder.AddInterceptor(interceptor)
@@ -209,6 +228,23 @@ func (mh *MsgHandle) doMsgHandler(request iface.IRequest, workerID int) {
 
 	// Execute the corresponding processing method
 	request.Call()
+}
+
+func (mh *MsgHandle) doClientMsgHandler(request iface.IRequest, workerID int) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Ins().ErrorF("workerID: %d doMsgHandler panic: %v", workerID, err)
+		}
+	}()
+
+	grpcId := request.GetMsgID()
+	grpcConn, err := mh.grpcConnMgr.Get(uint64(grpcId))
+	if err != nil {
+		msgErr := fmt.Sprintf("client msg err, clientId = %+v\n", grpcId)
+		panic(msgErr)
+	}
+
+	grpcConn.SendToQueue(request.GetData())
 }
 
 func (mh *MsgHandle) Execute(request iface.IRequest) {
@@ -287,11 +323,12 @@ func (mh *MsgHandle) StartOneWorker(workerID int, taskQueue chan iface.IRequest)
 
 			case iface.IRequest: // Client message request
 
-				if !conf.GlobalObject.RouterSlicesMode {
-					mh.doMsgHandler(req, workerID)
-				} else if conf.GlobalObject.RouterSlicesMode {
-					mh.doMsgHandlerSlices(req, workerID)
-				}
+				// if !conf.GlobalObject.RouterSlicesMode {
+				// 	mh.doMsgHandler(req, workerID)
+				// } else if conf.GlobalObject.RouterSlicesMode {
+				// 	mh.doMsgHandlerSlices(req, workerID)
+				// }
+				mh.doClientMsgHandler(req, workerID)
 			}
 		}
 	}

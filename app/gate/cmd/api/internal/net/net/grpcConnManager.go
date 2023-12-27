@@ -2,37 +2,44 @@ package net
 
 import (
 	"automatix/app/gate/cmd/api/internal/net/iface"
-	"sync"
+	"automatix/common/utils"
+	"errors"
+	"strconv"
 )
 
 type GrpcConnManager struct {
-	Conns map[string]iface.IGrpcConnection
-	pLock sync.RWMutex
+	connections utils.ShardLockMaps
 }
 
 var GrpcConnMgrObj *GrpcConnManager
 
 func newGrpcConnManager() *GrpcConnManager {
 	return &GrpcConnManager{
-		Conns: make(map[string]iface.IGrpcConnection),
+		connections: utils.NewShardLockMaps(),
 	}
 }
 
-func (s *GrpcConnManager) Add(clientConn iface.IGrpcConnection) {
-	s.pLock.Lock()
-	s.Conns[clientConn.GetConnIdStr()] = clientConn
-	s.pLock.Unlock()
+func (s *GrpcConnManager) Add(conn iface.IGrpcConnection) {
+	s.connections.Set(conn.GetConnIdStr(), conn)
 }
 
-func (s *GrpcConnManager) Remove(pID string) {
-	s.pLock.Lock()
-	delete(s.Conns, pID)
-	s.pLock.Unlock()
+func (s *GrpcConnManager) Remove(conn iface.IGrpcConnection) {
+	s.connections.Remove(conn.GetConnIdStr())
 }
 
-func (s *GrpcConnManager) Get(pID string) iface.IGrpcConnection {
-	s.pLock.RLock()
-	defer s.pLock.RUnlock()
+func (s *GrpcConnManager) Get(connID uint64) (iface.IGrpcConnection, error) {
+	strConnId := strconv.FormatUint(connID, 10)
+	if conn, ok := s.connections.Get(strConnId); ok {
+		return conn.(iface.IGrpcConnection), nil
+	}
 
-	return s.Conns[pID]
+	return nil, errors.New("connection not found")
+}
+
+func (s *GrpcConnManager) Get2(strConnId string) (iface.IGrpcConnection, error) {
+	if conn, ok := s.connections.Get(strConnId); ok {
+		return conn.(iface.IGrpcConnection), nil
+	}
+
+	return nil, errors.New("connection not found")
 }

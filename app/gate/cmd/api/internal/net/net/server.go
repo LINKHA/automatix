@@ -91,6 +91,13 @@ type Server struct {
 // newServerWithConfig creates a server handle based on config
 // (根据config创建一个服务器句柄)
 func newServerWithConfig(config *conf.Config, ipVersion string, opts ...Option) iface.IServer {
+	connMgr := newConnManager()
+	grpcConnMgr := newGrpcConnManager()
+
+	msgHandler := newMsgHandle()
+	msgHandler.SetConnManager(connMgr)
+	msgHandler.SetGrpcConnManager(grpcConnMgr)
+
 	s := &Server{
 		Name:             config.Name,
 		IPVersion:        ipVersion,
@@ -98,10 +105,10 @@ func newServerWithConfig(config *conf.Config, ipVersion string, opts ...Option) 
 		Port:             config.TCPPort,
 		WsPort:           config.WsPort,
 		KcpPort:          config.KcpPort,
-		msgHandler:       newMsgHandle(),
+		msgHandler:       msgHandler,
 		RouterSlicesMode: config.RouterSlicesMode,
-		ConnMgr:          newConnManager(),
-		GrpcConnMgr:      newGrpcConnManager(),
+		ConnMgr:          connMgr,
+		GrpcConnMgr:      grpcConnMgr,
 		exitChan:         nil,
 		// Default to using Zinx's TLV data pack format
 		// (默认使用zinx的TLV封包方式)
