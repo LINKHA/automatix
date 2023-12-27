@@ -7,7 +7,9 @@ import (
 
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/conf"
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
+	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/pb"
 	"github.com/LINKHA/automatix/common/log"
+	"google.golang.org/protobuf/proto"
 )
 
 const (
@@ -243,6 +245,10 @@ func (mh *MsgHandle) doClientMsgHandler(request iface.IRequest, workerID int) {
 		msgErr := fmt.Sprintf("client msg err, clientId = %+v\n", grpcId)
 		panic(msgErr)
 	}
+	pbMsg := &pb.CreateRoleReq{}
+	rawData := request.GetData()
+	proto.Unmarshal(rawData, pbMsg)
+	fmt.Println(pbMsg)
 
 	grpcConn.SendToQueue(request.GetData())
 }

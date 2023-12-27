@@ -9,15 +9,24 @@ import (
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
 	mNet "github.com/LINKHA/automatix/app/gate/cmd/api/src/net/net"
 	"github.com/LINKHA/automatix/app/gate/example/tcp/c_router"
+	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/pb"
+	"google.golang.org/protobuf/proto"
 
 	"github.com/LINKHA/automatix/common/log"
 )
 
 // Custom business logic of the client (客户端自定义业务)
 func business(conn iface.IConnection) {
+	data := &pb.CreateRoleReq{
+		Id:        "1",
+		Name:      "name2",
+		AccountId: 123,
+	}
+	msg, _ := proto.Marshal(data)
 
 	for {
-		err := conn.SendMsg(1, []byte("Ping...[FromClient]"))
+		// err := conn.SendMsg(1, []byte("Ping...[FromClient]"))
+		err := conn.SendMsg(1, msg)
 		if err != nil {
 			fmt.Println(err)
 			log.Error(err)
