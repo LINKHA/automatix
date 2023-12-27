@@ -4,27 +4,20 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"strconv"
 
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
 	"google.golang.org/grpc"
 )
-
-type IGrpcConnection interface {
-	GetConnID() string
-	Start()
-	Stop()
-	Send(interface{}) error
-	SendToQueue(interface{}) error
-	StartReader()
-	StartWriter()
-}
 
 type StreamClientInterface interface {
 	grpc.ClientStream
 }
 
 type GrpcConnection[T1 StreamClientInterface, T2 any, T3 any] struct {
-	conn   T1
-	connID string
+	conn      T1
+	connId    uint64
+	connIdStr string
 
 	ctx    context.Context
 	cancel context.CancelFunc
@@ -33,19 +26,24 @@ type GrpcConnection[T1 StreamClientInterface, T2 any, T3 any] struct {
 	msgRespChan chan T3
 }
 
-func NewGrpcConnection[T1 StreamClientInterface, T2 any, T3 any](conn T1, connID string) GrpcConnection[T1, T2, T3] {
+func NewGrpcConnection[T1 StreamClientInterface, T2 any, T3 any](conn T1, connId uint64) iface.IGrpcConnection {
 
 	// Initialize Conn properties
-	c := GrpcConnection[T1, T2, T3]{
+	c := &GrpcConnection[T1, T2, T3]{
 		conn:        conn,
-		connID:      connID,
+		connId:      connId,
+		connIdStr:   strconv.FormatUint(connId, 10),
 		msgRespChan: make(chan T3, 1000),
 	}
 	return c
 }
 
-func (c *GrpcConnection[T1, T2, T3]) GetConnID() string {
-	return c.connID
+func (c *GrpcConnection[T1, T2, T3]) GetConnId() uint64 {
+	return c.connId
+}
+
+func (c *GrpcConnection[T1, T2, T3]) GetConnIdStr() string {
+	return c.connIdStr
 }
 
 func (c *GrpcConnection[T1, T2, T3]) Start() {

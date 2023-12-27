@@ -558,4 +558,20 @@ func (s *Server) ServerName() string {
 	return s.Name
 }
 
+func (s *Server) GetConnManager() (iface.IConnManager, error) {
+	if s.ConnMgr == nil {
+		errstr := fmt.Sprintf("conn manager is nil.\n")
+		return nil, errors.New(errstr)
+	}
+	return s.ConnMgr, nil
+}
+
+func (s *Server) GetGrpcConnManager() (iface.IGrpcConnManager, error) {
+	if s.GrpcConnMgr == nil {
+		errstr := fmt.Sprintf("grpc conn manager is nil.\n")
+		return nil, errors.New(errstr)
+	}
+	return s.GrpcConnMgr, nil
+}
+
 func init() {}

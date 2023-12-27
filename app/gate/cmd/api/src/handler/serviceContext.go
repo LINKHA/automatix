@@ -14,21 +14,18 @@ type ServiceContext struct {
 	RoleManagerRpc rolemanager.Rolemanager
 	RoomManagerRpc roommanager.Roommanager
 	Snowflake      *snowflake.Node
-	MsgHandler     *MsgHandler
 }
 
 var ServiceContextObj *ServiceContext
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	snowflake, _ := snowflake.NewNode(c.Id)
-	msgHandler := NewMsgHandler()
 
 	ServiceContextObj = &ServiceContext{
 		Config:         c,
 		RoleManagerRpc: rolemanager.NewRolemanager(zrpc.MustNewClient(c.RoleManagerRpcConf)),
 		RoomManagerRpc: roommanager.NewRoommanager(zrpc.MustNewClient(c.RoomManagerRpcConf)),
 		Snowflake:      snowflake,
-		MsgHandler:     msgHandler,
 	}
 	return ServiceContextObj
 }

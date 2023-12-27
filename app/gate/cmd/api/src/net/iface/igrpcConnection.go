@@ -1,7 +1,7 @@
 package iface
 
 type IGrpcConnection interface {
-	GetConnID() uint64
+	GetConnId() uint64
 	GetConnIdStr() string
 	Start()
 	Stop()

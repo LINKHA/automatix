@@ -79,4 +79,8 @@ type IServer interface {
 
 	// Get the server name (获取服务器名称)
 	ServerName() string
+
+	GetConnManager() (IConnManager, error)
+
+	GetGrpcConnManager() (IGrpcConnManager, error)
 }
