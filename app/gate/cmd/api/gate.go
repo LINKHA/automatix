@@ -8,10 +8,8 @@ import (
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/handler"
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/logic"
 
-	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/decoder"
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/net"
-	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/pack"
 
 	"github.com/zeromicro/go-zero/core/conf"
 )
@@ -50,10 +48,10 @@ func main() {
 	s.SetOnConnStart(OnConnectionAdd)
 	s.SetOnConnStop(OnConnectionLost)
 
-	// Add LTV data format Decoder
-	s.SetDecoder(decoder.NewLTV_Little_Decoder())
-	// Add LTV data format Pack packet Encoder
-	s.SetPacket(pack.NewDataPackLtv())
+	// // Add LTV data format Decoder
+	// s.SetDecoder(decoder.NewLTV_Little_Decoder())
+	// // Add LTV data format Pack packet Encoder
+	// s.SetPacket(pack.NewDataPackLtv())
 
 	s.Serve()
 }

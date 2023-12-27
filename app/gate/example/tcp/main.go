@@ -17,7 +17,7 @@ import (
 func business(conn iface.IConnection) {
 
 	for {
-		err := conn.SendMsg(100, []byte("Ping...[FromClient]"))
+		err := conn.SendMsg(1, []byte("Ping...[FromClient]"))
 		if err != nil {
 			fmt.Println(err)
 			log.Error(err)
@@ -56,7 +56,7 @@ func DoClientConnectedLost(conn iface.IConnection) {
 
 func main() {
 	// Create a client handle using Zinx's Method (创建一个Client句柄，使用Zinx的方法)
-	client := mNet.NewClient("127.0.0.1", 8999)
+	client := mNet.NewClient("127.0.0.1", 10242)
 
 	// Set the business logic to execute when the connection is created or lost
 	// (添加首次建立链接时的业务)
