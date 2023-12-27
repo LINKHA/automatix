@@ -1,12 +1,13 @@
 package logic
 
 import (
-	"automatix/app/usercenter/cmd/rpc/internal/svc"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
-	"automatix/app/usercenter/model"
-	"automatix/common/tool"
-	"automatix/common/xerr"
 	"context"
+
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/app/usercenter/model"
+	"github.com/LINKHA/automatix/common/tool"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"

@@ -3,10 +3,10 @@ package homestayOrder
 import (
 	"net/http"
 
-	"automatix/app/order/cmd/api/internal/logic/homestayOrder"
-	"automatix/app/order/cmd/api/internal/svc"
-	"automatix/app/order/cmd/api/internal/types"
-	"automatix/common/result"
+	"github.com/LINKHA/automatix/app/order/cmd/api/internal/logic/homestayOrder"
+	"github.com/LINKHA/automatix/app/order/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/order/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/common/result"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

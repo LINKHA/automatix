@@ -1,6 +1,6 @@
 package svc
 
-import "automatix/common/utils"
+import "github.com/LINKHA/automatix/common/utils"
 
 type StreamManager struct {
 	streams utils.ShardLockMaps

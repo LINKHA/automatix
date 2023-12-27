@@ -6,7 +6,7 @@ package usercenter
 import (
 	"context"
 
-	"automatix/app/usercenter/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

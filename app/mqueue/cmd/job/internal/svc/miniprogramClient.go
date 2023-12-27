@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"automatix/app/mqueue/cmd/job/internal/config"
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/config"
 
 	"github.com/silenceper/wechat/v2"
 	"github.com/silenceper/wechat/v2/cache"

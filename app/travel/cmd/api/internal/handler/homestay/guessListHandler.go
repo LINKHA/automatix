@@ -3,10 +3,10 @@ package homestay
 import (
 	"net/http"
 
-	"automatix/app/travel/cmd/api/internal/logic/homestay"
-	"automatix/app/travel/cmd/api/internal/svc"
-	"automatix/app/travel/cmd/api/internal/types"
-	"automatix/common/result"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/logic/homestay"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/common/result"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

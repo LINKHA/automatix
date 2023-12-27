@@ -1,9 +1,9 @@
 package svc
 
 import (
-	"automatix/app/order/cmd/rpc/internal/config"
-	"automatix/app/order/model"
-	"automatix/app/travel/cmd/rpc/travel"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/order/model"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/travel"
 
 	"github.com/hibiken/asynq"
 

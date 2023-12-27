@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"automatix/app/servermanager/cmd/api/internal/config"
-	"automatix/app/servermanager/cmd/api/internal/handler"
-	"automatix/app/servermanager/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/api/internal/config"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/api/internal/handler"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

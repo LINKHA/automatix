@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"automatix/common/log"
+	"github.com/LINKHA/automatix/common/log"
 )
 
 // 触发函数

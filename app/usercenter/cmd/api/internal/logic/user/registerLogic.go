@@ -1,11 +1,12 @@
 package user
 
 import (
-	"automatix/app/usercenter/cmd/api/internal/svc"
-	"automatix/app/usercenter/cmd/api/internal/types"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
-	"automatix/app/usercenter/model"
 	"context"
+
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/app/usercenter/model"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

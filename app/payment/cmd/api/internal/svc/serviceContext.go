@@ -1,10 +1,10 @@
 package svc
 
 import (
-	"automatix/app/order/cmd/rpc/order"
-	"automatix/app/payment/cmd/api/internal/config"
-	"automatix/app/payment/cmd/rpc/payment"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/order"
+	"github.com/LINKHA/automatix/app/payment/cmd/api/internal/config"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/payment"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
 
 	"github.com/wechatpay-apiv3/wechatpay-go/core"
 	"github.com/zeromicro/go-zero/zrpc"

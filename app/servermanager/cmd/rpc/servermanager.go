@@ -4,11 +4,11 @@ import (
 	"flag"
 	"fmt"
 
-	"automatix/app/servermanager/cmd/rpc/internal/config"
-	"automatix/app/servermanager/cmd/rpc/internal/mqs/listen"
-	"automatix/app/servermanager/cmd/rpc/internal/server"
-	"automatix/app/servermanager/cmd/rpc/internal/svc"
-	"automatix/app/servermanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/mqs/listen"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/server"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

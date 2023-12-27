@@ -24,7 +24,7 @@ import (
 	"sync"
 	"time"
 
-	"automatix/common/utils"
+	"github.com/LINKHA/automatix/common/utils"
 )
 
 const (

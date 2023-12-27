@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"automatix/app/travel/cmd/rpc/internal/config"
-	"automatix/app/travel/model"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/travel/model"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )

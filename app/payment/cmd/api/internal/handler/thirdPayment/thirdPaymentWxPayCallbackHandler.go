@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"automatix/app/payment/cmd/api/internal/logic/thirdPayment"
-	"automatix/app/payment/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/payment/cmd/api/internal/logic/thirdPayment"
+	"github.com/LINKHA/automatix/app/payment/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

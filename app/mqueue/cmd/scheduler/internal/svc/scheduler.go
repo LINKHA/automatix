@@ -1,9 +1,10 @@
 package svc
 
 import (
-	"automatix/app/mqueue/cmd/scheduler/internal/config"
 	"fmt"
 	"time"
+
+	"github.com/LINKHA/automatix/app/mqueue/cmd/scheduler/internal/config"
 
 	"github.com/hibiken/asynq"
 )

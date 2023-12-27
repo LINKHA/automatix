@@ -1,13 +1,14 @@
 package logic
 
 import (
-	"automatix/app/mqueue/cmd/job/internal/svc"
-	"automatix/app/mqueue/cmd/job/jobtype"
-	"automatix/app/order/cmd/rpc/order"
-	"automatix/app/order/model"
-	"automatix/common/xerr"
 	"context"
 	"encoding/json"
+
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/svc"
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/jobtype"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/order"
+	"github.com/LINKHA/automatix/app/order/model"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/hibiken/asynq"
 	"github.com/pkg/errors"

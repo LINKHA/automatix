@@ -1,14 +1,15 @@
 package model
 
 import (
-	"automatix/deploy/script/mysql/genModel"
 	"context"
 	"database/sql"
 	"fmt"
 	"strings"
 	"time"
 
-	"automatix/common/globalkey"
+	"github.com/LINKHA/automatix/deploy/script/mysql/genModel"
+
+	"github.com/LINKHA/automatix/common/globalkey"
 
 	"github.com/Masterminds/squirrel"
 	"github.com/zeromicro/go-zero/core/stores/builder"

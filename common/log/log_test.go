@@ -3,7 +3,7 @@ package log_test
 import (
 	"testing"
 
-	"automatix/common/log"
+	"github.com/LINKHA/automatix/common/log"
 )
 
 func TestStdlog(t *testing.T) {

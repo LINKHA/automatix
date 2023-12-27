@@ -6,7 +6,7 @@ package payment
 import (
 	"context"
 
-	"automatix/app/payment/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

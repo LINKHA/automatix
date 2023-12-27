@@ -1,9 +1,10 @@
 package svc
 
 import (
-	"automatix/app/payment/cmd/api/internal/config"
-	"automatix/common/xerr"
 	"context"
+
+	"github.com/LINKHA/automatix/app/payment/cmd/api/internal/config"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/wechatpay-apiv3/wechatpay-go/core"

@@ -1,21 +1,22 @@
 package logic
 
 import (
-	"automatix/app/mqueue/cmd/job/jobtype"
 	"context"
 	"encoding/json"
 	"strings"
 	"time"
 
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/jobtype"
+
 	"github.com/hibiken/asynq"
 
-	"automatix/app/order/cmd/rpc/internal/svc"
-	"automatix/app/order/cmd/rpc/pb"
-	"automatix/app/order/model"
-	"automatix/app/travel/cmd/rpc/travel"
-	"automatix/common/tool"
-	"automatix/common/uniqueid"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/order/model"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/travel"
+	"github.com/LINKHA/automatix/common/tool"
+	"github.com/LINKHA/automatix/common/uniqueid"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"

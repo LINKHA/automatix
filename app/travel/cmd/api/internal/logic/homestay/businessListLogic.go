@@ -5,10 +5,10 @@ import (
 
 	"github.com/Masterminds/squirrel"
 
-	"automatix/app/travel/cmd/api/internal/svc"
-	"automatix/app/travel/cmd/api/internal/types"
-	"automatix/common/tool"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/common/tool"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

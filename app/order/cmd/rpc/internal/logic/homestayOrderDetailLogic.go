@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 
-	"automatix/app/order/cmd/rpc/internal/svc"
-	"automatix/app/order/cmd/rpc/pb"
-	"automatix/app/order/model"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/order/model"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

@@ -3,10 +3,10 @@ package user
 import (
 	"net/http"
 
-	"automatix/app/usercenter/cmd/api/internal/logic/user"
-	"automatix/app/usercenter/cmd/api/internal/svc"
-	"automatix/app/usercenter/cmd/api/internal/types"
-	"automatix/common/result"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/logic/user"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/common/result"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

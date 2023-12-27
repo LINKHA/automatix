@@ -1,8 +1,9 @@
 package logic
 
 import (
-	"automatix/app/mqueue/cmd/scheduler/internal/svc"
 	"context"
+
+	"github.com/LINKHA/automatix/app/mqueue/cmd/scheduler/internal/svc"
 )
 
 type MqueueScheduler struct {

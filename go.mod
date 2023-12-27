@@ -1,4 +1,4 @@
-module automatix
+module github.com/LINKHA/automatix
 
 go 1.18
 

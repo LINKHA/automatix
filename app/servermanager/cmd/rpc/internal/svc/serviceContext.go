@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"automatix/app/servermanager/cmd/rpc/internal/config"
-	"automatix/app/servermanager/model"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/servermanager/model"
 
 	"github.com/bwmarrin/snowflake"
 	"github.com/zeromicro/go-queue/kq"

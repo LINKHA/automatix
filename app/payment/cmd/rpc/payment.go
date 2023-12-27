@@ -4,11 +4,11 @@ import (
 	"flag"
 	"fmt"
 
-	"automatix/app/payment/cmd/rpc/internal/config"
-	"automatix/app/payment/cmd/rpc/internal/server"
-	"automatix/app/payment/cmd/rpc/internal/svc"
-	"automatix/app/payment/cmd/rpc/pb"
-	"automatix/common/interceptor/rpcserver"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/internal/server"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/common/interceptor/rpcserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

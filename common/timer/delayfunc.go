@@ -6,9 +6,10 @@ package timer
 * @Mail: danbing.at@gmail.com
  */
 import (
-	"automatix/common/log"
 	"fmt"
 	"reflect"
+
+	"github.com/LINKHA/automatix/common/log"
 )
 
 /*

@@ -4,10 +4,10 @@ package handler
 import (
 	"net/http"
 
-	homestay "automatix/app/travel/cmd/api/internal/handler/homestay"
-	homestayBussiness "automatix/app/travel/cmd/api/internal/handler/homestayBussiness"
-	homestayComment "automatix/app/travel/cmd/api/internal/handler/homestayComment"
-	"automatix/app/travel/cmd/api/internal/svc"
+	homestay "github.com/LINKHA/automatix/app/travel/cmd/api/internal/handler/homestay"
+	homestayBussiness "github.com/LINKHA/automatix/app/travel/cmd/api/internal/handler/homestayBussiness"
+	homestayComment "github.com/LINKHA/automatix/app/travel/cmd/api/internal/handler/homestayComment"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

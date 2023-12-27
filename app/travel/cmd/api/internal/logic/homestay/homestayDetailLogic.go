@@ -1,12 +1,13 @@
 package homestay
 
 import (
-	"automatix/app/travel/cmd/api/internal/svc"
-	"automatix/app/travel/cmd/api/internal/types"
-	"automatix/app/travel/cmd/rpc/travel"
-	"automatix/common/tool"
-	"automatix/common/xerr"
 	"context"
+
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/travel"
+	"github.com/LINKHA/automatix/common/tool"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

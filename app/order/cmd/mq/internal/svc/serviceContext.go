@@ -1,9 +1,9 @@
 package svc
 
 import (
-	"automatix/app/order/cmd/mq/internal/config"
-	"automatix/app/order/cmd/rpc/order"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/app/order/cmd/mq/internal/config"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/order"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

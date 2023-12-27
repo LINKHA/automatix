@@ -1,10 +1,11 @@
 package listen
 
 import (
-	"automatix/app/servermanager/cmd/rpc/internal/config"
-	kqMq "automatix/app/servermanager/cmd/rpc/internal/mqs/kq"
-	"automatix/app/servermanager/cmd/rpc/internal/svc"
 	"context"
+
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/config"
+	kqMq "github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/mqs/kq"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/svc"
 
 	"github.com/zeromicro/go-queue/kq"
 	"github.com/zeromicro/go-zero/core/service"

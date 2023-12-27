@@ -1,19 +1,20 @@
 package logic
 
 import (
-	"automatix/app/mqueue/cmd/job/internal/svc"
-	"automatix/app/mqueue/cmd/job/jobtype"
-	"automatix/app/order/model"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
-	usercenterModel "automatix/app/usercenter/model"
-	"automatix/common/globalkey"
-	"automatix/common/tool"
-	"automatix/common/wxminisub"
-	"automatix/common/xerr"
 	"context"
 	"encoding/json"
 	"fmt"
 	"time"
+
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/svc"
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/jobtype"
+	"github.com/LINKHA/automatix/app/order/model"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
+	usercenterModel "github.com/LINKHA/automatix/app/usercenter/model"
+	"github.com/LINKHA/automatix/common/globalkey"
+	"github.com/LINKHA/automatix/common/tool"
+	"github.com/LINKHA/automatix/common/wxminisub"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/golang-module/carbon/v2"
 	"github.com/hibiken/asynq"

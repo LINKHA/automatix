@@ -1,8 +1,9 @@
 package svc
 
 import (
-	"automatix/app/mqueue/cmd/job/internal/config"
 	"fmt"
+
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/config"
 
 	"github.com/hibiken/asynq"
 )

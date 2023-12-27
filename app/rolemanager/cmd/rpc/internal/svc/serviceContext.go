@@ -1,6 +1,6 @@
 package svc
 
-import "automatix/app/rolemanager/cmd/rpc/internal/config"
+import "github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/internal/config"
 
 type ServiceContext struct {
 	Config config.Config

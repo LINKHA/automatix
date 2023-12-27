@@ -1,9 +1,9 @@
 package svc
 
 import (
-	"automatix/app/mqueue/cmd/job/internal/config"
-	"automatix/app/order/cmd/rpc/order"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/config"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/order"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
 
 	"github.com/hibiken/asynq"
 	"github.com/silenceper/wechat/v2/miniprogram"

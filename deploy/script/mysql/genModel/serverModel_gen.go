@@ -14,7 +14,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
-	"automatix/common/globalkey"
+	"github.com/LINKHA/automatix/common/globalkey"
 )
 
 var (

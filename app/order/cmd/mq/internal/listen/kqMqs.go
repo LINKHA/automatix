@@ -1,10 +1,11 @@
 package listen
 
 import (
-	"automatix/app/order/cmd/mq/internal/config"
-	kqMq "automatix/app/order/cmd/mq/internal/mqs/kq"
-	"automatix/app/order/cmd/mq/internal/svc"
 	"context"
+
+	"github.com/LINKHA/automatix/app/order/cmd/mq/internal/config"
+	kqMq "github.com/LINKHA/automatix/app/order/cmd/mq/internal/mqs/kq"
+	"github.com/LINKHA/automatix/app/order/cmd/mq/internal/svc"
 
 	"github.com/zeromicro/go-queue/kq"
 	"github.com/zeromicro/go-zero/core/service"

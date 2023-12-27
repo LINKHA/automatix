@@ -1,8 +1,9 @@
 package logic
 
 import (
-	"automatix/app/mqueue/cmd/job/jobtype"
 	"fmt"
+
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/jobtype"
 
 	"github.com/hibiken/asynq"
 	"github.com/zeromicro/go-zero/core/logx"

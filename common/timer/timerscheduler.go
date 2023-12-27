@@ -10,10 +10,11 @@ package timer
  */
 
 import (
-	"automatix/common/log"
 	"math"
 	"sync"
 	"time"
+
+	"github.com/LINKHA/automatix/common/log"
 )
 
 const (

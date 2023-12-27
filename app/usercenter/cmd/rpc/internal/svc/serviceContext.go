@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"automatix/app/usercenter/cmd/rpc/internal/config"
-	"automatix/app/usercenter/model"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/usercenter/model"
 
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"

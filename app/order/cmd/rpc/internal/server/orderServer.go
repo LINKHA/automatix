@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"automatix/app/order/cmd/rpc/internal/logic"
-	"automatix/app/order/cmd/rpc/internal/svc"
-	"automatix/app/order/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/internal/logic"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/pb"
 )
 
 type OrderServer struct {

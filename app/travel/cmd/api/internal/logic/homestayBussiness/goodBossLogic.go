@@ -5,11 +5,11 @@ import (
 
 	"github.com/Masterminds/squirrel"
 
-	"automatix/app/travel/cmd/api/internal/svc"
-	"automatix/app/travel/cmd/api/internal/types"
-	"automatix/app/travel/model"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/travel/model"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

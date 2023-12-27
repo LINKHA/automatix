@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 
-	"automatix/app/servermanager/cmd/rpc/internal/svc"
-	"automatix/app/servermanager/cmd/rpc/pb"
-	"automatix/common/servercode"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/common/servercode"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

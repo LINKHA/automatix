@@ -1,11 +1,12 @@
 package main
 
 import (
-	"automatix/app/usercenter/cmd/api/internal/config"
-	"automatix/app/usercenter/cmd/api/internal/handler"
-	"automatix/app/usercenter/cmd/api/internal/svc"
 	"flag"
 	"fmt"
+
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/config"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/handler"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

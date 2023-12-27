@@ -3,9 +3,9 @@ package login
 import (
 	"net/http"
 
-	"automatix/app/login/cmd/api/internal/logic/login"
-	"automatix/app/login/cmd/api/internal/svc"
-	"automatix/app/login/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/login/cmd/api/internal/logic/login"
+	"github.com/LINKHA/automatix/app/login/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/login/cmd/api/internal/types"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

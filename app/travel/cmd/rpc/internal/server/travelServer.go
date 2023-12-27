@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"automatix/app/travel/cmd/rpc/internal/logic"
-	"automatix/app/travel/cmd/rpc/internal/svc"
-	"automatix/app/travel/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/internal/logic"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/pb"
 )
 
 type TravelServer struct {

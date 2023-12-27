@@ -1,11 +1,12 @@
 package logic
 
 import (
-	"automatix/app/payment/cmd/rpc/internal/svc"
-	"automatix/app/payment/cmd/rpc/pb"
-	"automatix/app/payment/model"
-	"automatix/common/xerr"
 	"context"
+
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/payment/model"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

@@ -4,11 +4,11 @@ import (
 	"context"
 	"net/http"
 
-	"automatix/app/payment/cmd/api/internal/svc"
-	"automatix/app/payment/cmd/api/internal/types"
-	"automatix/app/payment/cmd/rpc/payment"
-	"automatix/app/payment/model"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/payment/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/payment/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/payment"
+	"github.com/LINKHA/automatix/app/payment/model"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/wechatpay-apiv3/wechatpay-go/core/auth/verifiers"

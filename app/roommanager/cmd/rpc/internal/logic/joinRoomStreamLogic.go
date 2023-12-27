@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"automatix/app/roommanager/cmd/rpc/internal/svc"
-	"automatix/app/roommanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

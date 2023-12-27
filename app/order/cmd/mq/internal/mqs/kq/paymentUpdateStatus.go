@@ -1,14 +1,15 @@
 package kq
 
 import (
-	"automatix/app/order/cmd/mq/internal/svc"
-	"automatix/app/order/cmd/rpc/order"
-	"automatix/app/order/model"
-	paymentModel "automatix/app/payment/model"
-	"automatix/common/kqueue"
-	"automatix/common/xerr"
 	"context"
 	"encoding/json"
+
+	"github.com/LINKHA/automatix/app/order/cmd/mq/internal/svc"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/order"
+	"github.com/LINKHA/automatix/app/order/model"
+	paymentModel "github.com/LINKHA/automatix/app/payment/model"
+	"github.com/LINKHA/automatix/common/kqueue"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"

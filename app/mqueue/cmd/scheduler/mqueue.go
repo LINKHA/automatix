@@ -1,12 +1,13 @@
 package main
 
 import (
-	"automatix/app/mqueue/cmd/scheduler/internal/config"
-	"automatix/app/mqueue/cmd/scheduler/internal/logic"
-	"automatix/app/mqueue/cmd/scheduler/internal/svc"
 	"context"
 	"flag"
 	"os"
+
+	"github.com/LINKHA/automatix/app/mqueue/cmd/scheduler/internal/config"
+	"github.com/LINKHA/automatix/app/mqueue/cmd/scheduler/internal/logic"
+	"github.com/LINKHA/automatix/app/mqueue/cmd/scheduler/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 

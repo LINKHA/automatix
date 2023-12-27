@@ -3,10 +3,10 @@ package user
 import (
 	"context"
 
-	"automatix/app/usercenter/cmd/api/internal/svc"
-	"automatix/app/usercenter/cmd/api/internal/types"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
-	"automatix/common/ctxdata"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/common/ctxdata"
 
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"

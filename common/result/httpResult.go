@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"

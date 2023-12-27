@@ -6,7 +6,7 @@ package travel
 import (
 	"context"
 
-	"automatix/app/travel/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 
-	"automatix/app/servermanager/cmd/api/internal/svc"
-	"automatix/app/servermanager/cmd/api/internal/types"
-	"automatix/app/servermanager/cmd/rpc/servermanager"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/servermanager"
 
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"

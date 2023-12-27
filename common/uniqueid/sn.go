@@ -1,9 +1,10 @@
 package uniqueid
 
 import (
-	"automatix/common/tool"
 	"fmt"
 	"time"
+
+	"github.com/LINKHA/automatix/common/tool"
 )
 
 // 生成sn单号

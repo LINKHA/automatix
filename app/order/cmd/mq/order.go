@@ -1,9 +1,10 @@
 package main
 
 import (
-	"automatix/app/order/cmd/mq/internal/config"
-	"automatix/app/order/cmd/mq/internal/listen"
 	"flag"
+
+	"github.com/LINKHA/automatix/app/order/cmd/mq/internal/config"
+	"github.com/LINKHA/automatix/app/order/cmd/mq/internal/listen"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

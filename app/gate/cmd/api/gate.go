@@ -1,16 +1,17 @@
 package main
 
 import (
-	"automatix/app/gate/cmd/api/internal/config"
-	"automatix/app/gate/cmd/api/internal/handler"
-	"automatix/app/gate/cmd/api/internal/logic"
 	"flag"
 	"fmt"
 
-	"automatix/app/gate/cmd/api/internal/net/decoder"
-	"automatix/app/gate/cmd/api/internal/net/iface"
-	"automatix/app/gate/cmd/api/internal/net/net"
-	"automatix/app/gate/cmd/api/internal/net/pack"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/config"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/handler"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/logic"
+
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/decoder"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/net"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/pack"
 
 	"github.com/zeromicro/go-zero/core/conf"
 )

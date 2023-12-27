@@ -6,7 +6,7 @@ package order
 import (
 	"context"
 
-	"automatix/app/order/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

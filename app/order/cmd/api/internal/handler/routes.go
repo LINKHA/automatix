@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	homestayOrder "automatix/app/order/cmd/api/internal/handler/homestayOrder"
-	"automatix/app/order/cmd/api/internal/svc"
+	homestayOrder "github.com/LINKHA/automatix/app/order/cmd/api/internal/handler/homestayOrder"
+	"github.com/LINKHA/automatix/app/order/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

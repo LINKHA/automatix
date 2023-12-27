@@ -1,9 +1,9 @@
 package c_router
 
 import (
-	"automatix/app/gate/cmd/api/internal/net/iface"
-	"automatix/app/gate/cmd/api/internal/net/net"
-	"automatix/common/log"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/net"
+	"github.com/LINKHA/automatix/common/log"
 )
 
 type HelloRouter struct {

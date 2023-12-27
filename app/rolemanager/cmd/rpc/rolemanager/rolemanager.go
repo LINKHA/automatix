@@ -6,7 +6,7 @@ package rolemanager
 import (
 	"context"
 
-	"automatix/app/rolemanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

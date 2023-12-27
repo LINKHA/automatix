@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	login "automatix/app/login/cmd/api/internal/handler/login"
-	"automatix/app/login/cmd/api/internal/svc"
+	login "github.com/LINKHA/automatix/app/login/cmd/api/internal/handler/login"
+	"github.com/LINKHA/automatix/app/login/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

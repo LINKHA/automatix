@@ -1,9 +1,10 @@
 package listen
 
 import (
-	"automatix/app/servermanager/cmd/rpc/internal/config"
-	"automatix/app/servermanager/cmd/rpc/internal/svc"
 	"context"
+
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/service"
 )

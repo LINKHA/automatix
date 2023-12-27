@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"automatix/app/servermanager/cmd/rpc/internal/logic"
-	"automatix/app/servermanager/cmd/rpc/internal/svc"
-	"automatix/app/servermanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/logic"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/pb"
 )
 
 type ServermanagerServer struct {

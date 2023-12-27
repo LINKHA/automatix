@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"automatix/app/roommanager/cmd/rpc/internal/config"
-	"automatix/common/utils"
+	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/common/utils"
 )
 
 type ServiceContext struct {

@@ -1,9 +1,10 @@
 package logic
 
 import (
-	"automatix/app/mqueue/cmd/job/internal/svc"
 	"context"
 	"fmt"
+
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/svc"
 
 	"github.com/hibiken/asynq"
 )

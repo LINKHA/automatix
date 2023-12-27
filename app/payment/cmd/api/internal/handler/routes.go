@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	thirdPayment "automatix/app/payment/cmd/api/internal/handler/thirdPayment"
-	"automatix/app/payment/cmd/api/internal/svc"
+	thirdPayment "github.com/LINKHA/automatix/app/payment/cmd/api/internal/handler/thirdPayment"
+	"github.com/LINKHA/automatix/app/payment/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

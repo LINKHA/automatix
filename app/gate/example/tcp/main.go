@@ -1,15 +1,16 @@
 package main
 
 import (
-	"automatix/app/gate/cmd/api/internal/net/iface"
-	mNet "automatix/app/gate/cmd/api/internal/net/net"
-	"automatix/app/gate/cmd/example/tcp/c_router"
 	"fmt"
 	"os"
 	"os/signal"
 	"time"
 
-	"automatix/common/log"
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
+	mNet "github.com/LINKHA/automatix/app/gate/cmd/api/src/net/net"
+	"github.com/LINKHA/automatix/app/gate/example/tcp/c_router"
+
+	"github.com/LINKHA/automatix/common/log"
 )
 
 // Custom business logic of the client (客户端自定义业务)

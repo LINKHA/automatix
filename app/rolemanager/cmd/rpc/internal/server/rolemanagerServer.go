@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"automatix/app/rolemanager/cmd/rpc/internal/logic"
-	"automatix/app/rolemanager/cmd/rpc/internal/svc"
-	"automatix/app/rolemanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/internal/logic"
+	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/pb"
 )
 
 type RolemanagerServer struct {

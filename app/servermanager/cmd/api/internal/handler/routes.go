@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	"automatix/app/servermanager/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

@@ -3,8 +3,8 @@ package homestayComment
 import (
 	"context"
 
-	"automatix/app/travel/cmd/api/internal/svc"
-	"automatix/app/travel/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

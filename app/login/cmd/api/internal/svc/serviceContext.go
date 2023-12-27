@@ -1,9 +1,9 @@
 package svc
 
 import (
-	"automatix/app/login/cmd/api/internal/config"
-	"automatix/app/servermanager/cmd/rpc/servermanager"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/app/login/cmd/api/internal/config"
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/servermanager"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

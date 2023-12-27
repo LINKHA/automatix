@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"automatix/app/roommanager/cmd/rpc/internal/config"
-	"automatix/app/roommanager/cmd/rpc/internal/server"
-	"automatix/app/roommanager/cmd/rpc/internal/svc"
-	"automatix/app/roommanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/server"
+	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

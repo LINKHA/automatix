@@ -1,10 +1,10 @@
 package svc
 
 import (
-	"automatix/app/order/cmd/api/internal/config"
-	"automatix/app/order/cmd/rpc/order"
-	"automatix/app/payment/cmd/rpc/payment"
-	"automatix/app/travel/cmd/rpc/travel"
+	"github.com/LINKHA/automatix/app/order/cmd/api/internal/config"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/order"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/payment"
+	"github.com/LINKHA/automatix/app/travel/cmd/rpc/travel"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

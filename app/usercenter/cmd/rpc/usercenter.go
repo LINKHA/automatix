@@ -7,11 +7,11 @@ import (
 	"github.com/zeromicro/go-zero/core/service"
 	"google.golang.org/grpc/reflection"
 
-	"automatix/app/usercenter/cmd/rpc/internal/config"
-	"automatix/app/usercenter/cmd/rpc/internal/server"
-	"automatix/app/usercenter/cmd/rpc/internal/svc"
-	"automatix/app/usercenter/cmd/rpc/pb"
-	"automatix/common/interceptor/rpcserver"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/internal/server"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/common/interceptor/rpcserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"

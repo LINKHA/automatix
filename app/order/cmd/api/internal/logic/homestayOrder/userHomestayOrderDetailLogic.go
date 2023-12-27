@@ -3,14 +3,14 @@ package homestayOrder
 import (
 	"context"
 
-	"automatix/app/order/cmd/api/internal/svc"
-	"automatix/app/order/cmd/api/internal/types"
-	"automatix/app/order/cmd/rpc/order"
-	"automatix/app/order/model"
-	"automatix/app/payment/cmd/rpc/payment"
-	"automatix/common/ctxdata"
-	"automatix/common/tool"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/order/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/order/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/order/cmd/rpc/order"
+	"github.com/LINKHA/automatix/app/order/model"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/payment"
+	"github.com/LINKHA/automatix/common/ctxdata"
+	"github.com/LINKHA/automatix/common/tool"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"

@@ -7,11 +7,12 @@ package timer
  */
 
 import (
-	"automatix/common/log"
 	"errors"
 	"fmt"
 	"sync"
 	"time"
+
+	"github.com/LINKHA/automatix/common/log"
 )
 
 /*

@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"automatix/app/payment/cmd/rpc/internal/config"
-	"automatix/app/payment/model"
+	"github.com/LINKHA/automatix/app/payment/cmd/rpc/internal/config"
+	"github.com/LINKHA/automatix/app/payment/model"
 
 	"github.com/zeromicro/go-queue/kq"
 

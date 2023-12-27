@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"automatix/app/usercenter/cmd/api/internal/svc"
-	"automatix/app/usercenter/cmd/api/internal/types"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
-	usercenterModel "automatix/app/usercenter/model"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
+	usercenterModel "github.com/LINKHA/automatix/app/usercenter/model"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/pkg/errors"
 	wechat "github.com/silenceper/wechat/v2"

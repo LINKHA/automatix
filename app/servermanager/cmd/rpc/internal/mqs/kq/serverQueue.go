@@ -1,11 +1,12 @@
 package kq
 
 import (
-	"automatix/app/servermanager/cmd/rpc/internal/svc"
-	"automatix/common/kqueue"
-	"automatix/common/servercode"
 	"context"
 	"encoding/json"
+
+	"github.com/LINKHA/automatix/app/servermanager/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/common/kqueue"
+	"github.com/LINKHA/automatix/common/servercode"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

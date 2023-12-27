@@ -1,14 +1,15 @@
 package logic
 
 import (
-	"automatix/common/ctxdata"
 	"context"
 	"time"
 
+	"github.com/LINKHA/automatix/common/ctxdata"
+
 	"github.com/pkg/errors"
 
-	"automatix/app/usercenter/cmd/rpc/internal/svc"
-	"automatix/app/usercenter/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/internal/svc"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/pb"
 
 	"github.com/golang-jwt/jwt/v4"
 

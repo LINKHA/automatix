@@ -1,15 +1,16 @@
 package main
 
 import (
-	"automatix/app/mqueue/cmd/job/internal/logic"
-	"automatix/app/mqueue/cmd/job/internal/svc"
 	"context"
 	"flag"
 	"os"
 
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/logic"
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/svc"
+
 	"github.com/zeromicro/go-zero/core/logx"
 
-	"automatix/app/mqueue/cmd/job/internal/config"
+	"github.com/LINKHA/automatix/app/mqueue/cmd/job/internal/config"
 
 	"github.com/zeromicro/go-zero/core/conf"
 )

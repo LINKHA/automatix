@@ -3,11 +3,11 @@ package homestayBussiness
 import (
 	"context"
 
-	"automatix/app/travel/cmd/api/internal/svc"
-	"automatix/app/travel/cmd/api/internal/types"
-	"automatix/app/usercenter/cmd/rpc/usercenter"
-	"automatix/app/usercenter/model"
-	"automatix/common/xerr"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/svc"
+	"github.com/LINKHA/automatix/app/travel/cmd/api/internal/types"
+	"github.com/LINKHA/automatix/app/usercenter/cmd/rpc/usercenter"
+	"github.com/LINKHA/automatix/app/usercenter/model"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
