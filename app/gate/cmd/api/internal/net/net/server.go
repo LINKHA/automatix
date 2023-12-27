@@ -51,6 +51,9 @@ type Server struct {
 	// Current server's connection manager (当前Server的链接管理器)
 	ConnMgr iface.IConnManager
 
+	// Internal service grpc connection manager (内部服务grpc链接管理器)
+	GrpcConnMgr iface.IGrpcConnManager
+
 	// Hook function called when a new connection is established
 	// (该Server的连接创建时Hook函数)
 	onConnStart func(conn iface.IConnection)
@@ -98,6 +101,7 @@ func newServerWithConfig(config *conf.Config, ipVersion string, opts ...Option) 
 		msgHandler:       newMsgHandle(),
 		RouterSlicesMode: config.RouterSlicesMode,
 		ConnMgr:          newConnManager(),
+		GrpcConnMgr:      newGrpcConnManager(),
 		exitChan:         nil,
 		// Default to using Zinx's TLV data pack format
 		// (默认使用zinx的TLV封包方式)
