@@ -8,13 +8,14 @@ import (
 
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/proto"
 )
 
 type StreamClientInterface interface {
 	grpc.ClientStream
 }
 
-type GrpcConnection[T1 StreamClientInterface, T2 any, T3 any] struct {
+type GrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 any] struct {
 	conn      T1
 	connId    uint64
 	connIdStr string
@@ -24,9 +25,11 @@ type GrpcConnection[T1 StreamClientInterface, T2 any, T3 any] struct {
 
 	msgReqChan  chan T2
 	msgRespChan chan T3
+
+	newT2Func func() T2
 }
 
-func NewGrpcConnection[T1 StreamClientInterface, T2 any, T3 any](conn T1, connId uint64) iface.IGrpcConnection {
+func NewGrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 any](conn T1, connId uint64, newT2Func func() T2) iface.IGrpcConnection {
 
 	// Initialize Conn properties
 	c := &GrpcConnection[T1, T2, T3]{
@@ -34,6 +37,7 @@ func NewGrpcConnection[T1 StreamClientInterface, T2 any, T3 any](conn T1, connId
 		connId:      connId,
 		connIdStr:   strconv.FormatUint(connId, 10),
 		msgRespChan: make(chan T3, 1000),
+		newT2Func:   newT2Func,
 	}
 	return c
 }
@@ -72,14 +76,14 @@ func (c *GrpcConnection[T1, T2, T3]) Send(_m interface{}) error {
 	return c.conn.SendMsg(m)
 }
 
-func (c *GrpcConnection[T1, T2, T3]) SendToQueue(_m interface{}) error {
-	m := _m.(T2)
-
+func (c *GrpcConnection[T1, T2, T3]) SendToQueue(m []byte) error {
+	pbMsg := c.newT2Func()
+	proto.Unmarshal(m, pbMsg)
 	if c.msgReqChan == nil {
 		c.msgReqChan = make(chan T2, 1000)
 		go c.StartWriter()
 	}
-	c.msgReqChan <- m
+	c.msgReqChan <- pbMsg
 
 	return nil
 }
