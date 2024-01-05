@@ -24,7 +24,7 @@ func RegisterHandlers(ctx *ServiceContext, s iface.IServer) {
 		grpcConn := net.NewGrpcConnection[
 			rolemanagerPb.Rolemanager_CreateRoleStreamClient,
 			*rolemanagerPb.CreateRoleReq,
-			rolemanagerPb.CreateRoleResp,
+			*rolemanagerPb.CreateRoleResp,
 		](
 			createRole_Client,
 			1,
@@ -44,7 +44,7 @@ func RegisterHandlers(ctx *ServiceContext, s iface.IServer) {
 		grpcConn := net.NewGrpcConnection[
 			roommanagerPb.Roommanager_JoinRoomStreamClient,
 			*roommanagerPb.JoinRoomStreamReq,
-			roommanagerPb.JoinRoomResp,
+			*roommanagerPb.JoinRoomResp,
 		](
 			createRoleStream_Client,
 			2,

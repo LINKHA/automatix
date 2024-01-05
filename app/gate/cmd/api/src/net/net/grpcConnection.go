@@ -15,7 +15,7 @@ type StreamClientInterface interface {
 	grpc.ClientStream
 }
 
-type GrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 any] struct {
+type GrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 proto.Message] struct {
 	conn      T1
 	connId    uint64
 	connIdStr string
@@ -29,7 +29,7 @@ type GrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 any] struct {
 	newT2Func func() T2
 }
 
-func NewGrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 any](conn T1, connId uint64, newT2Func func() T2) iface.IGrpcConnection {
+func NewGrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 proto.Message](conn T1, connId uint64, newT2Func func() T2) iface.IGrpcConnection {
 
 	// Initialize Conn properties
 	c := &GrpcConnection[T1, T2, T3]{
