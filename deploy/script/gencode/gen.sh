@@ -38,3 +38,4 @@
 
 #到pb目录
 # protoc *.proto --go_out=../ --go-grpc_out=../
+# protoc *.proto --cpp_out=../
