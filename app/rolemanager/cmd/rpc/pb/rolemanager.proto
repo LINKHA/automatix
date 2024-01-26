@@ -4,6 +4,7 @@ option go_package = "./pb";
 
 package pb;
 
+
 message CreateRoleReq {
     string id = 1;
     string name = 2;
@@ -14,7 +15,58 @@ message CreateRoleResp {
     int64 returnCode = 1;
 }
 
+
+
+message RegisterRoleReq {
+    string accountId = 1;
+    string serverId = 2;
+  	string templateValue = 3;
+}
+
+message RegisterRoleResp {
+    string roldId = 1;
+    int64 returnCode = 2;
+}
+
+
+message SetRoleReq {
+    string roldId = 1;
+  	string templateValue = 2;
+}
+
+message SetRoleResp {
+    int64 returnCode = 1;
+}
+
+
+message GetRoleReq {
+    string roldId = 1;
+}
+
+message GetRoleResp {
+    int64 returnCode = 1;
+  	string roldId = 2;
+    string bornServerId = 3;
+    string curServerId = 4;
+    repeated string historyServerIds = 5;
+    int64 createTime	 = 6;
+    repeated string tags = 7;
+    string templateValue = 8;
+}
+
+message DeleteRoleReq {
+    string playerId = 1;
+}
+message DeleteRoleResp {
+    int64 returnCode = 1;
+}
+
 service rolemanager {
     rpc createRole(CreateRoleReq) returns (CreateRoleResp);
     rpc createRoleStream(stream CreateRoleReq) returns (stream CreateRoleResp);
+
+    rpc registerRole(stream RegisterRoleReq) returns (stream RegisterRoleResp);
+    rpc setRole(stream SetRoleReq) returns (stream SetRoleResp);
+    rpc getRole(stream GetRoleReq) returns (stream GetRoleResp);
+    rpc deleteRole(stream DeleteRoleReq) returns (stream DeleteRoleResp);
 }

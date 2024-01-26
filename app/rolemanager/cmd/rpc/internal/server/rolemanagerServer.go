@@ -31,3 +31,23 @@ func (s *RolemanagerServer) CreateRoleStream(stream pb.Rolemanager_CreateRoleStr
 	l := logic.NewCreateRoleStreamLogic(stream.Context(), s.svcCtx)
 	return l.CreateRoleStream(stream)
 }
+
+func (s *RolemanagerServer) RegisterRole(stream pb.Rolemanager_RegisterRoleServer) error {
+	l := logic.NewRegisterRoleLogic(stream.Context(), s.svcCtx)
+	return l.RegisterRole(stream)
+}
+
+func (s *RolemanagerServer) SetRole(stream pb.Rolemanager_SetRoleServer) error {
+	l := logic.NewSetRoleLogic(stream.Context(), s.svcCtx)
+	return l.SetRole(stream)
+}
+
+func (s *RolemanagerServer) GetRole(stream pb.Rolemanager_GetRoleServer) error {
+	l := logic.NewGetRoleLogic(stream.Context(), s.svcCtx)
+	return l.GetRole(stream)
+}
+
+func (s *RolemanagerServer) DeleteRole(stream pb.Rolemanager_DeleteRoleServer) error {
+	l := logic.NewDeleteRoleLogic(stream.Context(), s.svcCtx)
+	return l.DeleteRole(stream)
+}

@@ -13,12 +13,24 @@ import (
 )
 
 type (
-	CreateRoleReq  = pb.CreateRoleReq
-	CreateRoleResp = pb.CreateRoleResp
+	CreateRoleReq    = pb.CreateRoleReq
+	CreateRoleResp   = pb.CreateRoleResp
+	DeleteRoleReq    = pb.DeleteRoleReq
+	DeleteRoleResp   = pb.DeleteRoleResp
+	GetRoleReq       = pb.GetRoleReq
+	GetRoleResp      = pb.GetRoleResp
+	RegisterRoleReq  = pb.RegisterRoleReq
+	RegisterRoleResp = pb.RegisterRoleResp
+	SetRoleReq       = pb.SetRoleReq
+	SetRoleResp      = pb.SetRoleResp
 
 	Rolemanager interface {
 		CreateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*CreateRoleResp, error)
 		CreateRoleStream(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_CreateRoleStreamClient, error)
+		RegisterRole(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_RegisterRoleClient, error)
+		SetRole(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_SetRoleClient, error)
+		GetRole(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_GetRoleClient, error)
+		DeleteRole(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_DeleteRoleClient, error)
 	}
 
 	defaultRolemanager struct {
@@ -40,4 +52,24 @@ func (m *defaultRolemanager) CreateRole(ctx context.Context, in *CreateRoleReq, 
 func (m *defaultRolemanager) CreateRoleStream(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_CreateRoleStreamClient, error) {
 	client := pb.NewRolemanagerClient(m.cli.Conn())
 	return client.CreateRoleStream(ctx, opts...)
+}
+
+func (m *defaultRolemanager) RegisterRole(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_RegisterRoleClient, error) {
+	client := pb.NewRolemanagerClient(m.cli.Conn())
+	return client.RegisterRole(ctx, opts...)
+}
+
+func (m *defaultRolemanager) SetRole(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_SetRoleClient, error) {
+	client := pb.NewRolemanagerClient(m.cli.Conn())
+	return client.SetRole(ctx, opts...)
+}
+
+func (m *defaultRolemanager) GetRole(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_GetRoleClient, error) {
+	client := pb.NewRolemanagerClient(m.cli.Conn())
+	return client.GetRole(ctx, opts...)
+}
+
+func (m *defaultRolemanager) DeleteRole(ctx context.Context, opts ...grpc.CallOption) (pb.Rolemanager_DeleteRoleClient, error) {
+	client := pb.NewRolemanagerClient(m.cli.Conn())
+	return client.DeleteRole(ctx, opts...)
 }
