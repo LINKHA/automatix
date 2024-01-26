@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/net"
@@ -152,17 +153,25 @@ func registerGrpcConn[T_Client net.StreamClientInterface, T_Req proto.Message, T
 	id uint64,
 	newReq func() T_Req,
 ) {
-	client, err := rpcClient.(func(context.Context) (interface{}, error))(context.Background())
-	if err != nil {
-		grpcConn := net.NewGrpcConnection[T_Client, T_Req, T_Resp](
-			client.(T_Client),
-			id,
-			newReq,
-		)
+	go func() {
+		retryInterval := 3 * time.Second
+		for {
+			client, err := rpcClient.(func(context.Context) (interface{}, error))(context.Background())
+			if err != nil {
+				grpcConn := net.NewGrpcConnection[T_Client, T_Req, T_Resp](
+					client.(T_Client),
+					id,
+					newReq,
+				)
 
-		grpcConnManager.Add(grpcConn)
-		go grpcConn.Start()
-	} else {
-		fmt.Printf("rpc register err: %v\n", err)
-	}
+				grpcConnManager.Add(grpcConn)
+				go grpcConn.Start()
+				break
+			} else {
+				fmt.Printf("rpc register err: %v\n", err)
+				fmt.Println("Retrying in", retryInterval)
+				<-time.After(retryInterval)
+			}
+		}
+	}()
 }
