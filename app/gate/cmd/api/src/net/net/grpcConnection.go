@@ -15,42 +15,42 @@ type StreamClientInterface interface {
 	grpc.ClientStream
 }
 
-type GrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 proto.Message] struct {
-	conn      T1
+type GrpcConnection[T_Client StreamClientInterface, T_Req proto.Message, T_Resp proto.Message] struct {
+	conn      T_Client
 	connId    uint64
 	connIdStr string
 
 	ctx    context.Context
 	cancel context.CancelFunc
 
-	msgReqChan  chan T2
-	msgRespChan chan T3
+	msgReqChan  chan T_Req
+	msgRespChan chan T_Resp
 
-	newT2Func func() T2
+	newT_ReqFunc func() T_Req
 }
 
-func NewGrpcConnection[T1 StreamClientInterface, T2 proto.Message, T3 proto.Message](conn T1, connId uint64, newT2Func func() T2) iface.IGrpcConnection {
+func NewGrpcConnection[T_Client StreamClientInterface, T_Req proto.Message, T_Resp proto.Message](conn T_Client, connId uint64, newT_ReqFunc func() T_Req) iface.IGrpcConnection {
 
 	// Initialize Conn properties
-	c := &GrpcConnection[T1, T2, T3]{
-		conn:        conn,
-		connId:      connId,
-		connIdStr:   strconv.FormatUint(connId, 10),
-		msgRespChan: make(chan T3, 1000),
-		newT2Func:   newT2Func,
+	c := &GrpcConnection[T_Client, T_Req, T_Resp]{
+		conn:         conn,
+		connId:       connId,
+		connIdStr:    strconv.FormatUint(connId, 10),
+		msgRespChan:  make(chan T_Resp, 1000),
+		newT_ReqFunc: newT_ReqFunc,
 	}
 	return c
 }
 
-func (c *GrpcConnection[T1, T2, T3]) GetConnId() uint64 {
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) GetConnId() uint64 {
 	return c.connId
 }
 
-func (c *GrpcConnection[T1, T2, T3]) GetConnIdStr() string {
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) GetConnIdStr() string {
 	return c.connIdStr
 }
 
-func (c *GrpcConnection[T1, T2, T3]) Start() {
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) Start() {
 	defer func() {
 		if err := recover(); err != nil {
 			fmt.Printf("Connection Start() error: %v\n", err)
@@ -66,21 +66,21 @@ func (c *GrpcConnection[T1, T2, T3]) Start() {
 	}
 }
 
-func (c *GrpcConnection[T1, T2, T3]) Stop() {
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) Stop() {
 	c.cancel()
 }
 
-func (c *GrpcConnection[T1, T2, T3]) Send(_m interface{}) error {
-	m := _m.(T2)
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) Send(_m interface{}) error {
+	m := _m.(T_Req)
 
 	return c.conn.SendMsg(m)
 }
 
-func (c *GrpcConnection[T1, T2, T3]) SendToQueue(m []byte) error {
-	pbMsg := c.newT2Func()
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) SendToQueue(m []byte) error {
+	pbMsg := c.newT_ReqFunc()
 	proto.Unmarshal(m, pbMsg)
 	if c.msgReqChan == nil {
-		c.msgReqChan = make(chan T2, 1000)
+		c.msgReqChan = make(chan T_Req, 1000)
 		go c.StartWriter()
 	}
 	c.msgReqChan <- pbMsg
@@ -88,8 +88,8 @@ func (c *GrpcConnection[T1, T2, T3]) SendToQueue(m []byte) error {
 	return nil
 }
 
-func (c *GrpcConnection[T1, T2, T3]) StartReader() {
-	m := new(T3)
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) StartReader() {
+	m := new(T_Resp)
 	for {
 		select {
 		case <-c.ctx.Done():
@@ -110,7 +110,7 @@ func (c *GrpcConnection[T1, T2, T3]) StartReader() {
 	}
 }
 
-func (c *GrpcConnection[T1, T2, T3]) StartWriter() {
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) StartWriter() {
 	for {
 		select {
 		case data, ok := <-c.msgReqChan:
