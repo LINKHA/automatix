@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "------------------------------gate-api----------------------------------------"
-# go build -o data/server/gate-api  -v app/gate/cmd/api/gate.go
-# ./data/server/gate-api -f app/gate/cmd/api/etc/gate.yaml &
+go build -o data/server/gate-api  -v app/gate/cmd/api/gate.go
+./data/server/gate-api -f app/gate/cmd/api/etc/gate.yaml &
 
 echo "------------------------------rolemanager-rpc----------------------------------------"
 # go build -o data/server/rolemanager-rpc  -v app/rolemanager/cmd/rpc/rolemanager.go
