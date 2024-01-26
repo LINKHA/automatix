@@ -31,7 +31,7 @@ CREATE TABLE `role`  (
   `history_server_ids` json NOT NULL COMMENT '历史区服',
   `tags` json NOT NULL COMMENT '标签组',
   `template_value` json NOT NULL COMMENT '自定义参数',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`),
   UNIQUE KEY `idx_role_id_key` (`role_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
