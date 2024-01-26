@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type JoinRoomLogic struct {
+type MatchRoomLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewJoinRoomLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JoinRoomLogic {
-	return &JoinRoomLogic{
+func NewMatchRoomLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MatchRoomLogic {
+	return &MatchRoomLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *JoinRoomLogic) JoinRoom(stream pb.Roommanager_JoinRoomServer) error {
+func (l *MatchRoomLogic) MatchRoom(stream pb.Roommanager_MatchRoomServer) error {
 	// todo: add your logic here and delete this line
 
 	return nil

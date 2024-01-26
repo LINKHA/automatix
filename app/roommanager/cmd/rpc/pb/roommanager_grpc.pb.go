@@ -19,18 +19,24 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Roommanager_CreateRoom_FullMethodName     = "/pb.roommanager/createRoom"
-	Roommanager_JoinRoom_FullMethodName       = "/pb.roommanager/joinRoom"
-	Roommanager_JoinRoomStream_FullMethodName = "/pb.roommanager/joinRoomStream"
+	Roommanager_CreateRoom_FullMethodName  = "/pb.roommanager/createRoom"
+	Roommanager_JoinRoom_FullMethodName    = "/pb.roommanager/joinRoom"
+	Roommanager_LeaveRoom_FullMethodName   = "/pb.roommanager/leaveRoom"
+	Roommanager_MatchRoom_FullMethodName   = "/pb.roommanager/matchRoom"
+	Roommanager_GetRoomInfo_FullMethodName = "/pb.roommanager/getRoomInfo"
+	Roommanager_MatchFinish_FullMethodName = "/pb.roommanager/matchFinish"
 )
 
 // RoommanagerClient is the client API for Roommanager service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RoommanagerClient interface {
-	CreateRoom(ctx context.Context, in *CreateRoomReq, opts ...grpc.CallOption) (*CreateRoomResp, error)
-	JoinRoom(ctx context.Context, in *JoinRoomReq, opts ...grpc.CallOption) (*JoinRoomResp, error)
-	JoinRoomStream(ctx context.Context, opts ...grpc.CallOption) (Roommanager_JoinRoomStreamClient, error)
+	CreateRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_CreateRoomClient, error)
+	JoinRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_JoinRoomClient, error)
+	LeaveRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_LeaveRoomClient, error)
+	MatchRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_MatchRoomClient, error)
+	GetRoomInfo(ctx context.Context, opts ...grpc.CallOption) (Roommanager_GetRoomInfoClient, error)
+	MatchFinish(ctx context.Context, opts ...grpc.CallOption) (Roommanager_MatchFinishClient, error)
 }
 
 type roommanagerClient struct {
@@ -41,49 +47,186 @@ func NewRoommanagerClient(cc grpc.ClientConnInterface) RoommanagerClient {
 	return &roommanagerClient{cc}
 }
 
-func (c *roommanagerClient) CreateRoom(ctx context.Context, in *CreateRoomReq, opts ...grpc.CallOption) (*CreateRoomResp, error) {
-	out := new(CreateRoomResp)
-	err := c.cc.Invoke(ctx, Roommanager_CreateRoom_FullMethodName, in, out, opts...)
+func (c *roommanagerClient) CreateRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_CreateRoomClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[0], Roommanager_CreateRoom_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
-}
-
-func (c *roommanagerClient) JoinRoom(ctx context.Context, in *JoinRoomReq, opts ...grpc.CallOption) (*JoinRoomResp, error) {
-	out := new(JoinRoomResp)
-	err := c.cc.Invoke(ctx, Roommanager_JoinRoom_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *roommanagerClient) JoinRoomStream(ctx context.Context, opts ...grpc.CallOption) (Roommanager_JoinRoomStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[0], Roommanager_JoinRoomStream_FullMethodName, opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &roommanagerJoinRoomStreamClient{stream}
+	x := &roommanagerCreateRoomClient{stream}
 	return x, nil
 }
 
-type Roommanager_JoinRoomStreamClient interface {
-	Send(*JoinRoomStreamReq) error
-	Recv() (*JoinRoomStreamResp, error)
+type Roommanager_CreateRoomClient interface {
+	Send(*CreateRoomReq) error
+	Recv() (*CreateRoomResp, error)
 	grpc.ClientStream
 }
 
-type roommanagerJoinRoomStreamClient struct {
+type roommanagerCreateRoomClient struct {
 	grpc.ClientStream
 }
 
-func (x *roommanagerJoinRoomStreamClient) Send(m *JoinRoomStreamReq) error {
+func (x *roommanagerCreateRoomClient) Send(m *CreateRoomReq) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *roommanagerJoinRoomStreamClient) Recv() (*JoinRoomStreamResp, error) {
-	m := new(JoinRoomStreamResp)
+func (x *roommanagerCreateRoomClient) Recv() (*CreateRoomResp, error) {
+	m := new(CreateRoomResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) JoinRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_JoinRoomClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[1], Roommanager_JoinRoom_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerJoinRoomClient{stream}
+	return x, nil
+}
+
+type Roommanager_JoinRoomClient interface {
+	Send(*JoinRoomReq) error
+	Recv() (*JoinRoomResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerJoinRoomClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerJoinRoomClient) Send(m *JoinRoomReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerJoinRoomClient) Recv() (*JoinRoomResp, error) {
+	m := new(JoinRoomResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) LeaveRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_LeaveRoomClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[2], Roommanager_LeaveRoom_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerLeaveRoomClient{stream}
+	return x, nil
+}
+
+type Roommanager_LeaveRoomClient interface {
+	Send(*LeaveRoomReq) error
+	Recv() (*LeaveRoomResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerLeaveRoomClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerLeaveRoomClient) Send(m *LeaveRoomReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerLeaveRoomClient) Recv() (*LeaveRoomResp, error) {
+	m := new(LeaveRoomResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) MatchRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_MatchRoomClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[3], Roommanager_MatchRoom_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerMatchRoomClient{stream}
+	return x, nil
+}
+
+type Roommanager_MatchRoomClient interface {
+	Send(*MatchRoomReq) error
+	Recv() (*MatchRoomResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerMatchRoomClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerMatchRoomClient) Send(m *MatchRoomReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerMatchRoomClient) Recv() (*MatchRoomResp, error) {
+	m := new(MatchRoomResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) GetRoomInfo(ctx context.Context, opts ...grpc.CallOption) (Roommanager_GetRoomInfoClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[4], Roommanager_GetRoomInfo_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerGetRoomInfoClient{stream}
+	return x, nil
+}
+
+type Roommanager_GetRoomInfoClient interface {
+	Send(*GetRoomInfoReq) error
+	Recv() (*GetRoomInfoResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerGetRoomInfoClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerGetRoomInfoClient) Send(m *GetRoomInfoReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerGetRoomInfoClient) Recv() (*GetRoomInfoResp, error) {
+	m := new(GetRoomInfoResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) MatchFinish(ctx context.Context, opts ...grpc.CallOption) (Roommanager_MatchFinishClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[5], Roommanager_MatchFinish_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerMatchFinishClient{stream}
+	return x, nil
+}
+
+type Roommanager_MatchFinishClient interface {
+	Send(*MatchFinishReq) error
+	Recv() (*MatchFinishResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerMatchFinishClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerMatchFinishClient) Send(m *MatchFinishReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerMatchFinishClient) Recv() (*MatchFinishResp, error) {
+	m := new(MatchFinishResp)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -94,9 +237,12 @@ func (x *roommanagerJoinRoomStreamClient) Recv() (*JoinRoomStreamResp, error) {
 // All implementations must embed UnimplementedRoommanagerServer
 // for forward compatibility
 type RoommanagerServer interface {
-	CreateRoom(context.Context, *CreateRoomReq) (*CreateRoomResp, error)
-	JoinRoom(context.Context, *JoinRoomReq) (*JoinRoomResp, error)
-	JoinRoomStream(Roommanager_JoinRoomStreamServer) error
+	CreateRoom(Roommanager_CreateRoomServer) error
+	JoinRoom(Roommanager_JoinRoomServer) error
+	LeaveRoom(Roommanager_LeaveRoomServer) error
+	MatchRoom(Roommanager_MatchRoomServer) error
+	GetRoomInfo(Roommanager_GetRoomInfoServer) error
+	MatchFinish(Roommanager_MatchFinishServer) error
 	mustEmbedUnimplementedRoommanagerServer()
 }
 
@@ -104,14 +250,23 @@ type RoommanagerServer interface {
 type UnimplementedRoommanagerServer struct {
 }
 
-func (UnimplementedRoommanagerServer) CreateRoom(context.Context, *CreateRoomReq) (*CreateRoomResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateRoom not implemented")
+func (UnimplementedRoommanagerServer) CreateRoom(Roommanager_CreateRoomServer) error {
+	return status.Errorf(codes.Unimplemented, "method CreateRoom not implemented")
 }
-func (UnimplementedRoommanagerServer) JoinRoom(context.Context, *JoinRoomReq) (*JoinRoomResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JoinRoom not implemented")
+func (UnimplementedRoommanagerServer) JoinRoom(Roommanager_JoinRoomServer) error {
+	return status.Errorf(codes.Unimplemented, "method JoinRoom not implemented")
 }
-func (UnimplementedRoommanagerServer) JoinRoomStream(Roommanager_JoinRoomStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method JoinRoomStream not implemented")
+func (UnimplementedRoommanagerServer) LeaveRoom(Roommanager_LeaveRoomServer) error {
+	return status.Errorf(codes.Unimplemented, "method LeaveRoom not implemented")
+}
+func (UnimplementedRoommanagerServer) MatchRoom(Roommanager_MatchRoomServer) error {
+	return status.Errorf(codes.Unimplemented, "method MatchRoom not implemented")
+}
+func (UnimplementedRoommanagerServer) GetRoomInfo(Roommanager_GetRoomInfoServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetRoomInfo not implemented")
+}
+func (UnimplementedRoommanagerServer) MatchFinish(Roommanager_MatchFinishServer) error {
+	return status.Errorf(codes.Unimplemented, "method MatchFinish not implemented")
 }
 func (UnimplementedRoommanagerServer) mustEmbedUnimplementedRoommanagerServer() {}
 
@@ -126,62 +281,156 @@ func RegisterRoommanagerServer(s grpc.ServiceRegistrar, srv RoommanagerServer) {
 	s.RegisterService(&Roommanager_ServiceDesc, srv)
 }
 
-func _Roommanager_CreateRoom_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateRoomReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoommanagerServer).CreateRoom(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Roommanager_CreateRoom_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoommanagerServer).CreateRoom(ctx, req.(*CreateRoomReq))
-	}
-	return interceptor(ctx, in, info, handler)
+func _Roommanager_CreateRoom_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).CreateRoom(&roommanagerCreateRoomServer{stream})
 }
 
-func _Roommanager_JoinRoom_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JoinRoomReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoommanagerServer).JoinRoom(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Roommanager_JoinRoom_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoommanagerServer).JoinRoom(ctx, req.(*JoinRoomReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Roommanager_JoinRoomStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(RoommanagerServer).JoinRoomStream(&roommanagerJoinRoomStreamServer{stream})
-}
-
-type Roommanager_JoinRoomStreamServer interface {
-	Send(*JoinRoomStreamResp) error
-	Recv() (*JoinRoomStreamReq, error)
+type Roommanager_CreateRoomServer interface {
+	Send(*CreateRoomResp) error
+	Recv() (*CreateRoomReq, error)
 	grpc.ServerStream
 }
 
-type roommanagerJoinRoomStreamServer struct {
+type roommanagerCreateRoomServer struct {
 	grpc.ServerStream
 }
 
-func (x *roommanagerJoinRoomStreamServer) Send(m *JoinRoomStreamResp) error {
+func (x *roommanagerCreateRoomServer) Send(m *CreateRoomResp) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *roommanagerJoinRoomStreamServer) Recv() (*JoinRoomStreamReq, error) {
-	m := new(JoinRoomStreamReq)
+func (x *roommanagerCreateRoomServer) Recv() (*CreateRoomReq, error) {
+	m := new(CreateRoomReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_JoinRoom_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).JoinRoom(&roommanagerJoinRoomServer{stream})
+}
+
+type Roommanager_JoinRoomServer interface {
+	Send(*JoinRoomResp) error
+	Recv() (*JoinRoomReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerJoinRoomServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerJoinRoomServer) Send(m *JoinRoomResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerJoinRoomServer) Recv() (*JoinRoomReq, error) {
+	m := new(JoinRoomReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_LeaveRoom_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).LeaveRoom(&roommanagerLeaveRoomServer{stream})
+}
+
+type Roommanager_LeaveRoomServer interface {
+	Send(*LeaveRoomResp) error
+	Recv() (*LeaveRoomReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerLeaveRoomServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerLeaveRoomServer) Send(m *LeaveRoomResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerLeaveRoomServer) Recv() (*LeaveRoomReq, error) {
+	m := new(LeaveRoomReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_MatchRoom_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).MatchRoom(&roommanagerMatchRoomServer{stream})
+}
+
+type Roommanager_MatchRoomServer interface {
+	Send(*MatchRoomResp) error
+	Recv() (*MatchRoomReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerMatchRoomServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerMatchRoomServer) Send(m *MatchRoomResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerMatchRoomServer) Recv() (*MatchRoomReq, error) {
+	m := new(MatchRoomReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_GetRoomInfo_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).GetRoomInfo(&roommanagerGetRoomInfoServer{stream})
+}
+
+type Roommanager_GetRoomInfoServer interface {
+	Send(*GetRoomInfoResp) error
+	Recv() (*GetRoomInfoReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerGetRoomInfoServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerGetRoomInfoServer) Send(m *GetRoomInfoResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerGetRoomInfoServer) Recv() (*GetRoomInfoReq, error) {
+	m := new(GetRoomInfoReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_MatchFinish_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).MatchFinish(&roommanagerMatchFinishServer{stream})
+}
+
+type Roommanager_MatchFinishServer interface {
+	Send(*MatchFinishResp) error
+	Recv() (*MatchFinishReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerMatchFinishServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerMatchFinishServer) Send(m *MatchFinishResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerMatchFinishServer) Recv() (*MatchFinishReq, error) {
+	m := new(MatchFinishReq)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -194,20 +443,41 @@ func (x *roommanagerJoinRoomStreamServer) Recv() (*JoinRoomStreamReq, error) {
 var Roommanager_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.roommanager",
 	HandlerType: (*RoommanagerServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "createRoom",
-			Handler:    _Roommanager_CreateRoom_Handler,
-		},
-		{
-			MethodName: "joinRoom",
-			Handler:    _Roommanager_JoinRoom_Handler,
-		},
-	},
+	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "joinRoomStream",
-			Handler:       _Roommanager_JoinRoomStream_Handler,
+			StreamName:    "createRoom",
+			Handler:       _Roommanager_CreateRoom_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "joinRoom",
+			Handler:       _Roommanager_JoinRoom_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "leaveRoom",
+			Handler:       _Roommanager_LeaveRoom_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "matchRoom",
+			Handler:       _Roommanager_MatchRoom_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "getRoomInfo",
+			Handler:       _Roommanager_GetRoomInfo_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "matchFinish",
+			Handler:       _Roommanager_MatchFinish_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

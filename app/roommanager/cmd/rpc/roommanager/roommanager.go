@@ -13,17 +13,26 @@ import (
 )
 
 type (
-	CreateRoomReq      = pb.CreateRoomReq
-	CreateRoomResp     = pb.CreateRoomResp
-	JoinRoomReq        = pb.JoinRoomReq
-	JoinRoomResp       = pb.JoinRoomResp
-	JoinRoomStreamReq  = pb.JoinRoomStreamReq
-	JoinRoomStreamResp = pb.JoinRoomStreamResp
+	CreateRoomReq   = pb.CreateRoomReq
+	CreateRoomResp  = pb.CreateRoomResp
+	GetRoomInfoReq  = pb.GetRoomInfoReq
+	GetRoomInfoResp = pb.GetRoomInfoResp
+	JoinRoomReq     = pb.JoinRoomReq
+	JoinRoomResp    = pb.JoinRoomResp
+	LeaveRoomReq    = pb.LeaveRoomReq
+	LeaveRoomResp   = pb.LeaveRoomResp
+	MatchFinishReq  = pb.MatchFinishReq
+	MatchFinishResp = pb.MatchFinishResp
+	MatchRoomReq    = pb.MatchRoomReq
+	MatchRoomResp   = pb.MatchRoomResp
 
 	Roommanager interface {
-		CreateRoom(ctx context.Context, in *CreateRoomReq, opts ...grpc.CallOption) (*CreateRoomResp, error)
-		JoinRoom(ctx context.Context, in *JoinRoomReq, opts ...grpc.CallOption) (*JoinRoomResp, error)
-		JoinRoomStream(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_JoinRoomStreamClient, error)
+		CreateRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_CreateRoomClient, error)
+		JoinRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_JoinRoomClient, error)
+		LeaveRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_LeaveRoomClient, error)
+		MatchRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_MatchRoomClient, error)
+		GetRoomInfo(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_GetRoomInfoClient, error)
+		MatchFinish(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_MatchFinishClient, error)
 	}
 
 	defaultRoommanager struct {
@@ -37,17 +46,32 @@ func NewRoommanager(cli zrpc.Client) Roommanager {
 	}
 }
 
-func (m *defaultRoommanager) CreateRoom(ctx context.Context, in *CreateRoomReq, opts ...grpc.CallOption) (*CreateRoomResp, error) {
+func (m *defaultRoommanager) CreateRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_CreateRoomClient, error) {
 	client := pb.NewRoommanagerClient(m.cli.Conn())
-	return client.CreateRoom(ctx, in, opts...)
+	return client.CreateRoom(ctx, opts...)
 }
 
-func (m *defaultRoommanager) JoinRoom(ctx context.Context, in *JoinRoomReq, opts ...grpc.CallOption) (*JoinRoomResp, error) {
+func (m *defaultRoommanager) JoinRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_JoinRoomClient, error) {
 	client := pb.NewRoommanagerClient(m.cli.Conn())
-	return client.JoinRoom(ctx, in, opts...)
+	return client.JoinRoom(ctx, opts...)
 }
 
-func (m *defaultRoommanager) JoinRoomStream(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_JoinRoomStreamClient, error) {
+func (m *defaultRoommanager) LeaveRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_LeaveRoomClient, error) {
 	client := pb.NewRoommanagerClient(m.cli.Conn())
-	return client.JoinRoomStream(ctx, opts...)
+	return client.LeaveRoom(ctx, opts...)
+}
+
+func (m *defaultRoommanager) MatchRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_MatchRoomClient, error) {
+	client := pb.NewRoommanagerClient(m.cli.Conn())
+	return client.MatchRoom(ctx, opts...)
+}
+
+func (m *defaultRoommanager) GetRoomInfo(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_GetRoomInfoClient, error) {
+	client := pb.NewRoommanagerClient(m.cli.Conn())
+	return client.GetRoomInfo(ctx, opts...)
+}
+
+func (m *defaultRoommanager) MatchFinish(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_MatchFinishClient, error) {
+	client := pb.NewRoommanagerClient(m.cli.Conn())
+	return client.MatchFinish(ctx, opts...)
 }

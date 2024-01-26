@@ -5,30 +5,65 @@ option go_package = "./pb";
 package pb;
 
 message CreateRoomReq {
-    string id = 1;
+    string roleId = 1;
+    string roomName = 2;
+  	string maxPlayers = 3;
 }
 
 message CreateRoomResp {
     int64 returnCode = 1;
+    string roomId = 2;
 }
 
 message JoinRoomReq {
-    string id = 1;
+    string roomId = 1;
+    string roleId = 2;
 }
 
 message JoinRoomResp {
     int64 returnCode = 1;
 }
 
-message JoinRoomStreamReq {
+message LeaveRoomReq {
+    string roomId = 1;
+    string playerId = 2;
 }
 
-message JoinRoomStreamResp {
+message LeaveRoomResp {
     int64 returnCode = 1;
 }
 
+message MatchRoomReq {
+    string roomId = 1;
+}
+
+message MatchRoomResp {
+    int64 returnCode = 1;
+}
+
+message GetRoomInfoReq {
+    string roomId = 1;
+}
+
+message GetRoomInfoResp {
+    int64 returnCode = 1;
+}
+
+message MatchFinishReq {
+}
+
+message MatchFinishResp {
+    int64 returnCode = 1;
+    string battleId = 2;
+}
+
 service roommanager {
-    rpc createRoom(CreateRoomReq) returns (CreateRoomResp);
-    rpc joinRoom(JoinRoomReq) returns (JoinRoomResp);
-    rpc joinRoomStream(stream JoinRoomStreamReq) returns (stream JoinRoomStreamResp);
+    rpc createRoom(stream CreateRoomReq) returns (stream CreateRoomResp);
+    rpc joinRoom(stream JoinRoomReq) returns (stream JoinRoomResp);
+    rpc leaveRoom(stream LeaveRoomReq) returns (stream LeaveRoomResp);
+
+    rpc matchRoom(stream MatchRoomReq) returns (stream MatchRoomResp);
+    rpc getRoomInfo(stream GetRoomInfoReq) returns (stream GetRoomInfoResp);
+    rpc matchFinish(stream MatchFinishReq) returns (stream MatchFinishResp);
+
 }

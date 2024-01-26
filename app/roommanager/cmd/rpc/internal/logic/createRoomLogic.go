@@ -23,8 +23,8 @@ func NewCreateRoomLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 	}
 }
 
-func (l *CreateRoomLogic) CreateRoom(in *pb.CreateRoomReq) (*pb.CreateRoomResp, error) {
+func (l *CreateRoomLogic) CreateRoom(stream pb.Roommanager_CreateRoomServer) error {
 	// todo: add your logic here and delete this line
 
-	return &pb.CreateRoomResp{}, nil
+	return nil
 }

@@ -4,8 +4,6 @@
 package server
 
 import (
-	"context"
-
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/logic"
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
@@ -22,17 +20,32 @@ func NewRoommanagerServer(svcCtx *svc.ServiceContext) *RoommanagerServer {
 	}
 }
 
-func (s *RoommanagerServer) CreateRoom(ctx context.Context, in *pb.CreateRoomReq) (*pb.CreateRoomResp, error) {
-	l := logic.NewCreateRoomLogic(ctx, s.svcCtx)
-	return l.CreateRoom(in)
+func (s *RoommanagerServer) CreateRoom(stream pb.Roommanager_CreateRoomServer) error {
+	l := logic.NewCreateRoomLogic(stream.Context(), s.svcCtx)
+	return l.CreateRoom(stream)
 }
 
-func (s *RoommanagerServer) JoinRoom(ctx context.Context, in *pb.JoinRoomReq) (*pb.JoinRoomResp, error) {
-	l := logic.NewJoinRoomLogic(ctx, s.svcCtx)
-	return l.JoinRoom(in)
+func (s *RoommanagerServer) JoinRoom(stream pb.Roommanager_JoinRoomServer) error {
+	l := logic.NewJoinRoomLogic(stream.Context(), s.svcCtx)
+	return l.JoinRoom(stream)
 }
 
-func (s *RoommanagerServer) JoinRoomStream(stream pb.Roommanager_JoinRoomStreamServer) error {
-	l := logic.NewJoinRoomStreamLogic(stream.Context(), s.svcCtx)
-	return l.JoinRoomStream(stream)
+func (s *RoommanagerServer) LeaveRoom(stream pb.Roommanager_LeaveRoomServer) error {
+	l := logic.NewLeaveRoomLogic(stream.Context(), s.svcCtx)
+	return l.LeaveRoom(stream)
+}
+
+func (s *RoommanagerServer) MatchRoom(stream pb.Roommanager_MatchRoomServer) error {
+	l := logic.NewMatchRoomLogic(stream.Context(), s.svcCtx)
+	return l.MatchRoom(stream)
+}
+
+func (s *RoommanagerServer) GetRoomInfo(stream pb.Roommanager_GetRoomInfoServer) error {
+	l := logic.NewGetRoomInfoLogic(stream.Context(), s.svcCtx)
+	return l.GetRoomInfo(stream)
+}
+
+func (s *RoommanagerServer) MatchFinish(stream pb.Roommanager_MatchFinishServer) error {
+	l := logic.NewMatchFinishLogic(stream.Context(), s.svcCtx)
+	return l.MatchFinish(stream)
 }
