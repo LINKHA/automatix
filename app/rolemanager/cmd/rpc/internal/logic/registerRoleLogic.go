@@ -3,9 +3,12 @@ package logic
 import (
 	"context"
 	"fmt"
+	"strconv"
 
+	"github.com/LINKHA/automatix/app/rolemanager/cmd/model"
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,27 +28,46 @@ func NewRegisterRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Regi
 }
 
 func (l *RegisterRoleLogic) RegisterRole(stream pb.Rolemanager_RegisterRoleServer) error {
-	// todo: add your logic here and delete this line
-
-	stream.Send(&pb.RegisterRoleResp{
-		RoldId:     "123",
-		ReturnCode: 2,
-	})
-
-	//stream reader
 	go func() {
 		for {
 			select {
 			case <-l.ctx.Done():
 				return
 			default:
-				gateMsg, err := stream.Recv()
-				fmt.Println(gateMsg)
+				msg, err := stream.Recv()
+				l.handlerFunc(stream, msg)
 				fmt.Println(err)
 			}
 		}
 	}()
 
-	select {}
-	return nil
+	select {
+	case <-l.ctx.Done():
+		return nil
+	}
+}
+
+func (l *RegisterRoleLogic) handlerFunc(stream pb.Rolemanager_RegisterRoleServer, req *pb.RegisterRoleReq) {
+	role := new(model.Role)
+	roleId := strconv.FormatInt(int64(l.svcCtx.Snowflake.Generate()), 10)
+
+	role.RoleId = roleId
+	role.BornServerId = req.ServerId
+	role.CurServerId = req.ServerId
+	role.HistoryServerIds = "[]"
+	role.Tags = "[]"
+	role.TemplateValue = req.TemplateValue
+
+	_, err := l.svcCtx.RoleModel.Insert(l.ctx, role)
+
+	if err != nil {
+		stream.Send(&pb.RegisterRoleResp{
+			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
+		})
+	}
+
+	stream.Send(&pb.RegisterRoleResp{
+		RoldId:     "123",
+		ReturnCode: int64(xerr.OK),
+	})
 }

@@ -27,10 +27,6 @@ func NewCreateRoleStreamLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 func (l *CreateRoleStreamLogic) CreateRoleStream(stream pb.Rolemanager_CreateRoleStreamServer) error {
 	fmt.Println("CreateRoleStream Start..")
 
-	stream.Send(&pb.CreateRoleResp{
-		ReturnCode: 2,
-	})
-
 	//stream reader
 	go func() {
 		for {
@@ -45,6 +41,15 @@ func (l *CreateRoleStreamLogic) CreateRoleStream(stream pb.Rolemanager_CreateRol
 		}
 	}()
 
-	select {}
-	return nil
+	select {
+	case <-l.ctx.Done():
+		return nil
+	}
+}
+
+func (l *CreateRoleStreamLogic) handlerFunc(stream pb.Rolemanager_CreateRoleStreamServer, req *pb.CreateRoleReq) {
+	// req.AccountId
+	stream.Send(&pb.CreateRoleResp{
+		ReturnCode: 2,
+	})
 }
