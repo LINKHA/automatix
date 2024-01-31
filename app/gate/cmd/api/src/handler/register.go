@@ -19,7 +19,7 @@ func RegisterHandlers(ctx *ServiceContext, s iface.IServer) {
 		fmt.Println("server grpc conn manager err: ")
 	}
 	RegisterRoleManager(grpcConnManager, ctx, s)
-	RegisterRoomManager(grpcConnManager, ctx, s)
+	// RegisterRoomManager(grpcConnManager, ctx, s)
 }
 
 func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceContext, s iface.IServer) {
@@ -49,44 +49,44 @@ func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 		func() *rolemanagerPb.RegisterRoleReq { return &rolemanagerPb.RegisterRoleReq{} },
 	)
 
-	registerGrpcConn[
-		rolemanagerPb.Rolemanager_SetRoleClient,
-		*rolemanagerPb.SetRoleReq,
-		*rolemanagerPb.SetRoleResp,
-	](
-		103,
-		grpcConnManager,
-		func(mctx context.Context) (rolemanagerPb.Rolemanager_SetRoleClient, error) {
-			return ctx.RoleManagerRpc.SetRole(context.Background())
-		},
-		func() *rolemanagerPb.SetRoleReq { return &rolemanagerPb.SetRoleReq{} },
-	)
+	// registerGrpcConn[
+	// 	rolemanagerPb.Rolemanager_SetRoleClient,
+	// 	*rolemanagerPb.SetRoleReq,
+	// 	*rolemanagerPb.SetRoleResp,
+	// ](
+	// 	103,
+	// 	grpcConnManager,
+	// 	func(mctx context.Context) (rolemanagerPb.Rolemanager_SetRoleClient, error) {
+	// 		return ctx.RoleManagerRpc.SetRole(context.Background())
+	// 	},
+	// 	func() *rolemanagerPb.SetRoleReq { return &rolemanagerPb.SetRoleReq{} },
+	// )
 
-	registerGrpcConn[
-		rolemanagerPb.Rolemanager_GetRoleClient,
-		*rolemanagerPb.GetRoleReq,
-		*rolemanagerPb.GetRoleResp,
-	](
-		104,
-		grpcConnManager,
-		func(mctx context.Context) (rolemanagerPb.Rolemanager_GetRoleClient, error) {
-			return ctx.RoleManagerRpc.GetRole(context.Background())
-		},
-		func() *rolemanagerPb.GetRoleReq { return &rolemanagerPb.GetRoleReq{} },
-	)
+	// registerGrpcConn[
+	// 	rolemanagerPb.Rolemanager_GetRoleClient,
+	// 	*rolemanagerPb.GetRoleReq,
+	// 	*rolemanagerPb.GetRoleResp,
+	// ](
+	// 	104,
+	// 	grpcConnManager,
+	// 	func(mctx context.Context) (rolemanagerPb.Rolemanager_GetRoleClient, error) {
+	// 		return ctx.RoleManagerRpc.GetRole(context.Background())
+	// 	},
+	// 	func() *rolemanagerPb.GetRoleReq { return &rolemanagerPb.GetRoleReq{} },
+	// )
 
-	registerGrpcConn[
-		rolemanagerPb.Rolemanager_DeleteRoleClient,
-		*rolemanagerPb.DeleteRoleReq,
-		*rolemanagerPb.DeleteRoleResp,
-	](
-		105,
-		grpcConnManager,
-		func(mctx context.Context) (rolemanagerPb.Rolemanager_DeleteRoleClient, error) {
-			return ctx.RoleManagerRpc.DeleteRole(context.Background())
-		},
-		func() *rolemanagerPb.DeleteRoleReq { return &rolemanagerPb.DeleteRoleReq{} },
-	)
+	// registerGrpcConn[
+	// 	rolemanagerPb.Rolemanager_DeleteRoleClient,
+	// 	*rolemanagerPb.DeleteRoleReq,
+	// 	*rolemanagerPb.DeleteRoleResp,
+	// ](
+	// 	105,
+	// 	grpcConnManager,
+	// 	func(mctx context.Context) (rolemanagerPb.Rolemanager_DeleteRoleClient, error) {
+	// 		return ctx.RoleManagerRpc.DeleteRole(context.Background())
+	// 	},
+	// 	func() *rolemanagerPb.DeleteRoleReq { return &rolemanagerPb.DeleteRoleReq{} },
+	// )
 }
 
 func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceContext, s iface.IServer) {

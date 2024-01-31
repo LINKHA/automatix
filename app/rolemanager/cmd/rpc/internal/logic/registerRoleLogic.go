@@ -35,8 +35,9 @@ func (l *RegisterRoleLogic) RegisterRole(stream pb.Rolemanager_RegisterRoleServe
 				return
 			default:
 				msg, err := stream.Recv()
-				l.handlerFunc(stream, msg)
 				fmt.Println(err)
+				l.handlerFunc(stream, msg)
+
 			}
 		}
 	}()
@@ -61,6 +62,8 @@ func (l *RegisterRoleLogic) handlerFunc(stream pb.Rolemanager_RegisterRoleServer
 	_, err := l.svcCtx.RoleModel.Insert(l.ctx, role)
 
 	if err != nil {
+		fmt.Println(err)
+
 		stream.Send(&pb.RegisterRoleResp{
 			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
 		})
