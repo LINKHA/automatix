@@ -15,7 +15,7 @@ type StreamClientInterface interface {
 	grpc.ClientStream
 }
 
-type GrpcConnection[T_Client StreamClientInterface, T_Req proto.Message, T_Resp proto.Message] struct {
+type GrpcConnection[T_Client StreamClientInterface, T_Req proto.Message, T_Resp any] struct {
 	conn      T_Client
 	connId    uint64
 	connIdStr string
@@ -29,7 +29,7 @@ type GrpcConnection[T_Client StreamClientInterface, T_Req proto.Message, T_Resp 
 	newT_ReqFunc func() T_Req
 }
 
-func NewGrpcConnection[T_Client StreamClientInterface, T_Req proto.Message, T_Resp proto.Message](conn T_Client, connId uint64, newT_ReqFunc func() T_Req) iface.IGrpcConnection {
+func NewGrpcConnection[T_Client StreamClientInterface, T_Req proto.Message, T_Resp any](conn T_Client, connId uint64, newT_ReqFunc func() T_Req) iface.IGrpcConnection {
 
 	// Initialize Conn properties
 	c := &GrpcConnection[T_Client, T_Req, T_Resp]{
@@ -99,13 +99,13 @@ func (c *GrpcConnection[T_Client, T_Req, T_Resp]) StartReader() {
 
 			if err == io.EOF {
 				fmt.Printf("Received GRPC EOF\n")
+				return
 			}
-
+			fmt.Printf("Received GRPC message: %v\n", m)
 			if err != nil {
 				fmt.Printf("Received GRPC err: %s\n", err)
+				return
 			}
-
-			fmt.Printf("Received GRPC message: %v\n", m)
 		}
 	}
 }

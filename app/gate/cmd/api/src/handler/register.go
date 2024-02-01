@@ -26,7 +26,7 @@ func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		rolemanagerPb.Rolemanager_CreateRoleStreamClient,
 		*rolemanagerPb.CreateRoleReq,
-		*rolemanagerPb.CreateRoleResp,
+		rolemanagerPb.CreateRoleResp,
 	](
 		101,
 		grpcConnManager,
@@ -39,7 +39,7 @@ func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		rolemanagerPb.Rolemanager_RegisterRoleClient,
 		*rolemanagerPb.RegisterRoleReq,
-		*rolemanagerPb.RegisterRoleResp,
+		rolemanagerPb.RegisterRoleResp,
 	](
 		102,
 		grpcConnManager,
@@ -52,7 +52,7 @@ func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	// registerGrpcConn[
 	// 	rolemanagerPb.Rolemanager_SetRoleClient,
 	// 	*rolemanagerPb.SetRoleReq,
-	// 	*rolemanagerPb.SetRoleResp,
+	// 	rolemanagerPb.SetRoleResp,
 	// ](
 	// 	103,
 	// 	grpcConnManager,
@@ -65,7 +65,7 @@ func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	// registerGrpcConn[
 	// 	rolemanagerPb.Rolemanager_GetRoleClient,
 	// 	*rolemanagerPb.GetRoleReq,
-	// 	*rolemanagerPb.GetRoleResp,
+	// 	rolemanagerPb.GetRoleResp,
 	// ](
 	// 	104,
 	// 	grpcConnManager,
@@ -78,7 +78,7 @@ func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	// registerGrpcConn[
 	// 	rolemanagerPb.Rolemanager_DeleteRoleClient,
 	// 	*rolemanagerPb.DeleteRoleReq,
-	// 	*rolemanagerPb.DeleteRoleResp,
+	// 	rolemanagerPb.DeleteRoleResp,
 	// ](
 	// 	105,
 	// 	grpcConnManager,
@@ -93,7 +93,7 @@ func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		roommanagerPb.Roommanager_CreateRoomClient,
 		*roommanagerPb.CreateRoomReq,
-		*roommanagerPb.CreateRoomResp,
+		roommanagerPb.CreateRoomResp,
 	](
 		201,
 		grpcConnManager,
@@ -106,7 +106,7 @@ func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		roommanagerPb.Roommanager_JoinRoomClient,
 		*roommanagerPb.JoinRoomReq,
-		*roommanagerPb.JoinRoomResp,
+		roommanagerPb.JoinRoomResp,
 	](
 		202,
 		grpcConnManager,
@@ -119,7 +119,7 @@ func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		roommanagerPb.Roommanager_LeaveRoomClient,
 		*roommanagerPb.LeaveRoomReq,
-		*roommanagerPb.LeaveRoomResp,
+		roommanagerPb.LeaveRoomResp,
 	](
 		203,
 		grpcConnManager,
@@ -132,7 +132,7 @@ func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		roommanagerPb.Roommanager_MatchRoomClient,
 		*roommanagerPb.MatchRoomReq,
-		*roommanagerPb.MatchRoomResp,
+		roommanagerPb.MatchRoomResp,
 	](
 		204,
 		grpcConnManager,
@@ -145,7 +145,7 @@ func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		roommanagerPb.Roommanager_GetRoomInfoClient,
 		*roommanagerPb.GetRoomInfoReq,
-		*roommanagerPb.GetRoomInfoResp,
+		roommanagerPb.GetRoomInfoResp,
 	](
 		205,
 		grpcConnManager,
@@ -158,7 +158,7 @@ func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		roommanagerPb.Roommanager_MatchFinishClient,
 		*roommanagerPb.MatchFinishReq,
-		*roommanagerPb.MatchFinishResp,
+		roommanagerPb.MatchFinishResp,
 	](
 		206,
 		grpcConnManager,
@@ -169,7 +169,7 @@ func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	)
 }
 
-func registerGrpcConn[T_Client net.StreamClientInterface, T_Req proto.Message, T_Resp proto.Message](
+func registerGrpcConn[T_Client net.StreamClientInterface, T_Req proto.Message, T_Resp any](
 	id uint64,
 	grpcConnManager iface.IGrpcConnManager,
 	rpcClient func(mctx context.Context) (T_Client, error),

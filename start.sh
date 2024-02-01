@@ -16,6 +16,6 @@ echo "------------------------------roommanager-rpc-----------------------------
 go build -o data/server/roommanager-rpc  -v app/roommanager/cmd/rpc/roommanager.go
 ./data/server/roommanager-rpc -f app/roommanager/cmd/rpc/etc/roommanager.yaml &
 
-echo "------------------------------gate-api----------------------------------------"
-go build -o data/server/gate-api  -v app/gate/cmd/api/gate.go
-./data/server/gate-api -f app/gate/cmd/api/etc/gate.yaml &
+# echo "------------------------------gate-api----------------------------------------"
+# go build -o data/server/gate-api  -v app/gate/cmd/api/gate.go
+# ./data/server/gate-api -f app/gate/cmd/api/etc/gate.yaml &

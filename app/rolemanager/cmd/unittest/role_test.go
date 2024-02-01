@@ -13,7 +13,7 @@ import (
 )
 
 func TestRegisterRole(t *testing.T) {
-	client := mNet.NewClient("127.0.0.1", 8999)
+	client := mNet.NewClient("127.0.0.1", 10242)
 	client.SetOnConnStart(func(conn iface.IConnection) {
 		go func() {
 			data := &pb.RegisterRoleReq{
