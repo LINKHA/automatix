@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +26,45 @@ func NewGetRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetRoleLo
 }
 
 func (l *GetRoleLogic) GetRole(stream pb.Rolemanager_GetRoleServer) error {
-	// todo: add your logic here and delete this line
+	go func() {
+		for {
+			select {
+			case <-l.ctx.Done():
+				return
+			default:
+				msg, err := stream.Recv()
+				fmt.Println(err)
+				l.handlerFunc(stream, msg)
 
-	return nil
+			}
+		}
+	}()
+
+	select {
+	case <-l.ctx.Done():
+		return nil
+	}
+}
+
+func (l *GetRoleLogic) handlerFunc(stream pb.Rolemanager_GetRoleServer, req *pb.GetRoleReq) {
+	role, err := l.svcCtx.RoleModel.FindOneByRoleId(l.ctx, req.RoldId)
+
+	if err != nil {
+		fmt.Println(err)
+
+		stream.Send(&pb.GetRoleResp{
+			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
+		})
+	}
+
+	stream.Send(&pb.GetRoleResp{
+		ReturnCode:   int64(xerr.OK),
+		RoldId:       role.RoleId,
+		BornServerId: role.BornServerId,
+		CurServerId:  role.CurServerId,
+		// HistoryServerIds: role.HistoryServerIds,
+		// CreateTime:       role.CreateTime,
+		// Tags:             role.Tags,
+		TemplateValue: role.TemplateValue,
+	})
 }

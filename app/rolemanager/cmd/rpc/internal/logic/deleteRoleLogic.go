@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +26,38 @@ func NewDeleteRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 }
 
 func (l *DeleteRoleLogic) DeleteRole(stream pb.Rolemanager_DeleteRoleServer) error {
-	// todo: add your logic here and delete this line
+	go func() {
+		for {
+			select {
+			case <-l.ctx.Done():
+				return
+			default:
+				msg, err := stream.Recv()
+				fmt.Println(err)
+				l.handlerFunc(stream, msg)
 
-	return nil
+			}
+		}
+	}()
+
+	select {
+	case <-l.ctx.Done():
+		return nil
+	}
+}
+
+func (l *DeleteRoleLogic) handlerFunc(stream pb.Rolemanager_DeleteRoleServer, req *pb.DeleteRoleReq) {
+	err := l.svcCtx.RoleModel.DeleteByRoleId(l.ctx, req.PlayerId)
+
+	if err != nil {
+		fmt.Println(err)
+
+		stream.Send(&pb.DeleteRoleResp{
+			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
+		})
+	}
+
+	stream.Send(&pb.DeleteRoleResp{
+		ReturnCode: int64(xerr.OK),
+	})
 }

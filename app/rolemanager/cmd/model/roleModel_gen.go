@@ -35,6 +35,7 @@ type (
 		FindOneByRoleId(ctx context.Context, roleId string) (*Role, error)
 		Update(ctx context.Context, data *Role) error
 		Delete(ctx context.Context, id int64) error
+		DeleteByRoleId(ctx context.Context, roleId string) error
 	}
 
 	defaultRoleModel struct {
@@ -74,6 +75,20 @@ func (m *defaultRoleModel) Delete(ctx context.Context, id int64) error {
 		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
 		return conn.ExecCtx(ctx, query, id)
 	}, amxRolemanagerRoleIdKey, amxRolemanagerRoleRoleIdKey)
+	return err
+}
+
+func (m *defaultRoleModel) DeleteByRoleId(ctx context.Context, roleId string) error {
+	data, err := m.FindOneByRoleId(ctx, roleId)
+	if err != nil {
+		return err
+	}
+
+	amxRolemanagerRoleRoleIdKey := fmt.Sprintf("%s%v", cacheAmxRolemanagerRoleRoleIdPrefix, data.RoleId)
+	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `role_id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, roleId)
+	}, amxRolemanagerRoleRoleIdKey)
 	return err
 }
 
