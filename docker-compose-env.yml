@@ -188,7 +188,7 @@ services:
     ports:
       - 8980:8080
     command:
-      - '--redis-addr=redis:6379'
+      - '--redis-addr=redis:36379'
       - '--redis-password=G62m50oigInC30sf'
     restart: always
     networks:
@@ -205,7 +205,7 @@ services:
       # root 密码 - root password
       MYSQL_ROOT_PASSWORD: PXDN93VRKUm8TeE7
     ports:
-      - 33069:3306
+      - 33069:33069
     volumes:
       # 数据挂载 - Data mounting
       - ./data/mysql/data:/var/lib/mysql
@@ -228,7 +228,7 @@ services:
     image: redis:6.2.5
     container_name: redis
     ports:
-      - 36379:6379
+      - 36379:36379
     environment:
       # 时区上海 - Time zone Shanghai (Change if needed)
       TZ: Asia/Shanghai
