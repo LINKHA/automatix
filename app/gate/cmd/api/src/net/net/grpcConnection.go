@@ -96,6 +96,7 @@ func (c *GrpcConnection[T_Client, T_Req, T_Resp]) StartReader() {
 			return
 		default:
 			err := c.conn.RecvMsg(m)
+			c.msgRespChan <- *m
 
 			if err == io.EOF {
 				fmt.Printf("Received GRPC EOF\n")
