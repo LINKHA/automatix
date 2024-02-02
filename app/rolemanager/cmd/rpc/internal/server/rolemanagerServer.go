@@ -4,8 +4,6 @@
 package server
 
 import (
-	"context"
-
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/internal/logic"
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/rolemanager/cmd/rpc/pb"
@@ -20,16 +18,6 @@ func NewRolemanagerServer(svcCtx *svc.ServiceContext) *RolemanagerServer {
 	return &RolemanagerServer{
 		svcCtx: svcCtx,
 	}
-}
-
-func (s *RolemanagerServer) CreateRole(ctx context.Context, in *pb.CreateRoleReq) (*pb.CreateRoleResp, error) {
-	l := logic.NewCreateRoleLogic(ctx, s.svcCtx)
-	return l.CreateRole(in)
-}
-
-func (s *RolemanagerServer) CreateRoleStream(stream pb.Rolemanager_CreateRoleStreamServer) error {
-	l := logic.NewCreateRoleStreamLogic(stream.Context(), s.svcCtx)
-	return l.CreateRoleStream(stream)
 }
 
 func (s *RolemanagerServer) RegisterRole(stream pb.Rolemanager_RegisterRoleServer) error {

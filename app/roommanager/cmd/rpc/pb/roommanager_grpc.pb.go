@@ -19,11 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	Roommanager_CreateGroup_FullMethodName = "/pb.roommanager/createGroup"
+	Roommanager_DeleteGroup_FullMethodName = "/pb.roommanager/deleteGroup"
+	Roommanager_GetGroup_FullMethodName    = "/pb.roommanager/getGroup"
+	Roommanager_JoinGroup_FullMethodName   = "/pb.roommanager/joinGroup"
+	Roommanager_LeaveGroup_FullMethodName  = "/pb.roommanager/leaveGroup"
 	Roommanager_CreateRoom_FullMethodName  = "/pb.roommanager/createRoom"
-	Roommanager_JoinRoom_FullMethodName    = "/pb.roommanager/joinRoom"
-	Roommanager_LeaveRoom_FullMethodName   = "/pb.roommanager/leaveRoom"
+	Roommanager_GetRoom_FullMethodName     = "/pb.roommanager/getRoom"
 	Roommanager_MatchRoom_FullMethodName   = "/pb.roommanager/matchRoom"
-	Roommanager_GetRoomInfo_FullMethodName = "/pb.roommanager/getRoomInfo"
 	Roommanager_MatchFinish_FullMethodName = "/pb.roommanager/matchFinish"
 )
 
@@ -31,11 +34,14 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RoommanagerClient interface {
+	CreateGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_CreateGroupClient, error)
+	DeleteGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_DeleteGroupClient, error)
+	GetGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_GetGroupClient, error)
+	JoinGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_JoinGroupClient, error)
+	LeaveGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_LeaveGroupClient, error)
 	CreateRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_CreateRoomClient, error)
-	JoinRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_JoinRoomClient, error)
-	LeaveRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_LeaveRoomClient, error)
+	GetRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_GetRoomClient, error)
 	MatchRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_MatchRoomClient, error)
-	GetRoomInfo(ctx context.Context, opts ...grpc.CallOption) (Roommanager_GetRoomInfoClient, error)
 	MatchFinish(ctx context.Context, opts ...grpc.CallOption) (Roommanager_MatchFinishClient, error)
 }
 
@@ -47,8 +53,163 @@ func NewRoommanagerClient(cc grpc.ClientConnInterface) RoommanagerClient {
 	return &roommanagerClient{cc}
 }
 
+func (c *roommanagerClient) CreateGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_CreateGroupClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[0], Roommanager_CreateGroup_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerCreateGroupClient{stream}
+	return x, nil
+}
+
+type Roommanager_CreateGroupClient interface {
+	Send(*CreateGroupReq) error
+	Recv() (*CreateGroupResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerCreateGroupClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerCreateGroupClient) Send(m *CreateGroupReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerCreateGroupClient) Recv() (*CreateGroupResp, error) {
+	m := new(CreateGroupResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) DeleteGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_DeleteGroupClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[1], Roommanager_DeleteGroup_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerDeleteGroupClient{stream}
+	return x, nil
+}
+
+type Roommanager_DeleteGroupClient interface {
+	Send(*DeleteGroupReq) error
+	Recv() (*DeleteGroupResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerDeleteGroupClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerDeleteGroupClient) Send(m *DeleteGroupReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerDeleteGroupClient) Recv() (*DeleteGroupResp, error) {
+	m := new(DeleteGroupResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) GetGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_GetGroupClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[2], Roommanager_GetGroup_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerGetGroupClient{stream}
+	return x, nil
+}
+
+type Roommanager_GetGroupClient interface {
+	Send(*GetGroupReq) error
+	Recv() (*GetGroupResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerGetGroupClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerGetGroupClient) Send(m *GetGroupReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerGetGroupClient) Recv() (*GetGroupResp, error) {
+	m := new(GetGroupResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) JoinGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_JoinGroupClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[3], Roommanager_JoinGroup_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerJoinGroupClient{stream}
+	return x, nil
+}
+
+type Roommanager_JoinGroupClient interface {
+	Send(*JoinGroupReq) error
+	Recv() (*JoinGroupResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerJoinGroupClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerJoinGroupClient) Send(m *JoinGroupReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerJoinGroupClient) Recv() (*JoinGroupResp, error) {
+	m := new(JoinGroupResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *roommanagerClient) LeaveGroup(ctx context.Context, opts ...grpc.CallOption) (Roommanager_LeaveGroupClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[4], Roommanager_LeaveGroup_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roommanagerLeaveGroupClient{stream}
+	return x, nil
+}
+
+type Roommanager_LeaveGroupClient interface {
+	Send(*LeaveGroupReq) error
+	Recv() (*LeaveGroupResp, error)
+	grpc.ClientStream
+}
+
+type roommanagerLeaveGroupClient struct {
+	grpc.ClientStream
+}
+
+func (x *roommanagerLeaveGroupClient) Send(m *LeaveGroupReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *roommanagerLeaveGroupClient) Recv() (*LeaveGroupResp, error) {
+	m := new(LeaveGroupResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *roommanagerClient) CreateRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_CreateRoomClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[0], Roommanager_CreateRoom_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[5], Roommanager_CreateRoom_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -78,62 +239,31 @@ func (x *roommanagerCreateRoomClient) Recv() (*CreateRoomResp, error) {
 	return m, nil
 }
 
-func (c *roommanagerClient) JoinRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_JoinRoomClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[1], Roommanager_JoinRoom_FullMethodName, opts...)
+func (c *roommanagerClient) GetRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_GetRoomClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[6], Roommanager_GetRoom_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &roommanagerJoinRoomClient{stream}
+	x := &roommanagerGetRoomClient{stream}
 	return x, nil
 }
 
-type Roommanager_JoinRoomClient interface {
-	Send(*JoinRoomReq) error
-	Recv() (*JoinRoomResp, error)
+type Roommanager_GetRoomClient interface {
+	Send(*GetRoomReq) error
+	Recv() (*GetRoomResp, error)
 	grpc.ClientStream
 }
 
-type roommanagerJoinRoomClient struct {
+type roommanagerGetRoomClient struct {
 	grpc.ClientStream
 }
 
-func (x *roommanagerJoinRoomClient) Send(m *JoinRoomReq) error {
+func (x *roommanagerGetRoomClient) Send(m *GetRoomReq) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *roommanagerJoinRoomClient) Recv() (*JoinRoomResp, error) {
-	m := new(JoinRoomResp)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *roommanagerClient) LeaveRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_LeaveRoomClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[2], Roommanager_LeaveRoom_FullMethodName, opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &roommanagerLeaveRoomClient{stream}
-	return x, nil
-}
-
-type Roommanager_LeaveRoomClient interface {
-	Send(*LeaveRoomReq) error
-	Recv() (*LeaveRoomResp, error)
-	grpc.ClientStream
-}
-
-type roommanagerLeaveRoomClient struct {
-	grpc.ClientStream
-}
-
-func (x *roommanagerLeaveRoomClient) Send(m *LeaveRoomReq) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *roommanagerLeaveRoomClient) Recv() (*LeaveRoomResp, error) {
-	m := new(LeaveRoomResp)
+func (x *roommanagerGetRoomClient) Recv() (*GetRoomResp, error) {
+	m := new(GetRoomResp)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -141,7 +271,7 @@ func (x *roommanagerLeaveRoomClient) Recv() (*LeaveRoomResp, error) {
 }
 
 func (c *roommanagerClient) MatchRoom(ctx context.Context, opts ...grpc.CallOption) (Roommanager_MatchRoomClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[3], Roommanager_MatchRoom_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[7], Roommanager_MatchRoom_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -171,39 +301,8 @@ func (x *roommanagerMatchRoomClient) Recv() (*MatchRoomResp, error) {
 	return m, nil
 }
 
-func (c *roommanagerClient) GetRoomInfo(ctx context.Context, opts ...grpc.CallOption) (Roommanager_GetRoomInfoClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[4], Roommanager_GetRoomInfo_FullMethodName, opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &roommanagerGetRoomInfoClient{stream}
-	return x, nil
-}
-
-type Roommanager_GetRoomInfoClient interface {
-	Send(*GetRoomInfoReq) error
-	Recv() (*GetRoomInfoResp, error)
-	grpc.ClientStream
-}
-
-type roommanagerGetRoomInfoClient struct {
-	grpc.ClientStream
-}
-
-func (x *roommanagerGetRoomInfoClient) Send(m *GetRoomInfoReq) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *roommanagerGetRoomInfoClient) Recv() (*GetRoomInfoResp, error) {
-	m := new(GetRoomInfoResp)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *roommanagerClient) MatchFinish(ctx context.Context, opts ...grpc.CallOption) (Roommanager_MatchFinishClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[5], Roommanager_MatchFinish_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Roommanager_ServiceDesc.Streams[8], Roommanager_MatchFinish_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -237,11 +336,14 @@ func (x *roommanagerMatchFinishClient) Recv() (*MatchFinishResp, error) {
 // All implementations must embed UnimplementedRoommanagerServer
 // for forward compatibility
 type RoommanagerServer interface {
+	CreateGroup(Roommanager_CreateGroupServer) error
+	DeleteGroup(Roommanager_DeleteGroupServer) error
+	GetGroup(Roommanager_GetGroupServer) error
+	JoinGroup(Roommanager_JoinGroupServer) error
+	LeaveGroup(Roommanager_LeaveGroupServer) error
 	CreateRoom(Roommanager_CreateRoomServer) error
-	JoinRoom(Roommanager_JoinRoomServer) error
-	LeaveRoom(Roommanager_LeaveRoomServer) error
+	GetRoom(Roommanager_GetRoomServer) error
 	MatchRoom(Roommanager_MatchRoomServer) error
-	GetRoomInfo(Roommanager_GetRoomInfoServer) error
 	MatchFinish(Roommanager_MatchFinishServer) error
 	mustEmbedUnimplementedRoommanagerServer()
 }
@@ -250,20 +352,29 @@ type RoommanagerServer interface {
 type UnimplementedRoommanagerServer struct {
 }
 
+func (UnimplementedRoommanagerServer) CreateGroup(Roommanager_CreateGroupServer) error {
+	return status.Errorf(codes.Unimplemented, "method CreateGroup not implemented")
+}
+func (UnimplementedRoommanagerServer) DeleteGroup(Roommanager_DeleteGroupServer) error {
+	return status.Errorf(codes.Unimplemented, "method DeleteGroup not implemented")
+}
+func (UnimplementedRoommanagerServer) GetGroup(Roommanager_GetGroupServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetGroup not implemented")
+}
+func (UnimplementedRoommanagerServer) JoinGroup(Roommanager_JoinGroupServer) error {
+	return status.Errorf(codes.Unimplemented, "method JoinGroup not implemented")
+}
+func (UnimplementedRoommanagerServer) LeaveGroup(Roommanager_LeaveGroupServer) error {
+	return status.Errorf(codes.Unimplemented, "method LeaveGroup not implemented")
+}
 func (UnimplementedRoommanagerServer) CreateRoom(Roommanager_CreateRoomServer) error {
 	return status.Errorf(codes.Unimplemented, "method CreateRoom not implemented")
 }
-func (UnimplementedRoommanagerServer) JoinRoom(Roommanager_JoinRoomServer) error {
-	return status.Errorf(codes.Unimplemented, "method JoinRoom not implemented")
-}
-func (UnimplementedRoommanagerServer) LeaveRoom(Roommanager_LeaveRoomServer) error {
-	return status.Errorf(codes.Unimplemented, "method LeaveRoom not implemented")
+func (UnimplementedRoommanagerServer) GetRoom(Roommanager_GetRoomServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetRoom not implemented")
 }
 func (UnimplementedRoommanagerServer) MatchRoom(Roommanager_MatchRoomServer) error {
 	return status.Errorf(codes.Unimplemented, "method MatchRoom not implemented")
-}
-func (UnimplementedRoommanagerServer) GetRoomInfo(Roommanager_GetRoomInfoServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetRoomInfo not implemented")
 }
 func (UnimplementedRoommanagerServer) MatchFinish(Roommanager_MatchFinishServer) error {
 	return status.Errorf(codes.Unimplemented, "method MatchFinish not implemented")
@@ -279,6 +390,136 @@ type UnsafeRoommanagerServer interface {
 
 func RegisterRoommanagerServer(s grpc.ServiceRegistrar, srv RoommanagerServer) {
 	s.RegisterService(&Roommanager_ServiceDesc, srv)
+}
+
+func _Roommanager_CreateGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).CreateGroup(&roommanagerCreateGroupServer{stream})
+}
+
+type Roommanager_CreateGroupServer interface {
+	Send(*CreateGroupResp) error
+	Recv() (*CreateGroupReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerCreateGroupServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerCreateGroupServer) Send(m *CreateGroupResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerCreateGroupServer) Recv() (*CreateGroupReq, error) {
+	m := new(CreateGroupReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_DeleteGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).DeleteGroup(&roommanagerDeleteGroupServer{stream})
+}
+
+type Roommanager_DeleteGroupServer interface {
+	Send(*DeleteGroupResp) error
+	Recv() (*DeleteGroupReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerDeleteGroupServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerDeleteGroupServer) Send(m *DeleteGroupResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerDeleteGroupServer) Recv() (*DeleteGroupReq, error) {
+	m := new(DeleteGroupReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_GetGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).GetGroup(&roommanagerGetGroupServer{stream})
+}
+
+type Roommanager_GetGroupServer interface {
+	Send(*GetGroupResp) error
+	Recv() (*GetGroupReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerGetGroupServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerGetGroupServer) Send(m *GetGroupResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerGetGroupServer) Recv() (*GetGroupReq, error) {
+	m := new(GetGroupReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_JoinGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).JoinGroup(&roommanagerJoinGroupServer{stream})
+}
+
+type Roommanager_JoinGroupServer interface {
+	Send(*JoinGroupResp) error
+	Recv() (*JoinGroupReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerJoinGroupServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerJoinGroupServer) Send(m *JoinGroupResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerJoinGroupServer) Recv() (*JoinGroupReq, error) {
+	m := new(JoinGroupReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Roommanager_LeaveGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).LeaveGroup(&roommanagerLeaveGroupServer{stream})
+}
+
+type Roommanager_LeaveGroupServer interface {
+	Send(*LeaveGroupResp) error
+	Recv() (*LeaveGroupReq, error)
+	grpc.ServerStream
+}
+
+type roommanagerLeaveGroupServer struct {
+	grpc.ServerStream
+}
+
+func (x *roommanagerLeaveGroupServer) Send(m *LeaveGroupResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *roommanagerLeaveGroupServer) Recv() (*LeaveGroupReq, error) {
+	m := new(LeaveGroupReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func _Roommanager_CreateRoom_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -307,52 +548,26 @@ func (x *roommanagerCreateRoomServer) Recv() (*CreateRoomReq, error) {
 	return m, nil
 }
 
-func _Roommanager_JoinRoom_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(RoommanagerServer).JoinRoom(&roommanagerJoinRoomServer{stream})
+func _Roommanager_GetRoom_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RoommanagerServer).GetRoom(&roommanagerGetRoomServer{stream})
 }
 
-type Roommanager_JoinRoomServer interface {
-	Send(*JoinRoomResp) error
-	Recv() (*JoinRoomReq, error)
+type Roommanager_GetRoomServer interface {
+	Send(*GetRoomResp) error
+	Recv() (*GetRoomReq, error)
 	grpc.ServerStream
 }
 
-type roommanagerJoinRoomServer struct {
+type roommanagerGetRoomServer struct {
 	grpc.ServerStream
 }
 
-func (x *roommanagerJoinRoomServer) Send(m *JoinRoomResp) error {
+func (x *roommanagerGetRoomServer) Send(m *GetRoomResp) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *roommanagerJoinRoomServer) Recv() (*JoinRoomReq, error) {
-	m := new(JoinRoomReq)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func _Roommanager_LeaveRoom_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(RoommanagerServer).LeaveRoom(&roommanagerLeaveRoomServer{stream})
-}
-
-type Roommanager_LeaveRoomServer interface {
-	Send(*LeaveRoomResp) error
-	Recv() (*LeaveRoomReq, error)
-	grpc.ServerStream
-}
-
-type roommanagerLeaveRoomServer struct {
-	grpc.ServerStream
-}
-
-func (x *roommanagerLeaveRoomServer) Send(m *LeaveRoomResp) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *roommanagerLeaveRoomServer) Recv() (*LeaveRoomReq, error) {
-	m := new(LeaveRoomReq)
+func (x *roommanagerGetRoomServer) Recv() (*GetRoomReq, error) {
+	m := new(GetRoomReq)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -379,32 +594,6 @@ func (x *roommanagerMatchRoomServer) Send(m *MatchRoomResp) error {
 
 func (x *roommanagerMatchRoomServer) Recv() (*MatchRoomReq, error) {
 	m := new(MatchRoomReq)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func _Roommanager_GetRoomInfo_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(RoommanagerServer).GetRoomInfo(&roommanagerGetRoomInfoServer{stream})
-}
-
-type Roommanager_GetRoomInfoServer interface {
-	Send(*GetRoomInfoResp) error
-	Recv() (*GetRoomInfoReq, error)
-	grpc.ServerStream
-}
-
-type roommanagerGetRoomInfoServer struct {
-	grpc.ServerStream
-}
-
-func (x *roommanagerGetRoomInfoServer) Send(m *GetRoomInfoResp) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *roommanagerGetRoomInfoServer) Recv() (*GetRoomInfoReq, error) {
-	m := new(GetRoomInfoReq)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -446,32 +635,50 @@ var Roommanager_ServiceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
+			StreamName:    "createGroup",
+			Handler:       _Roommanager_CreateGroup_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "deleteGroup",
+			Handler:       _Roommanager_DeleteGroup_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "getGroup",
+			Handler:       _Roommanager_GetGroup_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "joinGroup",
+			Handler:       _Roommanager_JoinGroup_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "leaveGroup",
+			Handler:       _Roommanager_LeaveGroup_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
 			StreamName:    "createRoom",
 			Handler:       _Roommanager_CreateRoom_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
 		{
-			StreamName:    "joinRoom",
-			Handler:       _Roommanager_JoinRoom_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
-		{
-			StreamName:    "leaveRoom",
-			Handler:       _Roommanager_LeaveRoom_Handler,
+			StreamName:    "getRoom",
+			Handler:       _Roommanager_GetRoom_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
 		{
 			StreamName:    "matchRoom",
 			Handler:       _Roommanager_MatchRoom_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
-		{
-			StreamName:    "getRoomInfo",
-			Handler:       _Roommanager_GetRoomInfo_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

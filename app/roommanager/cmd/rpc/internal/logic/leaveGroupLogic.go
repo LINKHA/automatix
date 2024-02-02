@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type GetRoomInfoLogic struct {
+type LeaveGroupLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewGetRoomInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetRoomInfoLogic {
-	return &GetRoomInfoLogic{
+func NewLeaveGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LeaveGroupLogic {
+	return &LeaveGroupLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *GetRoomInfoLogic) GetRoomInfo(stream pb.Roommanager_GetRoomInfoServer) error {
+func (l *LeaveGroupLogic) LeaveGroup(stream pb.Roommanager_LeaveGroupServer) error {
 	// todo: add your logic here and delete this line
 
 	return nil

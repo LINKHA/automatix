@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type LeaveRoomLogic struct {
+type CreateGroupLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewLeaveRoomLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LeaveRoomLogic {
-	return &LeaveRoomLogic{
+func NewCreateGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateGroupLogic {
+	return &CreateGroupLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *LeaveRoomLogic) LeaveRoom(stream pb.Roommanager_LeaveRoomServer) error {
+func (l *CreateGroupLogic) CreateGroup(stream pb.Roommanager_CreateGroupServer) error {
 	// todo: add your logic here and delete this line
 
 	return nil

@@ -20,29 +20,44 @@ func NewRoommanagerServer(svcCtx *svc.ServiceContext) *RoommanagerServer {
 	}
 }
 
+func (s *RoommanagerServer) CreateGroup(stream pb.Roommanager_CreateGroupServer) error {
+	l := logic.NewCreateGroupLogic(stream.Context(), s.svcCtx)
+	return l.CreateGroup(stream)
+}
+
+func (s *RoommanagerServer) DeleteGroup(stream pb.Roommanager_DeleteGroupServer) error {
+	l := logic.NewDeleteGroupLogic(stream.Context(), s.svcCtx)
+	return l.DeleteGroup(stream)
+}
+
+func (s *RoommanagerServer) GetGroup(stream pb.Roommanager_GetGroupServer) error {
+	l := logic.NewGetGroupLogic(stream.Context(), s.svcCtx)
+	return l.GetGroup(stream)
+}
+
+func (s *RoommanagerServer) JoinGroup(stream pb.Roommanager_JoinGroupServer) error {
+	l := logic.NewJoinGroupLogic(stream.Context(), s.svcCtx)
+	return l.JoinGroup(stream)
+}
+
+func (s *RoommanagerServer) LeaveGroup(stream pb.Roommanager_LeaveGroupServer) error {
+	l := logic.NewLeaveGroupLogic(stream.Context(), s.svcCtx)
+	return l.LeaveGroup(stream)
+}
+
 func (s *RoommanagerServer) CreateRoom(stream pb.Roommanager_CreateRoomServer) error {
 	l := logic.NewCreateRoomLogic(stream.Context(), s.svcCtx)
 	return l.CreateRoom(stream)
 }
 
-func (s *RoommanagerServer) JoinRoom(stream pb.Roommanager_JoinRoomServer) error {
-	l := logic.NewJoinRoomLogic(stream.Context(), s.svcCtx)
-	return l.JoinRoom(stream)
-}
-
-func (s *RoommanagerServer) LeaveRoom(stream pb.Roommanager_LeaveRoomServer) error {
-	l := logic.NewLeaveRoomLogic(stream.Context(), s.svcCtx)
-	return l.LeaveRoom(stream)
+func (s *RoommanagerServer) GetRoom(stream pb.Roommanager_GetRoomServer) error {
+	l := logic.NewGetRoomLogic(stream.Context(), s.svcCtx)
+	return l.GetRoom(stream)
 }
 
 func (s *RoommanagerServer) MatchRoom(stream pb.Roommanager_MatchRoomServer) error {
 	l := logic.NewMatchRoomLogic(stream.Context(), s.svcCtx)
 	return l.MatchRoom(stream)
-}
-
-func (s *RoommanagerServer) GetRoomInfo(stream pb.Roommanager_GetRoomInfoServer) error {
-	l := logic.NewGetRoomInfoLogic(stream.Context(), s.svcCtx)
-	return l.GetRoomInfo(stream)
 }
 
 func (s *RoommanagerServer) MatchFinish(stream pb.Roommanager_MatchFinishServer) error {

@@ -13,12 +13,22 @@ import (
 )
 
 type (
+	CreateGroupReq  = pb.CreateGroupReq
+	CreateGroupResp = pb.CreateGroupResp
 	CreateRoomReq   = pb.CreateRoomReq
 	CreateRoomResp  = pb.CreateRoomResp
-	GetRoomInfoReq  = pb.GetRoomInfoReq
-	GetRoomInfoResp = pb.GetRoomInfoResp
+	DeleteGroupReq  = pb.DeleteGroupReq
+	DeleteGroupResp = pb.DeleteGroupResp
+	GetGroupReq     = pb.GetGroupReq
+	GetGroupResp    = pb.GetGroupResp
+	GetRoomReq      = pb.GetRoomReq
+	GetRoomResp     = pb.GetRoomResp
+	JoinGroupReq    = pb.JoinGroupReq
+	JoinGroupResp   = pb.JoinGroupResp
 	JoinRoomReq     = pb.JoinRoomReq
 	JoinRoomResp    = pb.JoinRoomResp
+	LeaveGroupReq   = pb.LeaveGroupReq
+	LeaveGroupResp  = pb.LeaveGroupResp
 	LeaveRoomReq    = pb.LeaveRoomReq
 	LeaveRoomResp   = pb.LeaveRoomResp
 	MatchFinishReq  = pb.MatchFinishReq
@@ -27,11 +37,14 @@ type (
 	MatchRoomResp   = pb.MatchRoomResp
 
 	Roommanager interface {
+		CreateGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_CreateGroupClient, error)
+		DeleteGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_DeleteGroupClient, error)
+		GetGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_GetGroupClient, error)
+		JoinGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_JoinGroupClient, error)
+		LeaveGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_LeaveGroupClient, error)
 		CreateRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_CreateRoomClient, error)
-		JoinRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_JoinRoomClient, error)
-		LeaveRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_LeaveRoomClient, error)
+		GetRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_GetRoomClient, error)
 		MatchRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_MatchRoomClient, error)
-		GetRoomInfo(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_GetRoomInfoClient, error)
 		MatchFinish(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_MatchFinishClient, error)
 	}
 
@@ -46,29 +59,44 @@ func NewRoommanager(cli zrpc.Client) Roommanager {
 	}
 }
 
+func (m *defaultRoommanager) CreateGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_CreateGroupClient, error) {
+	client := pb.NewRoommanagerClient(m.cli.Conn())
+	return client.CreateGroup(ctx, opts...)
+}
+
+func (m *defaultRoommanager) DeleteGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_DeleteGroupClient, error) {
+	client := pb.NewRoommanagerClient(m.cli.Conn())
+	return client.DeleteGroup(ctx, opts...)
+}
+
+func (m *defaultRoommanager) GetGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_GetGroupClient, error) {
+	client := pb.NewRoommanagerClient(m.cli.Conn())
+	return client.GetGroup(ctx, opts...)
+}
+
+func (m *defaultRoommanager) JoinGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_JoinGroupClient, error) {
+	client := pb.NewRoommanagerClient(m.cli.Conn())
+	return client.JoinGroup(ctx, opts...)
+}
+
+func (m *defaultRoommanager) LeaveGroup(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_LeaveGroupClient, error) {
+	client := pb.NewRoommanagerClient(m.cli.Conn())
+	return client.LeaveGroup(ctx, opts...)
+}
+
 func (m *defaultRoommanager) CreateRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_CreateRoomClient, error) {
 	client := pb.NewRoommanagerClient(m.cli.Conn())
 	return client.CreateRoom(ctx, opts...)
 }
 
-func (m *defaultRoommanager) JoinRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_JoinRoomClient, error) {
+func (m *defaultRoommanager) GetRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_GetRoomClient, error) {
 	client := pb.NewRoommanagerClient(m.cli.Conn())
-	return client.JoinRoom(ctx, opts...)
-}
-
-func (m *defaultRoommanager) LeaveRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_LeaveRoomClient, error) {
-	client := pb.NewRoommanagerClient(m.cli.Conn())
-	return client.LeaveRoom(ctx, opts...)
+	return client.GetRoom(ctx, opts...)
 }
 
 func (m *defaultRoommanager) MatchRoom(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_MatchRoomClient, error) {
 	client := pb.NewRoommanagerClient(m.cli.Conn())
 	return client.MatchRoom(ctx, opts...)
-}
-
-func (m *defaultRoommanager) GetRoomInfo(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_GetRoomInfoClient, error) {
-	client := pb.NewRoommanagerClient(m.cli.Conn())
-	return client.GetRoomInfo(ctx, opts...)
 }
 
 func (m *defaultRoommanager) MatchFinish(ctx context.Context, opts ...grpc.CallOption) (pb.Roommanager_MatchFinishClient, error) {

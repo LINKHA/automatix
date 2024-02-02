@@ -3,13 +3,56 @@ syntax = "proto3";
 option go_package = "./pb";
 
 package pb;
-
-message CreateRoomReq {
-    string roleId = 1;
-    string roomName = 2;
-  	string maxPlayers = 3;
+//group
+message CreateGroupReq {
+    string roldId = 1;
+    string groupName = 2;
+  	string maxPlayer = 3;
+}
+message CreateGroupResp {
+    int64 returnCode = 1;
+    string groupId = 2;
 }
 
+message DeleteGroupReq {
+    string groupId = 1;
+}
+message DeleteGroupResp {
+    int64 returnCode = 1;
+}
+
+message GetGroupReq {
+    string groupId = 1;
+}
+message GetGroupResp {
+    int64 returnCode = 1;
+    string groupId = 2;
+    string groupName = 3;
+  	string maxPlayer = 4;
+    repeated string roldIds = 5;
+}
+
+message JoinGroupReq {
+    string groupId = 1;
+    string roldId = 2;
+}
+message JoinGroupResp {
+    int64 returnCode = 1;
+}
+
+message LeaveGroupReq {
+    string groupId = 1;
+    string roldId = 2;
+}
+message LeaveGroupResp {
+    int64 returnCode = 1;
+}
+
+//room
+message CreateRoomReq {
+    string roomName = 1;
+  	string maxPlayer = 2;
+}
 message CreateRoomResp {
     int64 returnCode = 1;
     string roomId = 2;
@@ -19,33 +62,36 @@ message JoinRoomReq {
     string roomId = 1;
     string roleId = 2;
 }
-
 message JoinRoomResp {
     int64 returnCode = 1;
 }
 
 message LeaveRoomReq {
     string roomId = 1;
-    string playerId = 2;
+    string roleId = 2;
 }
-
 message LeaveRoomResp {
     int64 returnCode = 1;
 }
 
-message MatchRoomReq {
+message GetRoomReq {
     string roomId = 1;
 }
-
-message MatchRoomResp {
+message GetRoomResp {
     int64 returnCode = 1;
+    string roomId = 2;
+    string roomName = 3;
+  	string maxPlayer = 4;
+    repeated string roldIds = 5;
 }
 
-message GetRoomInfoReq {
-    string roomId = 1;
-}
 
-message GetRoomInfoResp {
+//match
+message MatchRoomReq {
+  	string groupId = 1;
+    string roomId = 2;
+}
+message MatchRoomResp {
     int64 returnCode = 1;
 }
 
@@ -54,16 +100,19 @@ message MatchFinishReq {
 
 message MatchFinishResp {
     int64 returnCode = 1;
-    string battleId = 2;
+    string roomId = 2;
 }
 
 service roommanager {
+    rpc createGroup(stream CreateGroupReq) returns (stream CreateGroupResp);
+    rpc deleteGroup(stream DeleteGroupReq) returns (stream DeleteGroupResp);
+    rpc getGroup(stream GetGroupReq) returns (stream GetGroupResp);
+    rpc joinGroup(stream JoinGroupReq) returns (stream JoinGroupResp);
+    rpc leaveGroup(stream LeaveGroupReq) returns (stream LeaveGroupResp);
+
     rpc createRoom(stream CreateRoomReq) returns (stream CreateRoomResp);
-    rpc joinRoom(stream JoinRoomReq) returns (stream JoinRoomResp);
-    rpc leaveRoom(stream LeaveRoomReq) returns (stream LeaveRoomResp);
-
+    rpc getRoom(stream GetRoomReq) returns (stream GetRoomResp);
+    
     rpc matchRoom(stream MatchRoomReq) returns (stream MatchRoomResp);
-    rpc getRoomInfo(stream GetRoomInfoReq) returns (stream GetRoomInfoResp);
     rpc matchFinish(stream MatchFinishReq) returns (stream MatchFinishResp);
-
 }

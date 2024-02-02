@@ -19,20 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Rolemanager_CreateRole_FullMethodName       = "/pb.rolemanager/createRole"
-	Rolemanager_CreateRoleStream_FullMethodName = "/pb.rolemanager/createRoleStream"
-	Rolemanager_RegisterRole_FullMethodName     = "/pb.rolemanager/registerRole"
-	Rolemanager_SetRole_FullMethodName          = "/pb.rolemanager/setRole"
-	Rolemanager_GetRole_FullMethodName          = "/pb.rolemanager/getRole"
-	Rolemanager_DeleteRole_FullMethodName       = "/pb.rolemanager/deleteRole"
+	Rolemanager_RegisterRole_FullMethodName = "/pb.rolemanager/registerRole"
+	Rolemanager_SetRole_FullMethodName      = "/pb.rolemanager/setRole"
+	Rolemanager_GetRole_FullMethodName      = "/pb.rolemanager/getRole"
+	Rolemanager_DeleteRole_FullMethodName   = "/pb.rolemanager/deleteRole"
 )
 
 // RolemanagerClient is the client API for Rolemanager service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RolemanagerClient interface {
-	CreateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*CreateRoleResp, error)
-	CreateRoleStream(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_CreateRoleStreamClient, error)
 	RegisterRole(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_RegisterRoleClient, error)
 	SetRole(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_SetRoleClient, error)
 	GetRole(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_GetRoleClient, error)
@@ -47,48 +43,8 @@ func NewRolemanagerClient(cc grpc.ClientConnInterface) RolemanagerClient {
 	return &rolemanagerClient{cc}
 }
 
-func (c *rolemanagerClient) CreateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*CreateRoleResp, error) {
-	out := new(CreateRoleResp)
-	err := c.cc.Invoke(ctx, Rolemanager_CreateRole_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *rolemanagerClient) CreateRoleStream(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_CreateRoleStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[0], Rolemanager_CreateRoleStream_FullMethodName, opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &rolemanagerCreateRoleStreamClient{stream}
-	return x, nil
-}
-
-type Rolemanager_CreateRoleStreamClient interface {
-	Send(*CreateRoleReq) error
-	Recv() (*CreateRoleResp, error)
-	grpc.ClientStream
-}
-
-type rolemanagerCreateRoleStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *rolemanagerCreateRoleStreamClient) Send(m *CreateRoleReq) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *rolemanagerCreateRoleStreamClient) Recv() (*CreateRoleResp, error) {
-	m := new(CreateRoleResp)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *rolemanagerClient) RegisterRole(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_RegisterRoleClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[1], Rolemanager_RegisterRole_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[0], Rolemanager_RegisterRole_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +75,7 @@ func (x *rolemanagerRegisterRoleClient) Recv() (*RegisterRoleResp, error) {
 }
 
 func (c *rolemanagerClient) SetRole(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_SetRoleClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[2], Rolemanager_SetRole_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[1], Rolemanager_SetRole_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +106,7 @@ func (x *rolemanagerSetRoleClient) Recv() (*SetRoleResp, error) {
 }
 
 func (c *rolemanagerClient) GetRole(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_GetRoleClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[3], Rolemanager_GetRole_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[2], Rolemanager_GetRole_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -181,7 +137,7 @@ func (x *rolemanagerGetRoleClient) Recv() (*GetRoleResp, error) {
 }
 
 func (c *rolemanagerClient) DeleteRole(ctx context.Context, opts ...grpc.CallOption) (Rolemanager_DeleteRoleClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[4], Rolemanager_DeleteRole_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Rolemanager_ServiceDesc.Streams[3], Rolemanager_DeleteRole_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -215,8 +171,6 @@ func (x *rolemanagerDeleteRoleClient) Recv() (*DeleteRoleResp, error) {
 // All implementations must embed UnimplementedRolemanagerServer
 // for forward compatibility
 type RolemanagerServer interface {
-	CreateRole(context.Context, *CreateRoleReq) (*CreateRoleResp, error)
-	CreateRoleStream(Rolemanager_CreateRoleStreamServer) error
 	RegisterRole(Rolemanager_RegisterRoleServer) error
 	SetRole(Rolemanager_SetRoleServer) error
 	GetRole(Rolemanager_GetRoleServer) error
@@ -228,12 +182,6 @@ type RolemanagerServer interface {
 type UnimplementedRolemanagerServer struct {
 }
 
-func (UnimplementedRolemanagerServer) CreateRole(context.Context, *CreateRoleReq) (*CreateRoleResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateRole not implemented")
-}
-func (UnimplementedRolemanagerServer) CreateRoleStream(Rolemanager_CreateRoleStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method CreateRoleStream not implemented")
-}
 func (UnimplementedRolemanagerServer) RegisterRole(Rolemanager_RegisterRoleServer) error {
 	return status.Errorf(codes.Unimplemented, "method RegisterRole not implemented")
 }
@@ -257,50 +205,6 @@ type UnsafeRolemanagerServer interface {
 
 func RegisterRolemanagerServer(s grpc.ServiceRegistrar, srv RolemanagerServer) {
 	s.RegisterService(&Rolemanager_ServiceDesc, srv)
-}
-
-func _Rolemanager_CreateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateRoleReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RolemanagerServer).CreateRole(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Rolemanager_CreateRole_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RolemanagerServer).CreateRole(ctx, req.(*CreateRoleReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Rolemanager_CreateRoleStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(RolemanagerServer).CreateRoleStream(&rolemanagerCreateRoleStreamServer{stream})
-}
-
-type Rolemanager_CreateRoleStreamServer interface {
-	Send(*CreateRoleResp) error
-	Recv() (*CreateRoleReq, error)
-	grpc.ServerStream
-}
-
-type rolemanagerCreateRoleStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *rolemanagerCreateRoleStreamServer) Send(m *CreateRoleResp) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *rolemanagerCreateRoleStreamServer) Recv() (*CreateRoleReq, error) {
-	m := new(CreateRoleReq)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
 }
 
 func _Rolemanager_RegisterRole_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -413,19 +317,8 @@ func (x *rolemanagerDeleteRoleServer) Recv() (*DeleteRoleReq, error) {
 var Rolemanager_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.rolemanager",
 	HandlerType: (*RolemanagerServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "createRole",
-			Handler:    _Rolemanager_CreateRole_Handler,
-		},
-	},
+	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "createRoleStream",
-			Handler:       _Rolemanager_CreateRoleStream_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
 		{
 			StreamName:    "registerRole",
 			Handler:       _Rolemanager_RegisterRole_Handler,
