@@ -49,18 +49,18 @@ func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 		func() *rolemanagerPb.SetRoleReq { return &rolemanagerPb.SetRoleReq{} },
 	)
 
-	// registerGrpcConn[
-	// 	rolemanagerPb.Rolemanager_GetRoleClient,
-	// 	*rolemanagerPb.GetRoleReq,
-	// 	rolemanagerPb.GetRoleResp,
-	// ](
-	// 	103,
-	// 	grpcConnManager,
-	// 	func(mctx context.Context) (rolemanagerPb.Rolemanager_GetRoleClient, error) {
-	// 		return ctx.RoleManagerRpc.GetRole(context.Background())
-	// 	},
-	// 	func() *rolemanagerPb.GetRoleReq { return &rolemanagerPb.GetRoleReq{} },
-	// )
+	registerGrpcConn[
+		rolemanagerPb.Rolemanager_GetRoleClient,
+		*rolemanagerPb.GetRoleReq,
+		rolemanagerPb.GetRoleResp,
+	](
+		103,
+		grpcConnManager,
+		func(mctx context.Context) (rolemanagerPb.Rolemanager_GetRoleClient, error) {
+			return ctx.RoleManagerRpc.GetRole(context.Background())
+		},
+		func() *rolemanagerPb.GetRoleReq { return &rolemanagerPb.GetRoleReq{} },
+	)
 
 	registerGrpcConn[
 		rolemanagerPb.Rolemanager_DeleteRoleClient,

@@ -1,7 +1,6 @@
 package test
 
 import (
-	"encoding/json"
 	"fmt"
 	"testing"
 	"time"
@@ -81,21 +80,43 @@ import (
 // 	time.Sleep(time.Second * 2)
 // }
 
-func TestSetRole(t *testing.T) {
+// func TestSetRole(t *testing.T) {
+// 	client := mNet.NewClient("127.0.0.1", 8999)
+// 	client.SetOnConnStart(func(conn iface.IConnection) {
+// 		go func() {
+// 			tmp := make(map[string]interface{})
+// 			tmp["level"] = 1
+// 			templateValue, _ := json.Marshal(tmp)
+
+// 			data := &pb.SetRoleReq{
+// 				RoleId:        "1754055433376501760",
+// 				TemplateValue: string(templateValue),
+// 			}
+// 			msg, _ := proto.Marshal(data)
+
+// 			err := conn.SendMsg(102, msg)
+// 			if err != nil {
+// 				fmt.Println(err)
+// 				log.Error(err)
+// 			}
+// 		}()
+// 	})
+
+// 	client.Start()
+
+// 	time.Sleep(time.Second * 2)
+// }
+
+func TestGetRole(t *testing.T) {
 	client := mNet.NewClient("127.0.0.1", 8999)
 	client.SetOnConnStart(func(conn iface.IConnection) {
 		go func() {
-			tmp := make(map[string]interface{})
-			tmp["level"] = 1
-			templateValue, _ := json.Marshal(tmp)
-
-			data := &pb.SetRoleReq{
-				RoleId:        "1754055433376501760",
-				TemplateValue: string(templateValue),
+			data := &pb.GetRoleReq{
+				RoleId: "1754055433376501760",
 			}
 			msg, _ := proto.Marshal(data)
 
-			err := conn.SendMsg(102, msg)
+			err := conn.SendMsg(103, msg)
 			if err != nil {
 				fmt.Println(err)
 				log.Error(err)
