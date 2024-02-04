@@ -17,10 +17,10 @@ import (
 
 // Custom business logic of the client (客户端自定义业务)
 func business(conn iface.IConnection) {
-	data := &pb.CreateRoleReq{
-		Id:        "1",
-		Name:      "name2",
-		AccountId: 123,
+	data := &pb.RegisterRoleReq{
+		AccountId:     "1",
+		ServerId:      "1",
+		TemplateValue: "{}",
 	}
 	msg, _ := proto.Marshal(data)
 

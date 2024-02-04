@@ -34,6 +34,7 @@ type (
 		FindOne(ctx context.Context, id int64) (*Role, error)
 		FindOneByRoleId(ctx context.Context, roleId string) (*Role, error)
 		Update(ctx context.Context, data *Role) error
+		UpdateByRoleId(ctx context.Context, data *Role) error
 		Delete(ctx context.Context, id int64) error
 		DeleteByRoleId(ctx context.Context, roleId string) error
 	}
@@ -149,6 +150,21 @@ func (m *defaultRoleModel) Update(ctx context.Context, newData *Role) error {
 	amxRolemanagerRoleRoleIdKey := fmt.Sprintf("%s%v", cacheAmxRolemanagerRoleRoleIdPrefix, data.RoleId)
 	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, roleRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, newData.RoleId, newData.BornServerId, newData.CurServerId, newData.HistoryServerIds, newData.Tags, newData.TemplateValue, newData.Id)
+	}, amxRolemanagerRoleIdKey, amxRolemanagerRoleRoleIdKey)
+	return err
+}
+
+func (m *defaultRoleModel) UpdateByRoleId(ctx context.Context, newData *Role) error {
+	data, err := m.FindOneByRoleId(ctx, newData.RoleId)
+	if err != nil {
+		return err
+	}
+
+	amxRolemanagerRoleIdKey := fmt.Sprintf("%s%v", cacheAmxRolemanagerRoleIdPrefix, data.Id)
+	amxRolemanagerRoleRoleIdKey := fmt.Sprintf("%s%v", cacheAmxRolemanagerRoleRoleIdPrefix, data.RoleId)
+	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `rold_id` = ?", m.table, roleRowsWithPlaceHolder)
 		return conn.ExecCtx(ctx, query, newData.RoleId, newData.BornServerId, newData.CurServerId, newData.HistoryServerIds, newData.Tags, newData.TemplateValue, newData.Id)
 	}, amxRolemanagerRoleIdKey, amxRolemanagerRoleRoleIdKey)
 	return err

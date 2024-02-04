@@ -42,7 +42,7 @@ message GetRoleResp {
 }
 
 message DeleteRoleReq {
-    string playerId = 1;
+    string roleId = 1;
 }
 message DeleteRoleResp {
     int64 returnCode = 1;
