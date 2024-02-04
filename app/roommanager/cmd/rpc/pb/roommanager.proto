@@ -5,7 +5,7 @@ option go_package = "./pb";
 package pb;
 //group
 message CreateGroupReq {
-    string roldId = 1;
+    string roleId = 1;
     string groupName = 2;
   	string maxPlayer = 3;
 }
@@ -29,12 +29,12 @@ message GetGroupResp {
     string groupId = 2;
     string groupName = 3;
   	string maxPlayer = 4;
-    repeated string roldIds = 5;
+    repeated string roleIds = 5;
 }
 
 message JoinGroupReq {
     string groupId = 1;
-    string roldId = 2;
+    string roleId = 2;
 }
 message JoinGroupResp {
     int64 returnCode = 1;
@@ -42,7 +42,7 @@ message JoinGroupResp {
 
 message LeaveGroupReq {
     string groupId = 1;
-    string roldId = 2;
+    string roleId = 2;
 }
 message LeaveGroupResp {
     int64 returnCode = 1;
@@ -82,7 +82,7 @@ message GetRoomResp {
     string roomId = 2;
     string roomName = 3;
   	string maxPlayer = 4;
-    repeated string roldIds = 5;
+    repeated string roleIds = 5;
 }
 
 

@@ -49,14 +49,11 @@ func (l *SetRoleLogic) SetRole(stream pb.Rolemanager_SetRoleServer) error {
 
 func (l *SetRoleLogic) handlerFunc(stream pb.Rolemanager_SetRoleServer, req *pb.SetRoleReq) {
 	role := new(model.Role)
-
-	role.RoleId = req.RoldId
+	role.RoleId = req.RoleId
 	role.HistoryServerIds = "[]"
 	role.Tags = "[]"
 	role.TemplateValue = req.TemplateValue
-
 	err := l.svcCtx.RoleModel.UpdateByRoleId(l.ctx, role)
-
 	if err != nil {
 		fmt.Println(err)
 

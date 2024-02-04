@@ -88,7 +88,7 @@ type RegisterRoleResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RoldId     string `protobuf:"bytes,1,opt,name=roldId,proto3" json:"roldId,omitempty"`
+	RoleId     string `protobuf:"bytes,1,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	ReturnCode int64  `protobuf:"varint,2,opt,name=returnCode,proto3" json:"returnCode,omitempty"`
 }
 
@@ -124,9 +124,9 @@ func (*RegisterRoleResp) Descriptor() ([]byte, []int) {
 	return file_rolemanager_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *RegisterRoleResp) GetRoldId() string {
+func (x *RegisterRoleResp) GetRoleId() string {
 	if x != nil {
-		return x.RoldId
+		return x.RoleId
 	}
 	return ""
 }
@@ -143,7 +143,7 @@ type SetRoleReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RoldId        string `protobuf:"bytes,1,opt,name=roldId,proto3" json:"roldId,omitempty"`
+	RoleId        string `protobuf:"bytes,1,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	TemplateValue string `protobuf:"bytes,2,opt,name=templateValue,proto3" json:"templateValue,omitempty"`
 }
 
@@ -179,9 +179,9 @@ func (*SetRoleReq) Descriptor() ([]byte, []int) {
 	return file_rolemanager_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SetRoleReq) GetRoldId() string {
+func (x *SetRoleReq) GetRoleId() string {
 	if x != nil {
-		return x.RoldId
+		return x.RoleId
 	}
 	return ""
 }
@@ -245,7 +245,7 @@ type GetRoleReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RoldId string `protobuf:"bytes,1,opt,name=roldId,proto3" json:"roldId,omitempty"`
+	RoleId string `protobuf:"bytes,1,opt,name=roleId,proto3" json:"roleId,omitempty"`
 }
 
 func (x *GetRoleReq) Reset() {
@@ -280,9 +280,9 @@ func (*GetRoleReq) Descriptor() ([]byte, []int) {
 	return file_rolemanager_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetRoleReq) GetRoldId() string {
+func (x *GetRoleReq) GetRoleId() string {
 	if x != nil {
-		return x.RoldId
+		return x.RoleId
 	}
 	return ""
 }
@@ -293,7 +293,7 @@ type GetRoleResp struct {
 	unknownFields protoimpl.UnknownFields
 
 	ReturnCode       int64    `protobuf:"varint,1,opt,name=returnCode,proto3" json:"returnCode,omitempty"`
-	RoldId           string   `protobuf:"bytes,2,opt,name=roldId,proto3" json:"roldId,omitempty"`
+	RoleId           string   `protobuf:"bytes,2,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	BornServerId     string   `protobuf:"bytes,3,opt,name=bornServerId,proto3" json:"bornServerId,omitempty"`
 	CurServerId      string   `protobuf:"bytes,4,opt,name=curServerId,proto3" json:"curServerId,omitempty"`
 	HistoryServerIds []string `protobuf:"bytes,5,rep,name=historyServerIds,proto3" json:"historyServerIds,omitempty"`
@@ -341,9 +341,9 @@ func (x *GetRoleResp) GetReturnCode() int64 {
 	return 0
 }
 
-func (x *GetRoleResp) GetRoldId() string {
+func (x *GetRoleResp) GetRoleId() string {
 	if x != nil {
-		return x.RoldId
+		return x.RoleId
 	}
 	return ""
 }

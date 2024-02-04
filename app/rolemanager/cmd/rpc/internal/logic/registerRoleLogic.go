@@ -70,7 +70,7 @@ func (l *RegisterRoleLogic) handlerFunc(stream pb.Rolemanager_RegisterRoleServer
 	}
 
 	stream.Send(&pb.RegisterRoleResp{
-		RoldId:     roleId,
+		RoleId:     roleId,
 		ReturnCode: int64(xerr.OK),
 	})
 }

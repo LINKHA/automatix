@@ -26,7 +26,7 @@ type CreateGroupReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RoldId    string `protobuf:"bytes,1,opt,name=roldId,proto3" json:"roldId,omitempty"`
+	RoleId    string `protobuf:"bytes,1,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	GroupName string `protobuf:"bytes,2,opt,name=groupName,proto3" json:"groupName,omitempty"`
 	MaxPlayer string `protobuf:"bytes,3,opt,name=maxPlayer,proto3" json:"maxPlayer,omitempty"`
 }
@@ -63,9 +63,9 @@ func (*CreateGroupReq) Descriptor() ([]byte, []int) {
 	return file_roommanager_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreateGroupReq) GetRoldId() string {
+func (x *CreateGroupReq) GetRoleId() string {
 	if x != nil {
-		return x.RoldId
+		return x.RoleId
 	}
 	return ""
 }
@@ -289,7 +289,7 @@ type GetGroupResp struct {
 	GroupId    string   `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
 	GroupName  string   `protobuf:"bytes,3,opt,name=groupName,proto3" json:"groupName,omitempty"`
 	MaxPlayer  string   `protobuf:"bytes,4,opt,name=maxPlayer,proto3" json:"maxPlayer,omitempty"`
-	RoldIds    []string `protobuf:"bytes,5,rep,name=roldIds,proto3" json:"roldIds,omitempty"`
+	RoleIds    []string `protobuf:"bytes,5,rep,name=roleIds,proto3" json:"roleIds,omitempty"`
 }
 
 func (x *GetGroupResp) Reset() {
@@ -352,9 +352,9 @@ func (x *GetGroupResp) GetMaxPlayer() string {
 	return ""
 }
 
-func (x *GetGroupResp) GetRoldIds() []string {
+func (x *GetGroupResp) GetRoleIds() []string {
 	if x != nil {
-		return x.RoldIds
+		return x.RoleIds
 	}
 	return nil
 }
@@ -365,7 +365,7 @@ type JoinGroupReq struct {
 	unknownFields protoimpl.UnknownFields
 
 	GroupId string `protobuf:"bytes,1,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	RoldId  string `protobuf:"bytes,2,opt,name=roldId,proto3" json:"roldId,omitempty"`
+	RoleId  string `protobuf:"bytes,2,opt,name=roleId,proto3" json:"roleId,omitempty"`
 }
 
 func (x *JoinGroupReq) Reset() {
@@ -407,9 +407,9 @@ func (x *JoinGroupReq) GetGroupId() string {
 	return ""
 }
 
-func (x *JoinGroupReq) GetRoldId() string {
+func (x *JoinGroupReq) GetRoleId() string {
 	if x != nil {
-		return x.RoldId
+		return x.RoleId
 	}
 	return ""
 }
@@ -467,7 +467,7 @@ type LeaveGroupReq struct {
 	unknownFields protoimpl.UnknownFields
 
 	GroupId string `protobuf:"bytes,1,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	RoldId  string `protobuf:"bytes,2,opt,name=roldId,proto3" json:"roldId,omitempty"`
+	RoleId  string `protobuf:"bytes,2,opt,name=roleId,proto3" json:"roleId,omitempty"`
 }
 
 func (x *LeaveGroupReq) Reset() {
@@ -509,9 +509,9 @@ func (x *LeaveGroupReq) GetGroupId() string {
 	return ""
 }
 
-func (x *LeaveGroupReq) GetRoldId() string {
+func (x *LeaveGroupReq) GetRoleId() string {
 	if x != nil {
-		return x.RoldId
+		return x.RoleId
 	}
 	return ""
 }
@@ -934,7 +934,7 @@ type GetRoomResp struct {
 	RoomId     string   `protobuf:"bytes,2,opt,name=roomId,proto3" json:"roomId,omitempty"`
 	RoomName   string   `protobuf:"bytes,3,opt,name=roomName,proto3" json:"roomName,omitempty"`
 	MaxPlayer  string   `protobuf:"bytes,4,opt,name=maxPlayer,proto3" json:"maxPlayer,omitempty"`
-	RoldIds    []string `protobuf:"bytes,5,rep,name=roldIds,proto3" json:"roldIds,omitempty"`
+	RoleIds    []string `protobuf:"bytes,5,rep,name=roleIds,proto3" json:"roleIds,omitempty"`
 }
 
 func (x *GetRoomResp) Reset() {
@@ -997,9 +997,9 @@ func (x *GetRoomResp) GetMaxPlayer() string {
 	return ""
 }
 
-func (x *GetRoomResp) GetRoldIds() []string {
+func (x *GetRoomResp) GetRoleIds() []string {
 	if x != nil {
-		return x.RoldIds
+		return x.RoleIds
 	}
 	return nil
 }

@@ -11,13 +11,13 @@ message RegisterRoleReq {
 }
 
 message RegisterRoleResp {
-    string roldId = 1;
+    string roleId = 1;
     int64 returnCode = 2;
 }
 
 
 message SetRoleReq {
-    string roldId = 1;
+    string roleId = 1;
   	string templateValue = 2;
 }
 
@@ -27,12 +27,12 @@ message SetRoleResp {
 
 
 message GetRoleReq {
-    string roldId = 1;
+    string roleId = 1;
 }
 
 message GetRoleResp {
     int64 returnCode = 1;
-  	string roldId = 2;
+  	string roleId = 2;
     string bornServerId = 3;
     string curServerId = 4;
     repeated string historyServerIds = 5;

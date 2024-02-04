@@ -47,7 +47,7 @@ func (l *GetRoleLogic) GetRole(stream pb.Rolemanager_GetRoleServer) error {
 }
 
 func (l *GetRoleLogic) handlerFunc(stream pb.Rolemanager_GetRoleServer, req *pb.GetRoleReq) {
-	role, err := l.svcCtx.RoleModel.FindOneByRoleId(l.ctx, req.RoldId)
+	role, err := l.svcCtx.RoleModel.FindOneByRoleId(l.ctx, req.RoleId)
 
 	if err != nil {
 		fmt.Println(err)
@@ -59,7 +59,7 @@ func (l *GetRoleLogic) handlerFunc(stream pb.Rolemanager_GetRoleServer, req *pb.
 
 	stream.Send(&pb.GetRoleResp{
 		ReturnCode:   int64(xerr.OK),
-		RoldId:       role.RoleId,
+		RoleId:       role.RoleId,
 		BornServerId: role.BornServerId,
 		CurServerId:  role.CurServerId,
 		// HistoryServerIds: role.HistoryServerIds,

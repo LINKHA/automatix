@@ -25,7 +25,7 @@ Redis:
   Pass: G62m50oigInC30sf
   Key: servermanager-rpc
 DB:
-  DataSource: root:PXDN93VRKUm8TeE7@tcp(127.0.0.1:33069)/amx_rolemanager?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  DataSource: root:PXDN93VRKUm8TeE7@tcp(mysql:33069)/amx_rolemanager?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 Cache:
   - Host: redis:36379
     Pass: G62m50oigInC30sf

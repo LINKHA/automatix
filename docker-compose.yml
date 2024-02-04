@@ -29,7 +29,7 @@ services:
       TZ: Asia/Shanghai
       GOPROXY: https://goproxy.cn,direct
     ports:
-      - 10242:10242
+      - 8999:8999
       - 10243:10243
     working_dir: /go/automatix
     volumes:

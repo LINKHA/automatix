@@ -1,7 +1,7 @@
 Name: gate-api
 Id: 3
 TcpHost: 0.0.0.0
-TcpPort: 10242
+TcpPort: 8999
 
 UdpHost: 0.0.0.0
 UdpPort: 10243

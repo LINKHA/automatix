@@ -164,7 +164,7 @@ func (m *defaultRoleModel) UpdateByRoleId(ctx context.Context, newData *Role) er
 	amxRolemanagerRoleIdKey := fmt.Sprintf("%s%v", cacheAmxRolemanagerRoleIdPrefix, data.Id)
 	amxRolemanagerRoleRoleIdKey := fmt.Sprintf("%s%v", cacheAmxRolemanagerRoleRoleIdPrefix, data.RoleId)
 	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("update %s set %s where `rold_id` = ?", m.table, roleRowsWithPlaceHolder)
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, roleRowsWithPlaceHolder)
 		return conn.ExecCtx(ctx, query, newData.RoleId, newData.BornServerId, newData.CurServerId, newData.HistoryServerIds, newData.Tags, newData.TemplateValue, newData.Id)
 	}, amxRolemanagerRoleIdKey, amxRolemanagerRoleRoleIdKey)
 	return err

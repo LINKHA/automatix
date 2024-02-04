@@ -65,7 +65,7 @@ func DoClientConnectedLost(conn iface.IConnection) {
 
 func main() {
 	// Create a client handle using Zinx's Method (创建一个Client句柄，使用Zinx的方法)
-	client := mNet.NewClient("127.0.0.1", 10242)
+	client := mNet.NewClient("127.0.0.1", 8999)
 
 	// Set the business logic to execute when the connection is created or lost
 	// (添加首次建立链接时的业务)

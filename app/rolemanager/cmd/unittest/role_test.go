@@ -1,6 +1,7 @@
 package test
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 	"time"
@@ -13,7 +14,7 @@ import (
 )
 
 // func TestRegisterRole(t *testing.T) {
-// 	client := mNet.NewClient("127.0.0.1", 10242)
+// 	client := mNet.NewClient("127.0.0.1", 8999)
 // 	client.SetOnConnStart(func(conn iface.IConnection) {
 // 		go func() {
 // 			data := &pb.RegisterRoleReq{
@@ -47,35 +48,62 @@ import (
 // 	time.Sleep(time.Second * 2)
 // }
 
-func TestDeleteRole(t *testing.T) {
-	client := mNet.NewClient("127.0.0.1", 10242)
+// func TestDeleteRole(t *testing.T) {
+// 	client := mNet.NewClient("127.0.0.1", 8999)
+// 	client.SetOnConnStart(func(conn iface.IConnection) {
+// 		go func() {
+// 			data := &pb.DeleteRoleReq{
+// 				RoleId: "1753983203577696256",
+// 			}
+// 			msg, _ := proto.Marshal(data)
+
+// 			//for {
+// 			err := conn.SendMsg(104, msg)
+// 			if err != nil {
+// 				fmt.Println(err)
+// 				log.Error(err)
+// 				//break
+// 			}
+
+// 			// 	time.Sleep(1 * time.Second)
+// 			// }
+// 		}()
+// 	})
+
+// 	client.Start()
+
+// 	// // close
+// 	// c := make(chan os.Signal, 1)
+// 	// signal.Notify(c, os.Interrupt, os.Kill)
+// 	// sig := <-c
+// 	// fmt.Println("===exit===", sig)
+// 	// client.Stop()
+// 	time.Sleep(time.Second * 2)
+// }
+
+func TestSetRole(t *testing.T) {
+	client := mNet.NewClient("127.0.0.1", 8999)
 	client.SetOnConnStart(func(conn iface.IConnection) {
 		go func() {
-			data := &pb.DeleteRoleReq{
-				RoleId: "1753983203577696256",
+			tmp := make(map[string]interface{})
+			tmp["level"] = 1
+			templateValue, _ := json.Marshal(tmp)
+
+			data := &pb.SetRoleReq{
+				RoleId:        "1754055433376501760",
+				TemplateValue: string(templateValue),
 			}
 			msg, _ := proto.Marshal(data)
 
-			//for {
-			err := conn.SendMsg(104, msg)
+			err := conn.SendMsg(102, msg)
 			if err != nil {
 				fmt.Println(err)
 				log.Error(err)
-				//break
 			}
-
-			// 	time.Sleep(1 * time.Second)
-			// }
 		}()
 	})
 
 	client.Start()
 
-	// // close
-	// c := make(chan os.Signal, 1)
-	// signal.Notify(c, os.Interrupt, os.Kill)
-	// sig := <-c
-	// fmt.Println("===exit===", sig)
-	// client.Stop()
 	time.Sleep(time.Second * 2)
 }

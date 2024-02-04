@@ -48,7 +48,6 @@ func (l *DeleteRoleLogic) DeleteRole(stream pb.Rolemanager_DeleteRoleServer) err
 
 func (l *DeleteRoleLogic) handlerFunc(stream pb.Rolemanager_DeleteRoleServer, req *pb.DeleteRoleReq) {
 	err := l.svcCtx.RoleModel.DeleteByRoleId(l.ctx, req.RoleId)
-	fmt.Println("1-----------------", err)
 
 	if err != nil {
 		fmt.Println(err)
