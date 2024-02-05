@@ -65,12 +65,14 @@ func (l *RegisterRoleLogic) handlerFunc(stream pb.Rolemanager_RegisterRoleServer
 		fmt.Println(err)
 
 		stream.Send(&pb.RegisterRoleResp{
+			Header:     req.Header,
 			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
 		})
 	}
 
 	stream.Send(&pb.RegisterRoleResp{
-		RoleId:     roleId,
+		Header:     req.Header,
 		ReturnCode: int64(xerr.OK),
+		RoleId:     roleId,
 	})
 }

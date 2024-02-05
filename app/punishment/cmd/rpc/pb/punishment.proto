@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+import "proto/header.proto";
+
+package pb;
+
+message ReportReq {
+    common.Header header = 1;
+    string accountId = 2;
+}
+
+message ReportResp {
+    common.Header header = 1;
+    int64 returnCode = 2;
+}
+
+service punishment {
+    rpc report(stream ReportReq) returns (stream ReportResp);
+}

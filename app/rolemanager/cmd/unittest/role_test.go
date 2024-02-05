@@ -12,40 +12,40 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-// func TestRegisterRole(t *testing.T) {
-// 	client := mNet.NewClient("127.0.0.1", 8999)
-// 	client.SetOnConnStart(func(conn iface.IConnection) {
-// 		go func() {
-// 			data := &pb.RegisterRoleReq{
-// 				AccountId:     "1",
-// 				ServerId:      "2",
-// 				TemplateValue: "{}",
-// 			}
-// 			msg, _ := proto.Marshal(data)
+func TestRegisterRole(t *testing.T) {
+	client := mNet.NewClient("127.0.0.1", 8999)
+	client.SetOnConnStart(func(conn iface.IConnection) {
+		go func() {
+			data := &pb.RegisterRoleReq{
+				AccountId:     "1",
+				ServerId:      "2",
+				TemplateValue: "{}",
+			}
+			msg, _ := proto.Marshal(data)
 
-// 			//for {
-// 			err := conn.SendMsg(101, msg)
-// 			if err != nil {
-// 				fmt.Println(err)
-// 				log.Error(err)
-// 				//break
-// 			}
+			//for {
+			err := conn.SendMsg(101, msg)
+			if err != nil {
+				fmt.Println(err)
+				log.Error(err)
+				//break
+			}
 
-// 			// 	time.Sleep(1 * time.Second)
-// 			// }
-// 		}()
-// 	})
+			// 	time.Sleep(1 * time.Second)
+			// }
+		}()
+	})
 
-// 	client.Start()
+	client.Start()
 
-// 	// // close
-// 	// c := make(chan os.Signal, 1)
-// 	// signal.Notify(c, os.Interrupt, os.Kill)
-// 	// sig := <-c
-// 	// fmt.Println("===exit===", sig)
-// 	// client.Stop()
-// 	time.Sleep(time.Second * 2)
-// }
+	// // close
+	// c := make(chan os.Signal, 1)
+	// signal.Notify(c, os.Interrupt, os.Kill)
+	// sig := <-c
+	// fmt.Println("===exit===", sig)
+	// client.Stop()
+	time.Sleep(time.Second * 2)
+}
 
 // func TestDeleteRole(t *testing.T) {
 // 	client := mNet.NewClient("127.0.0.1", 8999)
@@ -107,24 +107,24 @@ import (
 // 	time.Sleep(time.Second * 2)
 // }
 
-func TestGetRole(t *testing.T) {
-	client := mNet.NewClient("127.0.0.1", 8999)
-	client.SetOnConnStart(func(conn iface.IConnection) {
-		go func() {
-			data := &pb.GetRoleReq{
-				RoleId: "1754055433376501760",
-			}
-			msg, _ := proto.Marshal(data)
+// func TestGetRole(t *testing.T) {
+// 	client := mNet.NewClient("127.0.0.1", 8999)
+// 	client.SetOnConnStart(func(conn iface.IConnection) {
+// 		go func() {
+// 			data := &pb.GetRoleReq{
+// 				RoleId: "1754055433376501760",
+// 			}
+// 			msg, _ := proto.Marshal(data)
 
-			err := conn.SendMsg(103, msg)
-			if err != nil {
-				fmt.Println(err)
-				log.Error(err)
-			}
-		}()
-	})
+// 			err := conn.SendMsg(103, msg)
+// 			if err != nil {
+// 				fmt.Println(err)
+// 				log.Error(err)
+// 			}
+// 		}()
+// 	})
 
-	client.Start()
+// 	client.Start()
 
-	time.Sleep(time.Second * 2)
-}
+// 	time.Sleep(time.Second * 2)
+// }
