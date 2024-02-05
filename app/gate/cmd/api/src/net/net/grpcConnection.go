@@ -76,7 +76,7 @@ func (c *GrpcConnection[T_Client, T_Req, T_Resp]) Send(_m interface{}) error {
 	return c.conn.SendMsg(m)
 }
 
-func (c *GrpcConnection[T_Client, T_Req, T_Resp]) SendToQueue(m []byte) error {
+func (c *GrpcConnection[T_Client, T_Req, T_Resp]) SendToReqQueue(m []byte) error {
 	pbMsg := c.newT_ReqFunc()
 	proto.Unmarshal(m, pbMsg)
 	if c.msgReqChan == nil {

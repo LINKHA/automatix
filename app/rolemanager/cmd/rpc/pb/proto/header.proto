@@ -1,0 +1,7 @@
+syntax = "proto3";
+package common;
+option go_package = "github.com/LINKHA/automatix/common/proto";
+
+message Header {
+    uint64 connId = 1;
+}

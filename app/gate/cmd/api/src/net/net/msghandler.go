@@ -238,13 +238,17 @@ func (mh *MsgHandle) doClientMsgHandler(request iface.IRequest, workerID int) {
 	}()
 
 	grpcId := request.GetMsgID()
+	connId := request.GetConnection().GetConnID()
+
+	println(connId)
+
 	grpcConn, err := mh.grpcConnMgr.Get(uint64(grpcId))
 	if err != nil {
 		msgErr := fmt.Sprintf("client msg err, clientId = %+v\n", grpcId)
 		panic(msgErr)
 	}
 
-	grpcConn.SendToQueue(request.GetData())
+	grpcConn.SendToReqQueue(request.GetData())
 }
 
 func (mh *MsgHandle) Execute(request iface.IRequest) {

@@ -2,19 +2,22 @@ syntax = "proto3";
 
 option go_package = "./pb";
 
+import "proto/header.proto";
+
 package pb;
 
 message RegisterRoleReq {
-    string accountId = 1;
-    string serverId = 2;
-  	string templateValue = 3;
+    common.Header header = 1;
+    string accountId = 2;
+    string serverId = 3;
+  	string templateValue = 4;
 }
 
 message RegisterRoleResp {
-    string roleId = 1;
+    common.Header header = 1;
     int64 returnCode = 2;
+    string roleId = 3;
 }
-
 
 message SetRoleReq {
     string roleId = 1;
