@@ -20,35 +20,41 @@ message RegisterRoleResp {
 }
 
 message SetRoleReq {
-    string roleId = 1;
-  	string templateValue = 2;
+    common.Header header = 1;
+    string roleId = 2;
+  	string templateValue = 3;
 }
 
 message SetRoleResp {
-    int64 returnCode = 1;
+    common.Header header = 1;
+    int64 returnCode = 2;
 }
 
 
 message GetRoleReq {
-    string roleId = 1;
+    common.Header header = 1;
+    string roleId = 2;
 }
 
 message GetRoleResp {
-    int64 returnCode = 1;
-  	string roleId = 2;
-    string bornServerId = 3;
-    string curServerId = 4;
-    repeated string historyServerIds = 5;
-    int64 createTime	 = 6;
-    repeated string tags = 7;
-    string templateValue = 8;
+    common.Header header = 1;
+    int64 returnCode = 2;
+  	string roleId = 3;
+    string bornServerId = 4;
+    string curServerId = 5;
+    repeated string historyServerIds = 6;
+    int64 createTime	 = 7;
+    repeated string tags = 8;
+    string templateValue = 9;
 }
 
 message DeleteRoleReq {
-    string roleId = 1;
+    common.Header header = 1;
+    string roleId = 2;
 }
 message DeleteRoleResp {
-    int64 returnCode = 1;
+    common.Header header = 1;
+    int64 returnCode = 2;
 }
 
 service rolemanager {

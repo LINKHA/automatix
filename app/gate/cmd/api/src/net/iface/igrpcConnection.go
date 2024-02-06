@@ -6,7 +6,7 @@ type IGrpcConnection interface {
 	Start()
 	Stop()
 	Send(interface{}) error
-	SendToReqQueue(uint64, []byte) error
+	SendToReqQueue(IRequest) error
 	StartReader()
 	StartWriter()
 }

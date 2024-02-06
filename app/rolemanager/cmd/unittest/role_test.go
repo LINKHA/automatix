@@ -1,6 +1,7 @@
 package test
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 	"time"
@@ -12,119 +13,131 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+type RegisterRoleRouter struct {
+	mNet.BaseRouter
+}
+
+func (this *RegisterRoleRouter) Handle(request iface.IRequest) {
+	pbMsg := &pb.RegisterRoleResp{}
+	proto.Unmarshal(request.GetData(), pbMsg)
+	fmt.Println("recv from server : msgId=", request.GetMsgID(), ", data=", pbMsg)
+}
+
 func TestRegisterRole(t *testing.T) {
 	client := mNet.NewClient("127.0.0.1", 8999)
 	client.SetOnConnStart(func(conn iface.IConnection) {
-		go func() {
-			data := &pb.RegisterRoleReq{
-				AccountId:     "1",
-				ServerId:      "2",
-				TemplateValue: "{}",
-			}
-			msg, _ := proto.Marshal(data)
+		data := &pb.RegisterRoleReq{
+			AccountId:     "1",
+			ServerId:      "2",
+			TemplateValue: "{}",
+		}
+		msg, _ := proto.Marshal(data)
 
-			//for {
-			err := conn.SendMsg(101, msg)
-			if err != nil {
-				fmt.Println(err)
-				log.Error(err)
-				//break
-			}
-
-			// 	time.Sleep(1 * time.Second)
-			// }
-		}()
+		err := conn.SendMsg(101, msg)
+		if err != nil {
+			fmt.Println(err)
+			log.Error(err)
+		}
 	})
 
+	client.AddRouter(101, &RegisterRoleRouter{})
 	client.Start()
-
-	// // close
-	// c := make(chan os.Signal, 1)
-	// signal.Notify(c, os.Interrupt, os.Kill)
-	// sig := <-c
-	// fmt.Println("===exit===", sig)
-	// client.Stop()
 	time.Sleep(time.Second * 2)
 }
 
-// func TestDeleteRole(t *testing.T) {
-// 	client := mNet.NewClient("127.0.0.1", 8999)
-// 	client.SetOnConnStart(func(conn iface.IConnection) {
-// 		go func() {
-// 			data := &pb.DeleteRoleReq{
-// 				RoleId: "1753983203577696256",
-// 			}
-// 			msg, _ := proto.Marshal(data)
+type DeleteRoleRouter struct {
+	mNet.BaseRouter
+}
 
-// 			//for {
-// 			err := conn.SendMsg(104, msg)
-// 			if err != nil {
-// 				fmt.Println(err)
-// 				log.Error(err)
-// 				//break
-// 			}
+func (this *DeleteRoleRouter) Handle(request iface.IRequest) {
+	pbMsg := &pb.DeleteRoleResp{}
+	proto.Unmarshal(request.GetData(), pbMsg)
+	fmt.Println("recv from server : msgId=", request.GetMsgID(), ", data=", pbMsg)
+}
 
-// 			// 	time.Sleep(1 * time.Second)
-// 			// }
-// 		}()
-// 	})
+func TestDeleteRole(t *testing.T) {
+	client := mNet.NewClient("127.0.0.1", 8999)
+	client.SetOnConnStart(func(conn iface.IConnection) {
+		data := &pb.DeleteRoleReq{
+			RoleId: "1753983203577696256",
+		}
+		msg, _ := proto.Marshal(data)
 
-// 	client.Start()
+		err := conn.SendMsg(104, msg)
+		if err != nil {
+			fmt.Println(err)
+			log.Error(err)
+		}
+	})
+	client.AddRouter(104, &DeleteRoleRouter{})
+	client.Start()
 
-// 	// // close
-// 	// c := make(chan os.Signal, 1)
-// 	// signal.Notify(c, os.Interrupt, os.Kill)
-// 	// sig := <-c
-// 	// fmt.Println("===exit===", sig)
-// 	// client.Stop()
-// 	time.Sleep(time.Second * 2)
-// }
+	time.Sleep(time.Second * 2)
+}
 
-// func TestSetRole(t *testing.T) {
-// 	client := mNet.NewClient("127.0.0.1", 8999)
-// 	client.SetOnConnStart(func(conn iface.IConnection) {
-// 		go func() {
-// 			tmp := make(map[string]interface{})
-// 			tmp["level"] = 1
-// 			templateValue, _ := json.Marshal(tmp)
+type SetRoleRouter struct {
+	mNet.BaseRouter
+}
 
-// 			data := &pb.SetRoleReq{
-// 				RoleId:        "1754055433376501760",
-// 				TemplateValue: string(templateValue),
-// 			}
-// 			msg, _ := proto.Marshal(data)
+func (this *SetRoleRouter) Handle(request iface.IRequest) {
+	pbMsg := &pb.SetRoleResp{}
+	proto.Unmarshal(request.GetData(), pbMsg)
+	fmt.Println("recv from server : msgId=", request.GetMsgID(), ", data=", pbMsg)
+}
 
-// 			err := conn.SendMsg(102, msg)
-// 			if err != nil {
-// 				fmt.Println(err)
-// 				log.Error(err)
-// 			}
-// 		}()
-// 	})
+func TestSetRole(t *testing.T) {
+	client := mNet.NewClient("127.0.0.1", 8999)
+	client.SetOnConnStart(func(conn iface.IConnection) {
+		tmp := make(map[string]interface{})
+		tmp["level"] = 1
+		templateValue, _ := json.Marshal(tmp)
 
-// 	client.Start()
+		data := &pb.SetRoleReq{
+			RoleId:        "1754055433376501760",
+			TemplateValue: string(templateValue),
+		}
+		msg, _ := proto.Marshal(data)
 
-// 	time.Sleep(time.Second * 2)
-// }
+		err := conn.SendMsg(102, msg)
+		if err != nil {
+			fmt.Println(err)
+			log.Error(err)
+		}
+	})
+	client.AddRouter(102, &SetRoleRouter{})
+	client.Start()
 
-// func TestGetRole(t *testing.T) {
-// 	client := mNet.NewClient("127.0.0.1", 8999)
-// 	client.SetOnConnStart(func(conn iface.IConnection) {
-// 		go func() {
-// 			data := &pb.GetRoleReq{
-// 				RoleId: "1754055433376501760",
-// 			}
-// 			msg, _ := proto.Marshal(data)
+	time.Sleep(time.Second * 2)
+}
 
-// 			err := conn.SendMsg(103, msg)
-// 			if err != nil {
-// 				fmt.Println(err)
-// 				log.Error(err)
-// 			}
-// 		}()
-// 	})
+type GetRoleRouter struct {
+	mNet.BaseRouter
+}
 
-// 	client.Start()
+func (this *GetRoleRouter) Handle(request iface.IRequest) {
+	pbMsg := &pb.GetRoleResp{}
+	proto.Unmarshal(request.GetData(), pbMsg)
+	fmt.Println("recv from server : msgId=", request.GetMsgID(), ", data=", pbMsg)
+}
 
-// 	time.Sleep(time.Second * 2)
-// }
+func TestGetRole(t *testing.T) {
+	client := mNet.NewClient("127.0.0.1", 8999)
+	client.SetOnConnStart(func(conn iface.IConnection) {
+		go func() {
+			data := &pb.GetRoleReq{
+				RoleId: "1754055433376501760",
+			}
+			msg, _ := proto.Marshal(data)
+
+			err := conn.SendMsg(103, msg)
+			if err != nil {
+				fmt.Println(err)
+				log.Error(err)
+			}
+		}()
+	})
+	client.AddRouter(103, &GetRoleRouter{})
+	client.Start()
+
+	time.Sleep(time.Second * 2)
+}

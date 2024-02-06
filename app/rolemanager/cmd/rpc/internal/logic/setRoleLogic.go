@@ -58,11 +58,13 @@ func (l *SetRoleLogic) handlerFunc(stream pb.Rolemanager_SetRoleServer, req *pb.
 		fmt.Println(err)
 
 		stream.Send(&pb.SetRoleResp{
+			Header:     req.Header,
 			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
 		})
 	}
 
 	stream.Send(&pb.SetRoleResp{
+		Header:     req.Header,
 		ReturnCode: int64(xerr.OK),
 	})
 }

@@ -26,59 +26,90 @@ func RegisterRoleManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	registerGrpcConn[
 		rolemanagerPb.Rolemanager_RegisterRoleClient,
 		*rolemanagerPb.RegisterRoleReq,
-		rolemanagerPb.RegisterRoleResp,
+		*rolemanagerPb.RegisterRoleResp,
 	](
 		101,
-		grpcConnManager,
+		s,
 		func(mctx context.Context) (rolemanagerPb.Rolemanager_RegisterRoleClient, error) {
 			return ctx.RoleManagerRpc.RegisterRole(context.Background())
 		},
 		func() *rolemanagerPb.RegisterRoleReq { return &rolemanagerPb.RegisterRoleReq{} },
+		func() *rolemanagerPb.RegisterRoleResp { return &rolemanagerPb.RegisterRoleResp{} },
 		func(connId uint64, req *rolemanagerPb.RegisterRoleReq) {
 			req.Header = &commonPb.Header{
 				ConnId: connId,
 			}
 		},
+		func(resp *rolemanagerPb.RegisterRoleResp) uint64 {
+			return resp.Header.ConnId
+		},
 	)
 
-	// registerGrpcConn[
-	// 	rolemanagerPb.Rolemanager_SetRoleClient,
-	// 	*rolemanagerPb.SetRoleReq,
-	// 	rolemanagerPb.SetRoleResp,
-	// ](
-	// 	102,
-	// 	grpcConnManager,
-	// 	func(mctx context.Context) (rolemanagerPb.Rolemanager_SetRoleClient, error) {
-	// 		return ctx.RoleManagerRpc.SetRole(context.Background())
-	// 	},
-	// 	func() *rolemanagerPb.SetRoleReq { return &rolemanagerPb.SetRoleReq{} },
-	// )
+	registerGrpcConn[
+		rolemanagerPb.Rolemanager_SetRoleClient,
+		*rolemanagerPb.SetRoleReq,
+		*rolemanagerPb.SetRoleResp,
+	](
+		102,
+		s,
+		func(mctx context.Context) (rolemanagerPb.Rolemanager_SetRoleClient, error) {
+			return ctx.RoleManagerRpc.SetRole(context.Background())
+		},
+		func() *rolemanagerPb.SetRoleReq { return &rolemanagerPb.SetRoleReq{} },
+		func() *rolemanagerPb.SetRoleResp { return &rolemanagerPb.SetRoleResp{} },
+		func(connId uint64, req *rolemanagerPb.SetRoleReq) {
+			req.Header = &commonPb.Header{
+				ConnId: connId,
+			}
+		},
+		func(resp *rolemanagerPb.SetRoleResp) uint64 {
+			return resp.Header.ConnId
+		},
+	)
 
-	// registerGrpcConn[
-	// 	rolemanagerPb.Rolemanager_GetRoleClient,
-	// 	*rolemanagerPb.GetRoleReq,
-	// 	rolemanagerPb.GetRoleResp,
-	// ](
-	// 	103,
-	// 	grpcConnManager,
-	// 	func(mctx context.Context) (rolemanagerPb.Rolemanager_GetRoleClient, error) {
-	// 		return ctx.RoleManagerRpc.GetRole(context.Background())
-	// 	},
-	// 	func() *rolemanagerPb.GetRoleReq { return &rolemanagerPb.GetRoleReq{} },
-	// )
+	registerGrpcConn[
+		rolemanagerPb.Rolemanager_GetRoleClient,
+		*rolemanagerPb.GetRoleReq,
+		*rolemanagerPb.GetRoleResp,
+	](
+		103,
+		s,
+		func(mctx context.Context) (rolemanagerPb.Rolemanager_GetRoleClient, error) {
+			return ctx.RoleManagerRpc.GetRole(context.Background())
+		},
+		func() *rolemanagerPb.GetRoleReq { return &rolemanagerPb.GetRoleReq{} },
+		func() *rolemanagerPb.GetRoleResp { return &rolemanagerPb.GetRoleResp{} },
+		func(connId uint64, req *rolemanagerPb.GetRoleReq) {
+			req.Header = &commonPb.Header{
+				ConnId: connId,
+			}
+		},
+		func(resp *rolemanagerPb.GetRoleResp) uint64 {
+			return resp.Header.ConnId
+		},
+	)
 
-	// registerGrpcConn[
-	// 	rolemanagerPb.Rolemanager_DeleteRoleClient,
-	// 	*rolemanagerPb.DeleteRoleReq,
-	// 	rolemanagerPb.DeleteRoleResp,
-	// ](
-	// 	104,
-	// 	grpcConnManager,
-	// 	func(mctx context.Context) (rolemanagerPb.Rolemanager_DeleteRoleClient, error) {
-	// 		return ctx.RoleManagerRpc.DeleteRole(context.Background())
-	// 	},
-	// 	func() *rolemanagerPb.DeleteRoleReq { return &rolemanagerPb.DeleteRoleReq{} },
-	// )
+	registerGrpcConn[
+		rolemanagerPb.Rolemanager_DeleteRoleClient,
+		*rolemanagerPb.DeleteRoleReq,
+		*rolemanagerPb.DeleteRoleResp,
+	](
+		104,
+		s,
+		func(mctx context.Context) (rolemanagerPb.Rolemanager_DeleteRoleClient, error) {
+			return ctx.RoleManagerRpc.DeleteRole(context.Background())
+		},
+		func() *rolemanagerPb.DeleteRoleReq { return &rolemanagerPb.DeleteRoleReq{} },
+		func() *rolemanagerPb.DeleteRoleResp { return &rolemanagerPb.DeleteRoleResp{} },
+		func(connId uint64, req *rolemanagerPb.DeleteRoleReq) {
+			req.Header = &commonPb.Header{
+				ConnId: connId,
+			}
+		},
+		func(resp *rolemanagerPb.DeleteRoleResp) uint64 {
+			return resp.Header.ConnId
+		},
+	)
 }
 
 func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceContext, s iface.IServer) {
@@ -200,12 +231,15 @@ func RegisterRoomManager(grpcConnManager iface.IGrpcConnManager, ctx *ServiceCon
 	// )
 }
 
-func registerGrpcConn[T_Client net.StreamClientInterface, T_Req proto.Message, T_Resp any](
+func registerGrpcConn[T_Client net.StreamClientInterface, T_Req proto.Message,
+	T_Resp proto.Message](
 	id uint64,
-	grpcConnManager iface.IGrpcConnManager,
+	s iface.IServer,
 	rpcClient func(mctx context.Context) (T_Client, error),
 	newReq func() T_Req,
-	beginHook func(uint64, T_Req),
+	newResp func() T_Resp,
+	beforeHook func(uint64, T_Req),
+	afterHook func(T_Resp) uint64,
 ) {
 	go func() {
 		retryInterval := 3 * time.Second
@@ -213,11 +247,15 @@ func registerGrpcConn[T_Client net.StreamClientInterface, T_Req proto.Message, T
 			client, err := rpcClient(context.Background())
 			if err == nil {
 				grpcConn := net.NewGrpcConnection[T_Client, T_Req, T_Resp](
+					s,
 					client,
 					id,
 					newReq,
-					beginHook,
+					newResp,
+					beforeHook,
+					afterHook,
 				)
+				grpcConnManager, _ := s.GetGrpcConnManager()
 				grpcConnManager.Add(grpcConn)
 				go grpcConn.Start()
 				break

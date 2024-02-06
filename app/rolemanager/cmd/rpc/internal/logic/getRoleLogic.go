@@ -53,11 +53,13 @@ func (l *GetRoleLogic) handlerFunc(stream pb.Rolemanager_GetRoleServer, req *pb.
 		fmt.Println(err)
 
 		stream.Send(&pb.GetRoleResp{
+			Header:     req.Header,
 			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
 		})
 	}
 
 	stream.Send(&pb.GetRoleResp{
+		Header:           req.Header,
 		ReturnCode:       int64(xerr.OK),
 		RoleId:           role.RoleId,
 		BornServerId:     role.BornServerId,
