@@ -2,105 +2,129 @@ syntax = "proto3";
 
 option go_package = "./pb";
 
+import "proto/header.proto";
+
 package pb;
 //group
 message CreateGroupReq {
-    string roleId = 1;
-    string groupName = 2;
-  	string maxPlayer = 3;
+    common.Header header = 1;
+    string roleId = 2;
+    string groupName = 3;
+  	string maxPlayer = 4;
 }
 message CreateGroupResp {
-    int64 returnCode = 1;
-    string groupId = 2;
+    common.Header header = 1;
+    int64 returnCode = 2;
+    string groupId = 3;
 }
 
 message DeleteGroupReq {
-    string groupId = 1;
+    common.Header header = 1;
+    string groupId = 2;
 }
 message DeleteGroupResp {
-    int64 returnCode = 1;
+    common.Header header = 1;
+    int64 returnCode = 2;
 }
 
 message GetGroupReq {
-    string groupId = 1;
+    common.Header header = 1;
+    string groupId = 2;
 }
 message GetGroupResp {
-    int64 returnCode = 1;
-    string groupId = 2;
-    string groupName = 3;
-  	string maxPlayer = 4;
-    repeated string roleIds = 5;
+    common.Header header = 1;
+    int64 returnCode = 2;
+    string groupId = 3;
+    string groupName = 4;
+  	string maxPlayer = 5;
+    repeated string roleIds = 6;
 }
 
 message JoinGroupReq {
-    string groupId = 1;
-    string roleId = 2;
+    common.Header header = 1;
+    string groupId = 2;
+    string roleId = 3;
 }
 message JoinGroupResp {
-    int64 returnCode = 1;
+    common.Header header = 1;
+    int64 returnCode = 2;
 }
 
 message LeaveGroupReq {
-    string groupId = 1;
-    string roleId = 2;
+    common.Header header = 1;
+    string groupId = 2;
+    string roleId = 3;
 }
 message LeaveGroupResp {
-    int64 returnCode = 1;
+    common.Header header = 1;
+    int64 returnCode = 2;
 }
 
 //room
 message CreateRoomReq {
-    string roomName = 1;
-  	string maxPlayer = 2;
+    common.Header header = 1;
+    string roomName = 2;
+  	string maxPlayer = 3;
 }
 message CreateRoomResp {
-    int64 returnCode = 1;
-    string roomId = 2;
+    common.Header header = 1;
+    int64 returnCode = 2;
+    string roomId = 3;
 }
 
 message JoinRoomReq {
-    string roomId = 1;
-    string roleId = 2;
+    common.Header header = 1;
+    string roomId = 2;
+    string roleId = 3;
 }
 message JoinRoomResp {
-    int64 returnCode = 1;
+    common.Header header = 1;
+    int64 returnCode = 2;
 }
 
 message LeaveRoomReq {
-    string roomId = 1;
-    string roleId = 2;
+    common.Header header = 1;
+    string roomId = 2;
+    string roleId = 3;
 }
 message LeaveRoomResp {
-    int64 returnCode = 1;
+    common.Header header = 1;
+    int64 returnCode = 2;
 }
 
 message GetRoomReq {
-    string roomId = 1;
+    common.Header header = 1;
+    string roomId = 2;
 }
 message GetRoomResp {
-    int64 returnCode = 1;
-    string roomId = 2;
-    string roomName = 3;
-  	string maxPlayer = 4;
-    repeated string roleIds = 5;
+    common.Header header = 1;
+    int64 returnCode = 2;
+    string roomId = 3;
+    string roomName = 4;
+  	string maxPlayer = 5;
+    repeated string roleIds = 6;
 }
 
 
 //match
 message MatchRoomReq {
-  	string groupId = 1;
-    string roomId = 2;
+    common.Header header = 1;
+  	string groupId = 2;
+    string roomId = 3;
 }
 message MatchRoomResp {
-    int64 returnCode = 1;
+    common.Header header = 1;
+    int64 returnCode = 2;
 }
 
 message MatchFinishReq {
+    common.Header header = 1;
 }
 
 message MatchFinishResp {
-    int64 returnCode = 1;
-    string roomId = 2;
+    common.Header header = 1;
+    int64 returnCode = 2;
+    string roomId = 3;
 }
 
 service roommanager {
