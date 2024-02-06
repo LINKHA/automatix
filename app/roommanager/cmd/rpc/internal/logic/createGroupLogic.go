@@ -2,7 +2,9 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"strconv"
 
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
@@ -46,7 +48,24 @@ func (l *CreateGroupLogic) CreateGroup(stream pb.Roommanager_CreateGroupServer) 
 }
 
 func (l *CreateGroupLogic) handlerFunc(stream pb.Roommanager_CreateGroupServer, req *pb.CreateGroupReq) {
-	fmt.Print("1------------------   :   ", 1)
-	l.svcCtx.Redis.Set("qwe", "rerere")
+	groupId := strconv.FormatInt(int64(l.svcCtx.Snowflake.Generate()), 10)
+	groupKey := fmt.Sprintf("roommanager:group:%s", groupId)
+	group := &svc.Group{
+		GroupID:   groupId,
+		GroupName: req.GroupName,
+		MaxPlayer: int32(req.MaxPlayer),
+		RoomID:    "",
+		Roles:     []string{req.RoleId},
+	}
 
+	groupJSON, err := json.Marshal(group)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	l.svcCtx.Redis.Set(groupKey, string(groupJSON))
+	fmt.Print("0------------------   :   ", 1)
+	// ff, _ := l.svcCtx.Redis.Get(groupKey)
+	// fmt.Print("1------------------   :   ", ff)
 }

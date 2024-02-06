@@ -132,181 +132,181 @@ func RegisterRoomManager(ctx *ServiceContext, s iface.IServer) {
 		},
 	)
 
-	registerGrpcConn[
-		roommanagerPb.Roommanager_DeleteGroupClient,
-		*roommanagerPb.DeleteGroupReq,
-		*roommanagerPb.DeleteGroupResp,
-	](
-		202,
-		s,
-		func(mctx context.Context) (roommanagerPb.Roommanager_DeleteGroupClient, error) {
-			return ctx.RoomManagerRpc.DeleteGroup(context.Background())
-		},
-		func() *roommanagerPb.DeleteGroupReq { return &roommanagerPb.DeleteGroupReq{} },
-		func() *roommanagerPb.DeleteGroupResp { return &roommanagerPb.DeleteGroupResp{} },
-		func(connId uint64, req *roommanagerPb.DeleteGroupReq) {
-			req.Header = &commonPb.Header{
-				ConnId: connId,
-			}
-		},
-		func(resp *roommanagerPb.DeleteGroupResp) uint64 {
-			return resp.Header.ConnId
-		},
-	)
+	// registerGrpcConn[
+	// 	roommanagerPb.Roommanager_DeleteGroupClient,
+	// 	*roommanagerPb.DeleteGroupReq,
+	// 	*roommanagerPb.DeleteGroupResp,
+	// ](
+	// 	202,
+	// 	s,
+	// 	func(mctx context.Context) (roommanagerPb.Roommanager_DeleteGroupClient, error) {
+	// 		return ctx.RoomManagerRpc.DeleteGroup(context.Background())
+	// 	},
+	// 	func() *roommanagerPb.DeleteGroupReq { return &roommanagerPb.DeleteGroupReq{} },
+	// 	func() *roommanagerPb.DeleteGroupResp { return &roommanagerPb.DeleteGroupResp{} },
+	// 	func(connId uint64, req *roommanagerPb.DeleteGroupReq) {
+	// 		req.Header = &commonPb.Header{
+	// 			ConnId: connId,
+	// 		}
+	// 	},
+	// 	func(resp *roommanagerPb.DeleteGroupResp) uint64 {
+	// 		return resp.Header.ConnId
+	// 	},
+	// )
 
-	registerGrpcConn[
-		roommanagerPb.Roommanager_GetGroupClient,
-		*roommanagerPb.GetGroupReq,
-		*roommanagerPb.GetGroupResp,
-	](
-		203,
-		s,
-		func(mctx context.Context) (roommanagerPb.Roommanager_GetGroupClient, error) {
-			return ctx.RoomManagerRpc.GetGroup(context.Background())
-		},
-		func() *roommanagerPb.GetGroupReq { return &roommanagerPb.GetGroupReq{} },
-		func() *roommanagerPb.GetGroupResp { return &roommanagerPb.GetGroupResp{} },
-		func(connId uint64, req *roommanagerPb.GetGroupReq) {
-			req.Header = &commonPb.Header{
-				ConnId: connId,
-			}
-		},
-		func(resp *roommanagerPb.GetGroupResp) uint64 {
-			return resp.Header.ConnId
-		},
-	)
+	// registerGrpcConn[
+	// 	roommanagerPb.Roommanager_GetGroupClient,
+	// 	*roommanagerPb.GetGroupReq,
+	// 	*roommanagerPb.GetGroupResp,
+	// ](
+	// 	203,
+	// 	s,
+	// 	func(mctx context.Context) (roommanagerPb.Roommanager_GetGroupClient, error) {
+	// 		return ctx.RoomManagerRpc.GetGroup(context.Background())
+	// 	},
+	// 	func() *roommanagerPb.GetGroupReq { return &roommanagerPb.GetGroupReq{} },
+	// 	func() *roommanagerPb.GetGroupResp { return &roommanagerPb.GetGroupResp{} },
+	// 	func(connId uint64, req *roommanagerPb.GetGroupReq) {
+	// 		req.Header = &commonPb.Header{
+	// 			ConnId: connId,
+	// 		}
+	// 	},
+	// 	func(resp *roommanagerPb.GetGroupResp) uint64 {
+	// 		return resp.Header.ConnId
+	// 	},
+	// )
 
-	registerGrpcConn[
-		roommanagerPb.Roommanager_JoinGroupClient,
-		*roommanagerPb.JoinGroupReq,
-		*roommanagerPb.JoinGroupResp,
-	](
-		204,
-		s,
-		func(mctx context.Context) (roommanagerPb.Roommanager_JoinGroupClient, error) {
-			return ctx.RoomManagerRpc.JoinGroup(context.Background())
-		},
-		func() *roommanagerPb.JoinGroupReq { return &roommanagerPb.JoinGroupReq{} },
-		func() *roommanagerPb.JoinGroupResp { return &roommanagerPb.JoinGroupResp{} },
-		func(connId uint64, req *roommanagerPb.JoinGroupReq) {
-			req.Header = &commonPb.Header{
-				ConnId: connId,
-			}
-		},
-		func(resp *roommanagerPb.JoinGroupResp) uint64 {
-			return resp.Header.ConnId
-		},
-	)
+	// registerGrpcConn[
+	// 	roommanagerPb.Roommanager_JoinGroupClient,
+	// 	*roommanagerPb.JoinGroupReq,
+	// 	*roommanagerPb.JoinGroupResp,
+	// ](
+	// 	204,
+	// 	s,
+	// 	func(mctx context.Context) (roommanagerPb.Roommanager_JoinGroupClient, error) {
+	// 		return ctx.RoomManagerRpc.JoinGroup(context.Background())
+	// 	},
+	// 	func() *roommanagerPb.JoinGroupReq { return &roommanagerPb.JoinGroupReq{} },
+	// 	func() *roommanagerPb.JoinGroupResp { return &roommanagerPb.JoinGroupResp{} },
+	// 	func(connId uint64, req *roommanagerPb.JoinGroupReq) {
+	// 		req.Header = &commonPb.Header{
+	// 			ConnId: connId,
+	// 		}
+	// 	},
+	// 	func(resp *roommanagerPb.JoinGroupResp) uint64 {
+	// 		return resp.Header.ConnId
+	// 	},
+	// )
 
-	registerGrpcConn[
-		roommanagerPb.Roommanager_LeaveGroupClient,
-		*roommanagerPb.LeaveGroupReq,
-		*roommanagerPb.LeaveGroupResp,
-	](
-		205,
-		s,
-		func(mctx context.Context) (roommanagerPb.Roommanager_LeaveGroupClient, error) {
-			return ctx.RoomManagerRpc.LeaveGroup(context.Background())
-		},
-		func() *roommanagerPb.LeaveGroupReq { return &roommanagerPb.LeaveGroupReq{} },
-		func() *roommanagerPb.LeaveGroupResp { return &roommanagerPb.LeaveGroupResp{} },
-		func(connId uint64, req *roommanagerPb.LeaveGroupReq) {
-			req.Header = &commonPb.Header{
-				ConnId: connId,
-			}
-		},
-		func(resp *roommanagerPb.LeaveGroupResp) uint64 {
-			return resp.Header.ConnId
-		},
-	)
+	// registerGrpcConn[
+	// 	roommanagerPb.Roommanager_LeaveGroupClient,
+	// 	*roommanagerPb.LeaveGroupReq,
+	// 	*roommanagerPb.LeaveGroupResp,
+	// ](
+	// 	205,
+	// 	s,
+	// 	func(mctx context.Context) (roommanagerPb.Roommanager_LeaveGroupClient, error) {
+	// 		return ctx.RoomManagerRpc.LeaveGroup(context.Background())
+	// 	},
+	// 	func() *roommanagerPb.LeaveGroupReq { return &roommanagerPb.LeaveGroupReq{} },
+	// 	func() *roommanagerPb.LeaveGroupResp { return &roommanagerPb.LeaveGroupResp{} },
+	// 	func(connId uint64, req *roommanagerPb.LeaveGroupReq) {
+	// 		req.Header = &commonPb.Header{
+	// 			ConnId: connId,
+	// 		}
+	// 	},
+	// 	func(resp *roommanagerPb.LeaveGroupResp) uint64 {
+	// 		return resp.Header.ConnId
+	// 	},
+	// )
 
-	registerGrpcConn[
-		roommanagerPb.Roommanager_CreateRoomClient,
-		*roommanagerPb.CreateRoomReq,
-		*roommanagerPb.CreateRoomResp,
-	](
-		206,
-		s,
-		func(mctx context.Context) (roommanagerPb.Roommanager_CreateRoomClient, error) {
-			return ctx.RoomManagerRpc.CreateRoom(context.Background())
-		},
-		func() *roommanagerPb.CreateRoomReq { return &roommanagerPb.CreateRoomReq{} },
-		func() *roommanagerPb.CreateRoomResp { return &roommanagerPb.CreateRoomResp{} },
-		func(connId uint64, req *roommanagerPb.CreateRoomReq) {
-			req.Header = &commonPb.Header{
-				ConnId: connId,
-			}
-		},
-		func(resp *roommanagerPb.CreateRoomResp) uint64 {
-			return resp.Header.ConnId
-		},
-	)
+	// registerGrpcConn[
+	// 	roommanagerPb.Roommanager_CreateRoomClient,
+	// 	*roommanagerPb.CreateRoomReq,
+	// 	*roommanagerPb.CreateRoomResp,
+	// ](
+	// 	206,
+	// 	s,
+	// 	func(mctx context.Context) (roommanagerPb.Roommanager_CreateRoomClient, error) {
+	// 		return ctx.RoomManagerRpc.CreateRoom(context.Background())
+	// 	},
+	// 	func() *roommanagerPb.CreateRoomReq { return &roommanagerPb.CreateRoomReq{} },
+	// 	func() *roommanagerPb.CreateRoomResp { return &roommanagerPb.CreateRoomResp{} },
+	// 	func(connId uint64, req *roommanagerPb.CreateRoomReq) {
+	// 		req.Header = &commonPb.Header{
+	// 			ConnId: connId,
+	// 		}
+	// 	},
+	// 	func(resp *roommanagerPb.CreateRoomResp) uint64 {
+	// 		return resp.Header.ConnId
+	// 	},
+	// )
 
-	registerGrpcConn[
-		roommanagerPb.Roommanager_GetRoomClient,
-		*roommanagerPb.GetRoomReq,
-		*roommanagerPb.GetRoomResp,
-	](
-		207,
-		s,
-		func(mctx context.Context) (roommanagerPb.Roommanager_GetRoomClient, error) {
-			return ctx.RoomManagerRpc.GetRoom(context.Background())
-		},
-		func() *roommanagerPb.GetRoomReq { return &roommanagerPb.GetRoomReq{} },
-		func() *roommanagerPb.GetRoomResp { return &roommanagerPb.GetRoomResp{} },
-		func(connId uint64, req *roommanagerPb.GetRoomReq) {
-			req.Header = &commonPb.Header{
-				ConnId: connId,
-			}
-		},
-		func(resp *roommanagerPb.GetRoomResp) uint64 {
-			return resp.Header.ConnId
-		},
-	)
+	// registerGrpcConn[
+	// 	roommanagerPb.Roommanager_GetRoomClient,
+	// 	*roommanagerPb.GetRoomReq,
+	// 	*roommanagerPb.GetRoomResp,
+	// ](
+	// 	207,
+	// 	s,
+	// 	func(mctx context.Context) (roommanagerPb.Roommanager_GetRoomClient, error) {
+	// 		return ctx.RoomManagerRpc.GetRoom(context.Background())
+	// 	},
+	// 	func() *roommanagerPb.GetRoomReq { return &roommanagerPb.GetRoomReq{} },
+	// 	func() *roommanagerPb.GetRoomResp { return &roommanagerPb.GetRoomResp{} },
+	// 	func(connId uint64, req *roommanagerPb.GetRoomReq) {
+	// 		req.Header = &commonPb.Header{
+	// 			ConnId: connId,
+	// 		}
+	// 	},
+	// 	func(resp *roommanagerPb.GetRoomResp) uint64 {
+	// 		return resp.Header.ConnId
+	// 	},
+	// )
 
-	registerGrpcConn[
-		roommanagerPb.Roommanager_MatchRoomClient,
-		*roommanagerPb.MatchRoomReq,
-		*roommanagerPb.MatchRoomResp,
-	](
-		208,
-		s,
-		func(mctx context.Context) (roommanagerPb.Roommanager_MatchRoomClient, error) {
-			return ctx.RoomManagerRpc.MatchRoom(context.Background())
-		},
-		func() *roommanagerPb.MatchRoomReq { return &roommanagerPb.MatchRoomReq{} },
-		func() *roommanagerPb.MatchRoomResp { return &roommanagerPb.MatchRoomResp{} },
-		func(connId uint64, req *roommanagerPb.MatchRoomReq) {
-			req.Header = &commonPb.Header{
-				ConnId: connId,
-			}
-		},
-		func(resp *roommanagerPb.MatchRoomResp) uint64 {
-			return resp.Header.ConnId
-		},
-	)
+	// registerGrpcConn[
+	// 	roommanagerPb.Roommanager_MatchRoomClient,
+	// 	*roommanagerPb.MatchRoomReq,
+	// 	*roommanagerPb.MatchRoomResp,
+	// ](
+	// 	208,
+	// 	s,
+	// 	func(mctx context.Context) (roommanagerPb.Roommanager_MatchRoomClient, error) {
+	// 		return ctx.RoomManagerRpc.MatchRoom(context.Background())
+	// 	},
+	// 	func() *roommanagerPb.MatchRoomReq { return &roommanagerPb.MatchRoomReq{} },
+	// 	func() *roommanagerPb.MatchRoomResp { return &roommanagerPb.MatchRoomResp{} },
+	// 	func(connId uint64, req *roommanagerPb.MatchRoomReq) {
+	// 		req.Header = &commonPb.Header{
+	// 			ConnId: connId,
+	// 		}
+	// 	},
+	// 	func(resp *roommanagerPb.MatchRoomResp) uint64 {
+	// 		return resp.Header.ConnId
+	// 	},
+	// )
 
-	registerGrpcConn[
-		roommanagerPb.Roommanager_MatchFinishClient,
-		*roommanagerPb.MatchFinishReq,
-		*roommanagerPb.MatchFinishResp,
-	](
-		209,
-		s,
-		func(mctx context.Context) (roommanagerPb.Roommanager_MatchFinishClient, error) {
-			return ctx.RoomManagerRpc.MatchFinish(context.Background())
-		},
-		func() *roommanagerPb.MatchFinishReq { return &roommanagerPb.MatchFinishReq{} },
-		func() *roommanagerPb.MatchFinishResp { return &roommanagerPb.MatchFinishResp{} },
-		func(connId uint64, req *roommanagerPb.MatchFinishReq) {
-			req.Header = &commonPb.Header{
-				ConnId: connId,
-			}
-		},
-		func(resp *roommanagerPb.MatchFinishResp) uint64 {
-			return resp.Header.ConnId
-		},
-	)
+	// registerGrpcConn[
+	// 	roommanagerPb.Roommanager_MatchFinishClient,
+	// 	*roommanagerPb.MatchFinishReq,
+	// 	*roommanagerPb.MatchFinishResp,
+	// ](
+	// 	209,
+	// 	s,
+	// 	func(mctx context.Context) (roommanagerPb.Roommanager_MatchFinishClient, error) {
+	// 		return ctx.RoomManagerRpc.MatchFinish(context.Background())
+	// 	},
+	// 	func() *roommanagerPb.MatchFinishReq { return &roommanagerPb.MatchFinishReq{} },
+	// 	func() *roommanagerPb.MatchFinishResp { return &roommanagerPb.MatchFinishResp{} },
+	// 	func(connId uint64, req *roommanagerPb.MatchFinishReq) {
+	// 		req.Header = &commonPb.Header{
+	// 			ConnId: connId,
+	// 		}
+	// 	},
+	// 	func(resp *roommanagerPb.MatchFinishResp) uint64 {
+	// 		return resp.Header.ConnId
+	// 	},
+	// )
 }
 
 func registerGrpcConn[T_Client net.StreamClientInterface, T_Req proto.Message,

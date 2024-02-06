@@ -10,7 +10,7 @@ message CreateGroupReq {
     common.Header header = 1;
     string roleId = 2;
     string groupName = 3;
-  	string maxPlayer = 4;
+  	int64 maxPlayer = 4;
 }
 message CreateGroupResp {
     common.Header header = 1;
@@ -36,7 +36,7 @@ message GetGroupResp {
     int64 returnCode = 2;
     string groupId = 3;
     string groupName = 4;
-  	string maxPlayer = 5;
+  	int64 maxPlayer = 5;
     repeated string roleIds = 6;
 }
 
@@ -64,7 +64,7 @@ message LeaveGroupResp {
 message CreateRoomReq {
     common.Header header = 1;
     string roomName = 2;
-  	string maxPlayer = 3;
+  	int64 maxPlayer = 3;
 }
 message CreateRoomResp {
     common.Header header = 1;
@@ -101,7 +101,7 @@ message GetRoomResp {
     int64 returnCode = 2;
     string roomId = 3;
     string roomName = 4;
-  	string maxPlayer = 5;
+  	int64 maxPlayer = 5;
     repeated string roleIds = 6;
 }
 

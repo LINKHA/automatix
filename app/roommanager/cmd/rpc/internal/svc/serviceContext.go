@@ -8,6 +8,14 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/redis"
 )
 
+type Group struct {
+	GroupID   string   `json:"group_id"`
+	GroupName string   `json:"group_name"`
+	MaxPlayer int32    `json:"max_player"`
+	RoomID    string   `json:"room_id"`
+	Roles     []string `json:"roles"`
+}
+
 type ServiceContext struct {
 	Config        config.Config
 	StreamManager *utils.ShardLockMaps
