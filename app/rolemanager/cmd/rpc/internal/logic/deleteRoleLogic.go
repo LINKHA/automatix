@@ -56,6 +56,7 @@ func (l *DeleteRoleLogic) handlerFunc(stream pb.Rolemanager_DeleteRoleServer, re
 			Header:     req.Header,
 			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
 		})
+		return
 	}
 
 	stream.Send(&pb.DeleteRoleResp{

@@ -61,6 +61,7 @@ func (l *SetRoleLogic) handlerFunc(stream pb.Rolemanager_SetRoleServer, req *pb.
 			Header:     req.Header,
 			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
 		})
+		return
 	}
 
 	stream.Send(&pb.SetRoleResp{

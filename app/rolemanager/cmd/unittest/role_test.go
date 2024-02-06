@@ -59,7 +59,7 @@ func TestDeleteRole(t *testing.T) {
 	client := mNet.NewClient("127.0.0.1", 8999)
 	client.SetOnConnStart(func(conn iface.IConnection) {
 		data := &pb.DeleteRoleReq{
-			RoleId: "1753983203577696256",
+			RoleId: "1754784763119407104",
 		}
 		msg, _ := proto.Marshal(data)
 
@@ -93,7 +93,7 @@ func TestSetRole(t *testing.T) {
 		templateValue, _ := json.Marshal(tmp)
 
 		data := &pb.SetRoleReq{
-			RoleId:        "1754055433376501760",
+			RoleId:        "1754784763119407104",
 			TemplateValue: string(templateValue),
 		}
 		msg, _ := proto.Marshal(data)
@@ -125,7 +125,7 @@ func TestGetRole(t *testing.T) {
 	client.SetOnConnStart(func(conn iface.IConnection) {
 		go func() {
 			data := &pb.GetRoleReq{
-				RoleId: "1754055433376501760",
+				RoleId: "1754784763119407104",
 			}
 			msg, _ := proto.Marshal(data)
 
