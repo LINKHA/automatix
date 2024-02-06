@@ -26,8 +26,8 @@ func TestCreateGroup(t *testing.T) {
 	client := mNet.NewClient("127.0.0.1", 8999)
 	client.SetOnConnStart(func(conn iface.IConnection) {
 		data := &pb.CreateGroupReq{
-			RoleId:    "1",
-			GroupName: "1",
+			RoleId:    "1754894665305296896",
+			GroupName: "group_1",
 			MaxPlayer: 5,
 		}
 		msg, _ := proto.Marshal(data)

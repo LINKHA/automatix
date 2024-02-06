@@ -8,6 +8,7 @@ import (
 
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -50,6 +51,8 @@ func (l *CreateGroupLogic) CreateGroup(stream pb.Roommanager_CreateGroupServer) 
 func (l *CreateGroupLogic) handlerFunc(stream pb.Roommanager_CreateGroupServer, req *pb.CreateGroupReq) {
 	groupId := strconv.FormatInt(int64(l.svcCtx.Snowflake.Generate()), 10)
 	groupKey := fmt.Sprintf("roommanager:group:%s", groupId)
+
+	// group redis info
 	group := &svc.Group{
 		GroupID:   groupId,
 		GroupName: req.GroupName,
@@ -61,11 +64,36 @@ func (l *CreateGroupLogic) handlerFunc(stream pb.Roommanager_CreateGroupServer, 
 	groupJSON, err := json.Marshal(group)
 	if err != nil {
 		fmt.Println("Error:", err)
+		stream.Send(&pb.CreateGroupResp{
+			Header:     req.Header,
+			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
+		})
 		return
 	}
 
 	l.svcCtx.Redis.Set(groupKey, string(groupJSON))
-	fmt.Print("0------------------   :   ", 1)
-	// ff, _ := l.svcCtx.Redis.Get(groupKey)
-	// fmt.Print("1------------------   :   ", ff)
+	l.svcCtx.Redis.Expire(groupKey, 86400)
+
+	// role redis info
+	roleKey := fmt.Sprintf("roommanager:role:%s", req.RoleId)
+	err2 := l.svcCtx.Redis.Hmset(roleKey, map[string]string{
+		"RoleId":  req.RoleId,
+		"GroupId": groupId,
+	})
+
+	l.svcCtx.Redis.Expire(roleKey, 86400)
+	if err2 != nil {
+		fmt.Println("Error:", err2)
+		stream.Send(&pb.CreateGroupResp{
+			Header:     req.Header,
+			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
+		})
+		return
+	}
+
+	stream.Send(&pb.CreateGroupResp{
+		Header:     req.Header,
+		ReturnCode: int64(xerr.OK),
+		GroupId:    groupId,
+	})
 }

@@ -16,6 +16,20 @@ type Group struct {
 	Roles     []string `json:"roles"`
 }
 
+type Room struct {
+	RoomId    string   `json:"room_id"`
+	RoomName  string   `json:"room_name"`
+	MaxPlayer int32    `json:"max_player"`
+	Roles     []string `json:"roles"`
+	Groups    []string `json:"groups"`
+}
+
+type Role struct {
+	RoleId  string `json:"role_id"`
+	GroupId string `json:"group_id"`
+	RoomId  int32  `json:"room_id"`
+}
+
 type ServiceContext struct {
 	Config        config.Config
 	StreamManager *utils.ShardLockMaps
