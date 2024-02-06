@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
@@ -24,7 +25,25 @@ func NewGetRoomLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetRoomLo
 }
 
 func (l *GetRoomLogic) GetRoom(stream pb.Roommanager_GetRoomServer) error {
-	// todo: add your logic here and delete this line
+	go func() {
+		for {
+			select {
+			case <-l.ctx.Done():
+				return
+			default:
+				msg, err := stream.Recv()
+				fmt.Println(err)
+				l.handlerFunc(stream, msg)
 
-	return nil
+			}
+		}
+	}()
+
+	select {
+	case <-l.ctx.Done():
+		return nil
+	}
+}
+
+func (l *GetRoomLogic) handlerFunc(stream pb.Roommanager_GetRoomServer, req *pb.GetRoomReq) {
 }

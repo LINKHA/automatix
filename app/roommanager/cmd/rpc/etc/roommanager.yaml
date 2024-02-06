@@ -19,8 +19,19 @@ Telemetry:
 Log:
   ServiceName: roommanager.rpc
   Level: error
+  
 Redis:
   Host: redis:36379
   Type: node
   Pass: G62m50oigInC30sf
   Key: roommanager.rpc
+
+KqConfServerQueue:
+  Name: ServerQueue
+  Brokers:
+    - kafka:9092
+  Group: server-queue-topic
+  Topic: server-queue-topic
+  Offset: first
+  Consumers: 1
+  Processors: 1

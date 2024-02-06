@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
@@ -24,7 +25,28 @@ func NewCreateGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Creat
 }
 
 func (l *CreateGroupLogic) CreateGroup(stream pb.Roommanager_CreateGroupServer) error {
-	// todo: add your logic here and delete this line
+	go func() {
+		for {
+			select {
+			case <-l.ctx.Done():
+				return
+			default:
+				msg, err := stream.Recv()
+				fmt.Println(err)
+				l.handlerFunc(stream, msg)
 
-	return nil
+			}
+		}
+	}()
+
+	select {
+	case <-l.ctx.Done():
+		return nil
+	}
+}
+
+func (l *CreateGroupLogic) handlerFunc(stream pb.Roommanager_CreateGroupServer, req *pb.CreateGroupReq) {
+	fmt.Print("1------------------   :   ", 1)
+	l.svcCtx.Redis.Set("qwe", "rerere")
+
 }
