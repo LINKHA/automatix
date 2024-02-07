@@ -154,27 +154,27 @@ func RegisterRoomManager(ctx *ServiceContext, s iface.IServer) {
 		},
 	)
 
-	// registerGrpcConn[
-	// 	roommanagerPb.Roommanager_GetGroupClient,
-	// 	*roommanagerPb.GetGroupReq,
-	// 	*roommanagerPb.GetGroupResp,
-	// ](
-	// 	203,
-	// 	s,
-	// 	func(mctx context.Context) (roommanagerPb.Roommanager_GetGroupClient, error) {
-	// 		return ctx.RoomManagerRpc.GetGroup(context.Background())
-	// 	},
-	// 	func() *roommanagerPb.GetGroupReq { return &roommanagerPb.GetGroupReq{} },
-	// 	func() *roommanagerPb.GetGroupResp { return &roommanagerPb.GetGroupResp{} },
-	// 	func(connId uint64, req *roommanagerPb.GetGroupReq) {
-	// 		req.Header = &commonPb.Header{
-	// 			ConnId: connId,
-	// 		}
-	// 	},
-	// 	func(resp *roommanagerPb.GetGroupResp) uint64 {
-	// 		return resp.Header.ConnId
-	// 	},
-	// )
+	registerGrpcConn[
+		roommanagerPb.Roommanager_GetGroupClient,
+		*roommanagerPb.GetGroupReq,
+		*roommanagerPb.GetGroupResp,
+	](
+		203,
+		s,
+		func(mctx context.Context) (roommanagerPb.Roommanager_GetGroupClient, error) {
+			return ctx.RoomManagerRpc.GetGroup(context.Background())
+		},
+		func() *roommanagerPb.GetGroupReq { return &roommanagerPb.GetGroupReq{} },
+		func() *roommanagerPb.GetGroupResp { return &roommanagerPb.GetGroupResp{} },
+		func(connId uint64, req *roommanagerPb.GetGroupReq) {
+			req.Header = &commonPb.Header{
+				ConnId: connId,
+			}
+		},
+		func(resp *roommanagerPb.GetGroupResp) uint64 {
+			return resp.Header.ConnId
+		},
+	)
 
 	registerGrpcConn[
 		roommanagerPb.Roommanager_JoinGroupClient,

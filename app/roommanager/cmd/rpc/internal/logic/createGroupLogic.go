@@ -50,7 +50,7 @@ func (l *CreateGroupLogic) CreateGroup(stream pb.Roommanager_CreateGroupServer) 
 
 func (l *CreateGroupLogic) handlerFunc(stream pb.Roommanager_CreateGroupServer, req *pb.CreateGroupReq) {
 	groupId := strconv.FormatInt(int64(l.svcCtx.Snowflake.Generate()), 10)
-	groupKey := fmt.Sprintf("roommanager:group:%s", groupId)
+	groupKey := fmt.Sprintf("%s:%s", svc.ROOMMANAGER_GROUP, groupId)
 
 	// group redis info
 	group := &svc.Group{
@@ -71,11 +71,10 @@ func (l *CreateGroupLogic) handlerFunc(stream pb.Roommanager_CreateGroupServer, 
 		return
 	}
 
-	l.svcCtx.Redis.Set(groupKey, string(groupJSON))
-	l.svcCtx.Redis.Expire(groupKey, 86400)
+	l.svcCtx.Redis.Setex(groupKey, string(groupJSON), 86400)
 
 	// role redis info
-	roleKey := fmt.Sprintf("roommanager:role:%s", req.RoleId)
+	roleKey := fmt.Sprintf("%s:%s", svc.ROOMMANAGER_ROLE, req.RoleId)
 	err2 := l.svcCtx.Redis.Hmset(roleKey, map[string]string{
 		"RoleId":  req.RoleId,
 		"GroupId": groupId,

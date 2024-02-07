@@ -30,6 +30,11 @@ type Role struct {
 	RoomId  int32  `json:"room_id"`
 }
 
+const (
+	ROOMMANAGER_GROUP = "roommanager:group"
+	ROOMMANAGER_ROLE  = "roommanager:role"
+)
+
 type ServiceContext struct {
 	Config        config.Config
 	StreamManager *utils.ShardLockMaps
