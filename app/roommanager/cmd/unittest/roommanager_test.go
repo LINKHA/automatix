@@ -119,8 +119,8 @@ func TestJoinGroup(t *testing.T) {
 	client := mNet.NewClient("127.0.0.1", 8999)
 	client.SetOnConnStart(func(conn iface.IConnection) {
 		data := &pb.JoinGroupReq{
-			GroupId: "1755116474122375168",
-			RoleId:  "1755116474122375168",
+			GroupId: "1756283090377904128",
+			RoleId:  "1755116474122375169",
 		}
 		msg, _ := proto.Marshal(data)
 
