@@ -51,7 +51,7 @@ func (l *JoinGroupLogic) JoinGroup(stream pb.Roommanager_JoinGroupServer) error 
 }
 
 func (l *JoinGroupLogic) handlerFunc(stream pb.Roommanager_JoinGroupServer, req *pb.JoinGroupReq) {
-	err2 := l.svcCtx.Redis.Pipelined(
+	err := l.svcCtx.Redis.Pipelined(
 		func(pipe redis.Pipeliner) error {
 			roleKey := fmt.Sprintf("%s:%s", svc.ROOMMANAGER_ROLE, req.RoleId)
 			groupKey := fmt.Sprintf("%s:%s", svc.ROOMMANAGER_GROUP, req.GroupId)
@@ -82,7 +82,7 @@ func (l *JoinGroupLogic) handlerFunc(stream pb.Roommanager_JoinGroupServer, req 
 		},
 	)
 
-	if err2 != nil {
+	if err != nil {
 		stream.Send(&pb.JoinGroupResp{
 			Header:     req.Header,
 			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),

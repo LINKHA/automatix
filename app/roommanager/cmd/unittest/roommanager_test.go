@@ -135,3 +135,95 @@ func TestJoinGroup(t *testing.T) {
 	client.Start()
 	time.Sleep(time.Second * 1)
 }
+
+type LeaveGroupRouter struct {
+	mNet.BaseRouter
+}
+
+func (this *LeaveGroupRouter) Handle(request iface.IRequest) {
+	pbMsg := &pb.LeaveGroupResp{}
+	proto.Unmarshal(request.GetData(), pbMsg)
+	fmt.Println("recv from server : msgId=", request.GetMsgID(), ", data=", pbMsg)
+}
+
+func TestLeaveGroup(t *testing.T) {
+	client := mNet.NewClient("127.0.0.1", 8999)
+	client.SetOnConnStart(func(conn iface.IConnection) {
+		data := &pb.LeaveGroupReq{
+			GroupId: "1756283090377904128",
+			RoleId:  "1755109290944761856",
+		}
+		msg, _ := proto.Marshal(data)
+
+		err := conn.SendMsg(205, msg)
+		if err != nil {
+			fmt.Println(err)
+			log.Error(err)
+		}
+	})
+
+	client.AddRouter(205, &JoinGroupRouter{})
+	client.Start()
+	time.Sleep(time.Second * 1)
+}
+
+type CreateRoomRouter struct {
+	mNet.BaseRouter
+}
+
+func (this *CreateRoomRouter) Handle(request iface.IRequest) {
+	pbMsg := &pb.CreateRoomResp{}
+	proto.Unmarshal(request.GetData(), pbMsg)
+	fmt.Println("recv from server : msgId=", request.GetMsgID(), ", data=", pbMsg)
+}
+
+func TestCreateRoom(t *testing.T) {
+	client := mNet.NewClient("127.0.0.1", 8999)
+	client.SetOnConnStart(func(conn iface.IConnection) {
+		data := &pb.CreateRoomReq{
+			RoomName:  "roomName1",
+			MaxPlayer: 10,
+		}
+		msg, _ := proto.Marshal(data)
+
+		err := conn.SendMsg(206, msg)
+		if err != nil {
+			fmt.Println(err)
+			log.Error(err)
+		}
+	})
+
+	client.AddRouter(206, &JoinGroupRouter{})
+	client.Start()
+	time.Sleep(time.Second * 1)
+}
+
+type GetRoomRouter struct {
+	mNet.BaseRouter
+}
+
+func (this *GetRoomRouter) Handle(request iface.IRequest) {
+	pbMsg := &pb.GetRoomResp{}
+	proto.Unmarshal(request.GetData(), pbMsg)
+	fmt.Println("recv from server : msgId=", request.GetMsgID(), ", data=", pbMsg)
+}
+
+func TestGetRoom(t *testing.T) {
+	client := mNet.NewClient("127.0.0.1", 8999)
+	client.SetOnConnStart(func(conn iface.IConnection) {
+		data := &pb.GetRoomReq{
+			RoomId: "1756338735512817664",
+		}
+		msg, _ := proto.Marshal(data)
+
+		err := conn.SendMsg(207, msg)
+		if err != nil {
+			fmt.Println(err)
+			log.Error(err)
+		}
+	})
+
+	client.AddRouter(207, &JoinGroupRouter{})
+	client.Start()
+	time.Sleep(time.Second * 1)
+}

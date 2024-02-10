@@ -2,10 +2,12 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/internal/svc"
 	"github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
+	"github.com/LINKHA/automatix/common/xerr"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -46,4 +48,25 @@ func (l *GetRoomLogic) GetRoom(stream pb.Roommanager_GetRoomServer) error {
 }
 
 func (l *GetRoomLogic) handlerFunc(stream pb.Roommanager_GetRoomServer, req *pb.GetRoomReq) {
+	roomKey := fmt.Sprintf("%s:%s", svc.ROOMMANAGER_ROOM, req.RoomId)
+	roomStr, err := l.svcCtx.Redis.Get(roomKey)
+	if err != nil {
+		stream.Send(&pb.GetRoomResp{
+			Header:     req.Header,
+			ReturnCode: int64(xerr.SERVER_COMMON_ERROR),
+		})
+		return
+	}
+
+	m := &svc.Room{}
+	json.Unmarshal([]byte(roomStr), m)
+
+	stream.Send(&pb.GetRoomResp{
+		Header:     req.Header,
+		ReturnCode: int64(xerr.OK),
+		RoomId:     m.RoomId,
+		RoomName:   m.RoomName,
+		MaxPlayer:  int64(m.MaxPlayer),
+		RoleIds:    m.Roles,
+	})
 }

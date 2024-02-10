@@ -33,6 +33,7 @@ type Role struct {
 const (
 	ROOMMANAGER_GROUP = "roommanager:group"
 	ROOMMANAGER_ROLE  = "roommanager:role"
+	ROOMMANAGER_ROOM  = "roommanager:room"
 )
 
 type ServiceContext struct {
