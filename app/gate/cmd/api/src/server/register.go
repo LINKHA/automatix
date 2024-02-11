@@ -1,10 +1,11 @@
-package handler
+package server
 
 import (
 	"context"
 	"fmt"
 	"time"
 
+	"github.com/LINKHA/automatix/app/gate/cmd/api/src/handler"
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/iface"
 	"github.com/LINKHA/automatix/app/gate/cmd/api/src/net/net"
 	commonPb "github.com/LINKHA/automatix/common/proto"
@@ -14,12 +15,12 @@ import (
 	roommanagerPb "github.com/LINKHA/automatix/app/roommanager/cmd/rpc/pb"
 )
 
-func RegisterHandlers(ctx *ServiceContext, s iface.IServer) {
+func RegisterHandlers(ctx *handler.ServiceContext, s iface.IServer) {
 	RegisterRoleManager(ctx, s)
 	RegisterRoomManager(ctx, s)
 }
 
-func RegisterRoleManager(ctx *ServiceContext, s iface.IServer) {
+func RegisterRoleManager(ctx *handler.ServiceContext, s iface.IServer) {
 	registerGrpcConn[
 		rolemanagerPb.Rolemanager_RegisterRoleClient,
 		*rolemanagerPb.RegisterRoleReq,
@@ -109,7 +110,7 @@ func RegisterRoleManager(ctx *ServiceContext, s iface.IServer) {
 	)
 }
 
-func RegisterRoomManager(ctx *ServiceContext, s iface.IServer) {
+func RegisterRoomManager(ctx *handler.ServiceContext, s iface.IServer) {
 	registerGrpcConn[
 		roommanagerPb.Roommanager_CreateGroupClient,
 		*roommanagerPb.CreateGroupReq,

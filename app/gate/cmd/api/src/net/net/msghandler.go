@@ -237,10 +237,20 @@ func (mh *MsgHandle) doClientMsgHandler(request iface.IRequest, workerID int) {
 		}
 	}()
 
-	grpcId := request.GetMsgID()
-	grpcConn, err := mh.grpcConnMgr.Get(uint64(grpcId))
+	msgId := request.GetMsgID()
+
+	handler, ok := mh.Apis[msgId]
+	if ok {
+		request.BindRouter(handler)
+
+		// Execute the corresponding processing method
+		request.Call()
+		return
+	}
+
+	grpcConn, err := mh.grpcConnMgr.Get(uint64(msgId))
 	if err != nil {
-		msgErr := fmt.Sprintf("client msg err, clientId = %+v\n", grpcId)
+		msgErr := fmt.Sprintf("client msg err, clientId = %+v\n", msgId)
 		panic(msgErr)
 	}
 
